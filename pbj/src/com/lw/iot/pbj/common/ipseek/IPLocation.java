@@ -2,8 +2,8 @@ package com.lw.iot.pbj.common.ipseek;
 
 /**
  * 封装ip相关信息，目前只有两个字段，ip所在的国家和地区
- * @author 胡礼波
- * 2012-6-1 下午12:23:04
+ * @author 胡礼波  andy_hulibo@163.com
+ * @2017年10月30日 下午3:07:11
  */
 public class IPLocation {
 	private String country = "";
