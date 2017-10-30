@@ -16,7 +16,6 @@ import com.alibaba.fastjson.serializer.SimpleDateFormatSerializer;
  * Json工具类
  * @author 胡礼波-Andy
  * @2014年11月10日上午9:24:39
- *
  */
 public class JsonUtil {
 
