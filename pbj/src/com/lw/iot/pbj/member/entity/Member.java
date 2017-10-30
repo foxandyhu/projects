@@ -16,10 +16,22 @@ public class Member implements Serializable {
 	 * @2016年9月5日下午5:00:19
 	 */
 	private static final long serialVersionUID = 3267663492709936040L;
-	private int id; // id
-	private String phone; // 手机号
-	private boolean enable; // 是否可用
-	private Date registTime; // 注册时间
+	private int id;
+	
+	/**
+	 * 手机号
+	 */
+	private String phone; 
+	
+	/**
+	 * 是否可用
+	 */
+	private boolean enable; 
+	
+	/**
+	 * 注册时间
+	 */
+	private Date registTime; 
 
 	public int getId() {
 		return id;

@@ -7,5 +7,13 @@ package com.lw.iot.pbj.core.annotation;
  */
 public enum RecordType {
 
-	REQUIRED,IGNORE
+	/**
+	 * 必须记录日志
+	 */
+	REQUIRED,
+	
+	/**
+	 * 忽略日志
+	 */
+	IGNORE
 }

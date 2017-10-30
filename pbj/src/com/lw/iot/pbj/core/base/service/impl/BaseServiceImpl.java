@@ -17,8 +17,14 @@ import com.lw.iot.pbj.core.annotation.RecordType;
 import com.lw.iot.pbj.core.base.persistence.BaseMapper;
 import com.lw.iot.pbj.core.base.service.IBaseService;
 
+/**
+ * 基本公共的业务处理
+ * @author 胡礼波  andy_hulibo@163.com
+ * @param <T>
+ * @2017年10月30日 下午4:01:36
+ */
 @Service("BaseServiceImpl")
-@Transactional(propagation=Propagation.SUPPORTS)
+@Transactional(propagation=Propagation.SUPPORTS,rollbackFor=Exception.class)
 @ActionModel(description="公共业务接口")
 @LogRecord(record=RecordType.IGNORE)
 public class BaseServiceImpl<T> implements IBaseService<T> {
@@ -32,7 +38,7 @@ public class BaseServiceImpl<T> implements IBaseService<T> {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(rollbackFor=Exception.class)
 	@ActionModel(description="删除对象")
 	public int del(Integer... id) {
 		if(ArrayUtils.isEmpty(id))
@@ -43,7 +49,7 @@ public class BaseServiceImpl<T> implements IBaseService<T> {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(rollbackFor=Exception.class)
 	@ActionModel(description="编辑对象")	
 	public int edit(T t) {
 		Assert.notNull(t,"对象为空,编辑失败");
@@ -51,7 +57,7 @@ public class BaseServiceImpl<T> implements IBaseService<T> {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(rollbackFor=Exception.class)
 	@ActionModel(description="保存对象")
 	public int save(T t) {
 		Assert.notNull(t,"对象为空,保存失败");

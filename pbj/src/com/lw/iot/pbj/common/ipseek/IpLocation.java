@@ -5,19 +5,19 @@ package com.lw.iot.pbj.common.ipseek;
  * @author 胡礼波  andy_hulibo@163.com
  * @2017年10月30日 下午3:07:11
  */
-public class IPLocation {
+public class IpLocation {
 	private String country = "";
 	private String area = "";
 
-	public IPLocation() {}
+	public IpLocation() {}
 	
-	public IPLocation(String country, String area){
+	public IpLocation(String country, String area){
 		this.country = country;
 		this.area = area;
 	}
 
-	public IPLocation getCopy() {
-		IPLocation ret = new IPLocation();
+	public IpLocation getCopy() {
+		IpLocation ret = new IpLocation();
 		ret.country = country;
 		ret.area = area;
 		return ret;
@@ -32,7 +32,8 @@ public class IPLocation {
 	}
 
 	public String getArea() {
-		if("保留地址用于本地回送".equals(area))
+		String local="保留地址用于本地回送";
+		if(local.equals(area))
 		{
 			return "局域网";
 		}

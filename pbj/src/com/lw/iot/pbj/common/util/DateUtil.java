@@ -5,7 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-
+/**
+ * 时间日期工具类
+ * @author 胡礼波  andy_hulibo@163.com
+ * @2017年10月30日 下午4:01:11
+ */
 public class DateUtil {
 	
 	/**
@@ -160,10 +164,11 @@ public class DateUtil {
 	 */
 	public static String getTimeText(Date date)
 	{
-		long subTime=((new Date().getTime())-date.getTime())/1000;
+		long subTime=(System.currentTimeMillis()-date.getTime())/1000;
 		long sub=0;
 		sub=subTime/(24*60*60);
-		if(sub>0)			//大于1天
+		//大于1天
+		if(sub>0)
 		{
 			return formatterDateTime(date);
 		}

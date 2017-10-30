@@ -18,8 +18,13 @@ import com.lw.iot.pbj.member.service.IMemberService;
 import com.lw.iot.pbj.users.entity.Users;
 import com.lw.iot.pbj.users.service.IUserService;
 
+/**
+ * 登录日志业务
+ * @author 胡礼波  andy_hulibo@163.com
+ * @2017年10月30日 下午4:02:49
+ */
 @Service("LoginLogsServiceImpl")
-@Transactional(propagation=Propagation.SUPPORTS)
+@Transactional(propagation=Propagation.SUPPORTS,rollbackFor=Exception.class)
 @ActionModel(description="登录日志管理")
 @LogRecord(record=RecordType.IGNORE)
 public class LoginLogsServiceImpl extends BaseServiceImpl<LoginLogs> implements ILoginLogsService {

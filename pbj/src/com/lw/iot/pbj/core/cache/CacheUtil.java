@@ -15,7 +15,10 @@ public class CacheUtil {
 
 private static final CacheManager CACHE_MANAGER=CacheManager.create();
 	
-	private static String id="SF_Ehcache";				//缓存ID
+	/**
+	 * 缓存ID
+	 */
+	private static String id="PBJ_Ehcache";
 	
 	public static String getId() {
 		return id;

@@ -56,7 +56,7 @@ public class SecurityUtil {
 	 * @param data
 	 * @return
 	 */
-	public static String AESEncoding(String data,String key)
+	public static String aESEnCoding(String data,String key)
 	{
 		if(StringUtils.isBlank(data))
 		{
@@ -67,7 +67,7 @@ public class SecurityUtil {
 			SecretKeySpec skey = new SecretKeySpec(key.getBytes(), "AES");  
             Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");  
             byte[] byteContent = data.getBytes("utf-8");  
-            cipher.init(Cipher.ENCRYPT_MODE, skey);// 初始化  
+            cipher.init(Cipher.ENCRYPT_MODE, skey);
             byte[] result = cipher.doFinal(byteContent);
              return new String(result,"UTF-8");
 		} catch (Exception e) {
@@ -83,7 +83,7 @@ public class SecurityUtil {
 	 * @param data
 	 * @return
 	 */
-	public static String AESDecoding(String data,String key)
+	public static String aESDecoding(String data,String key)
 	{
 		if(StringUtils.isBlank(data))
 		{
@@ -96,8 +96,8 @@ public class SecurityUtil {
             SecretKey secretKey = kgen.generateKey();  
             byte[] enCodeFormat = secretKey.getEncoded();  
             SecretKeySpec skey = new SecretKeySpec(enCodeFormat, "AES");              
-            Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");// 创建密码器  
-           cipher.init(Cipher.DECRYPT_MODE, skey);// 初始化  
+            Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
+           cipher.init(Cipher.DECRYPT_MODE, skey);
            byte[] result = cipher.doFinal(data.getBytes());  
            return new String(result,"UTF-8");
 		} catch (Exception e) {
@@ -109,9 +109,9 @@ public class SecurityUtil {
 	public static void main(String[] args) {
 		String data="顺利打开飞机螺丝钉看法戒毒所是的";
 		String key="12345678";
-		String result=AESEncoding(data, key);
+		String result=aESEnCoding(data, key);
 		System.out.println(result);
-		System.out.println(AESDecoding(result, key));
+		System.out.println(aESDecoding(result, key));
 	}
 	
 	/**
@@ -121,7 +121,7 @@ public class SecurityUtil {
 	 * @param data
 	 * @return
 	 */
-	public static String SHA1(String data)
+	public static String sha1(String data)
 	{
 		return DigestUtils.sha1Hex(data);
 	}

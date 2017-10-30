@@ -6,12 +6,12 @@ package com.lw.iot.pbj.common.ipseek;
  * 2012-6-1 下午12:23:27
  */
 @SuppressWarnings("serial")
-public class IPParseException extends RuntimeException {
-	public IPParseException(String msg) {
+public class IpParseException extends RuntimeException {
+	public IpParseException(String msg) {
 		super(msg);
 	}
 
-	public IPParseException(String msg, Throwable cause) {
+	public IpParseException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 }

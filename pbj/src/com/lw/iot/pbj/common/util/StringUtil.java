@@ -118,23 +118,27 @@ public class StringUtil {
 	 private static String trimAllTags(String input, boolean inside)
 	  {
 	    StringBuffer output = new StringBuffer();
-
+	    char l='<',g='>';
 	    if (inside) {
-	      if ((input.indexOf('<') == -1) || (input.lastIndexOf('>') == -1) || (input.lastIndexOf('>') < input.indexOf('<'))) {
+	      if ((input.indexOf(l) == -1) || (input.lastIndexOf(g) == -1) || (input.lastIndexOf(g) < input.indexOf(l))) {
 	        output.append(input);
 	      } else {
-	        output.append(input.substring(0, input.indexOf('<')));
-	        output.append(input.substring(input.lastIndexOf('>') + 1, input.length()));
+	        output.append(input.substring(0, input.indexOf(l)));
+	        output.append(input.substring(input.lastIndexOf(g) + 1, input.length()));
 	      }
 	    } else {
 	      boolean write = true;
 	      for (int index = 0; index < input.length(); index++)
 	      {
-	        if ((input.charAt(index) == '<') && (write))
+	        if ((input.charAt(index) == l) && (write))
+	        {
 	          write = false;
+	        }
 	        if (write)
+	        {
 	          output.append(input.charAt(index));
-	        if ((input.charAt(index) == '>') && (!write)) {
+	        }
+	        if ((input.charAt(index) == g) && (!write)) {
 	          write = true;
 	        }
 	      }

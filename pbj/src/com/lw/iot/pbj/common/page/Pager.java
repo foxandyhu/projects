@@ -93,18 +93,22 @@ public class Pager implements Paginable,Serializable {
 		}
 	}
 
+	@Override
 	public int getPageNo() {
 		return pageNo;
 	}
 
+	@Override
 	public int getPageSize() {
 		return pageSize;
 	}
 
+	@Override
 	public int getTotalCount() {
 		return totalCount;
 	}
 
+	@Override
 	public int getTotalPage() {
 		int totalPage = totalCount / pageSize;
 		if (totalPage == 0 || totalCount % pageSize != 0) {
@@ -113,14 +117,17 @@ public class Pager implements Paginable,Serializable {
 		return totalPage;
 	}
 
+	@Override
 	public boolean isFirstPage() {
 		return pageNo <= 1;
 	}
 
+	@Override
 	public boolean isLastPage() {
 		return pageNo >= getTotalPage();
 	}
 
+	@Override
 	public int getNextPage() {
 		if (isLastPage()) {
 			return pageNo;
@@ -129,6 +136,7 @@ public class Pager implements Paginable,Serializable {
 		}
 	}
 
+	@Override
 	public int getPrePage() {
 		if (isFirstPage()) {
 			return pageNo;
@@ -140,7 +148,11 @@ public class Pager implements Paginable,Serializable {
 	protected int totalCount = 0;
 	protected int pageSize = DEF_COUNT;
 	protected int pageNo = 1;
-	protected Object datas;	//分页的数据
+	
+	/**
+	 * 分页的数据
+	 */
+	protected Object datas;
 
 
 	public Object getDatas() {

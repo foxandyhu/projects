@@ -19,14 +19,45 @@ public class Users implements Serializable{
 	private static final long serialVersionUID = 2985559170913083284L;
 
 	private int id;
-	private String name;			//姓名
-	private String email;			//邮箱
-	private String userName;		//用户名
-	private String password;		//密码
-	private boolean enable;			//帐号是否启用
-	private String salt;			//密钥盐
-	private Date registeDate;		//注册时间
-	private String registIp;		//注册IP
+	/**
+	 * 姓名
+	 */
+	private String name;
+	
+	/**
+	 * 邮箱
+	 */
+	private String email;
+	
+	/**
+	 * 用户名
+	 */
+	private String userName;
+	
+	/**
+	 * 密码
+	 */
+	private String password;
+	
+	/**
+	 * 帐号是否启用
+	 */
+	private boolean enable;
+	
+	/**
+	 * 密钥盐
+	 */
+	private String salt;
+	
+	/**
+	 * 注册时间
+	 */
+	private Date registeDate;
+	
+	/**
+	 * 注册IP
+	 */
+	private String registIp;
 	
 	public String getEmail() {
 		return email;

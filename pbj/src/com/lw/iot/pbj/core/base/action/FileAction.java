@@ -37,11 +37,12 @@ public class FileAction extends BaseAction {
 	public String uploadFile(HttpServletResponse response)throws Exception
 	{
 		HttpServletRequest request=getRequest();
-		Part part=request.getPart("file");						//上传的文件
+		Part part=request.getPart("file");
 		
 		JSONObject jobj=new JSONObject();
-		float size=(float)part.getSize()/1024/1024;
-		if(size>SysConst.MAX_IMG_SIZE)							//最大为2M
+		float size=(float)part.getSize();
+		//最大为2M
+		if(size>SysConst.MAX_IMG_SIZE)
 		{
 			ResponseUtil.writeHtml(response,"LW.message.show('图片最大为2M')");
 			return null;
@@ -53,7 +54,8 @@ public class FileAction extends BaseAction {
 		String targetPath=base+"/"+filePath+name;
 		while(FileUtil.checkExist(targetPath))
 		{
-			name=StringUtil.getRandomString(10)+"."+StringUtils.substringAfter(name,".");			//重名的文件处理
+			//重名的文件处理
+			name=StringUtil.getRandomString(10)+"."+StringUtils.substringAfter(name,".");
 			targetPath=base+"/"+filePath+name;
 		}
 		part.write(targetPath);
@@ -74,9 +76,9 @@ public class FileAction extends BaseAction {
 	public void uploadImage(HttpServletResponse response)throws Exception
 	{
 		HttpServletRequest request=getRequest();
-		Part part=request.getPart("imgFile");					//上传的文件
-		float size=(float)part.getSize()/1024/1024;
-		if(size>SysConst.MAX_IMG_SIZE)							//最大为2M
+		Part part=request.getPart("imgFile");
+		float size=(float)part.getSize();
+		if(size>SysConst.MAX_IMG_SIZE)
 		{
 			throw new RuntimeException("图片最大为2M");
 		}

@@ -17,19 +17,40 @@ public class SysLog implements Serializable {
 	
 	private int id;
 
-	private int userId;// 用户ID
+	/**
+	 * 用户ID
+	 */
+	private int userId; 
 
-	private String userName;// 用户账号
+	/**
+	 * 用户账号
+	 */
+	private String userName; 
 
-	private String logInfo;// 日志信息
+	/**
+	 * 日志信息
+	 */
+	private String logInfo; 
 	
-	private String modelName; // 模块名称
+	/**
+	 * 模块名称
+	 */
+	private String modelName; 
 
-	private String methodName; // 方法名称	
+	/**
+	 * 方法名称
+	 */
+	private String methodName; 	
 
-	private Date logTime;// 日志时间
+	/**
+	 * 日志时间
+	 */
+	private Date logTime; 
 
-	private String ip;// IP地址	
+	/**
+	 * IP地址
+	 */
+	private String ip; 	
 	
 	public String getModelName() {
 		return modelName;

@@ -16,7 +16,11 @@ public class Pedometer implements Serializable{
 	private static final long serialVersionUID = -112937391692779758L;
 
 	private int id;
-	private String serialNo;		//设备序列号
+	
+	/**
+	 * 设备序列号
+	 */
+	private String serialNo;		
 	
 	public int getId() {
 		return id;

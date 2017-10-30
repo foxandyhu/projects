@@ -7,5 +7,13 @@ package com.lw.iot.pbj.core.annotation;
  */
 public enum LoginFlag
 {
-	YES, NO 
+	/**
+	 * 需要登录
+	 */
+	YES, 
+	
+	/**
+	 * 不需要登录
+	 */
+	NO 
 }

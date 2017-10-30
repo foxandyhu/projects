@@ -32,8 +32,15 @@ import com.lw.iot.pbj.users.entity.Users;
 @Controller("BaseAction")
 public class BaseAction{
 
-	private int rows;			//每页显示记录数
-	private int page;			//当前页数
+	/**
+	 * 每页显示记录数
+	 */
+	private int rows;
+	
+	/**
+	 * 当前页数
+	 */
+	private int page;
 	
 	public int getPage() {
 			page=DataConvertUtils.convertToInteger(getRequest().getParameter("pageNo"));
@@ -193,7 +200,7 @@ public class BaseAction{
 	public void exceptionHandler(HttpServletRequest request,HttpServletResponse response,Exception ex)
 	{
 		String xmlRquest=request.getHeader("X-Requested-With");
-		if("XMLHttpRequest".equals(xmlRquest))			//表示异步Ajax请求弹出登录框
+		if(SysConst.AJAXREQUEST.equals(xmlRquest))
 		{
 			response.setStatus(500);
 			ResponseUtil.writeHtml(response, ex.getMessage());

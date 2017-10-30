@@ -1,10 +1,13 @@
 package com.lw.iot.pbj.member.service;
 
-import java.util.List;
-
 import com.lw.iot.pbj.core.base.service.IBaseService;
 import com.lw.iot.pbj.member.entity.Member;
 
+/**
+ * 会员业务接口
+ * @author 胡礼波  andy_hulibo@163.com
+ * @2017年10月30日 下午4:02:59
+ */
 public interface IMemberService extends IBaseService<Member>{
 	
 	
@@ -46,10 +49,4 @@ public interface IMemberService extends IBaseService<Member>{
 	 * @return
 	 */
 	public boolean updateMemberPhone(String weixinNo,String phone);
-	
-	/**
-	 * 获得最近几天的会员报表数据
-	 * @return
-	 */
-	public List<Object> getMemberReport(int days);
 }

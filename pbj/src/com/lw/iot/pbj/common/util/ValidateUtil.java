@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 public class ValidateUtil {
 
 	private static Logger logger=Logger.getLogger(ValidateUtil.class);
+	private static Pattern phonePattern = Pattern.compile("^13[0-9]{9}$|14[0-9]{9}|15[0-9]{9}$|18[0-9]{9}$");
 	
 	/**
 	 * 是否为手机号码
@@ -28,8 +29,7 @@ public class ValidateUtil {
 		{
 			return false;
 		}
-		Pattern p = Pattern.compile("^13[0-9]{9}$|14[0-9]{9}|15[0-9]{9}$|18[0-9]{9}$");  
-		Matcher m = p.matcher(phoneNo);  
+		Matcher m = phonePattern.matcher(phoneNo);  
 		return m.matches();  
 	}
 

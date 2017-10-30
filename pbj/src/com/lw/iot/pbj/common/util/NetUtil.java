@@ -146,6 +146,24 @@ public class NetUtil {
 	 */
 	public static enum ContentTypeEnum
 	{
-		HTML,XML,JSON,TEXT;
+		/**
+		 * HTML格式
+		 */
+		HTML,
+		
+		/**
+		 * XML格式
+		 */
+		XML,
+		
+		/**
+		 * JSON格式
+		 */
+		JSON,
+		
+		/**
+		 * 文本格式
+		 */
+		TEXT;
 	}
 }

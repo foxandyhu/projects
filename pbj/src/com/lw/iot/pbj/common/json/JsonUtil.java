@@ -73,6 +73,7 @@ public class JsonUtil {
 		try {
 			PropertyFilter filter=new PropertyFilter()
 			{
+				@Override
 				public boolean apply(Object source, String name, Object value) {
 					for (String pro : properties) {
 						if(name.equals(pro))

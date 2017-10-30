@@ -20,7 +20,11 @@ import com.lw.iot.pbj.common.util.reflect.ReflectUtils;
 import com.lw.iot.pbj.core.annotation.RecordType;
 import com.lw.iot.pbj.logs.service.ILogService;
 import com.lw.iot.pbj.users.entity.Users;
-
+/**
+ * 抽象的日志处理器
+ * @author 胡礼波  andy_hulibo@163.com
+ * @2017年10月30日 下午4:02:05
+ */
 public abstract class AbstractLogsHandler {
 
 	@Autowired
@@ -44,6 +48,7 @@ public abstract class AbstractLogsHandler {
 		final Users user=getUser(map);
 		logTaskExecutor.execute(new Runnable()
 		{
+			@Override
 			public void run()
 			{
 				try {

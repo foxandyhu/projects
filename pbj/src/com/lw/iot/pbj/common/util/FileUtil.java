@@ -4,6 +4,11 @@ import java.io.File;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * 文件处理工具类
+ * @author 胡礼波  andy_hulibo@163.com
+ * @2017年10月30日 下午4:01:21
+ */
 public class FileUtil {
 	
 	/**

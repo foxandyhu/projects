@@ -18,7 +18,8 @@ public interface IUserService extends IBaseService<Users> {
 	 * 更新密码
 	 * @author 胡礼波
 	 * 2012-6-7 下午01:24:25
-	 * @param password
+	 * @param password 新密码
+	 * @param userId 用户ID
 	 * @return
 	 */
 	public boolean editPassword(int userId,String password);
@@ -54,7 +55,7 @@ public interface IUserService extends IBaseService<Users> {
 	 * 修改用户帐号状态
 	 * @author 胡礼波-Andy
 	 * @2014年11月12日下午1:12:14
-	 * 
+	 * @param userId 用户ID
 	 * @return
 	 */
 	public boolean editUserEnable(int userId);

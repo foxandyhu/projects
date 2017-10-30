@@ -24,11 +24,10 @@ public interface BaseMapper<T> {
 	public T getById(int id);
 	
 	/**
-	 * 根据组建删除对象
+	 * 根据主键删除对象
 	 * @author 胡礼波-Andy
 	 * @2014年11月11日下午3:13:48
-	 * 
-	 * @param id
+	 * @param ids 主键集合
 	 * @return
 	 */
 	public int delById(@Param("ids") Integer... ids);

@@ -25,7 +25,8 @@ public class LogsExceptionHandler extends AbstractLogsHandler{
 	 */
 	public void doAfterThrowing(final JoinPoint join) {
 		final Class<?> c=join.getTarget().getClass();
-		 if(listC.contains(c))	//过滤不需要日志处理的类
+		//过滤不需要日志处理的类
+		 if(listC.contains(c))
 		 {
 			 return;
 		 }

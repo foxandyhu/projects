@@ -19,11 +19,30 @@ public class PedometerData implements Serializable {
 	private static final long serialVersionUID = 3550091582147709980L;
 	
 	private int id;
-	private String serialNo;		//设备编号
-	private Date time;				//记录时间
-	private int step;				//步数
-	private float electricity;		//电量
-	private float version;			//版本号
+	/**
+	 * 设备编号
+	 */
+	private String serialNo;
+	
+	/**
+	 * 记录时间
+	 */
+	private Date time;
+	
+	/**
+	 * 步数
+	 */
+	private int step;
+	
+	/**
+	 * 电量
+	 */
+	private float electricity;
+	
+	/**
+	 * 版本号
+	 */
+	private float version;
 	
 	public int getId() {
 		return id;

@@ -268,17 +268,19 @@ public class ContextUtil {
 		{
 			return "";
 		}
+		String unknow="unknown";
 		String ip=request.getHeader("x-forwarded-for");
-		if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		if(ip == null || ip.length() == 0 || unknow.equalsIgnoreCase(ip)) {
 			 ip = request.getHeader("Proxy-Client-IP");
 		}
-		if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		if(ip == null || ip.length() == 0 || unknow.equalsIgnoreCase(ip)) {
 			 ip = request.getHeader("WL-Proxy-Client-IP");
 		}
-		if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			 ip = request.getHeader("X-Real-IP");		//Ngnix代理
+		if(ip == null || ip.length() == 0 || unknow.equalsIgnoreCase(ip)) {
+				//Ngnix代理
+			 ip = request.getHeader("X-Real-IP");
 		}		
-		if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		if(ip == null || ip.length() == 0 || unknow.equalsIgnoreCase(ip)) {
 		     ip = request.getRemoteAddr();
 		}
 		return ip;
@@ -293,8 +295,10 @@ public class ContextUtil {
 	public static boolean checkRequestIsSelfSite()
 	{
 		HttpServletRequest request=getHttpServletRequest();
-		String refererTo=request.getHeader("referer");						//传来的页面
-	   if(refererTo==null || refererTo.trim().equals("") || !refererTo.contains(request.getServerName())){	//防盗链  
+		//传来的页面
+		String refererTo=request.getHeader("referer");
+		//防盗链
+	   if(refererTo==null || refererTo.trim().equals("") || !refererTo.contains(request.getServerName())){
 		   return false;  
         }
 	   return true;
@@ -309,7 +313,7 @@ public class ContextUtil {
 	 */
 	public static Map<String,Object> getThreadLocalPagerMap()
 	{
-		Map<String,Object> map=new HashMap<>();
+		Map<String,Object> map=new HashMap<>(2);
 		int pageNo=0,pageSize=0;
 		try{
 			Pager pager=Pager.getPager();

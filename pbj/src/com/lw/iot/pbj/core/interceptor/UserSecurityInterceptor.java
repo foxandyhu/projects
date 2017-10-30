@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.lw.iot.pbj.common.constant.SysConst;
 import com.lw.iot.pbj.common.util.ContextUtil;
 import com.lw.iot.pbj.common.util.ResponseUtil;
 import com.lw.iot.pbj.common.util.reflect.ReflectUtils;
@@ -42,9 +43,10 @@ public class UserSecurityInterceptor extends HandlerInterceptorAdapter{
 					dispatchLoginRequest(request, response);
 					return false;
 				}
+				//访问资源未授权
 				if(!hasRight(user,request))
 				{
-					response.setStatus(HttpStatus.FORBIDDEN.value());				//访问资源未授权
+					response.setStatus(HttpStatus.FORBIDDEN.value());
 					ResponseUtil.writeText(response, "访问资源未授权!");
 					return false;
 				}
@@ -62,9 +64,10 @@ public class UserSecurityInterceptor extends HandlerInterceptorAdapter{
 	public void dispatchLoginRequest(HttpServletRequest request,HttpServletResponse response)throws Exception
 	{
 		String xmlRquest=request.getHeader("X-Requested-With");
-		if("XMLHttpRequest".equals(xmlRquest))			//表示异步Ajax请求弹出登录框
+		if(SysConst.AJAXREQUEST.equals(xmlRquest))
 		{
-			response.setStatus(401);					//未登录
+			//未登录
+			response.setStatus(401);
 		}else
 		{
 			String contextPath=request.getContextPath();
@@ -91,7 +94,8 @@ public class UserSecurityInterceptor extends HandlerInterceptorAdapter{
 	 */
 	private boolean hasRight(Users user,HttpServletRequest request)
 	{
-		return true;				//临时放行
+		//临时放行
+		return true;
 //		String url=String.valueOf(request.getAttribute("org.springframework.web.servlet.HandlerMapping.pathWithinHandlerMapping"));
 //		if(UsersRightContainer.exist(user.getId(),url))												//先判断真实请求的URL地址
 //		{

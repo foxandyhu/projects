@@ -9,35 +9,45 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * IP解析
+ * @author 胡礼波  andy_hulibo@163.com
+ * @2017年10月30日 下午3:41:32
+ */
+public class IpSeeker{
+	
+	private IpSeeker(){}
+	
+	private static IpSeeker iPSeeker;
+	
+	/**
+	 * 用来做为cache，查询一个ip时首先查看cache，以减少不必要的重复查找
+	 */
+	private Map<String, IpLocation> ipCache;
 
-public class IPSeeker{
-	
-	private IPSeeker(){}
-	
-	private static IPSeeker iPSeeker;  //单例
-	
-	// 用来做为cache，查询一个ip时首先查看cache，以减少不必要的重复查找
-	private Map<String, IPLocation> ipCache;
-	// 随机文件访问类
+	/**
+	 * 随机文件访问类
+	 */
 	private RandomAccessFile ipFile;
-	// 起始地区的开始和结束的绝对偏移
+
+	/**
+	 * 起始地区的开始和结束的绝对偏移
+	 */
 	private long ipBegin, ipEnd;
-	// 为提高效率而采用的临时变量
-	
-    // 一些固定常量，比如记录长度等等 
+	 
     private static final int IP_RECORD_LENGTH = 7; 
     private static final byte REDIRECT_MODE_1 = 0x01; 
     private static final byte REDIRECT_MODE_2 = 0x02;
     
-	private IPLocation loc;
+	private IpLocation loc;
 	private byte[] b4;
 	private byte[] b3;
 
-	public synchronized static IPSeeker getInstance()
+	public synchronized static IpSeeker getInstance()
 	{
 		if(iPSeeker==null)
 		{
-			iPSeeker=new IPSeeker();
+			iPSeeker=new IpSeeker();
 			iPSeeker.init();
 		}
 		return iPSeeker;
@@ -50,14 +60,14 @@ public class IPSeeker{
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-		ipCache = new HashMap<String, IPLocation>();
-		loc = new IPLocation();
+		ipCache = new HashMap<String, IpLocation>(10);
+		loc = new IpLocation();
 		b4 = new byte[4];
 		b3 = new byte[3];
 		try {
 			ipFile = new RandomAccessFile(file, "r");
 		} catch (FileNotFoundException e) {
-			throw new IPParseException("ip data file not found!", e);
+			throw new IpParseException("ip data file not found!", e);
 		}
 		// 如果打开文件成功，读取文件头信息
 		if (ipFile != null) {
@@ -74,8 +84,8 @@ public class IPSeeker{
 		}
 	}
 
-	public IPLocation getIPLocation(String ip) {
-		return new IPLocation(getCountry(ip), getArea(ip));
+	public IpLocation getIPLocation(String ip) {
+		return new IpLocation(getCountry(ip), getArea(ip));
 	}
 	
 	/**
@@ -91,7 +101,7 @@ public class IPSeeker{
 		{
 			return null;
 		}
-		IPLocation loca=getIPLocation(ip);
+		IpLocation loca=getIPLocation(ip);
 		return loca.getCountry()+loca.getArea()+" ["+ip+"]";
 	}
 
@@ -104,15 +114,17 @@ public class IPSeeker{
 	public String getCountry(byte[] ip) {
 		// 检查ip地址文件是否正常
 		if (ipFile == null)
-			return Message.bad_ip_file;
+		{
+			return Message.BAD_IP_FILE;
+		}
 		// 保存ip，转换ip字节数组为字符串形式
 		String ipStr = Util.getIpStringFromBytes(ip);
 		// 先检查cache中是否已经包含有这个ip的结果，没有再搜索文件
 		if (ipCache.containsKey(ipStr)) {
-			IPLocation ipLoc = ipCache.get(ipStr);
+			IpLocation ipLoc = ipCache.get(ipStr);
 			return ipLoc.getCountry();
 		} else {
-			IPLocation ipLoc = getIPLocation(ip);
+			IpLocation ipLoc = getIPLocation(ip);
 			ipCache.put(ipStr, ipLoc.getCopy());
 			return ipLoc.getCountry();
 		}
@@ -139,15 +151,17 @@ public class IPSeeker{
 	public String getArea(byte[] ip) {
 		// 检查ip地址文件是否正常
 		if (ipFile == null)
-			return Message.bad_ip_file;
+		{
+			return Message.BAD_IP_FILE;
+		}
 		// 保存ip，转换ip字节数组为字符串形式
 		String ipStr = Util.getIpStringFromBytes(ip);
 		// 先检查cache中是否已经包含有这个ip的结果，没有再搜索文件
 		if (ipCache.containsKey(ipStr)) {
-			IPLocation ipLoc = ipCache.get(ipStr);
+			IpLocation ipLoc = ipCache.get(ipStr);
 			return ipLoc.getArea();
 		} else {
-			IPLocation ipLoc = getIPLocation(ip);
+			IpLocation ipLoc = getIPLocation(ip);
 			ipCache.put(ipStr, ipLoc.getCopy());
 			return ipLoc.getArea();
 		}
@@ -171,16 +185,16 @@ public class IPSeeker{
 	 *            要查询的IP
 	 * @return IPLocation结构
 	 */
-	private IPLocation getIPLocation(byte[] ip) {
-		IPLocation info = null;
+	private IpLocation getIPLocation(byte[] ip) {
+		IpLocation info = null;
 		long offset = locateIP(ip);
 		if (offset != -1){
 			info = getIPLocation(offset);
 		}
 		if (info == null) {
-			info = new IPLocation();
-			info.setCountry(Message.unknown_country);
-			info.setArea(Message.unknown_area);
+			info = new IpLocation();
+			info.setCountry(Message.UNKNOWN_COUNTRY);
+			info.setArea(Message.UNKNOWN_AREA);
 		}
 		return info;
 	}
@@ -276,10 +290,13 @@ public class IPSeeker{
 	 * @return 相等返回0，ip大于beginIp则返回1，小于返回-1。
 	 */
 	private int compareIP(byte[] ip, byte[] beginIp) {
-		for (int i = 0; i < 4; i++) {
+		int len=4;
+		for (int i = 0; i < len; i++) {
 			int r = compareByte(ip[i], beginIp[i]);
 			if (r != 0)
+			{
 				return r;
+			}
 		}
 		return 0;
 	}
@@ -292,12 +309,19 @@ public class IPSeeker{
 	 * @return 若b1大于b2则返回1，相等返回0，小于返回-1
 	 */
 	private int compareByte(byte b1, byte b2) {
-		if ((b1 & 0xFF) > (b2 & 0xFF)) // 比较是否大于
+		int num=0xFF;
+		if ((b1 & num) > (b2 & num))
+		{
 			return 1;
-		else if ((b1 ^ b2) == 0)// 判断是否相等
+		}
+		else if ((b1 ^ b2) == 0)
+		{
 			return 0;
+		}
 		else
+		{
 			return -1;
+		}
 	}
 
 	/**
@@ -314,9 +338,13 @@ public class IPSeeker{
 		readIP(ipBegin, b4);
 		r = compareIP(ip, b4);
 		if (r == 0)
+		{
 			return ipBegin;
+		}
 		else if (r < 0)
+		{
 			return -1;
+		}
 		// 开始二分搜索
 		for (long i = ipBegin, j = ipEnd; i < j;) {
 			m = getMiddleOffset(i, j);
@@ -324,15 +352,21 @@ public class IPSeeker{
 			r = compareIP(ip, b4);
 			// log.debug(Utils.getIpStringFromBytes(b));
 			if (r > 0)
+			{
 				i = m;
+			}
 			else if (r < 0) {
 				if (m == j) {
 					j -= IP_RECORD_LENGTH;
 					m = j;
 				} else
+				{
 					j = m;
+				}
 			} else
+			{
 				return readLong3(m + 4);
+			}
 		}
 		// 如果循环结束了，那么i和j必定是相等的，这个记录为最可能的记录，但是并非
 		// 肯定就是，还要检查一下，如果是，就返回结束地址区的绝对偏移
@@ -340,9 +374,13 @@ public class IPSeeker{
 		readIP(m, b4);
 		r = compareIP(ip, b4);
 		if (r <= 0)
+		{
 			return m;
+		}
 		else
+		{
 			return -1;
+		}
 	}
 
 	/**
@@ -355,8 +393,9 @@ public class IPSeeker{
 	private long getMiddleOffset(long begin, long end) {
 		long records = (end - begin) / IP_RECORD_LENGTH;
 		records >>= 1;
-		if (records == 0)
+		if (records == 0){
 			records = 1;
+		}
 		return begin + records * IP_RECORD_LENGTH;
 	}
 
@@ -367,7 +406,7 @@ public class IPSeeker{
 	 *            国家记录的起始偏移
 	 * @return IPLocation对象
 	 */
-	private IPLocation getIPLocation(long offset) {
+	private IpLocation getIPLocation(long offset) {
 		try {
 			// 跳过4字节ip
 			ipFile.seek(offset + 4);
@@ -384,7 +423,9 @@ public class IPSeeker{
 					loc.setCountry(readString(readLong3()));
 					ipFile.seek(countryOffset + 4);
 				} else
+				{
 					loc.setCountry(readString(countryOffset));
+				}
 				// 读取地区标志
 				loc.setArea(readArea(ipFile.getFilePointer()));
 			} else if (b == REDIRECT_MODE_2) {
@@ -413,12 +454,16 @@ public class IPSeeker{
 		byte b = ipFile.readByte();
 		if (b == REDIRECT_MODE_1 || b == REDIRECT_MODE_2) {
 			long areaOffset = readLong3(offset + 1);
-			if (areaOffset == 0)
-				return Message.unknown_area;
+			if (areaOffset == 0){
+				return Message.UNKNOWN_AREA;
+			}
 			else
+			{
 				return readString(areaOffset);
-		} else
+			}
+		} else{
 			return readString(offset);
+		}
 	}
 
 	/**
@@ -450,8 +495,8 @@ public class IPSeeker{
 	}
 	
 	public interface Message {
-		String bad_ip_file = "IP地址库文件错误";
-		String unknown_country = "未知国家";
-		String unknown_area = "未知地区";
+		String BAD_IP_FILE = "IP地址库文件错误";
+		String UNKNOWN_COUNTRY = "未知国家";
+		String UNKNOWN_AREA = "未知地区";
 	}
 }

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.lw.iot.pbj.common.constant.SysConst;
 import com.lw.iot.pbj.common.util.ContextUtil;
 import com.lw.iot.pbj.member.entity.Member;
 
@@ -48,9 +49,10 @@ public class MemberSecurityInterceptor extends HandlerInterceptorAdapter{
 		String xmlRquest=request.getHeader("X-Requested-With");
 		String contextPath=request.getContextPath();
 		contextPath=contextPath+"/api/weixin/authorize.html";
-		if("XMLHttpRequest".equals(xmlRquest))			//表示异步Ajax请求弹出登录框
+		if(SysConst.AJAXREQUEST.equals(xmlRquest))
 		{
-			response.setStatus(401);					//未登录
+			//未登录
+			response.setStatus(401);
 		}else
 		{
 			response.sendRedirect(contextPath);

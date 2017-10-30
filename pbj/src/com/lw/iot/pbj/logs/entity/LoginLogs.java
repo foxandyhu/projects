@@ -3,8 +3,8 @@ package com.lw.iot.pbj.logs.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.lw.iot.pbj.common.ipseek.IPLocation;
-import com.lw.iot.pbj.common.ipseek.IPSeeker;
+import com.lw.iot.pbj.common.ipseek.IpLocation;
+import com.lw.iot.pbj.common.ipseek.IpSeeker;
 
 /**
  * 用户登录日志
@@ -17,20 +17,47 @@ public class LoginLogs implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public static final int MEMBER_LOGIN=1;			//会员登录
-	public static final int USERS_LOGIN=2;			//系统管理员登录
-	public static final int RESTAURATEUR_LOGIN=3;	//商户登录
+	/**
+	 * 会员登录
+	 */
+	public static final int MEMBER_LOGIN=1;
+	
+	/**
+	 * 系统管理员登录
+	 */
+	public static final int USERS_LOGIN=2;
+	
+	/**
+	 * 商户登录
+	 */
+	public static final int RESTAURATEUR_LOGIN=3;
 
 	private int id;
 
-	private String userName;	// 账号
-	private int type;			// 账号类型---管理员登录 会员登录
-
-	private Date time;			//登录时间
-
-	private String ip;			//登录ip
+	/**
+	 * 账号
+	 */
+	private String userName;
 	
-	private boolean login;		//退出还是登录
+	/**
+	 * 账号类型---管理员登录 会员登录
+	 */
+	private int type; 
+
+	/**
+	 * 登录退出时间
+	 */
+	private Date time;
+
+	/**
+	 * 登录ip
+	 */
+	private String ip;
+	
+	/**
+	 * 退出还是登录
+	 */
+	private boolean login;
 
 	public LoginLogs(){}
 	public LoginLogs(String userName,String ip,int type,boolean login)
@@ -111,7 +138,7 @@ public class LoginLogs implements Serializable {
 	
 	public String getIpArea()
 	{
-		IPLocation loca=IPSeeker.getInstance().getIPLocation(getIp());
+		IpLocation loca=IpSeeker.getInstance().getIPLocation(getIp());
 		return loca.getCountry();
 	}
 }
