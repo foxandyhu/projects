@@ -3,8 +3,8 @@ package com.lw.iot.pbj.common.constant;
 
 /**
  * 系统常量
- * @author 胡礼波-Andy
- * @2014年11月10日上午9:36:18
+ * @author 胡礼波  andy_hulibo@163.com
+ * @2017年10月30日 下午3:05:38
  */
 public class SysConst {
     
