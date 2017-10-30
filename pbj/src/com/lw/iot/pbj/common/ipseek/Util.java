@@ -4,9 +4,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.StringTokenizer;
 
 /**
- *  工具类，提供一些方便的方法
- * @author 胡礼波
- * 2012-6-1 下午12:23:48
+ * 工具类，提供一些方便的方法
+ * @author 胡礼波  andy_hulibo@163.com
+ * @2017年10月30日 下午3:09:17
  */
 public class Util {
 
