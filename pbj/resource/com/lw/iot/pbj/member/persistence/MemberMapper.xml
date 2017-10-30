@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lw.member.persistence.MemberMapper">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+    <parameterMap type="Member" id="MemberparaMap">
+    	<parameter property="id" resultMap="id"/>
+    	<parameter property="weixinNo" resultMap="weixin_no"/>
+    	<parameter property="phone" resultMap="phone"/>
+    	<parameter property="enable" resultMap="is_enable"/>
+    	<parameter property="registTime" resultMap="regist_time"/>
+    	<parameter property="subscribe" resultMap="is_subscribe"/>
+    	<parameter property="nickName" resultMap="nick_name"/>
+    	<parameter property="sex" resultMap="sex"/>
+    	<parameter property="province" resultMap="province"/>
+    	<parameter property="city" resultMap="city"/>
+    	<parameter property="country" resultMap="country"/>
+    	<parameter property="headImgUrl" resultMap="head_img_url"/>
+    	<parameter property="unionId" resultMap="union_id"/>
+    </parameterMap>
+
+    <resultMap type="Member" id="MemberResultMap">
+    	<id property="id" column="id"/>
+    	<result property="weixinNo" column="weixin_no"/>
+    	<result property="phone" column="phone"/>
+    	<result property="enable" column="is_enable"/>
+    	<result property="registTime" column="regist_time"/>
+    	<result property="subscribe" column="is_subscribe"/>
+    	<result property="nickName" column="nick_name"/>
+    	<result property="sex" column="sex"/>
+    	<result property="province" column="province"/>
+    	<result property="city" column="city"/>
+    	<result property="country" column="country"/>
+    	<result property="headImgUrl" column="head_img_url"/>
+    	<result property="unionId" column="union_id"/>
+   	</resultMap>
+   	
+	<sql id="memberColumn">id,weixin_no,phone,is_enable,regist_time,is_subscribe,nick_name,sex,province,city,country,head_img_url,union_id</sql>
+	
+	<insert id="save" parameterMap="MemberparaMap" keyProperty="id" useGeneratedKeys="true">
+    	<![CDATA[
+    		insert into member_info(weixin_no,phone,is_enable,regist_time,is_subscribe,nick_name,sex,province,city,country,head_img_url,union_id) 
+    		values(#{weixinNo},#{phone},#{enable},#{registTime},#{subscribe},#{nickName},#{sex},#{province},#{city},#{country},#{headImgUrl},#{unionId});
+    	]]>
+	</insert>
+	
+    <select id="getMemberByWX" parameterType="string" resultMap="MemberResultMap" >SELECT <include refid="memberColumn"/> from member_info where weixin_no=#{weixinNo}</select>
+    
+    <select id="getList" parameterType="map" resultMap="MemberResultMap" >
+    	SELECT <include refid="memberColumn"/> from member_info where 1=1
+    	<if test="no!=null">and (nick_name like CONCAT('%','${no}','%') or weixin_no like CONCAT('%','${no}','%'))</if>
+    	<if test="nickName!=null">and nick_name like CONCAT('%','${nickName}','%')</if>
+    	<if test="weixinNo!=null">and weixin_no like CONCAT('%','${weixinNo}','%')</if>
+    	<if test="subscribe!=null">and is_subscribe=#{subscribe}</if>
+    	<if test="sex!=null">and sex=#{sex}</if>
+	    <if test="beginTime!=null">and regist_time >= #{beginTime}</if>
+	    <if test="endTime!=null"><![CDATA[ and regist_time <= #{endTime}]]></if>    	    	
+    	order by id desc
+       <if test="firstResult!=null and maxResult!=null">limit #{firstResult} , #{maxResult};</if>
+    </select>
+    
+    <select id="getCount" resultType="int">
+    	select count(1) from member_info where 1=1
+    	<if test="no!=null">and (nick_name like CONCAT('%','${no}','%') or weixin_no like CONCAT('%','${no}','%'))</if>
+    	<if test="nickName!=null">and nick_name like CONCAT('%','${nickName}','%')</if>
+    	<if test="weixinNo!=null">and weixin_no like CONCAT('%','${weixinNo}','%')</if>
+    	<if test="subscribe!=null">and is_subscribe=#{subscribe}</if>
+    	<if test="sex!=null">and sex=#{sex}</if>
+	    <if test="beginTime!=null">and regist_time >= #{beginTime}</if>
+	    <if test="endTime!=null"><![CDATA[ and regist_time <= #{endTime}]]></if>    	    	
+    </select>
+	
+	<select id="getById" resultMap="MemberResultMap">SELECT <include refid="memberColumn"/> from member_info where id=#{id};</select>
+	
+    <select id="getMemberReport" resultType="map">select count(1) as total,date_format(regist_time,'%Y-%m-%d') as time,is_subscribe from member_info where regist_time between #{beginTime} and #{endTime} group by date_format(regist_time,'%Y-%m-%d'),is_subscribe order by time asc;</select>
+    
+    <update id="editById" parameterType="Member">
+    	<![CDATA[UPDATE MEMBER_INFO SET WEIXIN_NO=#{weixinNo},PHONE=#{phone},IS_ENABLE=#{enable},
+    	IS_SUBSCRIBE=#{subscribe},NICK_NAME=#{nickName},SEX=#{sex},
+    	PROVINCE=#{province},CITY=#{city},COUNTRY=#{country},HEAD_IMG_URL=#{headImgUrl},UNION_ID=#{unionId}
+    	WHERE ID=#{id};]]>
+    </update>
+    
+</mapper>
