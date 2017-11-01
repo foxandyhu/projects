@@ -30,6 +30,11 @@ public class PedometerData implements Serializable {
 	private Date time;
 	
 	/**
+	 * 活动时间 单位秒
+	 */
+	private int actTime;
+	
+	/**
 	 * 步数
 	 */
 	private int step;
@@ -46,6 +51,15 @@ public class PedometerData implements Serializable {
 	
 	public int getId() {
 		return id;
+	}
+
+	public int getActTime() {
+		return actTime;
+	}
+
+
+	public void setActTime(int actTime) {
+		this.actTime = actTime;
 	}
 
 

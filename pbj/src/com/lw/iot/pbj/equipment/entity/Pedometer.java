@@ -20,7 +20,7 @@ public class Pedometer implements Serializable{
 	/**
 	 * 设备序列号
 	 */
-	private String serialNo;		
+	private String serialNo;
 	
 	public int getId() {
 		return id;

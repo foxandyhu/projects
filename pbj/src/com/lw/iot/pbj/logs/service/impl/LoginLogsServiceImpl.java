@@ -13,8 +13,6 @@ import com.lw.iot.pbj.core.base.service.impl.BaseServiceImpl;
 import com.lw.iot.pbj.logs.entity.LoginLogs;
 import com.lw.iot.pbj.logs.persistence.LoginLogsMapper;
 import com.lw.iot.pbj.logs.service.ILoginLogsService;
-import com.lw.iot.pbj.member.entity.Member;
-import com.lw.iot.pbj.member.service.IMemberService;
 import com.lw.iot.pbj.users.entity.Users;
 import com.lw.iot.pbj.users.service.IUserService;
 
@@ -32,23 +30,21 @@ public class LoginLogsServiceImpl extends BaseServiceImpl<LoginLogs> implements 
 	@Autowired
 	private LoginLogsMapper loginLogsMapper;
 	@Autowired
-	private IMemberService memberService;
-	@Autowired
 	private IUserService userService;
 
 	@Override
-	public LoginLogs getLatestLog(int memberId,int index,int type)
+	public LoginLogs getLatestLog(int userId,int index,int type)
 	{
 		Assert.isTrue(index>0,"记录数必须大于0");
 		index=index-1;
 		String userName=null;
 		if(LoginLogs.MEMBER_LOGIN==type)
 		{
-			Member member=memberService.get(memberId);
-			userName=member==null?null:member.getPhone();
+			Users user=userService.get(userId);
+			userName=user==null?null:user.getUserName();
 		}else if(LoginLogs.USERS_LOGIN==type)
 		{
-			Users user=userService.get(memberId);
+			Users user=userService.get(userId);
 			userName=user==null?null:user.getUserName();
 		}
 		if(userName!=null)

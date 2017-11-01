@@ -11,11 +11,6 @@ public class SysConst {
 	/**
 	 * 用户登录标识
 	 */
-	public final static String MEMBER_LOGIN_FLAG="loginMember";
-	
-	/**
-	 * 用户登录标识
-	 */
 	public final static String LOGIN_FLAG="loginUser";
 	
 	/**

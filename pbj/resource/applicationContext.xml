@@ -44,7 +44,7 @@
      <!-- Session 工厂 end -->
     
 	<!-- 系统日志处理 begin -->
-	<bean id="logHandler" class="com.lw.iot.pbj.core.logs.LogsHandler"/>
+	<bean id="logHandler" class="com.lw.iot.pbj.logs.LogsHandler"/>
 	<aop:aspectj-autoproxy proxy-target-class="true"/>
 	<aop:config>
 		<aop:pointcut id="logPointcut" expression="execution(* com.lw.iot.pbj..service..*.add*(..)) or 
@@ -57,7 +57,7 @@
 		</aop:aspect>
 	</aop:config>
 
-	<bean id="logsExceptionHandler" class="com.lw.iot.pbj.core.logs.LogsExceptionHandler"/>		
+	<bean id="logsExceptionHandler" class="com.lw.iot.pbj.logs.LogsExceptionHandler"/>		
 	<aop:config>
 		<aop:pointcut id="logPointcut" expression="execution(* com.lw.iot.pbj..service..*.add*(..)) or 
 												   execution(* com.lw.iot.pbj..service..*.del*(..)) or 

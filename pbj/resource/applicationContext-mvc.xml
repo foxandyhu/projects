@@ -25,12 +25,12 @@
 	
  	<mvc:interceptors>
  		<mvc:interceptor>
- 			<mvc:mapping path="/manage/**"/>
- 			<bean class="com.lw.sale.core.security.interceptor.SecurityInterceptor"/>
+ 			<mvc:mapping path="/api/equipment/**"/>
+ 			<bean class="com.lw.iot.pbj.core.interceptor.ApiEquipmentInterceptor"/>
  		</mvc:interceptor>
  		<mvc:interceptor>
- 			<mvc:mapping path="/api/equipment/**"/>
- 			<bean class="com.lw.sale.core.security.interceptor.ApiCabinetInterceptor"/>
- 		</mvc:interceptor>
+ 			<mvc:mapping path="/manage/**"/>
+ 			<bean class="com.lw.iot.pbj.core.interceptor.UserSecurityInterceptor"/>
+ 		</mvc:interceptor> 		
  	</mvc:interceptors>
 </beans>

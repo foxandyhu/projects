@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.lw.users.persistence.UserMapper">
+<mapper namespace="com.lw.iot.pbj.users.persistence.UserMapper">
     <parameterMap type="Users" id="UsersParaMap">
     	<parameter property="id"  resultMap="id"/>
     	<parameter property="name" resultMap="name"/>

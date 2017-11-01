@@ -20,7 +20,6 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.lw.iot.pbj.common.constant.SysConst;
 import com.lw.iot.pbj.common.page.Pager;
-import com.lw.iot.pbj.member.entity.Member;
 import com.lw.iot.pbj.users.entity.Users;
 
 /**
@@ -92,24 +91,6 @@ public class ContextUtil {
 			}
 			Users user=(Users)getHttpServletRequest().getSession().getAttribute(SysConst.LOGIN_FLAG);
 			return user;
-		}
-		catch (Exception e) {
-		}
-		return null;
-	}
-	
-	/**
-	 * 获得登录会员
-	 * @author 胡礼波-Andy
-	 * @2015年4月23日下午4:43:53
-	 * @return
-	 */
-	public static Member getContextLoginMember()
-	{
-		try
-		{
-			Member member=(Member)getHttpServletRequest().getSession().getAttribute(SysConst.MEMBER_LOGIN_FLAG);
-			return member;
 		}
 		catch (Exception e) {
 		}

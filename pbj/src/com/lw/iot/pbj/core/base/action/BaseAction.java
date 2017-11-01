@@ -21,7 +21,6 @@ import com.lw.iot.pbj.common.constant.SysConst;
 import com.lw.iot.pbj.common.page.Pager;
 import com.lw.iot.pbj.common.util.DataConvertUtils;
 import com.lw.iot.pbj.common.util.ResponseUtil;
-import com.lw.iot.pbj.member.entity.Member;
 import com.lw.iot.pbj.users.entity.Users;
 
 /**
@@ -150,29 +149,6 @@ public class BaseAction{
 	public Users getLoginedUser()
 	{
 		return (Users) getSession().getAttribute(SysConst.LOGIN_FLAG);
-	}
-	
-	/**
-	 * 获得登录的Member对象
-	 * @author 胡礼波-Andy
-	 * @2015年4月27日上午11:47:07
-	 * @return
-	 */
-	public Member getLoginMember()
-	{
-		return (Member) getSession().getAttribute(SysConst.MEMBER_LOGIN_FLAG);
-	}
-	
-	/**
-	 * 响应到客户端的删除条数据
-	 * @author 胡礼波-Andy
-	 * @2014年11月12日上午10:13:51
-	 * 
-	 * @return
-	 */
-	public String getDelTipMsg(int count)
-	{
-		return count+"条数据删除成功";
 	}
 	
 	/**

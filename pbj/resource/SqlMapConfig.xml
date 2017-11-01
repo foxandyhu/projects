@@ -11,5 +11,8 @@
 	
 	<typeAliases>
 		<package name="com.lw.iot.pbj.equipment.entity"/>
+		<package name="com.lw.iot.pbj.logs.entity"/>
+		<package name="com.lw.iot.pbj.users.entity"/>
+		<package name="com.lw.iot.pbj.system.entity"/>
 	</typeAliases>	
 </configuration>

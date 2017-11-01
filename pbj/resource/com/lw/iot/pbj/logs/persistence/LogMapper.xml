@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.lw.logs.persistence.LogMapper">
+<mapper namespace="com.lw.iot.pbj.logs.persistence.LogMapper">
     <parameterMap type="SysLog" id="SysLogparaMap">
     	<parameter property="id" resultMap="id"/>
     	<parameter property="userId" resultMap="user_id"/>

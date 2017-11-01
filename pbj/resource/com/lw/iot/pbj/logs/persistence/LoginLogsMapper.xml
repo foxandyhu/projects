@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.lw.logs.persistence.LoginLogsMapper">
+<mapper namespace="com.lw.iot.pbj.logs.persistence.LoginLogsMapper">
     <parameterMap type="LoginLogs" id="LoginLogsparaMap">
     	<parameter property="id" resultMap="id"/>
     	<parameter property="userName" resultMap="username"/>
@@ -28,7 +28,7 @@
     	]]>
 	</insert>
 	
-		<select id="getList" resultMap="LoginLogsResultMap">
+	<select id="getList" resultMap="LoginLogsResultMap">
 		SELECT <include refid="LoginLogsColumn"/> FROM sys_login_logs order by id desc
 		<if test="firstResult!=null and maxResult!=null">limit #{firstResult} , #{maxResult};</if>
 	</select>
