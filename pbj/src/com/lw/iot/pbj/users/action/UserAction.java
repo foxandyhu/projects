@@ -59,7 +59,6 @@ public class UserAction extends BaseAction {
 	 * 添加用户
 	 * @author 胡礼波-Andy
 	 * @2014年11月12日上午11:15:40
-	 * 
 	 * @param response
 	 * @return
 	 */
