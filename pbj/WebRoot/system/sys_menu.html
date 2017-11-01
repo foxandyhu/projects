@@ -1,0 +1,23 @@
+﻿<style>.ztree * {font-size: 14px;}.ztree li a.curSelectedNode {z-index:10000;position: relative;}</style>
+<section class="content-header">
+    <h1>菜单配置</h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+      <li class="active">组织结构</li>
+      <li class="active">菜单设置</li>
+    </ol>
+</section>
+<section class="content" ng-init="initSysMenu()">
+	<div class="box box-danger"></div>
+	<div class="content">
+		<div class="row">
+			<div class="col-lg-2 ">
+					<ul id="menuTree" class="ztree"></ul>
+			</div>
+			<div class="col-lg-10" id="funListCc">
+				<ng-include src="'system/sys_menu_detail.html'"></ng-include>
+			</div>
+		</div>
+	</div>
+</section>
+<span ng-init="initSysMenuValidate()"></span>

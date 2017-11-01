@@ -1,0 +1,26 @@
+package com.lw.iot.pbj.equipment.persistence;
+
+import java.util.Date;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.lw.iot.pbj.core.base.persistence.BaseMapper;
+import com.lw.iot.pbj.equipment.entity.PedometerData;
+
+/**
+ * 脚环计步器数据数据接口
+ * @author andy_hulibo@163.com
+ * @2017年10月31日 下午3:30:20
+ */
+public interface PedometerDataMapper extends BaseMapper<PedometerData> {
+
+	/**
+	 * 根据设备编号和日期查找脚环计步器数据--一个脚环一天一条数据
+	 * @author andy_hulibo@163.com
+	 * @2017年11月1日 上午11:47:23
+	 * @param serialNo 设备编号
+	 * @param date 日期 例如：2017-11-1
+	 * @return
+	 */
+	public PedometerData getPedometerData(@Param("serialNo")String serialNo,@Param("time") Date date);
+}

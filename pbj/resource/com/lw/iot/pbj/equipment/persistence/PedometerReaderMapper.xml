@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lw.iot.pbj.equipment.persistence.PedometerReaderMapper">
+    <parameterMap type="PedometerReader" id="PedometerReaderParaMap">
+    	<parameter property="id" resultMap="id"/>
+    	<parameter property="serialNo" resultMap="serial_no"/>
+    	<parameter property="address" resultMap="address"/>
+    	<parameter property="online" resultMap="is_online"/>
+    	<parameter property="lastComm" resultMap="last_comm"/>
+    	<parameter property="enable" resultMap="is_enable"/>
+    	<parameter property="remark" resultMap="remark"/>
+    </parameterMap>
+
+    <resultMap type="PedometerReader" id="PedometerReaderResultMap">
+    	<id property="id" column="id"/>
+    	<result property="serialNo" column="serial_no"/>
+    	<result property="address" column="address"/>
+    	<result property="online" column="is_online"/>
+    	<result property="lastComm" column="last_comm"/>
+    	<result property="enable" column="is_enable"/>
+    	<result property="remark" column="remark"/>
+    </resultMap>
+
+	<sql id="PedometerReaderColumn">id,serial_no,address,is_online,last_comm,is_enable,remark</sql>
+	<insert id="save" parameterType="PedometerReader"  keyProperty="id" useGeneratedKeys="true">
+    	<![CDATA[
+    		insert into d_pedometer_reader(serial_no,address,is_enable,remark) values(#{serialNo},#{address},#{enable},#{remark});
+    	]]>
+	</insert>
+	
+	<select id="getList" resultMap="PedometerReaderResultMap">
+		SELECT <include refid="PedometerReaderColumn"/> FROM d_pedometer_reader order by id desc
+		<if test="firstResult!=null and maxResult!=null">limit #{firstResult} , #{maxResult};</if>
+	</select>
+	
+	<select id="getCount" resultType="int">
+		SELECT count(1) FROM d_pedometer_reader;
+	</select>
+	
+	<select id="getPedometerReader" resultMap="PedometerReaderResultMap">
+		SELECT <include refid="PedometerReaderColumn"/> from d_pedometer_reader where serial_no=#{serialNo};
+	</select>
+	
+	<delete id="delById">
+		DELETE FROM d_pedometer_reader where id in
+		<foreach collection="ids" index="index" item="item" open="(" close=")" separator=",">#{item}</foreach>
+	</delete>
+	
+	<update id="editById" parameterType="Users">
+    	<![CDATA[
+    		UPDATE d_pedometer_reader set address=#{address},is_enable=#{enable},remark=#{remark} where id=#{id};
+    	]]>
+	</update>
+	
+	<update id="editCommInfo" parameterType="map">
+    	<![CDATA[
+    		UPDATE d_pedometer_reader set is_online=#{online},last_comm=#{date} where serial_no=#{serialNo};
+    	]]>
+	</update>	
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lw.iot.pbj.system.persistence.SysConfigMapper">
+    <parameterMap type="SysConfig" id="SysConfigparaMap">
+    	<parameter property="id" resultMap="id"/>
+    	<parameter property="appName" resultMap="app_name"/>
+    	<parameter property="copyRight" resultMap="copyright"/>
+    	<parameter property="address" resultMap="address"/>
+    	<parameter property="phone" resultMap="phone"/>
+    	<parameter property="record" resultMap="record"/>
+    </parameterMap>
+
+    <resultMap type="SysConfig" id="SysConfigResultMap">
+    	<id property="id" column="id"/>
+    	<result property="appName" column="app_name"/>
+    	<result property="copyRight" column="copyright"/>
+    	<result property="address" column="address"/>
+    	<result property="phone" column="phone"/>
+    	<result property="record" column="record"/>
+   	</resultMap>
+   	
+	<sql id="SysConfigColumn">id,app_name,copyright,address,phone,record</sql>
+	
+	<insert id="save" parameterType="SysConfig" keyProperty="id" useGeneratedKeys="true">
+    	<![CDATA[
+    		insert into sys_config(app_name,copyright,address,phone,record) 
+    		values(#{appName},#{copyRight},#{address},#{phone},#{record});
+    	]]>
+	</insert>
+	
+	<select id="getById" resultMap="SysConfigResultMap">SELECT<include refid="SysConfigColumn"/> FROM sys_config limit 1;</select>
+	
+	<update id="editById" parameterType="SysConfig">
+		<![CDATA[UPDATE sys_config SET app_name=#{appName},copyright=#{copyRight},address=#{address},phone=#{phone},record=#{record}]]>
+	</update>
+</mapper>

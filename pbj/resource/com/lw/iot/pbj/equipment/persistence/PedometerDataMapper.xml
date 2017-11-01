@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lw.iot.pbj.equipment.persistence.PedometerDataMapper">
+    <parameterMap type="PedometerData" id="PedometerDataParaMap">
+    	<parameter property="id" resultMap="id"/>
+    	<parameter property="serialNo" resultMap="serial_no"/>
+    	<parameter property="time" resultMap="time"/>
+    	<parameter property="actTime" resultMap="act_time"/>
+    	<parameter property="step" resultMap="step"/>
+    	<parameter property="electricity" resultMap="electricity"/>
+    	<parameter property="version" resultMap="version"/>
+    </parameterMap>
+
+    <resultMap type="PedometerData" id="PedometerDataResultMap">
+    	<id property="id" column="id"/>
+    	<result property="serialNo" column="serial_no"/>
+    	<result property="time" column="time"/>
+    	<result property="actTime" column="act_time"/>
+    	<result property="step" column="step"/>
+    	<result property="electricity" column="electricity"/>
+    	<result property="version" column="version"/>
+    </resultMap>
+
+	<sql id="PedometerDataColumn">id,serial_no,time,act_time,step,electricity,version</sql>
+	<insert id="save" parameterType="PedometerData"  keyProperty="id" useGeneratedKeys="true">
+    	<![CDATA[
+    		insert into d_pedometer_data(serial_no,time,act_time,step,electricity,version) 
+    		values(#{serialNo},#{time},#{actTime},#{step},#{electricity},#{version});
+    	]]>
+	</insert>
+	
+	<select id="getList" resultMap="PedometerDataResultMap">
+		SELECT <include refid="PedometerDataColumn"/> FROM d_pedometer_data order by id desc
+		<if test="firstResult!=null and maxResult!=null">limit #{firstResult} , #{maxResult};</if>
+	</select>
+	
+	<select id="getCount" resultType="int">
+		SELECT count(1) FROM d_pedometer_data;
+	</select>
+	
+	<delete id="delById">
+		DELETE FROM d_pedometer_data where id in
+		<foreach collection="ids" index="index" item="item" open="(" close=")" separator=",">#{item}</foreach>
+	</delete>
+	
+	<update id="editById" parameterType="Users">
+    	<![CDATA[
+    		UPDATE d_pedometer_data set time=#{time},act_time=#{actTime},step=#{step},
+    		electricity=#{electricity},version=#{version} where id=#{id};
+    	]]>
+	</update>
+	
+	<select id="getPedometerData" parameterType="map" resultMap="PedometerDataResultMap">
+		SELECT <include refid="PedometerDataColumn"/> FROM d_pedometer_data where serial_no=#{serialNo} and date(time)=date(#{time})
+	</select>
+</mapper>

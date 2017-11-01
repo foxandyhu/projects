@@ -1,0 +1,18 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<!--[if lt IE 9]>
+    <script src="<%=basePath%>resources/plugin/framework/js/html5shiv.min.js"></script>
+   <script src="<%=basePath%>resources/plugin/framework/js/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" href="<%=basePath%>resources/plugin/bootstrap3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=basePath%>resources/plugin/awesome/font-awesome.min.css">
+<link rel="stylesheet" href="<%=basePath%>resources/plugin/awesome/ionicons.min.css">
+<link rel="stylesheet" href="<%=basePath%>resources/plugin/framework/css/AdminLTE.min.css">
+<link rel="stylesheet" href="<%=basePath%>resources/plugin/framework/css/skin-red.min.css">
+<link rel="stylesheet" href="<%=basePath%>resources/css/system.css">
+
+<link rel="shortcut icon" href="<%=basePath%>favicon.ico" type="image/x-icon" />
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
