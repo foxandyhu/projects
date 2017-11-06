@@ -63,7 +63,7 @@ public class BaseApiAction {
 	 */
 	public String getSerialNo()
 	{
-		String seriesNo=getRequest().getParameter("serialno");
+		String seriesNo=String.valueOf(getRequest().getAttribute("serialno"));
 		return seriesNo;
 	}
 	
@@ -75,7 +75,7 @@ public class BaseApiAction {
 	 */
 	public String getVersion()
 	{
-		String version=getRequest().getParameter("version");
+		String version=String.valueOf(getRequest().getAttribute("version"));
 		return version;
 	}
 	
@@ -87,7 +87,7 @@ public class BaseApiAction {
 	 */
 	public String getContent()
 	{
-		String content=getRequest().getParameter("content");
+		String content=String.valueOf(getRequest().getAttribute("content"));
 		return content;
 	}
 	
@@ -99,7 +99,7 @@ public class BaseApiAction {
 	 */
 	public String getNonceStr()
 	{
-		String noncestr=getRequest().getParameter("noncestr");
+		String noncestr=String.valueOf(getRequest().getAttribute("noncestr"));
 		return noncestr;
 	}
 	
@@ -111,7 +111,7 @@ public class BaseApiAction {
 	 */
 	public String getSignature()
 	{
-		String signature=getRequest().getParameter("signature");
+		String signature=String.valueOf(getRequest().getAttribute("signature"));
 		return signature;
 	}
 	

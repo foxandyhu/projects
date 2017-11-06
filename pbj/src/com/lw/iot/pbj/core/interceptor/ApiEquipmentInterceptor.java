@@ -7,6 +7,7 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
@@ -62,15 +63,42 @@ public class ApiEquipmentInterceptor extends HandlerInterceptorAdapter{
 	 * @2017年4月18日 上午10:46:58
 	 * @param request
 	 * @return
+	 * @throws Exception 
 	 */
-	private RequestData getRequestData(HttpServletRequest request)
+	private RequestData getRequestData(HttpServletRequest request) throws Exception
 	{
+		String dataStr =IOUtils.toString(request.getInputStream());
+		String[] datas=dataStr.split(",");
+		
+		String version=datas[1];
+		String signature=datas[datas.length-1];
+		String noncestr=datas[4];
+		String serialNo=datas[0];
+		
+		request.setAttribute("version",version);
+		request.setAttribute("serialno",serialNo);
+		request.setAttribute("noncestr",noncestr);
+		
+		StringBuilder sb=new StringBuilder();
+		int len=datas.length-1;
+		for (int i=5;i<len;i++) {
+			sb.append(datas[i]);
+			if(i+1<len)
+			{
+				sb.append(",");
+			}
+		}
+		
+		String content=sb.toString();
+		request.setAttribute("content",content);
+		
+		
 		RequestData data=new RequestData();
-		data.setContent(request.getParameter("content"));
-		data.setNonceStr(request.getParameter("noncestr"));
-		data.setSerialNo(request.getParameter("serialno"));
-		data.setSignature(request.getParameter("signature"));
-		data.setVersion(request.getParameter("version"));
+		data.setContent(content);
+		data.setNonceStr(noncestr);
+		data.setSerialNo(serialNo);
+		data.setSignature(signature);
+		data.setVersion(version);
 		return data;
 	}
 	

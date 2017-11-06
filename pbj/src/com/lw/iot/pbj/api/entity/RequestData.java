@@ -8,8 +8,8 @@ import java.util.Locale;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lw.iot.pbj.common.json.JsonUtil;
+import com.lw.iot.pbj.common.util.DateUtil;
 import com.lw.iot.pbj.common.util.SecurityUtil;
-import com.lw.iot.pbj.common.util.StringUtil;
 import com.lw.iot.pbj.equipment.entity.PedometerData;
 
 /**
@@ -107,7 +107,7 @@ public class RequestData implements Serializable{
 
 	public static void main(String[] args) {
 		RequestData data=new RequestData();
-		data.setNonceStr(StringUtil.getRandomString(11));
+		data.setNonceStr("QWE123ASD12");
 		data.setVersion("1.0");
 		data.setLatitude("12.232");
 		data.setLongitude("11.234234");
@@ -122,19 +122,21 @@ public class RequestData implements Serializable{
 		
 		PedometerData pd1=new PedometerData();
 		pd1.setElectricity(11);
-		pd1.setSerialNo("11345431111");
-		pd1.setStep(122);
-		pd1.setTime(new Date());
-		pd1.setVersion(1);
+		pd1.setSerialNo("123456");
+		pd1.setStep(12345);
+		pd1.setTime(DateUtil.parseStrDateTime("2017-11-01 10:02:22"));
+		pd1.setVersion(1.0f);
 		pd1.setActTime(234);
 		
 		List<PedometerData> list=new ArrayList<PedometerData>();
-		list.add(pd);list.add(pd1);
-		data.setContent(list);
-		data.setSerialNo("XXXXXXXXXXXXXXX3232XXXX");
+		list.add(pd1);
+		data.setContent(JsonUtil.toJsonStringFilterPropterForArray(list,"id"));
+		data.setSerialNo("666666");
 		
-		String signature = SecurityUtil.sha1(data.getSerialNo()+JsonUtil.toJsonStringFilterPropterForArray(data.getContent()).toJSONString()+data.getNonceStr()+data.getVersion()).toUpperCase(Locale.CHINA);
-		System.out.println(signature.length());
+		String aa=data.getSerialNo()+data.getContent()+data.getNonceStr()+data.getVersion();
+		String signature = SecurityUtil.sha1(aa).toUpperCase(Locale.CHINA);
+		System.out.println(aa);
+		System.out.println(signature);
 		data.setSignature(signature);
 		JSONObject json=JsonUtil.toJsonStringFilterPropter(data);
 		System.out.println(json);

@@ -32,7 +32,9 @@
 	</insert>
 	
 	<select id="getList" resultMap="PedometerDataResultMap">
-		SELECT <include refid="PedometerDataColumn"/> FROM d_pedometer_data order by id desc
+		SELECT <include refid="PedometerDataColumn"/> FROM d_pedometer_data where 1=1
+		<if test="serialNo!=null">and serial_no=#{serialNo}</if> 
+		order by time desc
 		<if test="firstResult!=null and maxResult!=null">limit #{firstResult} , #{maxResult};</if>
 	</select>
 	
