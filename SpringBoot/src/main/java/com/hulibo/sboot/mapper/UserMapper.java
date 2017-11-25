@@ -1,4 +1,4 @@
-package com.hulibo.sboot;
+package com.hulibo.sboot.mapper;
 
 import java.util.List;
 

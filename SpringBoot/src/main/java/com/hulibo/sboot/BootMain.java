@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.hulibo.sboot.entity.User;
+import com.hulibo.sboot.service.UserService;
 
 public class BootMain {
 

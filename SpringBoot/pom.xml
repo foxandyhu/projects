@@ -79,6 +79,10 @@
 		<artifactId>tomcat-embed-jasper</artifactId>
 		<scope>provided</scope>
 	</dependency>
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-aop</artifactId>
+	</dependency>
   </dependencies>
   <properties>
 		<java.version>1.8</java.version>
@@ -100,4 +104,5 @@
         </plugin>
     </plugins>
   </build>
+  <packaging>war</packaging>
 </project>

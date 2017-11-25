@@ -1,4 +1,4 @@
-package com.hulibo.sboot;
+package com.hulibo.sboot.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

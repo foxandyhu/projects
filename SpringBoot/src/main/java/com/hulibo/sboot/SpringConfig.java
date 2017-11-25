@@ -8,6 +8,9 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import com.hulibo.sboot.interceptor.MyInterceptor1;
+import com.hulibo.sboot.interceptor.MyInterceptor2;
+
 @Configuration
 public class SpringConfig extends WebMvcConfigurerAdapter{
 	
