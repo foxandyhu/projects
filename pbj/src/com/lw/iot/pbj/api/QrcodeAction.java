@@ -41,11 +41,13 @@ public class QrcodeAction extends BaseApiAction {
 		param.put("serialNo",serialNo);
 		List<PedometerData> list=pedometerDataService.getList(param);
 		JSONArray array=new JSONArray();
+		int totalStep=0;
 		if(list!=null)
 		{
 			JSONObject json=null;
 			for (PedometerData pedometerData : list) {
 				json=new JSONObject();
+				totalStep+=pedometerData.getStep();
 				json.put("step", pedometerData.getStep());
 				json.put("time",DateUtil.formatterDate(pedometerData.getTime()));
 				
@@ -55,6 +57,7 @@ public class QrcodeAction extends BaseApiAction {
 			}
 		}
 		getRequest().setAttribute("list",array);
+		getRequest().setAttribute("totalStep",totalStep);
 		return "qrcode";
 	}
 	
