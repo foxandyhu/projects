@@ -60,7 +60,7 @@ public class QrcodeAction extends BaseApiAction {
 				array.add(json);
 			}
 		}
-		PedometerReader reader=pedometerReaderService.getPedometerReader("666666");
+		PedometerReader reader=pedometerReaderService.getPedometerReader("100000");
 		getRequest().setAttribute("list",array);
 		getRequest().setAttribute("totalStep",totalStep);
 		getRequest().setAttribute("reader",reader);
