@@ -3,6 +3,8 @@ package com.lw.iot.pbj.core.interceptor;
 import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,9 +51,11 @@ public class ApiEquipmentInterceptor extends HandlerInterceptorAdapter{
 			}
 			try {
 				pedometerReaderService.editLastComm(data.getSerialNo(),new Date());
+				pedometerReaderService.editCommLocation(data.getSerialNo(),data.getLongitude(),data.getLatitude());
 			} catch (Exception e) {
 				logger.error("edit equipment communication data is error",e);
 			}
+			request.setAttribute("requestData", data);
 		}
 		return true;
 	}
@@ -74,24 +78,17 @@ public class ApiEquipmentInterceptor extends HandlerInterceptorAdapter{
 		String signature=datas[datas.length-1];
 		String noncestr=datas[4];
 		String serialNo=datas[0];
+		String longitude=datas[2];
+		String latitude=datas[3];
 		
-		request.setAttribute("version",version);
-		request.setAttribute("serialno",serialNo);
-		request.setAttribute("noncestr",noncestr);
-		
-		StringBuilder sb=new StringBuilder();
-		int len=datas.length-1;
-		for (int i=5;i<len;i++) {
-			sb.append(datas[i]);
-			if(i+1<len)
-			{
-				sb.append(",");
-			}
+		String regex = "(?<=\\[)(\\S+)(?=\\])";
+		Pattern pattern = Pattern.compile (regex);
+		Matcher matcher = pattern.matcher (dataStr);
+		String content=null;
+		if(matcher.find())
+		{
+			content=matcher.group ();
 		}
-		
-		String content=sb.toString();
-		request.setAttribute("content",content);
-		
 		
 		RequestData data=new RequestData();
 		data.setContent(content);
@@ -99,6 +96,8 @@ public class ApiEquipmentInterceptor extends HandlerInterceptorAdapter{
 		data.setSerialNo(serialNo);
 		data.setSignature(signature);
 		data.setVersion(version);
+		data.setLatitude(latitude);
+		data.setLongitude(longitude);
 		return data;
 	}
 	
@@ -134,7 +133,13 @@ public class ApiEquipmentInterceptor extends HandlerInterceptorAdapter{
 	 */
 	private boolean checkDataSign(RequestData data)
 	{
-		String signature = SecurityUtil.sha1(data.getSerialNo()+data.getContent()+data.getNonceStr()+data.getVersion()).toUpperCase(Locale.CHINA);
+		String signature = SecurityUtil.sha1(data.getSerialNo()+"["+data.getContent()+"]"+data.getNonceStr()+data.getVersion()).toUpperCase(Locale.CHINA);
 		return signature.equals(data.getSignature());
+	}
+	
+	public static void main(String[] args) {
+//		String data="666666,1.0,12.232,11.234234,QWE123ASD12,[123456:11:1000:2000:1.0:2017-10-10,123456:11:3000:4000:1.0:2017-10-11,123456:11:100:500:1.0:2017-10-12],F1A9EF51D48F864FADDECDF366292EDDF35B4250";
+		String sig="666666[123456:11:1000:2000:1.0:2017-10-10,123456:11:3000:4000:1.0:2017-10-11,123456:11:100:500:1.0:2017-10-12]QWE123ASD121.0";
+		System.out.println(SecurityUtil.sha1(sig).toUpperCase(Locale.CHINA));
 	}
 }

@@ -126,6 +126,7 @@ public class BaseApiAction {
 	@ExceptionHandler({Throwable.class})
 	public void exceptionHandler(HttpServletRequest request,HttpServletResponse response,Exception ex)
 	{
+		ex.printStackTrace();
 		String data=ResponseData.getFailResult(SysErrorCodeEnum.EXECUTE_ERROR,ex.getMessage());
 		ResponseUtil.writeJson(response,data);
 	}

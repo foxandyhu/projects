@@ -15,7 +15,9 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.lw.iot.pbj.common.util.DateUtil;
 import com.lw.iot.pbj.equipment.entity.PedometerData;
+import com.lw.iot.pbj.equipment.entity.PedometerReader;
 import com.lw.iot.pbj.equipment.service.IPedometerDataService;
+import com.lw.iot.pbj.equipment.service.IPedometerReaderService;
 
 /**
  * 扫描二维码获取数据Action
@@ -27,6 +29,8 @@ public class QrcodeAction extends BaseApiAction {
 
 	@Autowired
 	private IPedometerDataService pedometerDataService;
+	@Autowired
+	private IPedometerReaderService pedometerReaderService;
 	
 	/**
 	 * 扫描二维码获取数据
@@ -56,8 +60,10 @@ public class QrcodeAction extends BaseApiAction {
 				array.add(json);
 			}
 		}
+		PedometerReader reader=pedometerReaderService.getPedometerReader("666666");
 		getRequest().setAttribute("list",array);
 		getRequest().setAttribute("totalStep",totalStep);
+		getRequest().setAttribute("reader",reader);
 		return "qrcode";
 	}
 	

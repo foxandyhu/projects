@@ -45,7 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </div>
 	    <div class="row content">
 			<div>名称<span>西丽水库养鸡场</span></div>
-			<div>位置<span>116.173728,40.006518</span></div>
+			<div>位置<span>${reader.longitude},${reader.latitude}</span></div>
 			<div>品种<span>土鸡</span></div>
 			<div>编号<span>${serialNo}</span></div>
 	    </div>

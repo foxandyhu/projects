@@ -80,4 +80,11 @@ public class PedometerReaderServiceImpl extends BaseServiceImpl<PedometerReader>
 	public void editLastComm(String serialNo, Date date) {
 		pedometerReaderMapper.editCommInfo(serialNo, date,true);
 	}
+
+	@Override
+	@Transactional(rollbackFor=Exception.class)
+	@LogRecord(record=RecordType.IGNORE)
+	public void editCommLocation(String serialNo, String longitude, String latitude) {
+		pedometerReaderMapper.editCommLocation(serialNo, longitude, latitude);
+	}
 }

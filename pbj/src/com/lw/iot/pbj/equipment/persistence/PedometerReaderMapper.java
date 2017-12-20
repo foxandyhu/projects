@@ -33,4 +33,15 @@ public interface PedometerReaderMapper extends BaseMapper<PedometerReader> {
 	 * @return
 	 */
 	public int editCommInfo(@Param("serialNo") String serialNo, @Param("date")Date date,@Param("online") boolean online);
+	
+	/**
+	 * 更新设备GPS坐标
+	 * @author andy_hulibo@163.com
+	 * @2017年12月20日 上午10:18:21
+	 * @param serialNo
+	 * @param longitude
+	 * @param latitude
+	 * @return
+	 */
+	public int editCommLocation(@Param("serialNo") String serialNo,@Param("longitude") String longitude,@Param("latitude") String latitude);
 }

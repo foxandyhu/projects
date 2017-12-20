@@ -48,4 +48,14 @@ public interface IPedometerReaderService extends IBaseService<PedometerReader> {
 	 * @param ip 通信ip
 	 */
 	public void editLastComm(String serialNo,Date date);
+	
+	/**
+	 * 更新设备GPS坐标
+	 * @author andy_hulibo@163.com
+	 * @2017年12月20日 上午10:19:59
+	 * @param serialNo
+	 * @param longitude
+	 * @param latitude
+	 */
+	public void editCommLocation(String serialNo,String longitude,String latitude);
 }
