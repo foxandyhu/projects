@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lw.iot.pbj.logs.persistence.LogMapper">
+    <parameterMap type="SysLog" id="SysLogparaMap">
+    	<parameter property="id" resultMap="id"/>
+    	<parameter property="userId" resultMap="user_id"/>
+    	<parameter property="userName" resultMap="user_name"/>
+    	<parameter property="logInfo" resultMap="log_info"/>
+    	<parameter property="logTime" resultMap="log_time"/>
+    	<parameter property="ip" resultMap="ip"/>
+    	<parameter property="methodName" resultMap="method_name"/>
+    	<parameter property="modelName" resultMap="model_name"/>
+    </parameterMap>
+
+    <resultMap type="SysLog" id="SysLogResultMap">
+    	<id property="id" column="id"/>
+    	<result property="userName" column="user_name"/>
+    	<result property="userId" column="user_id"/>
+    	<result property="logInfo" column="log_info"/>
+    	<result property="logTime" column="log_time"/>
+    	<result property="ip" column="ip"/>
+    	<result property="methodName" column="method_name"/>
+    	<result property="modelName" column="model_name"/>    	
+   	</resultMap>
+   	
+	<sql id="syslogColumn">id,user_id,user_name,log_info,log_time,ip,method_name,model_name</sql>
+	<insert id="save" parameterType="SysLog" keyProperty="id">
+    	<![CDATA[
+    		insert into sys_users_log(user_id,user_name,log_info,log_time,ip,model_name,method_name) 
+    		values(#{userId},#{userName},#{logInfo},#{logTime},#{ip},#{modelName},#{methodName});
+    	]]>
+	</insert>
+	
+	<select id="getList" resultMap="SysLogResultMap">
+		SELECT <include refid="syslogColumn"/> FROM sys_users_log order by id desc
+		<if test="firstResult!=null and maxResult!=null">limit #{firstResult} , #{maxResult};</if>
+	</select>
+	
+	<select id="getCount" resultType="int">
+		SELECT count(1) FROM sys_users_log;
+	</select>
+	
+	<delete id="delById">
+		DELETE FROM sys_users_log where id in
+		<foreach collection="ids" index="index" item="item" open="(" close=")" separator=",">#{item}</foreach>
+	</delete>
+		
+</mapper>

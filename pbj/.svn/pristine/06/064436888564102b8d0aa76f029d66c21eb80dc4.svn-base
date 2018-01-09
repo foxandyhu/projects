@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lw.iot.pbj.equipment.persistence.PedometerMapper">
+    <parameterMap type="Pedometer" id="PedometerParaMap">
+    	<parameter property="id" resultMap="id"/>
+    	<parameter property="serialNo" resultMap="serial_no"/>
+    </parameterMap>
+
+    <resultMap type="Pedometer" id="PedometerResultMap">
+    	<id property="id" column="id"/>
+    	<result property="serialNo" column="serial_no"/>
+    </resultMap>
+
+	<sql id="PedometerColumn">id,serial_no</sql>
+	<insert id="save" parameterType="Pedometer"  keyProperty="id" useGeneratedKeys="true">
+    	<![CDATA[
+    		insert into d_pedometer(serial_no) values(#{serialNo});
+    	]]>
+	</insert>
+	
+	<select id="getList" resultMap="PedometerResultMap">
+		SELECT <include refid="PedometerColumn"/> FROM d_pedometer order by id desc
+		<if test="firstResult!=null and maxResult!=null">limit #{firstResult} , #{maxResult};</if>
+	</select>
+	
+	<select id="getCount" resultType="int">
+		SELECT count(1) FROM d_pedometer;
+	</select>
+	
+	<select id="getPedometer" resultMap="PedometerResultMap">
+		SELECT <include refid="PedometerColumn"/> from d_pedometer where serial_no=#{serialNo};
+	</select>
+	
+	<delete id="delById">
+		DELETE FROM d_pedometer where id in
+		<foreach collection="ids" index="index" item="item" open="(" close=")" separator=",">#{item}</foreach>
+	</delete>
+</mapper>

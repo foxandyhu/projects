@@ -1,0 +1,47 @@
+<section class="content-header">
+    <h1>编辑RFID主机</h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+      <li class="active">设备管理</li>
+      <li class="active">编辑RFID主机</li>
+    </ol>
+</section>
+<section class="content">
+	<div class="box box-danger"></div>
+	<form id="pedometerReaderForm">
+		<table class="table table-bordered">
+	    	<tr>
+		    	<td class="infobg col-md-1 text-right"><span class="red">*</span>编&nbsp;&nbsp;号:</td>
+		    	<td class="col-md-7">
+		    		<div class="form-group" style="margin:0px">
+		    			<input type="text" class="form-control" readonly="readonly" maxlength="25" ng-model="item.serialNo" name="serialNo" placeholder="请输入设备编号" autocomplete="off">
+	    			</div>
+		    	</td>
+		    </tr>
+	    	<tr>
+		    	<td class="infobg col-md-1 text-right"><span class="red">*</span>地&nbsp;&nbsp;址:</td>
+		    	<td class="col-md-7">
+		    		<div class="form-group" style="margin:0px">
+		    			<input type="text" class="form-control" maxlength="50" ng-model="item.address" name="address" placeholder="请输入设备安装地址" autocomplete="off">
+	    			</div>
+		    	</td>
+		    </tr>		    
+		    <tr>
+		    	<td class="infobg col-md-1 text-right">是否启用:</td>
+		    	<td class="col-md-11" colspan="5">
+		    		<input type="checkbox" name="enable" ng-checked="item.enable"/>
+		    	</td>
+		    </tr>
+		    <tr>
+		    	<td class="infobg col-md-1 text-right">备注:</td>
+		    	<td class="col-md-11" colspan="5">
+		    		<textarea rows="10"  class="form-control" ng-model="item.remark" name="remark" cols="100" maxlength="500"></textarea>
+		    	</td>
+		    </tr>
+	    </table>
+    </form>
+   <div class="col-md-12 text-center">
+      <button type="button" ng-click="editPedometerReader()" class="btn btn-warning"><i class="fa fa-fw fa-save"></i>提&nbsp;交</button>
+   </div>
+</section>
+<span ng-init="initPedometerReaderValidate();pedometerReaderDetail()"/>

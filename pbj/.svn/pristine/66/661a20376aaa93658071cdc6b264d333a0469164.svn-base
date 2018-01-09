@@ -1,0 +1,26 @@
+<div class="panel panel-success1 panel-success">
+	<div class="panel-heading1 panel-heading">
+	    <h3 class="panel-title">
+	      	<span class="glyphicon glyphicon-user" style="color: rgb(212, 106, 64);"></span> 包含用户
+	      	<div class="right"><a class="btn btn-warning btn-xs" ng-click="loadUnassignSysUsers()"><span class="glyphicon glyphicon-plus">添加</span></a></div>
+      	</h3>
+	</div>
+	<div class="panel-body">
+		<table class="table table-striped table-hover table-bordered text-center">
+			<thead>
+				<tr><th>用户名</th><th>姓名</th><th>状态</th><th>操作</th></tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in users">
+					<td>{{item.userName}}</td><td>{{item.name}}</td>
+					<td>{{item.enable?"启用":"禁用"}}</td>
+					<td>
+						<a class="btn btn-danger btn-xs" ng-click="unbindUserRole(item.id,role.id)">
+							<span class="glyphicon glyphicon-trash"></span> 移除
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

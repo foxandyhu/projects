@@ -1,0 +1,58 @@
+﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<aside class="main-sidebar">
+        <section class="sidebar">
+          <div class="user-panel">
+            <div class="pull-left image">
+              <img src="<%=basePath%>resources/images/user_default.jpg" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+              <p>${loginUser.name}</p>
+              <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
+            </div>
+          </div>
+
+          <ul class="sidebar-menu">
+            <li class="header">导航菜单</li>
+            <li id="centermanager" class="treeview">
+              <a href="#"><i class="fa fa-laptop"></i> <span>我的工作台</span> <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+                <li><a href="#home"><i class="fa fa-home"> 首页</i></a></li>
+                <li><a href="#users/editpwd"><i class="fa fa-key"> 修改密码</i></a></li>
+              </ul>
+            </li>
+            <li id="sysmanager" class="treeview">
+              <a href="#"><i class="fa fa-gear"></i> <span>组织结构</span> <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+                <li><a href="#users"><i class="fa fa-user"> 系统用户</i></a></li>
+                <li><a href="#/sys/menus"><i class="fa fa-exchange"> 菜单设置</i></a></li>
+                <li><a href="#sys/roles"><i class="fa fa-user-secret"> 角色设置</i></a></li>
+                <li><a href="#sys/config"><i class="fa fa-wrench"> 系统设置</i></a></li>
+              </ul>
+            </li>
+            <li id="dataAnalyse" class="treeview">
+              <a href="#"><i class="fa  fa-inbox"></i> <span>设备管理</span> <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+                <li><a href="#/pedometer"><i class="fa fa-dropbox"> 脚环管理</i></a></li>
+                <li><a href="#/pedometer/reader"><i class="fa  fa-circle-o"> RFID主机管理</i></a></li>
+                <li><a href="#/pedometer/data"><i class="fa fa-bar-chart"> 脚环数据</i></a></li>
+              </ul>
+            </li>
+ 			<li id="msgmanager" class="treeview">
+              <a href="#"><i class="fa fa-commenting-o"></i> <span>消息中心</span> <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+                <li><a href="<%=basePath%>manage/message/sys.html"><i class="fa fa-envelope"> 短信记录</i></a></li>
+                <li><a href="<%=basePath%>manage/message/sms.html"><i class="fa fa-commenting-o"> 微信消息</i></a></li>
+                <li><a href="<%=basePath%>manage/message/sms.html"><i class="fa fa-comments-o"> 系统消息</i></a></li>
+              </ul>
+            </li>
+			<li id="dataAnalyse" class="treeview">
+              <a href="#"><i class="fa fa-pie-chart"></i> <span>日志中心</span> <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+                <li><a href="#/sys/logs"><i class="fa fa-area-chart"> RFID通讯日志</i></a></li>
+                <li><a href="#/sys/login/logs"><i class="fa  fa-line-chart"> 系统日志</i></a></li>
+                <li><a href="#/sys/login/logs"><i class="fa  fa-line-chart"> 登录日志</i></a></li>
+              </ul>
+            </li>            
+          </ul>
+        </section>
+      </aside>

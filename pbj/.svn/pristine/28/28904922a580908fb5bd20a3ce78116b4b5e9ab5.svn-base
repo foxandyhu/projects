@@ -1,0 +1,37 @@
+﻿<section class="content-header">
+    <h1>脚环数据</h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+      <li class="active">设备管理</li>
+      <li class="active">脚环数据</li>
+    </ol>
+</section>
+<section class="content" ng-init="loadPedometerData()">
+	<div class="box box-danger"></div>
+	<nav>
+		<a class="btn btn-warning" ng-click="loadPedometerData()"><span class="glyphicon glyphicon-refresh"></span> 刷新</a>
+	</nav>	
+	<table class="table table-striped table-hover table-bordered">
+		<thead>
+			<tr>
+				<th width="10%">编号</th><th width="10%">日期</th>
+				<th width="10%">活动时间</th><th width="10">步数</th>
+				<th width="10%">电量</th><th width="10%">程序版本</th>
+				<th width="40%">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in items">
+				<td>{{item.serialNo}}</td>
+				<td>{{item.time|dateFormat}}</td>
+				<td>{{item.actTime}}</td><td>{{item.step}}</td>
+				<td>{{item.electricity}}</td><td>{{item.version}}</td>
+				<td>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="text-right">
+	  <pager page-count="pageCount" current-page="currentPage" on-page-change="loadPedometerData()" first-text="首页" next-text="下一页" prev-text="上一页" last-text="尾页" show-goto="true" goto-text="跳转到"></pager>
+	</div>
+</section>
