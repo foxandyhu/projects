@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- Mybatis 全局配置 begin -->
+	<settings>
+		<setting name="lazyLoadingEnabled" value="true"/>		<!-- 延时加载 -->
+		<setting name="aggressiveLazyLoading" value="false"/>
+	</settings>
+	<!-- Mybatis 全局配置 end -->
+	<typeAliases>
+		<package name="com.bfly.trade.users.entity"/>
+		<package name="com.bfly.trade.logs.entity"/>
+		<package name="com.bfly.trade.members.entity"/>
+		<package name="com.bfly.trade.logs.entity"/>
+	</typeAliases>
+</configuration>

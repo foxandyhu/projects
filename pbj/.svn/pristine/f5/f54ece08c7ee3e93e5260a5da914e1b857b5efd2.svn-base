@@ -1,0 +1,37 @@
+<section class="content-header">
+    <h1>账户安全设置</h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+      <li class="active">修改密码</li>
+    </ol>
+</section>
+<section class="content">
+	<div class="box box-danger">
+		<form class="form-horizontal" id="pwdForm" method="post" action="javascript:void(0)">
+			<div class="box-body" style="width:700px;">
+				<div class="form-group">
+				  <label class="col-sm-2 control-label">原密码:</label>
+				  <div class="col-sm-10">
+				    <input type="password" class="form-control" name="oldPassword" ng-model="admin.oldPassword" placeholder="请输入您的原始密码" autocomplete="off">
+				  </div>
+				</div>
+				<div class="form-group">
+				  <label class="col-sm-2 control-label">新密码:</label>
+				  <div class="col-sm-10">
+				    <input type="password" class="form-control" name="password" ng-model="admin.password" placeholder="请输入您的您新密码" autocomplete="off">
+				  </div>
+				</div>
+				<div class="form-group">
+				  <label class="col-sm-2 control-label">确认密码:</label>
+				  <div class="col-sm-10">
+				    <input type="password" class="form-control" name="confirmPassword" placeholder="请输入您的确认密码" autocomplete="off">
+				  </div>
+				</div>
+				<div class="box-footer text-center">
+				  <button type="button" ng-click="editPwd()" class="btn btn-warning"><i class="fa fa-fw fa-save"></i>提&nbsp;交</button>
+				</div>
+			</div>
+		</form>
+	</div>		
+</section>
+<span ng-init="initPwdValidate()"></span>

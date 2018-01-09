@@ -1,0 +1,48 @@
+﻿<section class="content-header">
+    <h1>系统配置</h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+      <li class="active">系统管理</li>
+      <li class="active">系统设置</li>
+    </ol>
+</section>
+<section class="content">
+	<div class="box box-danger"></div>
+	<form class="form-horizontal" action="javascript:void(0)" id="sysConfigForm" ng-init="loadSysConfig()">
+		<div class="box-body">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">系统名称:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" maxlength="50" name="appName" ng-model="config.appName" placeholder="请输入系统名称" autocomplete="off">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">企业地址:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" maxlength="50" name="address" ng-model="config.address" placeholder="请输入系统名称" autocomplete="off">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">企业电话:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" maxlength="50" name="phone" ng-model="config.phone" placeholder="请输入系统名称" autocomplete="off">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">系统版权:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" maxlength="50" name="copyRight" ng-model="config.copyRight" placeholder="请输入系统版权" autocomplete="off">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">备案号:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" maxlength="50" name="record" ng-model="config.record" placeholder="请输入系统备案号" autocomplete="off">
+				</div>
+			</div>
+	    </div>
+		<div class="col-md-12 text-center">
+		   <button type="button" ng-click="editSysConfig()" class="btn btn-warning">保 存</button>
+		</div>
+	</form>
+</section>

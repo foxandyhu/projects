@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bfly.trade.logs.mapper.LoginLogsMapper">
+    <parameterMap type="LoginLogs" id="LoginLogsparaMap">
+    	<parameter property="id" resultMap="id"/>
+    	<parameter property="userName" resultMap="username"/>
+    	<parameter property="time" resultMap="time"/>
+    	<parameter property="type" resultMap="type"/>
+    	<parameter property="ip" resultMap="ip"/>
+    	<parameter property="login" resultMap="is_login"/>
+    </parameterMap>
+
+    <resultMap type="LoginLogs" id="LoginLogsResultMap">
+    	<id property="id" column="id"/>
+    	<result property="userName" column="username"/>
+    	<result property="time" column="time"/>
+    	<result property="type" column="type"/>
+    	<result property="ip" column="ip"/>
+    	<result property="login" column="is_login"/>
+    </resultMap>
+
+	<sql id="LoginLogsColumn">id,username,time,type,ip,is_login</sql>
+	<insert id="save" parameterMap="LoginLogsparaMap" keyProperty="id" useGeneratedKeys="true">
+    	<![CDATA[
+    		insert into sys_login_logs(username,type,time,ip,is_login) values(#{userName},#{type},#{time},#{ip},#{login});
+    	]]>
+	</insert>
+	
+		<select id="getList" resultMap="LoginLogsResultMap">
+		SELECT <include refid="LoginLogsColumn"/> FROM sys_login_logs order by id desc
+		<if test="firstResult!=null and maxResult!=null">limit #{firstResult} , #{maxResult};</if>
+	</select>
+	
+	<select id="getCount" resultType="int">
+		SELECT count(1) FROM sys_login_logs;
+	</select>
+	
+	<select id="getLatestLog" resultMap="LoginLogsResultMap">
+		SELECT <include refid="LoginLogsColumn"/> from sys_login_logs where username=#{userName} order by time desc limit ${index},1;
+	</select>
+</mapper>

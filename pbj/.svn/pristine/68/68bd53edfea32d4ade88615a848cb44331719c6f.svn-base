@@ -1,0 +1,65 @@
+﻿<div class="panel panel-info" style="border:#B08E86" ng-show="menu">
+	<div class="panel-heading" style="background:#B08E86;color:#ffffff;border:#B08E86">
+		<h3 class="panel-title">
+			<span class="glyphicon glyphicon-book"></span> 
+			<span ng-if="menu.id>0">菜单详情</span>
+			<span ng-if="menu.id==0">新增菜单</span>
+		</h3>
+	</div>
+	<form id="menuForm">
+		<table class="table table-bordered">
+			<tr ng-if="menu.id==0">
+				<td class="infobg col-md-1 text-right">父菜单:</td>
+				<td class="col-md-11">{{menu.parentName}}</td>
+			</tr>
+			<tr>
+				<td class="infobg col-md-1 text-right"><span class="red">*</span> 名称:</td>
+				<td class="col-md-11">
+					<div class="form-group">
+						<input class="form-control" type="text" name="name" ng-model="menu.name" placeholder="请输入菜单名称!" maxlength="20"/>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="infobg col-md-1 text-right"><span class="red">*</span> URL:</td>
+				<td class="col-md-11">
+					<div class="form-group">
+						<input class="form-control" type="text" name="url" ng-model="menu.url" placeholder="请输入访问URL!"maxlength="200"/>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="infobg col-md-1 text-right">排序:</td>
+				<td class="col-md-11">
+					<input class="form-control" type="text" name="seq" ng-model="menu.seq" value="1"/>
+				</td>
+			</tr>
+			<tr>
+				<td class="infobg col-md-1 text-right">启用:</td>
+				<td class="col-md-11">
+					<input name="enable" ng-model="menu.enable" type="checkbox" ng-checked="menu.enable"/>
+				</td>
+			</tr>
+			<tr>
+				<td class="infobg col-md-1 text-right"><span class="red">*</span> 类型:</td>
+				<td class="col-md-11">
+					<div class="form-group">
+						<select class="form-control" ng-model="menu.type" name="type" ng-options="item.value as item.name for item in MenuType">
+							<option value="">请选择菜单类型</option>
+						</select>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="infobg col-md-1 text-right">备注:</td>
+				<td class="col-md-11">
+					<input class="form-control" name="remark" ng-model="menu.remark" type="text" maxlength="200"/>
+				</td>
+			</tr>
+		</table>
+	</form>
+	<div class="modal-footer">
+		<button type="button" ng-if="menu.id==0" ng-click="addSysMenu()" class="btn btn-warning"><i class="fa fa-fw fa-save"></i>保 存</button>
+		<button type="button" ng-if="menu.id>0" ng-click="editSysMenu()" class="btn btn-warning"><i class="fa fa-fw fa-save"></i>保 存</button>
+	</div>
+</div>

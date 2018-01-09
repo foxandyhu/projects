@@ -1,0 +1,37 @@
+﻿<section class="content-header">
+    <h1>智能柜管理</h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+      <li class="active">智能柜中心</li>
+      <li class="active">智能柜管理</li>
+    </ol>
+</section>
+<section class="content" ng-init="loadCabinetDetail()">
+	<div class="box box-danger"></div>
+	<div class="cls"></div>
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#baseInfoCc" data-toggle="tab">基本信息</a></li>
+		<li><a href="#locationInfoCc" data-toggle="tab">地理位置信息</a></li>
+		<li><a href="#safeInfoCc" data-toggle="tab">安全设置</a></li>
+		<li><a href="#screenInfoCc" data-toggle="tab">屏保设置</a></li>
+	</ul>
+	<div class="tab-content">
+		<div class="tab-pane fade in active " id="baseInfoCc">
+			<div class="cls"></div>
+			<ng-include src="'cabinet/cabinet_detail_base.html'"></ng-include>
+		</div>
+		<div class="tab-pane" id="locationInfoCc">
+			<div class="cls"></div>
+			<ng-include src="'cabinet/cabinet_detail_location.html'"></ng-include>
+	    </div>
+		<div class="tab-pane" id="safeInfoCc">
+			<div class="cls"></div>
+			<ng-include src="'cabinet/cabinet_detail_safety.html'"></ng-include>
+	    </div>
+		<div class="tab-pane" id="screenInfoCc">
+			<div class="cls"></div>
+			<ng-include src="'cabinet/cabinet_detail_screen.html'"></ng-include>
+	    </div>
+	</div>
+</section>
+<span ng-init="initCabinetValidate()"></span>
