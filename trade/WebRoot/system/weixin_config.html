@@ -1,0 +1,34 @@
+<section class="content-header">
+    <h1>微信设置</h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+      <li class="active">微信中心</li>
+      <li class="active">微信设置</li>
+    </ol>
+</section>
+<section class="content">
+	<div class="box box-danger"></div>
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#menuInfocc" data-toggle="tab">菜单设置</a></li>
+		<li><a href="#paramsInfoCc" data-toggle="tab">参数配置</a></li>
+		<li><a href="#bannnerInfoCc" data-toggle="tab">APP Banner设置</a></li>
+	</ul>
+	<div class="tab-content" ng-init="loadWxConfig()">
+		<div class="tab-pane fade in active " id="menuInfocc">
+			<div class="cls"></div>
+			<ng-include src="'system/weixin_menu.html'"/>
+		</div>
+		<div class="tab-pane" id="paramsInfoCc">
+			<div class="cls"></div>
+			<form action="manage/weixin/config/edit.html" method="post" id="paramForm">
+				<ng-include src="'system/weixin_param.html'"/>
+			</form>
+	    </div>
+		<div class="tab-pane" id="bannnerInfoCc">
+			<div class="cls"></div>
+			<form action="manage/weixin/banner/edit.html" method="post" id="bannerForm">
+				<ng-include src="'system/weixin_banner.html'"/>
+			</form>
+	    </div>						    
+	</div>
+</section>

@@ -165,7 +165,7 @@ public class UsersServiceImpl extends BaseServiceImpl<Users> implements IUsersSe
 	
 	@Override
 	public Users getUserByName(String userName) {
-		Assert.hasText(userName,"用户名为空!");
+		Assert.hasText(userName,"userName is empty!");
 		return userMapper.getUserByName(userName);
 	}
 

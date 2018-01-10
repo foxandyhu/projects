@@ -1,0 +1,16 @@
+<table class="table table-striped table-hover table-bordered">
+	<thead>
+		<tr><th>用户名</th><th>姓名</th><th>状态</th><th>操作</th></tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="item in assignUsers">
+			<td>{{item.userName}}</td><td>{{item.name}}</td>
+			<td>{{item.enable?"启用":"禁用"}}</td>
+			<td>
+				<a class="btn btn-warning btn-xs" ng-click="bindUserRole(item.id,role.id)">
+					<span class="glyphicon glyphicon-ok"></span> 添加
+				</a>
+			</td>
+		</tr>
+	</tbody>
+</table>

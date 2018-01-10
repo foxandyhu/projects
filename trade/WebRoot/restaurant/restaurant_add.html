@@ -1,0 +1,91 @@
+﻿<section class="content-header">
+    <h1>商户管理</h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+      <li class="active">商户中心</li>
+      <li class="active">新增商户</li>
+    </ol>
+</section>
+<section class="content">
+	<div class="box box-danger"></div>
+	<form id="restaurantForm">
+		<table class="table table-bordered">
+	    	<tr>
+		    	<td class="infobg col-md-1 text-right"><span class="red">*</span>门店名称:</td>
+		    	<td class="col-md-5">
+		    		<div class="form-group">
+		    			<input type="text" class="form-control" maxlength="20" name="name" placeholder="请输入店铺名称" autocomplete="off">
+	    			</div>
+		    	</td> 
+				<td class="infobg col-md-1 text-right"><span class="red">*</span>门店授权码:</td>
+		    	<td class="col-md-5">
+		    		<div class="form-group">
+		    			<input type="text" class="form-control" maxlength="30" name="authorKey" placeholder="请输入店铺授权码" autocomplete="off">
+	    			</div>
+		    	</td>
+	    	</tr>
+	    	<tr>
+		    	<td class="infobg col-md-1 text-right"><span class="red">*</span>电&nbsp;&nbsp;话:</td>
+		    	<td class="col-md-5">
+		    		<div class="form-group">
+		    			<input type="text" class="form-control" maxlength="15" name="cellphone" placeholder="请输入电话" autocomplete="off">
+	    			</div>
+		    	</td>
+				<td class="infobg col-md-1 text-right"><span class="red">*</span>状&nbsp;&nbsp;态:</td>
+		    	<td class="col-md-5">
+		    		<div class="form-group">
+		    			<select class="form-control" ng-model="restaurant.status" ng-options="item.value as item.name for item in RestaurantStatus"></select>
+	    			</div>
+		    	</td>
+		    </tr>
+	    	<tr>
+		    	<td class="infobg col-md-1 text-right"><span class="red">*</span>地&nbsp;&nbsp;址:</td>
+		    	<td class="col-md-3" colspan="3">
+		    		<span class="left" style="width:90%">
+		    			<div class="form-group">
+		    				<input type="text" class="form-control" name="address" id="address" ng-model="restaurant.address" maxlength="100" placeholder="请输入地址" autocomplete="off">
+	    				</div>
+    				</span>
+		    		<span class="left" style="margin-left:20px;">
+		    			<a id="btnSearch" type="button" class="btn btn-danger"><span class="glyphicon glyphicon-search"></span> 搜  索</a>
+	    			</span>
+		    	</td>
+		    </tr>
+		    <tr>
+		    	<td class="infobg col-md-1 text-right"><span class="red">*</span>经&nbsp;&nbsp;度:</td>
+		    	<td class="col-md-3">
+		    		<div class="form-group">
+		    			<input type="text" class="form-control" name="longitude" id="longitude" ng-model="restaurant.longitude"  maxlength="20" placeholder="请在地图上点击选择经度" autocomplete="off">
+	    			</div>
+		    	</td>
+		    	<td class="infobg col-md-1 text-right"><span class="red">*</span>纬&nbsp;&nbsp;度:</td>
+		    	<td class="col-md-3">
+		    		<div class="form-group">
+		    			<input type="text" class="form-control" name="latitude" id="latitude" ng-model="restaurant.latitude" maxlength="20" placeholder="请在地图上点击选择纬度" autocomplete="off">
+	    			</div>
+		    	</td>
+		    </tr>
+		    <tr>
+		    	<td class="infobg col-md-1 text-right">LOGO&nbsp;图<br/>最大2M:</td>
+		    	<td class="col-md-3">
+                   	<input type="file" name="imgFile" id="titlePicFile" style="display:none" onchange="angular.element(this).scope().uploadRestaurantLogo(this)">
+		    		<img class="preImg" src="resources/images/no_picture.gif" width="145" height="136" style="cursor:pointer" onclick="$('#titlePicFile').click()">
+		    		<input type="hidden" class="prePath" name="logo" ng-model="restaurant.logo">
+		    	</td>
+		    	<td class="infobg col-md-1 text-right">地图:</td>
+				<td class="col-md-3"><div style="height:136px;" id="mapcontainer"></div></td>
+		    </tr>
+		    <tr>
+		    	<td class="infobg col-md-1 text-right" style="height:150px;">店铺介绍</td>
+		    	<td class="col-md-11" colspan="3">
+		    	     <textarea rows="15" cols="" class="form-control" id="restaurantRemark" name="remark" autocomplete="off"></textarea>
+		    	</td>
+		    </tr>
+	    </table>
+    </form>
+	<div class="col-md-12 text-center">
+	   <button type="button" ng-click="addRestaurant()" class="btn btn-warning"><i class="fa fa-fw fa-save"></i>保 存</button>
+	</div>
+	<div class="cls"></div>
+</section>
+<span ng-init="initRestaurantValidate();initRestaurantMap();"></span>

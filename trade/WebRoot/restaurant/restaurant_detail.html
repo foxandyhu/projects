@@ -1,0 +1,25 @@
+﻿<section class="content-header">
+    <h1>商户管理</h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+      <li class="active">商户中心</li>
+      <li class="active">商户详情</li>
+    </ol>
+</section>
+<section class="content" ng-init="detailRestaurant()">
+	<div class="box box-danger"></div>
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#baseInfoCc" data-toggle="tab">基本信息</a></li>
+		<li><a href="#safeInfoCc" data-toggle="tab">账户设置</a></li>
+	</ul>
+	<div class="tab-content">
+		<div class="tab-pane fade in active " id="baseInfoCc">
+			<div class="cls"></div>
+			<ng-include src="'restaurant/restaurant_detail_base.html'"></ng-include>
+		</div>
+		<div class="tab-pane" id="safeInfoCc">
+			<div class="cls"></div>
+			<ng-include src="'restaurant/restaurant_detail_safety.html'"></ng-include>
+	    </div>
+    </div>
+</section>    

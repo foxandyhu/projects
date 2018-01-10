@@ -1,0 +1,56 @@
+<section class="content-header">
+    <h1>新增用户</h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+      <li class="active">组织结构</li>
+      <li><a href="#/users">系统用户</a></li>
+      <li class="active">新增用户</li>
+    </ol>
+</section>
+<section class="content">
+	<div class="box box-danger"></div>
+	<form class="form-horizontal" role="form" method="post" action="javascript:void(0)" id="userForm">
+		<div class="box-body">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">姓名:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="userName" ng-model="user.userName" value="userName" maxlength="10" placeholder="请输入用户名" autocomplete="off">
+				</div>
+			</div>
+			<div class="form-group">
+			  <label class="col-sm-2 control-label">新密码:</label>
+			  <div class="col-sm-10">
+			    <input type="password" class="form-control" name="password" ng-model="user.password" maxlength="20" placeholder="请输入您的您新密码" autocomplete="off">
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label class="col-sm-2 control-label">确认密码:</label>
+			  <div class="col-sm-10">
+			    <input type="password" class="form-control" name="confirmPassword" placeholder="请输入您的确认密码" autocomplete="off">
+			  </div>
+			</div>			
+			<div class="form-group">
+				<label class="col-sm-2 control-label">姓名:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="name" ng-model="user.name" value="{{user.name}}" maxlength="10" placeholder="请输入名字" autocomplete="off">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">邮箱:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="email" maxlength="50" ng-model="user.email" value="{{user.email}}" placeholder="请输入邮件" autocomplete="off">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">启用:</label>
+				<div class="col-sm-10">
+					<input type="checkbox" name="enable" ng-model="user.enable" ng-checked="user.enable"/>
+				</div>
+			</div>
+	    </div>
+		<div class="col-md-12 text-center">
+		   <button type="button" ng-click="addUser()" class="btn btn-warning"><i class="fa fa-fw fa-save"></i>保 存</button>
+		</div>
+	</form>
+</section>
+<span ng-init="initUserValidate()"></span>

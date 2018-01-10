@@ -1,0 +1,53 @@
+<section class="content-header">
+    <h1>微信会员</h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+      <li class="active">微信中心</li>
+      <li><a href="#/members">微信会员</a></li>
+      <li class="active">会员详情</li>
+    </ol>
+</section>
+<section class="content">
+	<div class="box box-danger"></div>
+	<form class="form-horizontal" role="form" method="post" action="javascript:void(0)" id="userForm" ng-init="detailMember()">
+		<div class="box-body">
+			<table class="table table-bordered">
+				<tr>
+			    	<td class="infobg col-md-1 text-right">头&nbsp;&nbsp;像:</td>
+			    	<td class="col-md-3" colspan="3"><img ng-src="{{member.headImgUrl}}" width="120" height="120"/></td>
+			    </tr>
+				<tr>
+			    	<td class="infobg col-md-1 text-right">昵&nbsp;&nbsp;称:</td>
+			    	<td class="col-md-1">{{member.nickName}}</td>
+			    	<td class="infobg col-md-1 text-right">微信号:</td>
+			    	<td class="col-md-1">{{member.weixinNo}}</td>
+			    </tr>
+				<tr>
+			    	<td class="infobg col-md-1 text-right">手机号码:</td>
+			    	<td class="col-md-3" colspan="3">{{member.phone}}</td>
+			    </tr>						    
+				<tr>
+			    	<td class="infobg col-md-1 text-right">性&nbsp;&nbsp;别:</td>
+			    	<td class="col-md-1">{{member.sexName}}</td>
+			    	<td class="infobg col-md-1 text-right">地&nbsp;&nbsp;址:</td>
+			    	<td class="col-md-1">{{member.country}}{{member.province}}{{member.city}}</td>
+			    </tr>
+				<tr>
+			    	<td class="infobg col-md-1 text-right">注册时间:</td>
+			    	<td class="col-md-3">{{member.registTime}}</td>
+			    </tr>
+				<tr>
+			    	<td class="infobg col-md-1 text-right">关注状态:</td>
+			    	<td class="col-md-1">{{member.subscribe?"已订阅":"未订阅"}}</td>
+			    	<td class="infobg col-md-1 text-right">帐号状态:</td>
+			    	<td class="col-md-1">{{member.enable?"已启用":"已禁用"}}			    	
+			    	</td>
+			    </tr>
+		    </table>			
+	    </div>
+		<div class="col-md-12 text-center">
+		   <a href="#/members" class="btn btn-warning"><i class="fa fa-fw fa-history"></i>返 回</a>
+		</div>
+	</form>
+</section>
+<span ng-init="initUserValidate()"></span>

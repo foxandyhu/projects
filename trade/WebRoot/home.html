@@ -1,0 +1,55 @@
+<section class="content-header" ng-init="loadLoginUser()">
+  <h1>&nbsp;</h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i>首页</a></li>
+    <li class="active">首页</li>
+  </ol>
+</section>
+<section class="content">
+	<div class="row">
+		<div class="col-md-2">
+		    <div class="small-box bg-aqua" style="border-radius:20px;margin-top:20px;">
+	<div class="inner"><h3>34件</h3><p>&nbsp;</p></div>
+	<div class="icon"><i class="ion ion-bag"></i></div>
+	<a class="small-box-footer" style="border-radius:20px;">待配送订单<i class="ion ion-bag"></i></a>
+	    </div>
+	</div>
+	<div class="col-md-2">
+	    <div class="small-box bg-red" style="border-radius:20px;margin-top:20px;">
+	<div class="inner"><h3>54件</h3><p>&nbsp;</p></div>
+	<div class="icon"><i class="ion ion-help-circled"></i></div>
+	<a class="small-box-footer" style="border-radius:20px;">异常订单<i class="ion ion-help-circled"></i></a>
+	    </div>
+	</div>
+	<div class="col-md-2">
+	    <div class="small-box bg-green" style="border-radius:20px;margin-top:20px;">
+	<div class="inner"><h3>34件</h3><p>&nbsp;</p></div>
+	<div class="icon"><i class="ion ion-clipboard"></i></div>
+	<a class="small-box-footer" style="border-radius:20px;">今日订单数<i class="ion ion-clipboard"></i></a>
+	    </div>
+	</div>
+	<div class="col-md-6">
+		<section class="connectedSortable ui-sortable">
+			<div id="reportPacket" style="min-width: 310px; height:200px; margin: 0 auto"></div>		
+			</section>
+		</div>				
+	</div>
+	<div class="row">
+	     		<div class="col-md-12">
+			<ul id="myTab" class="nav nav-tabs">
+			   <li class="active">
+			      <a href="#nosendOrderMonitor" data-toggle="tab"><span class="glyphicon glyphicon-book"></span> 未分配订单</a>
+			   </li>
+			   <li><a href="#courierMonitor" data-toggle="tab"><span class="glyphicon glyphicon-eye-open"></span> 配送员实时</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="tab-content">
+		<div class="tab-pane fade in active" id="nosendOrderMonitor">
+			<div id="nosendMap" style="height:370px"></div>
+	</div>
+	<div class="tab-pane fade" id="courierMonitor">
+		<div id="courierMap" style="width:100%;height:370px"></div>
+		</div>
+	</div>
+</section>

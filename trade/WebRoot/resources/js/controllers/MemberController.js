@@ -1,0 +1,30 @@
+define(["App"],function(App){
+	App.controller("MemberController",function($scope,$http,$routeParams,Dialog){
+		$scope.loadMembers=function()
+		{
+			$http.get("manage/member.html",{params:{pageNo:$scope.currentPage}},{cache:false}).success(function(data){
+				if(data){$scope.items=data.datas;$scope.pageCount=data.totalPage;}
+			});
+		};
+		$scope.enableMember=function(memberId)
+		{
+			$http.get("manage/member/editstatus/"+memberId+".html",{cache:false}).success(function(data){
+				Dialog.successTip("操作成功!");
+				$scope.loadMembers();
+			});
+		};
+		$scope.detailMember=function()
+		{
+			var memberId=$routeParams.memberId;
+			$http.get("manage/member/"+memberId+".html",{cache:false}).success(function(data){
+				$scope.member=data;
+			});
+		};
+		$scope.syncMember=function()
+		{
+			$http.get("manage/member/syncwx.html",{cache:false}).success(function(data){
+				Dialog.successTip("系统正在后台同步中,请稍候...!");
+			});
+		}
+	});
+});
