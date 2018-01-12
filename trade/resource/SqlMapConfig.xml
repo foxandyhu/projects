@@ -14,5 +14,6 @@
 		<package name="com.bfly.trade.members.entity"/>
 		<package name="com.bfly.trade.logs.entity"/>
 		<package name="com.bfly.trade.system.entity"/>
+		<package name="com.bfly.trade.news.entity"/>
 	</typeAliases>
 </configuration>
