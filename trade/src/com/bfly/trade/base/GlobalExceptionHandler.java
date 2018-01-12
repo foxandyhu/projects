@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.alibaba.fastjson.JSONObject;
 import com.bfly.trade.exception.NeedLoginException;
 import com.bfly.trade.exception.NoPermissionToAccessResourceException;
 import com.bfly.trade.util.ResponseUtil;
@@ -28,9 +27,10 @@ public class GlobalExceptionHandler {
 		}else if(ex instanceof NoPermissionToAccessResourceException)
 		{
 			response.setStatus(403);				//未登录
+		}else
+		{
+			response.setStatus(500);
 		}
-		JSONObject json=new JSONObject();
-		json.put("errorMsg",ex.getMessage());
-		ResponseUtil.writeJson(response, json.toJSONString());
+		ResponseUtil.writeText(response, ex.getMessage());
 	}
 }

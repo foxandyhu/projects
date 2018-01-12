@@ -56,6 +56,12 @@ define(["App"],function(App){
 			}).when("/members/:memberId",{
 				templateUrl:"members/member_detail.html",
 				controller:"MemberController"
+			}).when("/sellers",{
+				templateUrl:"members/seller_list.html",
+				controller:"MemberController"				
+			}).when("/sellers/:sellerId",{
+				templateUrl:"members/seller_detail.html",
+				controller:"MemberController"
 			});
 	});
 	

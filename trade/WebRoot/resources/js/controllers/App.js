@@ -1,4 +1,10 @@
 define(["angular","jquery"], function (angular,$) {
+	$.ajax({
+		url:"manage/user/loginuser.html",
+		success:function(data){
+			$(".loginuser").text(data.name);
+		}
+	});
     var App = angular.module("App", ["ngRoute","ng-pagination"]);
     App.config(["$httpProvider","TimerBarProvider",function($httpProvider,TimerBarProvider){
     	TimerBarProvider.start();

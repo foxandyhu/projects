@@ -1,0 +1,56 @@
+<section class="content-header">
+    <h1>微信会员</h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+      <li class="active">微信中心</li>
+      <li><a href="#/members">微信会员</a></li>
+      <li class="active">会员详情</li>
+    </ol>
+</section>
+<section class="content">
+	<div class="box box-danger"></div>
+	<form class="form-horizontal" role="form" method="post" action="javascript:void(0)" id="userForm" ng-init="detailSeller()">
+		<div class="box-body">
+			<table class="table table-bordered">
+				<tr>
+			    	<td class="infobg col-md-1 text-right">Logo:</td>
+			    	<td class="col-md-3" colspan="3"><img ng-src="{{seller.logo}}" height="120"/></td>
+			    </tr>
+				<tr>
+			    	<td class="infobg col-md-1 text-right">商户名称:</td>
+			    	<td class="col-md-1">{{seller.name}}</td>
+			    	<td class="infobg col-md-1 text-right">商户电话:</td>
+			    	<td class="col-md-1">{{seller.phone}}</td>
+			    </tr>
+				<tr>
+			    	<td class="infobg col-md-1 text-right">商户地址:</td>
+			    	<td class="col-md-3" colspan="3">{{seller.address}}</td>
+			    </tr>						    
+				<tr>
+			    	<td class="infobg col-md-1 text-right">类&nbsp;&nbsp;别:</td>
+			    	<td class="col-md-1">{{seller.typeName}}</td>
+			    	<td class="infobg col-md-1 text-right">状&nbsp;&nbsp;态:</td>
+			    	<td class="col-md-1">{{seller.enableName}}</td>
+			    </tr>
+				<tr>
+			    	<td class="infobg col-md-1 text-right">营业时间:</td>
+			    	<td class="col-md-1">{{seller.shopHours}}</td>
+			    	<td class="infobg col-md-1 text-right">提供设施:</td>
+			    	<td class="col-md-1"><span ng-repeat="item in seller.facilityNames">{{item}}&nbsp;&nbsp;</span></td>			    	
+			    </tr>
+				<tr>
+			    	<td class="infobg col-md-1 text-right">入住时间:</td>
+			    	<td class="col-md-3" colspan="3">{{seller.registeTime}}</td>
+			    </tr>
+				<tr>
+			    	<td class="infobg col-md-1 text-right">商户简介:</td>
+			    	<td class="col-md-3" colspan="3">{{seller.remark}}</td>
+			    </tr>			    
+		    </table>			
+	    </div>
+		<div class="col-md-12 text-center">
+		   <a href="#/sellers" class="btn btn-warning"><i class="fa fa-fw fa-history"></i>返 回</a>
+		</div>
+	</form>
+</section>
+<span ng-init="initUserValidate()"></span>

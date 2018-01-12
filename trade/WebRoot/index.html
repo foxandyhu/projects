@@ -108,12 +108,12 @@
 	              <li class="dropdown user user-menu">
 	                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 	                  <img src="resources/images/user_default.jpg" class="user-image">
-	                  <span class="hidden-xs">{{userName}}</span>
+	                  <span class="hidden-xs loginuser"></span>
 	                </a>
 	                <ul class="dropdown-menu">
 	                  <li class="user-header">
 	                    <img src="resources/images/user_default.jpg" class="img-circle" alt="User Image">
-	                    <p>{{userName}}</p>
+	                    <p class="loginuser"></p>
 	                  </li>
 	                  <li class="user-footer">
 	                    <div class="pull-left">
@@ -136,7 +136,7 @@
 	              <img src="resources/images/user_default.jpg" class="img-circle" alt="User Image">
 	            </div>
 	            <div class="pull-left info">
-	              <p>{{userName}}</p>
+	              <p class="loginuser"></p>
 	              <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
 	            </div>
 	          </div>
@@ -159,17 +159,11 @@
 	                <li><a href="#sys/config"><i class="fa fa-wrench"> 系统设置</i></a></li>
 	              </ul>
 	            </li>
-	            <li id="wxmanager" class="treeview">
-	              <a href="#"><i class="fa fa-weixin"></i> <span>微信中心</span> <i class="fa fa-angle-left pull-right"></i></a>
-	              <ul class="treeview-menu">
-	                <li><a href="#members"><i class="fa fa-qq"> 微信会员</i></a></li>
-	                <li><a href="#weixin"><i class="fa fa-edit"> 微信设置</i></a></li>
-	              </ul>
-	            </li>
 	            <li id="bizmanager" class="treeview">
 	              <a href="#"><i class="fa fa-heart-o"></i> <span>商户中心</span> <i class="fa fa-angle-left pull-right"></i></a>
 	              <ul class="treeview-menu">
-	                <li><a href="#/restaurant"><i class="fa fa-user-times"> 商户管理</i></a></li>
+	              	<li><a href="#/members"><i class="fa fa-user-times"> 微信会员</i></a></li>
+	                <li><a href="#/sellers"><i class="fa fa-user-times"> 商户管理</i></a></li>
 	                <li><a href="manage/order/report.html"><i class="fa fa-edit"> 商户设置</i></a></li>
 	              </ul>
 	            </li>
@@ -192,7 +186,6 @@
 	              <a href="#"><i class="fa fa-pie-chart"></i> <span>数据中心</span> <i class="fa fa-angle-left pull-right"></i></a>
 	              <ul class="treeview-menu">
 	                <li><a href="#/sys/logs"><i class="fa fa-area-chart"> 后台日志</i></a></li>
-	                <li><a href="manage/logs/app.html"><i class="fa fa-bar-chart"> 商户日志</i></a></li>
 	                <li><a href="#/sys/login/logs"><i class="fa  fa-line-chart"> 登录日志</i></a></li>
 	              </ul>
 	            </li>

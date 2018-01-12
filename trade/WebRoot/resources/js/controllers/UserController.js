@@ -46,8 +46,9 @@ define(["App"],function(App){
 				if(data){$scope.items=data.datas;$scope.pageCount = data.totalPage;}
 			});
 		};
-		$scope.enableUser=function(userId)
+		$scope.enableUser=function()
 		{
+			var userId=this.item.id;
 			$http.get("manage/user/editenable/"+userId+".html",{cache:false}).success(function(data){
 				Dialog.successTip("操作成功!");
 				$scope.loadUsers();

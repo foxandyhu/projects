@@ -38,7 +38,9 @@ public class BaseAction{
 	private int page;
 	
 	public int getPage() {
-			page=DataConvertUtils.convertToInteger(getRequest().getParameter("pageNo"));
+		String pageNo=getRequest().getParameter("pageNo");
+		pageNo=pageNo==null?"0":pageNo;
+		page=DataConvertUtils.convertToInteger(pageNo);
 		return page;
 	}
 

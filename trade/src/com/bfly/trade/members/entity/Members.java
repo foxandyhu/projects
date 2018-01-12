@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 用户类
- * 
- * @author 胡礼波 2012-4-24 下午11:15:51
+ * 会员基本信息--微信基本信息
+ * @author andy_hulibo@163.com
+ * @2018年1月11日 下午3:10:39
  */
 public class Members implements Serializable {
 
@@ -22,11 +22,6 @@ public class Members implements Serializable {
 	 */
 	private String cusCode;
 
-	/**
-	 * 手机号码
-	 */
-	private String phone;
-	
 	/**
 	 * 账号状态
 	 */
@@ -88,7 +83,7 @@ public class Members implements Serializable {
 		this.registeTime = registeTime;
 	}
 
-	public boolean getEnable() {
+	public boolean isEnable() {
 		return enable;
 	}
 
@@ -150,14 +145,6 @@ public class Members implements Serializable {
 
 	public void setHeadImgUrl(String headImgUrl) {
 		this.headImgUrl = headImgUrl;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
 	}
 
 	public String getCusCode() {

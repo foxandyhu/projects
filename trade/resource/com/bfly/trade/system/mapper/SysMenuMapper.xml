@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bfly.trade.system.mapper.SysMenuMapper">
+    <parameterMap type="SysMenu" id="SysMenuParaMap">
+    	<parameter property="id" resultMap="id"/>
+    	<parameter property="name" resultMap="name"/>
+    	<parameter property="type" resultMap="type"/>
+    	<parameter property="seq" resultMap="seq"/>
+    	<parameter property="url" resultMap="url"/>
+    	<parameter property="parentId" resultMap="parent_id"/>
+    	<parameter property="enable" resultMap="is_enable"/>
+    	<parameter property="remark" resultMap="remark"/>
+    </parameterMap>
+
+    <resultMap type="SysMenu" id="SysMenuResultMap">
+    	<id property="id" column="id"/>
+    	<result property="name" column="name"/>
+    	<result property="type" column="type"/>
+    	<result property="seq" column="seq"/>
+    	<result property="url" column="url"/>
+    	<result property="parentId" column="parent_id"/>
+    	<result property="enable" column="is_enable"/>
+    	<result property="remark" column="remark"/>
+    	<collection property="children" column="id" fetchType="lazy" select="com.bfly.trade.system.mapper.SysMenuMapper.getSubMenu"/>
+   	</resultMap>
+   	
+	<sql id="SysMenuColumn">id,name,type,seq,url,parent_id,is_enable,remark</sql>
+	
+	<insert id="save" parameterType="SysMenu" keyProperty="id" useGeneratedKeys="true">
+    	<![CDATA[
+    		insert into sys_menu(name,type,seq,url,parent_id,is_enable,remark) 
+    		values(#{name},#{type},#{seq},#{url},#{parentId},#{enable},#{remark});
+    	]]>
+	</insert>
+	
+	<select id="getSubMenu" resultMap="SysMenuResultMap" parameterType="int">
+		SELECT <include refid="SysMenuColumn"/> from sys_menu where parent_id=#{id}
+		order by seq
+	</select>
+	
+	<select id="getList" resultMap="SysMenuResultMap" parameterType="map">
+		SELECT <include refid="SysMenuColumn"/> from sys_menu where 1=1
+		<if test="parentId!=null">and parent_id=#{parentId}</if>
+		<if test="type!=null">and type=#{type}</if>
+		<if test="roleId!=null">and role_id=#{roleId}</if>
+		order by seq
+	</select>
+
+	<select id="getCount" resultType="int" parameterType="map">
+		<![CDATA[SELECT count(1) FROM sys_menu where 1=1]]>
+		<if test="parentId!=null">and parent_id=#{parentId}</if>
+		<if test="type!=null">and type=#{type}</if>
+		<if test="roleId!=null">and role_id=#{roleId}</if>
+	</select>
+
+	<select id="getById" resultMap="SysMenuResultMap">SELECT<include refid="SysMenuColumn"/> FROM sys_menu where id=#{id};</select>
+
+	<select id="getSysMenuByRole" resultMap="SysMenuResultMap" parameterType="int">
+		SELECT <include refid="SysMenuColumn"/> from sys_menu left join sys_role_menu on id=menu_id where role_id=#{roleId} 
+	</select>
+
+	<select id="getSysMenusByUser" resultMap="SysMenuResultMap" parameterType="int">
+		SELECT DISTINCT <include refid="SysMenuColumn"/> 
+		<![CDATA[from sys_menu sm inner join sys_role_menu srm on sm.id=srm.menu_id
+		inner join sys_role_user sru on srm.role_id=sru.role_id where sru.user_id=#{userId};
+		]]> 
+	</select>
+
+	<update id="editById" parameterType="SysMenu">
+		<![CDATA[UPDATE sys_menu SET name=#{name},type=#{type},seq=#{seq},url=#{url},parent_id=#{parentId},is_enable=#{enable},remark=#{remark} where id=#{id}]]>
+	</update>
+
+	<delete id="delById">
+		DELETE FROM sys_menu where id in
+		<foreach collection="ids" index="index" item="item" open="(" close=")" separator=",">#{item}</foreach>
+	</delete>
+</mapper>

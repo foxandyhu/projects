@@ -7,7 +7,6 @@
     <parameterMap type="Members" id="MemberparaMap">
     	<parameter property="id" resultMap="id"/>
     	<parameter property="cusCode" resultMap="cus_code"/>
-    	<parameter property="phone" resultMap="phone"/>
     	<parameter property="enable" resultMap="is_enable"/>
     	<parameter property="registeIp" resultMap="registe_ip"/>
     	<parameter property="registeTime" resultMap="registe_time"/>
@@ -22,7 +21,6 @@
     <resultMap type="Members" id="MemberResultMap">
     	<id property="id" column="id"/>
     	<result property="cusCode" column="cus_code"/>
-    	<result property="phone" column="phone"/>
     	<result property="enable" column="is_enable"/>
     	<result property="registeIp" column="registe_ip"/>
     	<result property="registeTime" column="registe_time"/>
@@ -34,17 +32,17 @@
     	<result property="headImgUrl" column="head_img_url"/>
    	</resultMap>
    	
-	<sql id="memberColumn">id,cus_code,phone,is_enable,registe_ip,registe_time,nick_name,sex,province,city,country,head_img_url</sql>
+	<sql id="memberColumn">id,cus_code,is_enable,registe_ip,registe_time,nick_name,sex,province,city,country,head_img_url</sql>
 	
 	<insert id="save" parameterMap="MemberparaMap" keyProperty="id" useGeneratedKeys="true">
     	<![CDATA[
-    		insert into member_info(cus_code,phone,is_enable,registe_ip,registe_time,nick_name,sex,province,city,country,head_img_url) 
-    		values(#{cusCode},#{phone},#{enable},#{registeIp},#{registeTime},#{nickName},#{sex},#{province},#{city},#{country},#{headImgUrl});
+    		insert into d_member(cus_code,is_enable,registe_ip,registe_time,nick_name,sex,province,city,country,head_img_url) 
+    		values(#{cusCode},#{enable},#{registeIp},#{registeTime},#{nickName},#{sex},#{province},#{city},#{country},#{headImgUrl});
     	]]>
 	</insert>
 	
     <select id="getList" parameterType="map" resultMap="MemberResultMap" >
-    	SELECT <include refid="memberColumn"/> from member_info where 1=1
+    	SELECT <include refid="memberColumn"/> from d_member where 1=1
     	<if test="no!=null">and (nick_name like CONCAT('%','${no}','%') or cus_code like CONCAT('%','${no}','%'))</if>
     	<if test="nickName!=null">and nick_name like CONCAT('%','${nickName}','%')</if>
 	    <if test="beginTime!=null">and regist_time >= #{beginTime}</if>
@@ -54,17 +52,17 @@
     </select>
     
     <select id="getCount" resultType="int">
-    	select count(1) from member_info where 1=1
+    	select count(1) from d_member where 1=1
     	<if test="no!=null">and (nick_name like CONCAT('%','${no}','%') or cus_code like CONCAT('%','${no}','%'))</if>
     	<if test="nickName!=null">and nick_name like CONCAT('%','${nickName}','%')</if>
 	    <if test="beginTime!=null">and regist_time >= #{beginTime}</if>
 	    <if test="endTime!=null"><![CDATA[ and regist_time <= #{endTime}]]></if>    	    	
     </select>
 	
-	<select id="getById" resultMap="MemberResultMap">SELECT <include refid="memberColumn"/> from member_info where id=#{id};</select>
+	<select id="getById" resultMap="MemberResultMap">SELECT <include refid="memberColumn"/> from d_member where id=#{id};</select>
 	
     <update id="editById" parameterType="Members">
-    	<![CDATA[UPDATE MEMBER_INFO SET cus_code=#{cusCode},PHONE=#{phone},IS_ENABLE=#{enable},
+    	<![CDATA[UPDATE d_member SET cus_code=#{cusCode},IS_ENABLE=#{enable},
     	NICK_NAME=#{nickName},SEX=#{sex},PROVINCE=#{province},CITY=#{city},COUNTRY=#{country},HEAD_IMG_URL=#{headImgUrl}
     	WHERE ID=#{id};]]>
     </update>

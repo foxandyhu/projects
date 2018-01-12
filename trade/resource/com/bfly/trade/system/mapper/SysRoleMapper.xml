@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bfly.trade.system.mapper.SysRoleMapper">
+    <parameterMap type="SysRole" id="SysRoleParaMap">
+    	<parameter property="id" resultMap="id"/>
+    	<parameter property="name" resultMap="name"/>
+    	<parameter property="seq" resultMap="seq"/>
+    	<parameter property="enable" resultMap="is_enable"/>
+    	<parameter property="remark" resultMap="remark"/>
+    </parameterMap>
+
+    <resultMap type="SysRole" id="SysRoleResultMap">
+    	<id property="id" column="id"/>
+    	<result property="name" column="name"/>
+    	<result property="seq" column="seq"/>
+    	<result property="enable" column="is_enable"/>
+    	<result property="remark" column="remark"/>
+   	</resultMap>
+   	
+	<sql id="SysRoleColumn">id,name,seq,is_enable,remark</sql>
+	
+	<insert id="save" parameterType="SysRole" keyProperty="id" useGeneratedKeys="true">
+    	<![CDATA[
+    		insert into sys_role(name,seq,is_enable,remark) 
+    		values(#{name},#{seq},#{enable},#{remark});
+    	]]>
+	</insert>
+	
+	<select id="getList" resultMap="SysRoleResultMap" parameterType="map">
+		SELECT <include refid="SysRoleColumn"/> from sys_role order by seq
+	</select>
+	
+	<select id="getCount" resultType="int" parameterType="map">
+		<![CDATA[SELECT count(1) FROM sys_role]]>
+	</select>
+	
+	<select id="getById" resultMap="SysRoleResultMap">SELECT<include refid="SysRoleColumn"/> FROM sys_role where id=#{id};</select>
+	
+	<update id="editById" parameterType="SysRole">
+		<![CDATA[UPDATE sys_role SET name=#{name},seq=#{seq},is_enable=#{enable},remark=#{remark} where id=#{id}]]>
+	</update>
+	
+	<delete id="delById">DELETE FROM sys_role where id in<foreach collection="ids" index="index" item="item" open="(" close=")" separator=",">#{item}</foreach></delete>
+	
+	<insert id="saveMenuRole">
+		<![CDATA[insert into sys_role_menu(role_id,menu_id) values(#{roleId},#{menuId});]]>
+	</insert>
+	<delete id="delMenuRole">
+		<![CDATA[DELETE FROM sys_role_menu where role_id=#{roleId} and menu_id=#{menuId};]]>
+	</delete>
+	<select id="getShipByMenu" resultType="int">
+		<![CDATA[SELECT count(1) FROM sys_role_menu where role_id=#{roleId} and menu_id=#{menuId};]]>
+	</select>
+		
+	<insert id="saveUserRole">
+		<![CDATA[insert into sys_role_user(user_id,role_id) values(#{userId},#{roleId});]]>
+	</insert>
+	<delete id="delUserRole">
+		<![CDATA[DELETE FROM sys_role_user where role_id=#{roleId} and user_id=#{userId};]]>
+	</delete>
+	<select id="getShipByUser" resultType="int">
+		<![CDATA[SELECT count(1) FROM sys_role_user where role_id=#{roleId} and user_id=#{userId};]]>
+	</select>	
+
+</mapper>

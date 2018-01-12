@@ -20,11 +20,26 @@ define(["App"],function(App){
 				$scope.member=data;
 			});
 		};
-		$scope.syncMember=function()
+		$scope.loadSellers=function()
 		{
-			$http.get("manage/member/syncwx.html",{cache:false}).success(function(data){
-				Dialog.successTip("系统正在后台同步中,请稍候...!");
+			$http.get("manage/seller.html",{params:{pageNo:$scope.currentPage}},{cache:false}).success(function(data){
+				if(data){$scope.items=data.datas;$scope.pageCount=data.totalPage;}
 			});
-		}
+		};
+		$scope.enableSeller=function()
+		{
+			var sellerId=this.item.id;
+			$http.get("manage/seller/editstatus/"+sellerId+".html",{cache:false}).success(function(data){
+				Dialog.successTip("操作成功!");
+				$scope.loadSellers();
+			});
+		};
+		$scope.detailSeller=function()
+		{
+			var sellerId=$routeParams.sellerId;
+			$http.get("manage/seller/"+sellerId+".html",{cache:false}).success(function(data){
+				$scope.seller=data;
+			});
+		};
 	});
 });

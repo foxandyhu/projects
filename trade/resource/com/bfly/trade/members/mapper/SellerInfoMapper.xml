@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bfly.trade.members.mapper.SellerInfoMapper">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+    <parameterMap type="SellerInfo" id="SellerInfoParaMap">
+    	<parameter property="id" resultMap="id"/>
+    	<parameter property="memberId" resultMap="member_id"/>
+    	<parameter property="name" resultMap="name"/>
+    	<parameter property="phone" resultMap="phone"/>
+    	<parameter property="longitude" resultMap="longitude"/>
+    	<parameter property="latitude" resultMap="latitude"/>
+    	<parameter property="address" resultMap="address"/>
+    	<parameter property="shopHours" resultMap="shop_hours"/>
+    	<parameter property="logo" resultMap="logo"/>
+    	<parameter property="type" resultMap="type"/>
+    	<parameter property="enable" resultMap="is_enable"/>
+    	<parameter property="facility" resultMap="facility"/>
+    	<parameter property="remark" resultMap="remark"/>
+    	<parameter property="registeTime" resultMap="registe_time"/>
+    </parameterMap>
+
+    <resultMap type="SellerInfo" id="SellerInfoResultMap">
+    	<id property="id" column="id"/>
+    	<result property="memberId" column="member_id"/>
+    	<result property="name" column="name"/>
+    	<result property="phone" column="phone"/>
+    	<result property="longitude" column="longitude"/>
+    	<result property="latitude" column="latitude"/>
+    	<result property="address" column="address"/>
+    	<result property="shopHours" column="shop_hours"/>
+    	<result property="logo" column="logo"/>
+    	<result property="type" column="type"/>
+    	<result property="enable" column="is_enable"/>
+    	<result property="facility" column="facility"/>
+    	<result property="remark" column="remark"/>
+    	<result property="registeTime" column="registe_time"/>
+   	</resultMap>
+   	
+	<sql id="SellerInfoColumn">id,member_id,name,phone,longitude,latitude,address,shop_hours,logo,type,is_enable,facility,registe_time,remark</sql>
+	
+	<insert id="save" parameterType="SellerInfo"  keyProperty="id" useGeneratedKeys="true">
+    	<![CDATA[
+    		insert into d_seller(member_id,name,phone,longitude,latitude,address,shop_hours,logo,type,is_enable,facility,registe_time,remark) 
+    		values(#{memberId},#{name},#{phone},#{longitude},#{latitude},#{address},#{shopHours},#{logo},#{type},#{enable},#{facility},#{registeTime},#{remark});
+    	]]>
+	</insert>
+	
+    <select id="getList" parameterType="map" resultMap="SellerInfoResultMap" >
+    	SELECT <include refid="SellerInfoColumn"/> from d_seller where 1=1
+    	<if test="name!=null">and name like CONCAT('%','${name}','%')</if>
+    	order by id desc
+       <if test="firstResult!=null and maxResult!=null">limit #{firstResult} , #{maxResult};</if>
+    </select>
+    
+    <select id="getCount" resultType="int">
+    	select count(1) from d_seller where 1=1
+    	<if test="name!=null">and name like CONCAT('%','${name}','%')</if>
+    </select>
+	
+	<select id="getById" resultMap="SellerInfoResultMap">SELECT <include refid="SellerInfoColumn"/> from d_seller where id=#{id};</select>
+	
+    <update id="editById" parameterType="SellerInfo">
+    	<![CDATA[UPDATE d_seller SET name=#{name},longitude=#{longitude},
+    	latitude=#{latitude},address=#{address},shop_hours=#{shopHours},logo=#{logo},type=#{type},is_enable=#{enable},facility=#{facility},remark=#{remark}
+    	WHERE ID=#{id};]]>
+    </update>
+    
+    <update id="editSellerStatus" parameterType="map">
+    	UPDATE D_SELLER SET IS_ENABLE=#{enable} where id=#{sellerId};
+    </update>
+    
+</mapper>
