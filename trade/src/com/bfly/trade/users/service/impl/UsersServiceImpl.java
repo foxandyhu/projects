@@ -125,7 +125,6 @@ public class UsersServiceImpl extends BaseServiceImpl<Users> implements IUsersSe
 	}
 
 	@Override
-	@ActionModel("用户登录")
 	@Transactional
 	public Users login(String userName, String password) {
 		Users user=getUserByName(userName);
@@ -142,7 +141,6 @@ public class UsersServiceImpl extends BaseServiceImpl<Users> implements IUsersSe
 	}
 
 	@Override
-	@ActionModel("用户登出")
 	@Transactional
 	public void logout(String userName) {
 		String ip=ContextUtil.getClientIp();

@@ -64,6 +64,14 @@ define(["App"],function(App){
 				controller:"MemberController"
 			});
 	});
+
+	App.config(function($routeProvider){
+		$routeProvider
+			.when("/message/sms",{
+				templateUrl:"message/sms_history.html",
+				controller:"MessageController"
+			});
+	});	
 	
 	App.config(function($routeProvider){
 		$routeProvider

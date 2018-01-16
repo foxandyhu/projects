@@ -22,7 +22,8 @@ require.config({
       "UserController":"../js/controllers/UserController",
       "MemberController":"../js/controllers/MemberController",
       "LogsController":"../js/controllers/LogsController",
-      "RestaurantController":"../js/controllers/RestaurantController"
+      "RestaurantController":"../js/controllers/RestaurantController",
+      "MessageController":"../js/controllers/MessageController"
     },
     shim: {
     	"kindeditor":{
@@ -59,7 +60,7 @@ require.config({
 });
 
 
-require(["angular","angular-route","bootstrap","pagination","framework","App","AppRoute","CommonService","UserController","SysController","SysMenuController","SysRoleController","MemberController","LogsController","RestaurantController"],function (angular,App){
+require(["angular","angular-route","bootstrap","pagination","framework","App","AppRoute","CommonService","UserController","SysController","SysMenuController","SysRoleController","MemberController","LogsController","RestaurantController","MessageController"],function (angular,App){
 	$(function(){
 		$(document.body).addClass("hold-transition skin-red sidebar-mini");
 		angular.bootstrap(document,["App"]);
