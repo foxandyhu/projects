@@ -19,6 +19,7 @@
     	<parameter property="facility" resultMap="facility"/>
     	<parameter property="remark" resultMap="remark"/>
     	<parameter property="registeTime" resultMap="registe_time"/>
+    	<parameter property="recommend" resultMap="is_recommend"/>
     </parameterMap>
 
     <resultMap type="SellerInfo" id="SellerInfoResultMap">
@@ -36,14 +37,15 @@
     	<result property="facility" column="facility"/>
     	<result property="remark" column="remark"/>
     	<result property="registeTime" column="registe_time"/>
+    	<result property="recommend" column="is_recommend"/>
    	</resultMap>
    	
-	<sql id="SellerInfoColumn">id,member_id,name,phone,longitude,latitude,address,shop_hours,logo,type,is_enable,facility,registe_time,remark</sql>
+	<sql id="SellerInfoColumn">id,member_id,name,phone,longitude,latitude,address,shop_hours,logo,type,is_enable,facility,registe_time,is_recommend,remark</sql>
 	
 	<insert id="save" parameterType="SellerInfo"  keyProperty="id" useGeneratedKeys="true">
     	<![CDATA[
-    		insert into d_seller(member_id,name,phone,longitude,latitude,address,shop_hours,logo,type,is_enable,facility,registe_time,remark) 
-    		values(#{memberId},#{name},#{phone},#{longitude},#{latitude},#{address},#{shopHours},#{logo},#{type},#{enable},#{facility},#{registeTime},#{remark});
+    		insert into d_seller(member_id,name,phone,longitude,latitude,address,shop_hours,logo,type,is_enable,facility,registe_time,remark,is_recommend) 
+    		values(#{memberId},#{name},#{phone},#{longitude},#{latitude},#{address},#{shopHours},#{logo},#{type},#{enable},#{facility},#{registeTime},#{remark},#{recommend});
     	]]>
 	</insert>
 	

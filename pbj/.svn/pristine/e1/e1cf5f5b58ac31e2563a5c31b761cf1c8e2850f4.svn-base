@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lw.iot.pbj.chicken.persistence.ChickenMapper">
+    <parameterMap type="Chicken" id="ChickenParaMap">
+    	<parameter property="id" resultMap="id"/>
+    	<parameter property="serialNo" resultMap="serial_no"/>
+    	<parameter property="breeds" resultMap="breeds"/>
+    	<parameter property="status" resultMap="status"/>
+    	<parameter property="wearTime" resultMap="wear_time"/>
+    	<parameter property="remark" resultMap="remark"/>
+    	<parameter property="birthDays" resultMap="birth_days"/>
+    	<parameter property="farm" resultMap="farm"/>
+    	<parameter property="sellTime" resultMap="sell_time"/>
+    </parameterMap>
+
+    <resultMap type="Chicken" id="ChickenResultMap">
+    	<id property="id" column="id"/>
+    	<result  property="serialNo" column="serial_no"/>
+    	<result  property="breeds" column="breeds"/>
+    	<result  property="status" column="status"/>
+    	<result  property="wearTime" column="wear_time"/>
+    	<result  property="remark" column="remark"/>
+    	<result  property="birthDays" column="birth_days"/>
+    	<result  property="farm" column="farm"/>
+    	<result  property="sellTime" column="sell_time"/>
+    </resultMap>
+
+	<sql id="ChickenColumn">id,serial_no,breeds,status,wear_time,remark,birth_days,farm,sell_time</sql>
+	<insert id="save" parameterType="Chicken"  keyProperty="id" useGeneratedKeys="true">
+    	<![CDATA[
+    		insert into d_pedometer(<include refid="PedometerColumn"/>) values(#{serialNo},#{breeds},#{status},#{wearTime},#{remark},#{birthDays},
+    		#{farm},#{sellTime});
+    	]]>
+	</insert>
+	
+	<update id="editById">
+		update d_chicken set breeds=#{breeds},status=#{status},wear_time=#{wearTime},remark=#{remark},birth_days=#{birthDays},farm=#{farm},sell_time=#{sellTime} where id = #{id}
+	</update>
+	<select id="getList" resultMap="ChickenResultMap">
+		SELECT <include refid="ChickenColumn"/> FROM d_chicken
+		order by id desc
+		<if test="firstResult!=null and maxResult!=null">limit #{firstResult} , #{maxResult};</if>
+	</select>
+	
+	<select id="getCount" resultType="int">
+		SELECT count(1) FROM d_chicken;
+	</select>
+	
+	<select id="getChicken" resultMap="ChickenResultMap">
+		SELECT <include refid="ChickenColumn"/> from d_chicken where serial_no=#{serialNo};
+	</select>
+	
+	<delete id="delById">
+		DELETE FROM d_chicken where id in
+		<foreach collection="ids" index="index" item="item" open="(" close=")" separator=",">#{item}</foreach>
+	</delete>
+</mapper>

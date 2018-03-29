@@ -77,6 +77,11 @@ public class SellerInfo implements Serializable{
 	private boolean enable;
 	
 	/**
+	 * 是否推荐
+	 */
+	private boolean recommend;
+	
+	/**
 	 * 商户提供设施 比如:wifi,停车位,微信支付,支付宝支付等设施服务 用ID拼接起来
 	 */
 	private String facility;
@@ -97,6 +102,15 @@ public class SellerInfo implements Serializable{
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	
+	public boolean isRecommend() {
+		return recommend;
+	}
+
+	public void setRecommend(boolean recommend) {
+		this.recommend = recommend;
 	}
 
 	public int getMemberId() {

@@ -41,5 +41,25 @@ define(["App"],function(App){
 				$scope.seller=data;
 			});
 		};
+		$scope.loadSellerPics=function()
+		{
+			var sellerId=$routeParams.sellerId;
+			$http.get("manage/seller/"+sellerId+"/pics.html",{cache:false}).success(function(data){
+				$scope.items=data;
+			});
+		};
+		$scope.delSellerPics=function()
+		{
+			var sellerId=$routeParams.sellerId;
+			var picId=this.item.id;
+			Dialog.confirm("picDialog","您确认要删除吗该图片?",function(r){if(r)
+			{
+				$http.get("manage/seller/del/pics/"+sellerId+"-"+picId+".html",{cache:false}).success(function(data){
+					Dialog.successTip("操作成功!");
+					$scope.loadSellerPics();
+				});
+			}
+		  });
+		};		
 	});
 });

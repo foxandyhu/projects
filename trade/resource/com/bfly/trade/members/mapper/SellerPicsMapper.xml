@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bfly.trade.members.mapper.SellerPicsMapper">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+    <parameterMap type="SellerPics" id="SellerPicsParaMap">
+    	<parameter property="id" resultMap="id"/>
+    	<parameter property="sellerId" resultMap="seller_id"/>
+    	<parameter property="url" resultMap="url"/>
+    </parameterMap>
+
+    <resultMap type="SellerPics" id="SellerPicsResultMap">
+    	<id property="id" column="id"/>
+    	<result property="sellerId" column="seller_id"/>
+    	<result property="url" column="url"/>
+   	</resultMap>
+   	
+	<sql id="SellerPicsColumn">id,seller_id,url</sql>
+	
+	<insert id="save" parameterType="SellerPics"  keyProperty="id" useGeneratedKeys="true">
+    	<![CDATA[insert into d_seller_pics(seller_id,url) values(#{sellerId},#{url});]]>
+	</insert>
+	
+    <select id="getList" parameterType="map" resultMap="SellerPicsResultMap" >
+    	SELECT <include refid="SellerPicsColumn"/> from d_seller_pics where 1=1
+    	<if test="sellerId!=null">and seller_id=#{sellerId}</if>
+    	order by id desc
+       <if test="firstResult!=null and maxResult!=null">limit #{firstResult} , #{maxResult};</if>
+    </select>
+    
+    <select id="getCount" resultType="int">
+    	select count(1) from d_seller_pics where 1=1
+    	<if test="sellerId!=null">and seller_id=#{sellerId}</if>
+    </select>
+	
+	<select id="getById" resultMap="SellerPicsResultMap">SELECT <include refid="SellerPicsColumn"/> from d_seller_pics where id=#{id};</select>
+	
+	<delete id="delById">DELETE FROM d_seller_pics where id in<foreach collection="ids" index="index" item="item" open="(" close=")" separator=",">#{item}</foreach></delete>
+	    
+</mapper>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bfly.trade.base.action.BaseAction;
 import com.bfly.trade.members.entity.SellerInfo;
+import com.bfly.trade.members.entity.SellerPics;
 import com.bfly.trade.members.service.ISellerInfoService;
 import com.bfly.trade.page.Pager;
 import com.bfly.trade.util.JsonUtil;
@@ -69,5 +70,32 @@ public class SellerInfoAction extends BaseAction{
 		SellerInfo sellerInfo = sellerInfoService.get(sellerId);
 		sellerInfoService.updateSellerStatus(sellerId,!sellerInfo.isEnable());
 		ResponseUtil.writeJson(response, null);
+	}
+	
+	/**
+	 * 商户图片列表
+	 * @author andy_hulibo@163.com
+	 * @2018年3月27日 上午11:56:59
+	 * @param response
+	 */
+	@RequestMapping(value="/{sellerId}/pics")
+	public void listPics(@PathVariable("sellerId") int sellerId,HttpServletResponse response){
+		List<SellerPics> list=sellerInfoService.getSellerPics(sellerId);
+		ResponseUtil.writeJson(response,JsonUtil.toJsonStringFilterPropterForArray(list).toJSONString());
+	}
+
+	/**
+	 * 删除商户图片
+	 * @author andy_hulibo@163.com
+	 * @2018年3月27日 下午12:06:39
+	 * @param sellerId
+	 * @param picId
+	 * @param response
+	 */
+	@RequestMapping(value="/del/pics/{sellerId}-{picId}")
+	public void delPics(@PathVariable("sellerId")int sellerId,@PathVariable("picId")int picId,HttpServletResponse response)
+	{
+		sellerInfoService.delPics(sellerId, picId);
+		ResponseUtil.writeJson(response, "");
 	}
 }
