@@ -1,6 +1,5 @@
-package com.bfly.trade.config;
+package com.bfly.industry.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
@@ -8,13 +7,9 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.JstlView;
-
-import com.bfly.trade.interceptor.ApiInterceptor;
-import com.bfly.trade.interceptor.LoginInterceptor;
 
 /**
  * SpringMVC配置
@@ -23,19 +18,8 @@ import com.bfly.trade.interceptor.LoginInterceptor;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages="com.bfly.trade",useDefaultFilters=false,includeFilters=@Filter(type=FilterType.ANNOTATION,value=Controller.class))
+@ComponentScan(basePackages="com.bfly.industry",useDefaultFilters=false,includeFilters=@Filter(type=FilterType.ANNOTATION,value=Controller.class))
 public class SpringConfig extends WebMvcConfigurerAdapter{
-
-	@Autowired
-	private ApiInterceptor apiInterceptor;
-	@Autowired
-	private LoginInterceptor loginInterceptor;
-	
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(apiInterceptor).addPathPatterns("/api/**");
-		registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns("/api/**");
-	}
 
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
