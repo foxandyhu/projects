@@ -1,11 +1,13 @@
 package com.bfly.trade.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -23,7 +25,7 @@ import com.bfly.trade.interceptor.LoginInterceptor;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages="com.bfly.trade",useDefaultFilters=false,includeFilters=@Filter(type=FilterType.ANNOTATION,value=Controller.class))
+@ComponentScan(basePackages="com.bfly.trade",useDefaultFilters=false,includeFilters={@Filter(type=FilterType.ANNOTATION,value=Controller.class),@Filter(type=FilterType.ANNOTATION,value=ControllerAdvice.class)})
 public class SpringMvcConfig extends WebMvcConfigurerAdapter{
 
 	@Autowired
@@ -47,4 +49,17 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter{
 		configurer.enable();
 	}
 	
+	@Bean(name="apiInterceptor")
+	public ApiInterceptor apiInterceptor()
+	{
+		ApiInterceptor apiInterceptor=new ApiInterceptor();
+		return apiInterceptor;
+	}
+	
+	@Bean(name="loginInterceptor")
+	public LoginInterceptor loginInterceptor()
+	{
+		LoginInterceptor loginInterceptor=new LoginInterceptor();
+		return loginInterceptor;
+	}
 }

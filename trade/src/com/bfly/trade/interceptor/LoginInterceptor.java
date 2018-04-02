@@ -5,7 +5,6 @@ import java.lang.reflect.Method;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -22,7 +21,6 @@ import com.bfly.trade.util.ReflectUtils;
  * @author andy_hulibo@163.com
  * 2018年1月8日下午2:38:59
  */
-@Component
 public class LoginInterceptor extends HandlerInterceptorAdapter{
 
 	@Override
