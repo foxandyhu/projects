@@ -1,9 +1,6 @@
 package com.bfly.industry.members.service;
 
-import org.springframework.stereotype.Service;
-
-@Service
-public class SellerInfoService{
+public interface SellerInfoService{
 
 	
 	/**

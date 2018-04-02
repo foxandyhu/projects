@@ -28,6 +28,7 @@ public class SpringAppInitializer implements WebApplicationInitializer {
 		servletContext.addFilter("CharactEncoding", encodingFilter).addMappingForUrlPatterns(null,true,"/*");
 		
 		AnnotationConfigWebApplicationContext rootContext =new AnnotationConfigWebApplicationContext();
+		rootContext.register(ServiceBeanFactory.class);
 		rootContext.register(SpringConfig.class);
 		
 		servletContext.addListener(new ContextLoaderListener(rootContext));
