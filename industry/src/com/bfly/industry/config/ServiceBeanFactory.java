@@ -1,10 +1,13 @@
-package com.bfly.industry.members.service;
+package com.bfly.industry.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+
+import com.bfly.industry.members.service.MembersService;
+import com.bfly.industry.members.service.SellerInfoService;
 
 import feign.Feign;
 import feign.gson.GsonDecoder;

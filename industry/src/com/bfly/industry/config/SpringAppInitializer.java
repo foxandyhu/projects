@@ -5,8 +5,14 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.context.support.XmlWebApplicationContext;
+import org.springframework.web.context.ContextLoaderListener;
+import org.springframework.web.context.request.RequestContextListener;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.util.IntrospectorCleanupListener;
+
+import com.bfly.industry.util.SysConst;
 
 /**
  * Spring应用启动类
@@ -17,9 +23,21 @@ public class SpringAppInitializer implements WebApplicationInitializer {
 
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
-		XmlWebApplicationContext appContext = new XmlWebApplicationContext();
-		appContext.setConfigLocation("classpath:applicationContext-mvc.xml");
-		ServletRegistration.Dynamic dispatcher =servletContext.addServlet("industry", new DispatcherServlet(appContext));
+		CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
+		encodingFilter.setEncoding(SysConst.ENCODEING_UTF8);
+		servletContext.addFilter("CharactEncoding", encodingFilter).addMappingForUrlPatterns(null,true,"/*");
+		
+		AnnotationConfigWebApplicationContext rootContext =new AnnotationConfigWebApplicationContext();
+		rootContext.register(SpringConfig.class);
+		
+		servletContext.addListener(new ContextLoaderListener(rootContext));
+		servletContext.addListener(new IntrospectorCleanupListener());
+		servletContext.addListener(new RequestContextListener());
+
+		AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
+		dispatcherContext.register(SpringMvcConfig.class);
+
+		ServletRegistration.Dynamic dispatcher =servletContext.addServlet("industry", new DispatcherServlet(dispatcherContext));
 		dispatcher.setLoadOnStartup(1);
 		dispatcher.addMapping("/");
 	}

@@ -1,11 +1,11 @@
 package com.bfly.industry.members.service;
 
-import java.util.List;
+import org.springframework.stereotype.Service;
 
-import com.bfly.industry.members.entity.SellerPics;
+@Service
+public class SellerInfoService{
 
-public interface SellerInfoService{
-
+	
 	/**
 	 * 获得商户图片列表
 	 * @author andy_hulibo@163.com
