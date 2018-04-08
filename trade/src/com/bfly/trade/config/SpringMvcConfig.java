@@ -1,5 +1,9 @@
 package com.bfly.trade.config;
 
+import javax.annotation.PostConstruct;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -28,6 +32,8 @@ import com.bfly.trade.interceptor.LoginInterceptor;
 @ComponentScan(basePackages="com.bfly.trade",useDefaultFilters=false,includeFilters={@Filter(type=FilterType.ANNOTATION,value=Controller.class),@Filter(type=FilterType.ANNOTATION,value=ControllerAdvice.class)})
 public class SpringMvcConfig extends WebMvcConfigurerAdapter{
 
+	private Logger logger=LoggerFactory.getLogger(SpringMvcConfig.class);
+			
 	@Autowired
 	private ApiInterceptor apiInterceptor;
 	@Autowired
@@ -61,5 +67,11 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter{
 	{
 		LoginInterceptor loginInterceptor=new LoginInterceptor();
 		return loginInterceptor;
+	}
+	
+	@PostConstruct
+	public void init()
+	{
+		logger.info("the spring mvc config is initialized");
 	}
 }
