@@ -1,5 +1,9 @@
 package com.bfly.industry.config;
 
+import javax.annotation.PostConstruct;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +25,8 @@ import org.springframework.web.servlet.view.JstlView;
 @ComponentScan(basePackages="com.bfly.industry",useDefaultFilters=false,includeFilters=@Filter(type=FilterType.ANNOTATION,value=Controller.class))
 public class SpringMvcConfig extends WebMvcConfigurerAdapter{
 
+	private Logger logger=LoggerFactory.getLogger(SpringMvcConfig.class);
+	
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
 		registry.jsp().prefix("/").suffix(".jsp").viewClass(JstlView.class);
@@ -31,4 +37,9 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter{
 		configurer.enable();
 	}
 	
+	@PostConstruct
+	public void init()
+	{
+		logger.info("the spring mvc config is initialized");
+	}
 }

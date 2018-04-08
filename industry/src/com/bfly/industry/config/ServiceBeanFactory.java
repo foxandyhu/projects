@@ -1,10 +1,12 @@
 package com.bfly.industry.config;
 
-import org.springframework.beans.factory.annotation.Value;
+import javax.annotation.PostConstruct;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 import com.bfly.industry.members.service.MembersService;
 import com.bfly.industry.members.service.SellerInfoService;
@@ -14,23 +16,12 @@ import feign.gson.GsonDecoder;
 import feign.gson.GsonEncoder;
 
 @Configuration
-@PropertySource("classpath:system.properties")
 public class ServiceBeanFactory {
 
-	@Value("${api.server}")
-	private String host;
-
-	/**
-	 * Property文件${}占位符解析必须使用的Bean
-	 * @author andy_hulibo@163.com
-	 * @2018年3月30日 上午11:13:13
-	 * @return
-	 */
-	@Bean
-	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer()
-	{
-      return new PropertySourcesPlaceholderConfigurer();
-	}
+	private Logger logger=LoggerFactory.getLogger(ServiceBeanFactory.class);
+	
+	@Autowired
+	private PropertyConfig config;
 	
 	/**
 	 * 会员服务接口
@@ -41,7 +32,7 @@ public class ServiceBeanFactory {
 	@Bean(name="membersService")
 	public MembersService membersService()
 	{
-		return Factory.builder(MembersService.class,host);
+		return Factory.builder(MembersService.class,config.getHost());
 	}
 	
 	/**
@@ -53,7 +44,7 @@ public class ServiceBeanFactory {
 	@Bean(name="sellerInfoService")
 	public SellerInfoService sellerInfoService()
 	{
-		return Factory.builder(SellerInfoService.class,host);
+		return Factory.builder(SellerInfoService.class,config.getHost());
 	}
 	
 	static class Factory
@@ -66,5 +57,11 @@ public class ServiceBeanFactory {
 					.target(cls,host);
 			return service;
 		}
+	}
+	
+	@PostConstruct
+	public void init()
+	{
+		logger.info("the service BeanFactory is initialized");
 	}
 }

@@ -1,9 +1,12 @@
 package com.bfly.industry.config;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.request.RequestContextListener;
@@ -21,6 +24,8 @@ import com.bfly.industry.util.SysConst;
  */
 public class SpringAppInitializer implements WebApplicationInitializer {
 
+	private Logger logger=LoggerFactory.getLogger(SpringAppInitializer.class);
+	
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
@@ -28,7 +33,6 @@ public class SpringAppInitializer implements WebApplicationInitializer {
 		servletContext.addFilter("CharactEncoding", encodingFilter).addMappingForUrlPatterns(null,true,"/*");
 		
 		AnnotationConfigWebApplicationContext rootContext =new AnnotationConfigWebApplicationContext();
-		rootContext.register(ServiceBeanFactory.class);
 		rootContext.register(SpringConfig.class);
 		
 		servletContext.addListener(new ContextLoaderListener(rootContext));
@@ -43,4 +47,9 @@ public class SpringAppInitializer implements WebApplicationInitializer {
 		dispatcher.addMapping("/");
 	}
 
+	@PostConstruct
+	public void init()
+	{
+		logger.info("the spring App Initializer is initialized");
+	}
 }
