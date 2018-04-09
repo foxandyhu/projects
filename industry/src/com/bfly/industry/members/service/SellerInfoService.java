@@ -3,6 +3,7 @@ package com.bfly.industry.members.service;
 import java.util.List;
 
 import com.bfly.industry.members.entity.SellerInfo;
+import com.bfly.industry.members.entity.SellerPics;
 
 import feign.Param;
 import feign.RequestLine;
@@ -46,4 +47,13 @@ public interface SellerInfoService{
 	 */
 	@RequestLine("GET /api/seller/{sellerId}")
 	public SellerInfo getSellerById(@Param(value="sellerId") String sellerId);
+	
+	/**
+	 * 商户图片
+	 * @author andy_hulibo@163.com
+	 * @2018年4月9日 下午2:06:39
+	 * @return
+	 */
+	@RequestLine("GET /api/seller/{sellerId}/pics")
+	public List<SellerPics> getSellerPics(@Param(value="sellerId") String sellerId);
 }

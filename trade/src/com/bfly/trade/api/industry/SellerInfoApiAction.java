@@ -15,6 +15,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bfly.trade.api.BaseApiAction;
 import com.bfly.trade.members.entity.SellerInfo;
+import com.bfly.trade.members.entity.SellerPics;
 import com.bfly.trade.members.service.ISellerInfoService;
 import com.bfly.trade.util.JsonUtil;
 import com.bfly.trade.util.ResponseUtil;
@@ -118,5 +119,19 @@ public class SellerInfoApiAction extends BaseApiAction{
 		SellerInfo sellerInfo = sellerInfoService.get(sid);
 		JSONObject json=JsonUtil.toJsonStringFilterPropter(sellerInfo);
 		ResponseUtil.writeJson(response, json.toJSONString());
+	}
+	
+	/**
+	 * 商户图片
+	 * @author andy_hulibo@163.com
+	 * @2018年4月9日 下午2:08:38
+	 */
+	@RequestMapping(value="/{sellerId}/pics")
+	public void getSellerPics(@PathVariable("sellerId") String sellerId, HttpServletResponse response)
+	{
+		int sid=WebUtil.IdConvert(sellerId);
+		List<SellerPics> pics=sellerInfoService.getSellerPics(sid);
+		JSONArray array = JsonUtil.toJsonStringFilterPropterForArray(pics,"sellerId");
+		ResponseUtil.writeJson(response, array.toJSONString());
 	}
 }

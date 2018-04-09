@@ -15,6 +15,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bfly.industry.enums.SellerType;
 import com.bfly.industry.members.entity.SellerInfo;
+import com.bfly.industry.members.entity.SellerPics;
 import com.bfly.industry.members.service.SellerInfoService;
 import com.bfly.industry.util.ResponseUtil;
 
@@ -99,8 +100,13 @@ public class IndexAction extends BaseAction {
 	@RequestMapping(value="/{sellerId}")
 	public String detailSellerInfo(@PathVariable("sellerId")String sellerId)
 	{
+		HttpServletRequest request=getRequest();
+		List<SellerPics> pics=sellerInfoService.getSellerPics(sellerId);
 		SellerInfo sellerInfo=sellerInfoService.getSellerById(sellerId);
-		getRequest().setAttribute("sellerInfo",sellerInfo);
+		
+		request.setAttribute("pics",pics);
+		request.setAttribute("sellerInfo",sellerInfo);
+		
 		return "industry_detail";
 	}
 }

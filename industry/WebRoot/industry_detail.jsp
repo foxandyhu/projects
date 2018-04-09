@@ -15,8 +15,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="mobile">
 		<div class="top w">
 	   		<div class="m_banner" id="owl">
-	   			<c:forEach var="item" items="1,2,3,4,5">
-					<a href="#" class="item"><img src="http://www.17sucai.com/preview/1983/2015-09-23/m.178hui_.com_/images/10250290397.png"></a>
+	   			<c:forEach var="item" items="${pics}">
+					<a href="#" class="item"><img src="${item.url}"></a>
 	            </c:forEach>
 	      	</div>
 		</div>
