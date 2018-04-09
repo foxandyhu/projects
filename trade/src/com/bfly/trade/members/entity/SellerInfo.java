@@ -3,9 +3,7 @@ package com.bfly.trade.members.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.bfly.trade.enums.Facility;
 import com.bfly.trade.enums.SellerType;
@@ -72,6 +70,11 @@ public class SellerInfo implements Serializable{
 	private int type;
 	
 	/**
+	 * 点击率
+	 */
+	private int clickRate;
+	
+	/**
 	 * 商户状态
 	 */
 	private boolean enable;
@@ -105,6 +108,14 @@ public class SellerInfo implements Serializable{
 	}
 
 	
+	public int getClickRate() {
+		return clickRate;
+	}
+
+	public void setClickRate(int clickRate) {
+		this.clickRate = clickRate;
+	}
+
 	public boolean isRecommend() {
 		return recommend;
 	}
@@ -185,17 +196,13 @@ public class SellerInfo implements Serializable{
 	 */
 	public String getTypeName()
 	{
-		Map<Integer,String> typeMap=new HashMap<Integer, String>();
-		typeMap.put(SellerType.MEISHI.getId(),"美食");
-		typeMap.put(SellerType.YULEXIUXIAN.getId(),"娱乐休闲");
-		typeMap.put(SellerType.JIUDIANZHUSU.getId(),"酒店住宿");
-		typeMap.put(SellerType.YUNDONGJIANSHEN.getId(),"运动健身");
-		typeMap.put(SellerType.SHISHANGDAREN.getId(),"时尚达人");
-		typeMap.put(SellerType.MUYINGQINZI.getId(),"母婴亲子");
-		typeMap.put(SellerType.XUEXIPEIXUN.getId(),"学习培训");
-		typeMap.put(SellerType.LVYOUCHUXING.getId(),"旅游出行");
-		typeMap.put(SellerType.SHENGHUOFUWU.getId(),"生活服务");
-		return typeMap.get(getType());
+		for (SellerType type:SellerType.values()) {
+			if(getType()==type.getId())
+			{
+				return type.getName();
+			}
+		}
+		return null;
 	}
 	
 	public int getType() {

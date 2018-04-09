@@ -20,6 +20,7 @@
     	<parameter property="remark" resultMap="remark"/>
     	<parameter property="registeTime" resultMap="registe_time"/>
     	<parameter property="recommend" resultMap="is_recommend"/>
+    	<parameter property="clickRate" resultMap="click_rate"/>
     </parameterMap>
 
     <resultMap type="SellerInfo" id="SellerInfoResultMap">
@@ -38,19 +39,22 @@
     	<result property="remark" column="remark"/>
     	<result property="registeTime" column="registe_time"/>
     	<result property="recommend" column="is_recommend"/>
+    	<result property="clickRate" column="click_rate"/>
    	</resultMap>
    	
-	<sql id="SellerInfoColumn">id,member_id,name,phone,longitude,latitude,address,shop_hours,logo,type,is_enable,facility,registe_time,is_recommend,remark</sql>
+	<sql id="SellerInfoColumn">id,member_id,name,phone,longitude,latitude,address,shop_hours,logo,type,is_enable,facility,registe_time,is_recommend,click_rate,remark</sql>
 	
 	<insert id="save" parameterType="SellerInfo"  keyProperty="id" useGeneratedKeys="true">
     	<![CDATA[
-    		insert into d_seller(member_id,name,phone,longitude,latitude,address,shop_hours,logo,type,is_enable,facility,registe_time,remark,is_recommend) 
-    		values(#{memberId},#{name},#{phone},#{longitude},#{latitude},#{address},#{shopHours},#{logo},#{type},#{enable},#{facility},#{registeTime},#{remark},#{recommend});
+    		insert into d_seller(member_id,name,phone,longitude,latitude,address,shop_hours,logo,type,is_enable,facility,registe_time,remark,is_recommend,click_rate) 
+    		values(#{memberId},#{name},#{phone},#{longitude},#{latitude},#{address},#{shopHours},#{logo},#{type},#{enable},#{facility},#{registeTime},#{remark},#{recommend},#{clickRate});
     	]]>
 	</insert>
 	
     <select id="getList" parameterType="map" resultMap="SellerInfoResultMap" >
     	SELECT <include refid="SellerInfoColumn"/> from d_seller where 1=1
+    	<if test="type!=null">and type=#{type}</if>
+    	<if test="recommend!=null">and is_recommend=#{recommend}</if>
     	<if test="name!=null">and name like CONCAT('%','${name}','%')</if>
     	order by id desc
        <if test="firstResult!=null and maxResult!=null">limit #{firstResult} , #{maxResult};</if>
@@ -58,6 +62,8 @@
     
     <select id="getCount" resultType="int">
     	select count(1) from d_seller where 1=1
+    	<if test="type!=null">and type=#{type}</if>
+    	<if test="recommend!=null">and is_recommend=#{recommend}</if>
     	<if test="name!=null">and name like CONCAT('%','${name}','%')</if>
     </select>
 	

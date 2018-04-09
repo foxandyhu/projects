@@ -1,4 +1,4 @@
-package com.bfly.trade.enums;
+package com.bfly.industry.enums;
 
 /**
  * 商户分类
@@ -18,11 +18,6 @@ public enum SellerType {
 	
 	private int id;
 	private String name;
-	private SellerType(int id,String name)
-	{
-		this.id=id;
-		this.name=name;
-	}
 	
 	public static SellerType getSellerType(int id)
 	{
@@ -34,6 +29,13 @@ public enum SellerType {
 		}
 		return null;
 	}
+	
+	private SellerType(int id,String name)
+	{
+		this.id=id;
+		this.name=name;
+	}
+	
 	public String getName() {
 		return name;
 	}

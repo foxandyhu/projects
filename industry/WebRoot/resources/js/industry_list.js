@@ -1,8 +1,4 @@
 var web={
-		initBanner:function()
-		{
-			$("#owl").owlCarousel({items: true,autoPlay: true});
-		},
 		initGotop:function()
 		{
 			var obj=this;
@@ -12,7 +8,7 @@ var web={
 				var windowHeight = $(window).innerHeight();
 				scrollTop > 100 ? $(".gotop").fadeIn("slow"): $(".gotop").fadeOut("slow");
 				if(scrollTop + windowHeight +200>= scrollHeight){
-				　　　　obj.loadAllSellers();
+				　　　　obj.loadSellersByType();
 				　　}
 			});
 			$(".backtop").click(function (e) {
@@ -21,17 +17,17 @@ var web={
 			var ev=$._data($(".bl_more"),"events")
 			if(!(ev && ev["click"])){
 				$(".bl_more").bind("click",function(){
-					obj.loadAllSellers();
+					obj.loadSellersByType();
 				});
 			}
 			$(".refresh").click(function(){
 				window.lock=false;
 				window.pageNo=undefined;
 				$(".renqi_list").html("")
-				obj.loadAllSellers();
+				obj.loadSellersByType();
 			});
 		},
-		loadAllSellers:function()
+		loadSellersByType:function()
 		{
 			if(window.lock==undefined){
 				window.lock=false;
@@ -44,7 +40,7 @@ var web={
 				}
 				lock=true;var obj=this;
 				$.ajax({
-					url:"load/0-"+pageNo+".html",
+					url:"load/"+window.typeId+"-"+pageNo+".html",
 					success:function(data){
 						lock=data.length>0?false:true;
 						if(lock){
@@ -69,5 +65,5 @@ var web={
 		}
 };
 
-web.initBanner();
 web.initGotop();
+$(".bl_more").click();

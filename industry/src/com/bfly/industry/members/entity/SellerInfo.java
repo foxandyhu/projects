@@ -1,7 +1,13 @@
 package com.bfly.industry.members.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import com.bfly.industry.enums.Facility;
+import com.bfly.industry.enums.SellerType;
+import com.bfly.industry.util.DataConvertUtils;
 
 /**
  * 商户信息类
@@ -16,7 +22,7 @@ public class SellerInfo implements Serializable{
 	 */
 	private static final long serialVersionUID = 8654746712308778299L;
 
-	private int id;
+	private String id;
 	
 	/**
 	 * 会员ID
@@ -79,6 +85,11 @@ public class SellerInfo implements Serializable{
 	private String facility;
 	
 	/**
+	 * 点击率
+	 */
+	private int clickRate;
+	
+	/**
 	 * 商户入住时间
 	 */
 	private Date registeTime;
@@ -88,15 +99,23 @@ public class SellerInfo implements Serializable{
 	 */
 	private String remark;
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
 	
+	public int getClickRate() {
+		return clickRate;
+	}
+
+	public void setClickRate(int clickRate) {
+		this.clickRate = clickRate;
+	}
+
 	public boolean isRecommend() {
 		return recommend;
 	}
@@ -187,6 +206,46 @@ public class SellerInfo implements Serializable{
 	public String getEnableName()
 	{
 		return isEnable()?"正常":"已禁用";
+	}
+	
+	public List<String> getFacilityNames()
+	{
+		String facilitys[]=getFacility().split(",");
+		List<String> fty=new ArrayList<String>();
+		for (String facility : facilitys) {
+			int facilityId=DataConvertUtils.convertToInteger(facility);
+			if(Facility.ALIPAY.getId()==facilityId)
+			{
+				fty.add("支付宝支付");
+			}else if(Facility.TENCENTPAY.getId()==facilityId)
+			{
+				fty.add("微信支付");
+			}else if(Facility.PARKING.getId()==facilityId)
+			{
+				fty.add("停车位");
+			}else if(Facility.WIFI.getId()==facilityId)
+			{
+				fty.add("wifi");
+			}
+		}
+		return fty;
+	}
+	
+	/**
+	 * 类型名称
+	 * @author andy_hulibo@163.com
+	 * @2018年1月12日 上午11:32:40
+	 * @return
+	 */
+	public String getTypeName()
+	{
+		for (SellerType type:SellerType.values()) {
+			if(getType()==type.getId())
+			{
+				return type.getName();
+			}
+		}
+		return null;
 	}
 	
 	public boolean isEnable() {
