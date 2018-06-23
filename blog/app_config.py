@@ -49,15 +49,8 @@ def configure_app_logs(app):
 def configure_app_blueprints(app):
     """配置系统蓝图"""
     from web import webBp
-    from users import userBp
-    from members import memberBp
-    from logs import logBp
-    from articles import articleBp
-    from admin import adminBp
+    from actions import adminBp
 
     app.register_blueprint(webBp, url_prefix="")
-    app.register_blueprint(adminBp,url_prefix="/manage/")
-    app.register_blueprint(memberBp, url_prefix="/manage/member")
-    app.register_blueprint(userBp, url_prefix="/manage/user")
-    app.register_blueprint(logBp, url_prefix="/manage/log")
-    app.register_blueprint(articleBp, url_prefix="/manage/article")
+    app.register_blueprint(adminBp, url_prefix="/manage/")
+
