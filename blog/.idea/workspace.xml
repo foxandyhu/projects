@@ -2,343 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a5d142df-e08d-4224-813e-65be4b2959e2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/awesome/fonts/FontAwesome.otf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/0.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/1.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/10.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/100.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/101.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/102.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/103.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/104.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/105.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/106.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/107.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/108.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/109.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/11.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/110.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/111.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/112.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/113.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/114.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/115.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/116.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/117.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/118.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/119.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/12.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/120.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/121.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/122.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/123.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/124.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/125.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/126.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/127.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/128.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/129.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/13.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/130.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/131.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/132.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/133.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/134.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/14.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/15.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/16.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/17.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/18.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/19.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/2.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/20.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/21.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/22.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/23.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/24.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/25.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/26.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/27.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/28.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/29.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/3.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/30.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/31.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/32.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/33.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/34.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/35.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/36.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/37.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/38.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/39.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/4.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/40.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/41.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/42.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/43.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/44.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/45.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/46.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/47.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/48.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/49.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/5.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/50.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/51.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/52.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/53.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/54.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/55.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/56.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/57.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/58.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/59.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/6.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/60.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/61.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/62.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/63.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/64.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/65.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/66.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/67.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/68.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/69.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/7.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/70.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/71.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/72.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/73.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/74.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/75.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/76.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/77.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/78.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/79.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/8.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/80.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/81.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/82.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/83.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/84.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/85.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/86.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/87.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/88.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/89.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/9.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/90.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/91.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/92.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/93.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/94.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/95.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/96.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/97.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/98.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/99.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/images/static.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/filemanager/images/file-16.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/filemanager/images/file-64.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/filemanager/images/folder-16.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/filemanager/images/folder-64.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/filemanager/images/go-up.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/image/images/align_left.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/image/images/align_right.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/image/images/align_top.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/image/images/refresh.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/multiimage/images/image.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/multiimage/images/select-files-en.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/multiimage/images/select-files-zh_CN.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/multiimage/images/swfupload.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/themes/common/anchor.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/themes/common/blank.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/themes/common/flash.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/themes/common/loading.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/themes/common/media.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/themes/common/rm.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/themes/default/background.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/themes/default/default.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/themes/qq/editor.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/actions/system_action.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/dist/css/adminlte.css.map" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/dist/css/adminlte.min.css.map" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/dist/css/alt/AdminLTE-bootstrap-social.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/dist/css/alt/AdminLTE-bootstrap-social.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/dist/css/alt/AdminLTE-fullcalendar.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/dist/css/alt/AdminLTE-fullcalendar.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/dist/css/alt/AdminLTE-select2.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/dist/css/alt/AdminLTE-select2.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/dist/css/alt/AdminLTE-without-plugins.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/dist/css/alt/AdminLTE-without-plugins.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/dist/js/adminlte.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/bootstrap/css/bootstrap-theme.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/bootstrap/css/bootstrap-theme.css.map" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/bootstrap/css/bootstrap-theme.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/bootstrap/css/bootstrap-theme.min.css.map" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/bootstrap/css/bootstrap.min.css.map" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/ionicons/css/ionicons.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/jquery/jquery.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/kindeditor-all-min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/kindeditor-all.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/kindeditor-min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/kindeditor.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/lang/en.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/lang/zh_CN.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/anchor/anchor.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/autoheight/autoheight.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/baidumap/baidumap.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/baidumap/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/baidumap/map.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/clearhtml/clearhtml.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/code/code.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/code/prettify.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/code/prettify.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/emoticons/emoticons.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/filemanager/filemanager.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/flash/flash.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/image/image.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/insertfile/insertfile.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/lineheight/lineheight.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/link/link.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/map/map.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/map/map.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/media/media.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/multiimage/multiimage.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/pagebreak/pagebreak.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/plainpaste/plainpaste.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/preview/preview.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/quickformat/quickformat.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/table/table.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/template/html/1.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/template/html/2.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/template/html/3.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/template/template.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/wordpaste/wordpaste.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/themes/default/default.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/themes/qq/qq.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/themes/simple/simple.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/admin/articles/article_list.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/admin/articles/category_list.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/admin/articles/comment_list.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/admin/articles/tags_list.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/admin/base.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/admin/logs/logfile_list.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/admin/logs/loginlog_list.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/admin/logs/oplog_list.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/admin/members/member_list.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/admin/members/member_unverify.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/admin/seo/friendlink_list.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/admin/system/about.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/admin/system/contact.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/admin/system/editpwd.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/admin/system/tasks.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/admin/system/web_setting.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/admin/system/web_template.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/admin/users/menu_list.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/admin/users/role_list.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/admin/users/user_list.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/articles/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/logs/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/members/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/members/form/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/members/model/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/members/service/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/dist/js/app.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/dist/js/app.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/dist/js/demo.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/dist/js/pages/dashboard.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/plugins/jQuery/jQuery-2.1.4.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/users/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/users/action/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/users/form/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/users/model/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/users/service/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/action/__init__.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/img/avatar.png" afterPath="$PROJECT_DIR$/static/admin/dist/img/avatar.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/img/avatar04.png" afterPath="$PROJECT_DIR$/static/admin/dist/img/avatar04.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/img/avatar2.png" afterPath="$PROJECT_DIR$/static/admin/dist/img/avatar2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/img/avatar3.png" afterPath="$PROJECT_DIR$/static/admin/dist/img/avatar3.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/img/avatar5.png" afterPath="$PROJECT_DIR$/static/admin/dist/img/avatar5.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/img/boxed-bg.png" afterPath="$PROJECT_DIR$/static/admin/dist/img/boxed-bg.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/img/credit/american-express.png" afterPath="$PROJECT_DIR$/static/admin/dist/img/credit/american-express.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/img/credit/cirrus.png" afterPath="$PROJECT_DIR$/static/admin/dist/img/credit/cirrus.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/img/credit/mastercard.png" afterPath="$PROJECT_DIR$/static/admin/dist/img/credit/mastercard.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/img/credit/mestro.png" afterPath="$PROJECT_DIR$/static/admin/dist/img/credit/mestro.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/img/credit/paypal.png" afterPath="$PROJECT_DIR$/static/admin/dist/img/credit/paypal.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/img/credit/paypal2.png" afterPath="$PROJECT_DIR$/static/admin/dist/img/credit/paypal2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/img/credit/visa.png" afterPath="$PROJECT_DIR$/static/admin/dist/img/credit/visa.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/img/icons.png" afterPath="$PROJECT_DIR$/static/admin/dist/img/icons.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/img/photo1.png" afterPath="$PROJECT_DIR$/static/admin/dist/img/photo1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/img/photo2.png" afterPath="$PROJECT_DIR$/static/admin/dist/img/photo2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/plugins/awesome/fonts/fontawesome-webfont.eot" afterPath="$PROJECT_DIR$/static/admin/plugins/awesome/fonts/fontawesome-webfont.eot" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/plugins/awesome/fonts/fontawesome-webfont.ttf" afterPath="$PROJECT_DIR$/static/admin/plugins/awesome/fonts/fontawesome-webfont.ttf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/plugins/awesome/fonts/fontawesome-webfont.woff" afterPath="$PROJECT_DIR$/static/admin/plugins/awesome/fonts/fontawesome-webfont.woff" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/plugins/awesome/fonts/fontawesome-webfont.woff2" afterPath="$PROJECT_DIR$/static/admin/plugins/awesome/fonts/fontawesome-webfont.woff2" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/plugins/ionicons/fonts/ionicons.eot" afterPath="$PROJECT_DIR$/static/admin/plugins/ionicons/fonts/ionicons.eot" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/plugins/ionicons/fonts/ionicons.ttf" afterPath="$PROJECT_DIR$/static/admin/plugins/ionicons/fonts/ionicons.ttf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/plugins/ionicons/fonts/ionicons.woff" afterPath="$PROJECT_DIR$/static/admin/plugins/ionicons/fonts/ionicons.woff" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_config.py" afterPath="$PROJECT_DIR$/app_config.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blog.iml" afterPath="$PROJECT_DIR$/blog.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/AdminLTE.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/AdminLTE.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/AdminLTE.min.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/AdminLTE.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/_all-skins.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/_all-skins.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/_all-skins.min.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/_all-skins.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-black-light.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-black-light.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-black-light.min.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-black-light.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-black.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-black.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-black.min.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-black.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-blue-light.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-blue-light.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-blue-light.min.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-blue-light.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-blue.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-blue.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-blue.min.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-blue.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-green-light.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-green-light.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-green-light.min.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-green-light.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-green.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-green.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-green.min.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-green.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-purple-light.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-purple-light.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-purple-light.min.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-purple-light.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-purple.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-purple.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-purple.min.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-purple.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-red-light.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-red-light.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-red-light.min.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-red-light.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-red.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-red.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-red.min.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-red.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-yellow-light.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-yellow-light.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-yellow-light.min.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-yellow-light.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-yellow.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-yellow.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-yellow.min.css" afterPath="$PROJECT_DIR$/static/admin/dist/css/skins/skin-yellow.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/plugins/awesome/css/font-awesome.min.css" afterPath="$PROJECT_DIR$/static/admin/plugins/awesome/css/font-awesome.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/plugins/awesome/fonts/fontawesome-webfont.svg" afterPath="$PROJECT_DIR$/static/admin/plugins/awesome/fonts/fontawesome-webfont.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/plugins/bootstrap/css/bootstrap.css" afterPath="$PROJECT_DIR$/static/admin/plugins/bootstrap/css/bootstrap.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/plugins/bootstrap/css/bootstrap.css.map" afterPath="$PROJECT_DIR$/static/admin/plugins/bootstrap/css/bootstrap.css.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/plugins/bootstrap/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/static/admin/plugins/bootstrap/css/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/plugins/bootstrap/js/bootstrap.js" afterPath="$PROJECT_DIR$/static/admin/plugins/bootstrap/js/bootstrap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/plugins/bootstrap/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/static/admin/plugins/bootstrap/js/bootstrap.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/plugins/ionicons/css/ionicons.min.css" afterPath="$PROJECT_DIR$/static/admin/plugins/ionicons/css/ionicons.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/plugins/ionicons/fonts/ionicons.svg" afterPath="$PROJECT_DIR$/static/admin/plugins/ionicons/fonts/ionicons.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/admin/index.html" afterPath="$PROJECT_DIR$/templates/admin/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/__init__.py" afterPath="$PROJECT_DIR$/web/__init__.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/action/__init__.py" afterPath="$PROJECT_DIR$/actions/__init__.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/action/index.py" afterPath="$PROJECT_DIR$/actions/manage_action.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/articles/action/__init__.py" afterPath="$PROJECT_DIR$/actions/articles_action.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/articles/form/__init__.py" afterPath="$PROJECT_DIR$/actions/logs_action.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/articles/model/__init__.py" afterPath="$PROJECT_DIR$/actions/members_action.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/articles/model/articles.py" afterPath="$PROJECT_DIR$/models/articles_model.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/articles/service/__init__.py" afterPath="$PROJECT_DIR$/actions/seo_action.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/logs/action/__init__.py" afterPath="$PROJECT_DIR$/actions/users_action.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/logs/model/__init__.py" afterPath="$PROJECT_DIR$/models/__init__.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/logs/model/logs.py" afterPath="$PROJECT_DIR$/models/logs_model.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/logs/service/__init__.py" afterPath="$PROJECT_DIR$/services/__init__.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/members/action/__init__.py" afterPath="$PROJECT_DIR$/web/actions/__init__.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/members/model/members.py" afterPath="$PROJECT_DIR$/models/members_model.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/admin/plugins/jQuery/jquery-ui.min.js" afterPath="$PROJECT_DIR$/static/admin/plugins/jquery/jquery-ui.min.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/users/model/users.py" afterPath="$PROJECT_DIR$/models/users_model.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/web/action/index.py" afterPath="$PROJECT_DIR$/web/actions/index.py" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -349,18 +13,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="members_model.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/models/members_model.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="13" column="19" lean-forward="true" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -455,7 +108,26 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="blog" type="cbb8eebc:String" user="blog" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <subPane subId="Default">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="blog" type="cbb8eebc:String" user="blog" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="PackagesPane" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
@@ -464,11 +136,6 @@
             <path>
               <item name="blog" type="b2602c69:ProjectViewProjectNode" />
               <item name="blog" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="blog" type="b2602c69:ProjectViewProjectNode" />
-              <item name="blog" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -603,7 +270,7 @@
       <option name="presentableId" value="Default" />
       <updated>1529717223726</updated>
       <workItem from="1529717241728" duration="21034000" />
-      <workItem from="1529757358805" duration="3358000" />
+      <workItem from="1529757358805" duration="4413000" />
     </task>
     <task id="LOCAL-00001" summary="blog">
       <created>1529717439165</created>
@@ -633,11 +300,18 @@
       <option name="project" value="LOCAL" />
       <updated>1529717495014</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="大改">
+      <created>1529764003002</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1529764003002</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24392000" />
+    <option name="totallyTimeSpent" value="25447000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -647,10 +321,10 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294893" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26853377" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3294893" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26853377" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22844176" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22844176" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -723,7 +397,8 @@
   <component name="VcsManagerConfiguration">
     <option name="SHOW_DIRTY_RECURSIVELY" value="true" />
     <MESSAGE value="blog" />
-    <option name="LAST_COMMIT_MESSAGE" value="blog" />
+    <MESSAGE value="大改" />
+    <option name="LAST_COMMIT_MESSAGE" value="大改" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -760,6 +435,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
           <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -826,6 +502,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="1" column="319" lean-forward="true" selection-start-line="1" selection-start-column="319" selection-end-line="1" selection-end-column="319" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -836,6 +515,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -844,7 +524,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -868,6 +548,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="130">
           <caret line="54" column="58" lean-forward="true" selection-start-line="54" selection-start-column="58" selection-end-line="54" selection-end-column="58" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -875,6 +556,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
           <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#27#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -907,7 +591,7 @@
         <state relative-caret-position="495">
           <caret line="15" column="48" lean-forward="false" selection-start-line="15" selection-start-column="48" selection-end-line="15" selection-end-column="48" />
           <folding>
-            <element signature="e#0#27#0" expanded="true" />
+            <element signature="e#0#27#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -925,8 +609,8 @@
         <state relative-caret-position="458">
           <caret line="34" column="29" lean-forward="true" selection-start-line="18" selection-start-column="24" selection-end-line="34" selection-end-column="29" />
           <folding>
-            <element signature="e#4902#4909#1#HTML" expanded="true" />
-            <element signature="e#5128#5135#1#HTML" expanded="true" />
+            <element signature="e#4902#4909#1#HTML" expanded="false" />
+            <element signature="e#5128#5135#1#HTML" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -976,7 +660,7 @@
         <state relative-caret-position="328">
           <caret line="25" column="30" lean-forward="false" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
           <folding>
-            <element signature="e#0#27#0" expanded="true" />
+            <element signature="e#0#27#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -986,7 +670,7 @@
         <state relative-caret-position="165">
           <caret line="5" column="21" lean-forward="true" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
           <folding>
-            <element signature="e#0#33#0" expanded="true" />
+            <element signature="e#0#33#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1012,7 +696,7 @@
         <state relative-caret-position="229">
           <caret line="13" column="14" lean-forward="true" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
           <folding>
-            <element signature="e#0#27#0" expanded="true" />
+            <element signature="e#0#27#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1054,7 +738,7 @@
         <state relative-caret-position="196">
           <caret line="22" column="24" lean-forward="false" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
           <folding>
-            <element signature="e#0#27#0" expanded="true" />
+            <element signature="e#0#27#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1072,7 +756,7 @@
         <state relative-caret-position="196">
           <caret line="41" column="12" lean-forward="false" selection-start-line="41" selection-start-column="12" selection-end-line="41" selection-end-column="12" />
           <folding>
-            <element signature="e#0#33#0" expanded="true" />
+            <element signature="e#0#33#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1087,8 +771,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/models/members_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="13" column="19" lean-forward="true" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+        <state relative-caret-position="66">
+          <caret line="11" column="41" lean-forward="false" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
           <folding />
         </state>
       </provider>
