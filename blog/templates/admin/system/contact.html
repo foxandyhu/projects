@@ -1,5 +1,3 @@
-{% extends "admin/base.html" %}
-{% block maincontent %}
     <section class="content-header">
         <h1>联系我们</h1>
         <ol class="breadcrumb">
@@ -18,8 +16,6 @@
             </div>
         </div>
     </section>
-{% endblock %}
-{% block scriptblock %}
     <script charset="utf-8" src="static/admin/plugins/kindeditor/kindeditor.js"></script>
     <script charset="utf-8" src="static/admin/plugins/kindeditor/lang/zh_CN.js"></script>
     <script>
@@ -27,4 +23,3 @@
             window.editor = K.create('#editor_id');
         });
     </script>
-{% endblock %}

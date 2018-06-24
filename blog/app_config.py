@@ -50,7 +50,8 @@ def configure_app_blueprints(app):
     """配置系统蓝图"""
     from web import webBp
     from actions import adminBp
+    from actions import templateAdminBp
 
     app.register_blueprint(webBp, url_prefix="")
     app.register_blueprint(adminBp, url_prefix="/manage/")
-
+    app.register_blueprint(templateAdminBp,url_prefix="/templates/admin")
