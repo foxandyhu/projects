@@ -2,87 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a5d142df-e08d-4224-813e-65be4b2959e2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/images/loading.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/gfx/vml-radial-gradient.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/graphics/meteogram-symbols-30px.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/graphics/skies.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/graphics/snow.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/graphics/sun.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/actions/templates_action.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/css/style.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/js/controllers/ArticleController.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/js/controllers/BlogApp.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/js/controllers/IndexController.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/js/controllers/LogController.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/js/controllers/MemberController.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/js/controllers/SeoController.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/js/controllers/SystemController.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/js/controllers/UserController.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/js/main.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/js/routes/BlogAppRoute.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/js/services/CommonService.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/js/views/loading.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/js/views/tip_success.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/angularjs/angular-route.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/angularjs/angular.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/bootstrapvalid/css/bootstrapValidator.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/bootstrapvalid/js/bootstrapValidator.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/bootstrapvalid/js/language/zh_CN.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/index.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/js/adapters/standalone-framework.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/js/highcharts-3d.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/js/highcharts-all.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/js/highcharts-more.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/js/highcharts.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/js/modules/canvas-tools.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/js/modules/data.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/js/modules/drilldown.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/js/modules/exporting.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/js/modules/funnel.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/js/modules/heatmap.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/js/modules/no-data-to-display.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/js/modules/solid-gauge.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/js/themes/dark-blue.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/js/themes/dark-green.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/js/themes/dark-unica.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/js/themes/gray.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/js/themes/grid-light.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/js/themes/grid.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/js/themes/sand-signika.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/highchart/js/themes/skies.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/ng-pagination/ng-pagination.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/ng-pagination/ng-pagination.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/admin/plugins/requirejs/require.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/plugins/fastclick/fastclick.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/plugins/kindeditor/kindeditor-all.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/plugins/kindeditor/kindeditor.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/js/jquery-2.1.1.min.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/actions/__init__.py" afterPath="$PROJECT_DIR$/actions/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/actions/manage_action.py" afterPath="$PROJECT_DIR$/actions/manage_action.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_config.py" afterPath="$PROJECT_DIR$/app_config.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/image/image.js" afterPath="$PROJECT_DIR$/static/admin/plugins/kindeditor/plugins/image/image.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/admin/articles/article_list.html" afterPath="$PROJECT_DIR$/templates/admin/articles/article_list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/admin/articles/category_list.html" afterPath="$PROJECT_DIR$/templates/admin/articles/category_list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/admin/articles/comment_list.html" afterPath="$PROJECT_DIR$/templates/admin/articles/comment_list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/admin/articles/tags_list.html" afterPath="$PROJECT_DIR$/templates/admin/articles/tags_list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/admin/base.html" afterPath="$PROJECT_DIR$/templates/admin/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/admin/index.html" afterPath="$PROJECT_DIR$/templates/admin/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/admin/logs/logfile_list.html" afterPath="$PROJECT_DIR$/templates/admin/logs/logfile_list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/admin/logs/loginlog_list.html" afterPath="$PROJECT_DIR$/templates/admin/logs/loginlog_list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/admin/logs/oplog_list.html" afterPath="$PROJECT_DIR$/templates/admin/logs/oplog_list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/admin/members/member_list.html" afterPath="$PROJECT_DIR$/templates/admin/members/member_list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/admin/members/member_unverify.html" afterPath="$PROJECT_DIR$/templates/admin/members/member_unverify.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/admin/seo/friendlink_list.html" afterPath="$PROJECT_DIR$/templates/admin/seo/friendlink_list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/admin/system/about.html" afterPath="$PROJECT_DIR$/templates/admin/system/about.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/admin/system/contact.html" afterPath="$PROJECT_DIR$/templates/admin/system/contact.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/admin/system/tasks.html" afterPath="$PROJECT_DIR$/templates/admin/system/tasks.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/admin/system/web_setting.html" afterPath="$PROJECT_DIR$/templates/admin/system/web_setting.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/admin/system/web_template.html" afterPath="$PROJECT_DIR$/templates/admin/system/web_template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/admin/users/menu_list.html" afterPath="$PROJECT_DIR$/templates/admin/users/menu_list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/admin/users/role_list.html" afterPath="$PROJECT_DIR$/templates/admin/users/role_list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/admin/users/user_list.html" afterPath="$PROJECT_DIR$/templates/admin/users/user_list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/actions/index.py" afterPath="$PROJECT_DIR$/web/actions/index.py" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -116,6 +36,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="PUSH_TAGS">
+      <GitPushTagMode />
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -368,7 +291,7 @@
       <updated>1529717223726</updated>
       <workItem from="1529717241728" duration="21034000" />
       <workItem from="1529757358805" duration="4631000" />
-      <workItem from="1529810117487" duration="11369000" />
+      <workItem from="1529810117487" duration="11489000" />
     </task>
     <task id="LOCAL-00001" summary="blog">
       <created>1529717439165</created>
@@ -405,11 +328,18 @@
       <option name="project" value="LOCAL" />
       <updated>1529764003002</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="添加angular就是支持">
+      <created>1529821734249</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1529821734249</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37034000" />
+    <option name="totallyTimeSpent" value="37154000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -418,7 +348,7 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294893" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3294893" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26853377" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -496,7 +426,8 @@
     <option name="SHOW_DIRTY_RECURSIVELY" value="true" />
     <MESSAGE value="blog" />
     <MESSAGE value="大改" />
-    <option name="LAST_COMMIT_MESSAGE" value="大改" />
+    <MESSAGE value="添加angular就是支持" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加angular就是支持" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
