@@ -7,6 +7,7 @@ class BaseConfig(object):
     DEBUG = True
     TESTING = True
     CSRF_ENABLED = True
+    JSON_AS_ASCII = False
     SECRET_KEY = binascii.hexlify(os.urandom(32))
 
 

@@ -1,7 +1,8 @@
 from extensions import db
+from models import Serializable
 
 
-class Member(db.Model):
+class Member(Serializable,db.Model):
     """博客用户类"""
     __tablename__ = "d_members"
 
