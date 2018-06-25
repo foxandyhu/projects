@@ -1,10 +1,15 @@
 define(["BlogApp"], function (BlogApp) {
-    BlogApp.controller("MemberController", function ($scope, $http, $location, $routeParams, Dialog, Resource) {
+    BlogApp.controller("MemberController", function ($scope, $http,Dialog) {
         $("#membermenu").addClass("active");
         $scope.loadMembers = function () {
 		    $http.get("/manage/members/list.html",{params:{pageNo:$scope.currentPage,name:$("#name").val()}},{cache:false}).success(function(data){
 				if(data){$scope.items=data.items;$scope.pageCount = data.total;}
 			});
+        };
+        $scope.loadVerifyMembers = function () {
+            $http.get("/manage/members/unverify.html",{params:{pageNo:$scope.currentPage,name:$("#name").val()}},{cache:false}).success(function(data){
+                if(data){$scope.items=data.items;$scope.pageCount = data.total;}
+            });
         };
         $scope.enableMember=function(){
             var label =this.item.is_enable?"禁用":"启用";
@@ -18,6 +23,9 @@ define(["BlogApp"], function (BlogApp) {
                     }
 				});
 			}});
+        };
+        $scope.addMember=function () {
+
         };
     });
 });

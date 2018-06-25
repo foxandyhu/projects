@@ -12,7 +12,10 @@ class MemberService(object):
         """返回分页对象"""
         pagination = context_utils.get_pagination()
         name = context_utils.get_from_g("name")
+        is_verify = context_utils.get_from_g("verify")
         query = members_model.Member.query
+        if is_verify is not None:
+            query = query.filter(members_model.Member.is_verify == is_verify)
         if name:
             rule = or_(members_model.Member.username.like("%" + name + "%"),
                        members_model.Member.nickname.like("%" + name + "%"))
@@ -35,5 +38,5 @@ class MemberService(object):
         member = MemberService.get_member(member_id)
         if not member:
             raise Exception("会员信息不存在")
-        member.is_enable =not member.is_enable
+        member.is_enable = not member.is_enable
         db.session.commit()

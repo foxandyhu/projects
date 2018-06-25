@@ -1,5 +1,5 @@
 from actions import adminBp
-from flask import render_template, request
+from flask import request
 from utils import pagination_utils, json_utils, context_utils
 from services.members_service import MemberService
 from models import ResponseData
@@ -19,7 +19,11 @@ def member_list():
 def member_unverify_list():
     """未审核用户列表"""
 
-    return render_template("admin/members/member_list.html")
+    pagination_utils.instantce_page(2)
+    context_utils.put_to_g("verify", False)
+    context_utils.put_to_g("name", 'name' in request.args and request.args.get("name"))
+    pagination = MemberService.get_page_members()
+    return json_utils.to_json(pagination)
 
 
 @adminBp.route("/members/enable-<int:member_id>.html")

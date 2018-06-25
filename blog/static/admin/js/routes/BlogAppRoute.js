@@ -19,6 +19,9 @@ define(["BlogApp"],function(BlogApp){
 		}).when("/members/unverify",{
             templateUrl:"/templates/admin/members/member_unverify.html",
             controller:"MemberController"
+        }).when("/members/add",{
+            templateUrl:"/templates/admin/members/member_add.html",
+            controller:"MemberController"
         });
 	});
 
