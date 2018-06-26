@@ -29,6 +29,9 @@ define(["angular","jquery"], function (angular,$) {
     			element.bind("change",function(event){
     				scope.$apply(function(){modelSetter(scope,element[0].files[0]);});
     				scope.imageFile=(event.srcElement||event.target).files[0];
+    				if(!scope.imageFile){
+    					return;
+					}
     				if(!Util.checkImage(scope.imageFile.name))
     				{
     					Dialog.show("亲,您上传的文件非图片类型哦!");

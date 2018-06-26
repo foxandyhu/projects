@@ -10,4 +10,4 @@ from actions import articles_action
 from actions import seo_action
 from actions import users_action
 from actions import logs_action
-from actions import templates_action
+from actions import templates_action, files_action

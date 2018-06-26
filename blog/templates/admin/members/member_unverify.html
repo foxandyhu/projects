@@ -24,22 +24,23 @@
             </div>
         </div>
         <div class="box-body table-responsive no-padding" ng-init="loadVerifyMembers()">
-            <table class="table table-hover">
+            <table class="table table-hover member_table">
                 <tr>
+                     <th>头像</th>
                     <th>用户名</th>
-                    <th>是否启用</th>
-                    <th>是否审核</th>
                     <th>注册时间</th>
                     <th>注册IP</th>
+                    <th>操作</th>
                 </tr>
                 <tr ng-repeat="item in items">
-                    <td>{{ item.username }}</td>
-                    <td><a ng-click="enableMember()" class="btn btn-xs {{item.is_enable?'btn-success':'btn-danger'}}">{{item.is_enable?"已启用":"已禁用"}}</a></td>
-                    <td>
-                        <span class="label label-xs {{item.is_verify?'label-success':'label-danger'}}">{{item.is_verify?"已审核":"未审核"}}</span>
+                    <td class="text-center">
+                        <img ng-src="{{ item.face }}" class="thumbnail" width="80px" height="80px" style="margin-bottom:0px">
+                        <div class="caption" style="width:80px">{{ item.nickname }}</div>
                     </td>
+                    <td>{{ item.username }}</td>
                     <td>{{ item.reg_time}}</td>
                     <td>{{ item.reg_ip }}</td>
+                    <td><a ng-click="verifyMember()" class="btn btn-xs {{item.is_verify?'btn-success':'btn-danger'}}">审核通过</a></td>
                 </tr>
             </table>
         </div>

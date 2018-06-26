@@ -1,5 +1,7 @@
 from actions import adminBp
-from flask import render_template
+from flask import render_template,request
+from services import articles_service
+from utils import pagination_utils,json_utils,context_utils
 
 
 @adminBp.route("/blog/articles.html")
@@ -13,7 +15,10 @@ def article_list():
 def article_tags():
     """标签列表"""
 
-    return render_template("admin/articles/tags_list.html")
+    pagination_utils.instantce_page()
+    context_utils.put_to_g("name", 'name' in request.args and request.args.get("name"))
+    pagination = articles_service.ArticlesService.get_page_tag()
+    return json_utils.to_json(pagination)
 
 
 @adminBp.route("/blog/categorys.html")

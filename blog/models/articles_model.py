@@ -1,7 +1,8 @@
 from extensions import db
+from models import Serializable
 
 
-class Article(db.Model):
+class Article(Serializable, db.Model):
     """博客文章"""
     __tablename__ = "d_articles"
 
@@ -14,16 +15,16 @@ class Article(db.Model):
     publish_time = db.Column(db.DateTime, nullable=False)  # 发布时间
     publish_ip = db.Column(db.String(30))  # 发布IP
 
-    user_id = db.Column(db.Integer, db.ForeignKey("d_users.id"))  # 发布者ID
-    user = db.relationship("User", lazy="dynamic")
+    member_id = db.Column(db.Integer, db.ForeignKey("d_members.id"))  # 发布者ID
+    member = db.relationship("Member")
 
     category_id = db.Column(db.Integer, db.ForeignKey("d_categorys.id"))  # 文章类别
-    category = db.relationship("Category", backref="articles", lazy="dynamic")
+    category = db.relationship("Category", backref="articles")
 
     comments = db.relationship("Comment")  # 评论集合
 
 
-class Category(db.Model):
+class Category(Serializable, db.Model):
     """文章分类"""
     __tablename__ = "d_categorys"
 
@@ -34,7 +35,7 @@ class Category(db.Model):
     parent = db.relationship("Category")
 
 
-class Tag(db.Model):
+class Tag(Serializable, db.Model):
     """文章标签"""
     __tablename__ = "d_tags"
 
@@ -48,7 +49,7 @@ article_tag_ship = db.Table("d_article_tag_ship",
                             db.Column("d_tags", db.Integer, db.ForeignKey("d_tags.id"), primary_key=True))
 
 
-class Comment(db.Model):
+class Comment(Serializable, db.Model):
     """文章评论"""
     __tablename__ = "d_comments"
 
@@ -57,8 +58,8 @@ class Comment(db.Model):
     publish_time = db.Column(db.DateTime, nullable=False)  # 发布时间
     publish_ip = db.Column(db.String(30))  # 发布IP
 
-    user_id = db.Column(db.Integer, db.ForeignKey("d_users.id"))  # 发布者ID
-    user = db.relationship("User", lazy="dynamic")
+    member_id = db.Column(db.Integer, db.ForeignKey("d_members.id"))  # 发布者ID
+    member = db.relationship("Member")
 
     article_id = db.Column(db.Integer, db.ForeignKey("d_articles.id"))  # 文章ID
 

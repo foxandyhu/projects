@@ -1,3 +1,4 @@
+{%raw%}
 <section class="content-header">
     <h1>新增用户</h1>
     <ol class="breadcrumb">
@@ -6,7 +7,7 @@
     </ol>
 </section>
 
-<section class="content">
+<section class="content" ng-init="initMemberValidate()">
     <div class="box">
         <div class="box-body table-responsive no-padding">
             <form role="form" method="post" id="memberForm">
@@ -18,22 +19,30 @@
                     <div class="form-group">
                         <label for="exampleInputPassword1">密码</label>
                         <input type="password" name="password" class="form-control" id="password" placeholder="请输入密码"
-                               maxlength="30">
+                               maxlength="30" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">确认密码</label>
-                        <input type="password" name="confirmpassword" class="form-control" id="confirmpassword" placeholder="请输入确认密码"
-                               maxlength="30">
+                        <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" placeholder="请输入确认密码"
+                               maxlength="30" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">昵称</label>
                         <input type="text" name="nickname" class="form-control" id="nickname" placeholder="请输入昵称"
-                               maxlength="30">
+                               maxlength="15">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputFile">头像</label>
-                        <input type="file" id="logoFile">
-                        <img src="/static/images/b04.jpg" class="img-thumbnail">
+                        <div class="row" style="margin: 0px;">
+                            <div class="col-lg-3 col-xs-6">
+                                <label for="exampleInputFile">头像</label>
+                                <input type="file" file-upload="imgFile" id="imgFile">
+                            </div>
+                            <div class="col-lg-9 col-xs-6">
+                                <input type="hidden" name="face" id="face" value="{{imageResult.path}}"/>
+                                <img ng-if="imageResult" ng-src="{{imageResult.fullUrl}}" class="img-thumbnail" width="100px" height="100px">
+                                <img ng-if="!imageResult" src="/static/admin/images/no_picture.gif" class="img-thumbnail">
+                            </div>
+                        </div>
                     </div>
                     <div class="checkbox">
                         <label>
@@ -43,9 +52,10 @@
                 </div>
 
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">保&nbsp;&nbsp;&nbsp;&nbsp;存</button>
+                    <button type="button" ng-click="addMember()" class="btn btn-primary">保&nbsp;&nbsp;&nbsp;&nbsp;存</button>
                 </div>
             </form>
         </div>
     </div>
 </section>
+{%endraw%}

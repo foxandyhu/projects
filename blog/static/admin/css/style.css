@@ -4,3 +4,5 @@
 .tip_success>span {color: #ffffff;line-height: 40px;font-size: 15px;padding: 10px 15px;border-radius: 5px;background-color:#459032;font-family: -webkit-body;}
 .tip_success span.ok{font-weight:bold;font-size:20px;}
 /***************提示tip end**********************/
+
+table.member_table tr td{vertical-align: middle}
