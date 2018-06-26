@@ -26,7 +26,7 @@ class ArticlesService(object):
 
         pagination = context_utils.get_pagination()
         title = context_utils.get_from_g("title")
-        query = articles_model.Article.query
+        query = articles_model.Article.query.order_by(articles_model.Article.id.desc())
         if title:
             query = query.filter(articles_model.Article.title.like("%" + title + "%"))
         pagination = query.paginate(pagination.page_no, pagination.page_size)
@@ -37,14 +37,39 @@ class ArticlesService(object):
     def add_tag(tag):
         """添加文章标签"""
 
+        t=ArticlesService.get_tag_name(tag.name)
+        if t:
+            raise Exception("标签名称已存在!")
         db.session.add(tag)
+        db.session.commit()
+
+    @staticmethod
+    def edit_tag(tag):
+        """修改文章标签"""
+
+        t = ArticlesService.get_tag(tag.id)
+        if not t:
+            raise Exception("标签不存在!")
+
+        if tag.name == t.name:
+            return
+        tt = ArticlesService.get_tag_name(tag.name)
+        if tt:
+            raise Exception("该标签已存在!")
+        t.name = tag.name
         db.session.commit()
 
     @staticmethod
     def get_tag(tag_id):
         """根据文章标签ID获取标签"""
 
-        result = articles_model.Article.query.filter(articles_model.Tag.id == tag_id).first()
+        result = articles_model.Tag.query.filter(articles_model.Tag.id == tag_id).first()
+        return result
+
+    @staticmethod
+    def get_tag_name(name):
+        """根据文章标签名称获取标签"""
+        result = articles_model.Tag.query.filter(articles_model.Tag.name == name).first()
         return result
 
     @staticmethod
@@ -53,7 +78,8 @@ class ArticlesService(object):
 
         pagination = context_utils.get_pagination()
         name = context_utils.get_from_g("name")
-        query = articles_model.Tag.query
+        query = articles_model.Tag.query.order_by(articles_model.Tag.id
+                                                  .desc())
         if name:
             query = query.filter(articles_model.Tag.name.like("%" + name + "%"))
         pagination = query.paginate(pagination.page_no, pagination.page_size)

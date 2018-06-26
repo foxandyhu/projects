@@ -14,7 +14,7 @@ class MemberService(object):
         pagination = context_utils.get_pagination()
         name = context_utils.get_from_g("name")
         is_verify = context_utils.get_from_g("verify")
-        query = members_model.Member.query
+        query = members_model.Member.query.order_by(members_model.Member.id.desc())
         if is_verify is not None:
             query = query.filter(members_model.Member.is_verify == is_verify)
         if name:
