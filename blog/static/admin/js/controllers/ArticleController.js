@@ -1,5 +1,5 @@
 define(["BlogApp"],function(BlogApp){
-    BlogApp.controller("ArticleController",function($scope,$http,$location,$routeParams,Resource){
+    BlogApp.controller("ArticleController",function($scope,$http,$location,$routeParams,Resource,Dialog){
 			$("#articlemenu").addClass("active");
 		$scope.loadTags = function () {
 				$http.get("/manage/blog/tags.html",{params:{pageNo:$scope.currentPage,name:$("#name").val()}},{cache:false}).success(function(data){
@@ -10,7 +10,7 @@ define(["BlogApp"],function(BlogApp){
             var tr=$("<tr><td><input name='name' type='text'/></td><td></td></tr>");
             var input=tr.find("input");
             input.blur(function(){
-            	var name=input.val();
+            	var name=$.trim(input.val());
             	if(name){
                     $http.get("/manage/blog/tags/add.html",{params:{name:name}},{cache:false}).success(function(data){
                         $scope.loadTags();
@@ -43,8 +43,9 @@ define(["BlogApp"],function(BlogApp){
                 });
 		};
 		$scope.editCategory=function(e){
-			console.log(this)
-			var name=this.sub.name;
+			var name="";
+			var id=0;
+			if(this.sub){name=this.sub.name;id=this.sub.id;}else {name=this.item.name;id=this.item.id;}
 			var target=$(e.currentTarget);
 			var label=target.parent().find("label");
 			var input=$("<input name='name' type='text'/>");
@@ -53,11 +54,43 @@ define(["BlogApp"],function(BlogApp){
 			input.trigger("focus");
 			input.blur(function(){
 		 		if(input.val()==name){label.html(name);target.show();return;}
-                // $http.get("/manage/blog/tags/edit.html",{params:{id:item.id,name:input.val()}},{cache:false}).success(function(data){
-                //     $scope.loadTags();
-                // });
+                $http.get("/manage/blog/categorys/edit.html",{params:{id:id,name:input.val()}},{cache:false}).success(function(data){
+                    $scope.loadCategorys();
+                });
 			});
 		 	target.hide();
+		};
+        $scope.addCategory=function(e){
+        	var parent_id=0;
+        	if(this.item){
+        		parent_id=this.item.id;
+            }
+            var label=$("<label class='list-group-item'><input name='name' type='text'/></label>");
+            var input=label.find("input");
+            input.blur(function(){
+                var name=$.trim(input.val());
+                if(name){
+                    $http.get("/manage/blog/categorys/add.html",{params:{name:name,parent_id:parent_id}},{cache:false}).success(function(data){
+                        $scope.loadCategorys();
+                    });
+                }
+                label.remove();
+            });
+            $(e.currentTarget).parent().parent().next().before(label);
+            input.trigger("focus");
+        };
+        $scope.delCategory=function(){
+            var id=0;
+            if(this.sub){id=this.sub.id;}else {id=this.item.id;}
+            Dialog.confirm("dialog","将会删除该类别下的子类别，确定吗?",function(r){if(r){
+                $http.get("/manage/blog/categorys/del-"+id+".html",{cache:false}).success(function(data){
+                    if(data.status){
+                        $scope.loadCategorys();
+                    }else{
+                        Dialog.show(data.message)
+                    }
+                });
+            }});
 		};
 	});
 });

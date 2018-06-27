@@ -9,20 +9,30 @@
 
 <section class="content" ng-init="initTreeView();loadCategorys();">
     <div class="panel-group">
-        <div class="panel panel-danger" ng-repeat="item in categorys">
-            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion"
-                 href="#collapse{{ $index }}">
-                <h4 class="panel-title">{{ item.name }}</h4>
-                <div class="pull-right" style="position: relative;top: -18px;right: 15px;clear: both;">
-                    <a href="javascript:void(0)" style="color:#c71212;margin-right:20px;" class="glyphicon glyphicon-plus"></a>
-                    <a href="javascript:void(0)" style="color:#c71212;" class="glyphicon glyphicon-minus"></a>
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <label class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#collapse">大类别</label>
+                <div class="pull-right" style="position: relative;right: 15px;clear: both;">
+                    <a href="javascript:void(0)" style="color:#c71212;margin-right:20px;" class="glyphicon glyphicon-plus" ng-click="addCategory($event)"></a>
                 </div>
             </div>
-            <div id="collapse{{ $index }}" class="panel-collapse collapse in">
+            <div id="collapse" class="panel-collapse collapse in" style="width: 100%">
+            </div>
+        </div>
+        <div class="panel panel-danger" ng-if="categorys" ng-repeat="item in categorys">
+            <div class="panel-heading">
+                <span class="badge" style="background: #00a157;margin-top: -5px;cursor:pointer;" ng-click="editCategory($event)"><i class="fa fa-fw fa-edit"></i></span>
+                <label class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $index }}">{{ item.name }}</label>
+                <div class="pull-right" style="position: relative;right: 15px;clear: both;">
+                    <a href="javascript:void(0)" style="color:#c71212;margin-right:20px;" class="glyphicon glyphicon-plus" ng-click="addCategory($event)"></a>
+                    <a href="javascript:void(0)" style="color:#c71212;cursor:pointer;" class="glyphicon glyphicon-minus" ng-click="delCategory()"></a>
+                </div>
+            </div>
+            <div id="collapse{{ $index }}" class="panel-collapse collapse in" style="width: 100%">
                 <label class="list-group-item" ng-repeat="sub in item.items">
                     <label>{{ sub.name }}</label>
-                    <span class="badge" style="background: #9f191f;"><i class="fa fa-fw fa-remove"></i></span>
-                    <span class="badge" style="background: #00a157;margin-right:10px;" ng-click="editCategory($event)"><i class="fa fa-fw fa-edit"></i></span>
+                    <span class="badge" style="background: #9f191f;cursor:pointer;" ng-click="delCategory()"><i class="fa fa-fw fa-remove"></i></span>
+                    <span class="badge" style="background: #00a157;margin-right:10px;cursor:pointer;" ng-click="editCategory($event)"><i class="fa fa-fw fa-edit"></i></span>
                 </label>
             </div>
         </div>

@@ -9,7 +9,8 @@ class MembersForm(Form):
     password = PasswordField("password", [validators.DataRequired("请输入密码!"),
                                           validators.Length(min=6, max=30, message="密码长度为6-30之间!")])
     nickname = StringField("nickname",
-                           [validators.Length(min=1, max=15, message="昵称长度为1-15之间!"), validators.DataRequired("请输入昵称!")])
+                           [validators.Length(min=1, max=15, message="昵称长度为1-15之间!"),
+                            validators.DataRequired("请输入昵称!")])
 
 
 class TagsForm(Form):
@@ -17,3 +18,10 @@ class TagsForm(Form):
 
     name = StringField("name", [validators.Length(min=1, max=10, message="标签名称长度为1-10之间!"),
                                 validators.DataRequired("请输入标签名称!")])
+
+
+class CategorysForm(Form):
+    """文章类别验证"""
+
+    name = StringField("name", [validators.Length(min=1, max=10, message="类别名称长度为1-10之间!"),
+                                validators.DataRequired("请输入类别名称!")])

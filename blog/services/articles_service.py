@@ -96,3 +96,63 @@ class ArticlesService(object):
         result = articles_model.Category.query.filter(articles_model.Category.parent_id == category_pid).order_by(
             articles_model.Category.seq.asc()).all()
         return result
+
+    @staticmethod
+    def get_category_id(category_id):
+        """根据ID查找类别别"""
+
+        result = articles_model.Category.query.filter(articles_model.Category.id == category_id).first()
+        return result
+
+    @staticmethod
+    def get_category_name(name):
+        """根据文章类别名称获取类别"""
+        result = articles_model.Tag.query.filter(articles_model.Category.name == name).first()
+        return result
+
+    @staticmethod
+    def edit_category(category):
+        """修改文章类别"""
+
+        c = ArticlesService.get_category_id(category.id)
+        if not c:
+            raise Exception("类别名称不存在!")
+
+        category.name = category.name.strip()
+        if category.name == c.name:
+            return
+        if category.name.lower() != c.name.lower():
+            tt = ArticlesService.get_tag_name(category.name)
+            if tt:
+                raise Exception("该类别名称已存在!")
+        c.name = category.name
+        db.session.commit()
+
+    @staticmethod
+    def add_category(category):
+        """添加文章类别"""
+
+        category.name = category.name.strip()
+        t = ArticlesService.get_category_name(category.name)
+        if t:
+            raise Exception("类别名称已存在!")
+
+        list = ArticlesService.get_category_pid(category.parent_id)
+        seq = len(list)
+        category.seq = seq + 1
+        db.session.add(category)
+        db.session.commit()
+
+    @staticmethod
+    def del_category_id(category_id):
+        """添加文章类别"""
+
+        category = ArticlesService.get_category_id(category_id)
+        if not category:
+            return
+        categorys = ArticlesService.get_category_pid(category.id)
+        if categorys:
+            for c in categorys:
+                ArticlesService.del_category_id(c.id)
+        db.session.delete(category)
+        db.session.commit()

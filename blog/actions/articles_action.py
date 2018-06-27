@@ -65,6 +65,50 @@ def article_categorys():
     return json_utils.to_json(result)
 
 
+@adminBp.route("/blog/categorys/edit.html")
+def edit_article_categorys():
+    """修改文章类别"""
+
+    form = forms.CategorysForm(request.args)
+    if not form.validate():
+        raise Exception(form.errors)
+    category = articles_model.Category()
+    category.name = form.name.data
+
+    id = "id" in request.args and request.args.get("id")
+    id = int(id) if id else 0
+    category.id = id
+
+    articles_service.ArticlesService.edit_category(category)
+    return json_utils.to_json(ResponseData.get_success())
+
+
+@adminBp.route("/blog/categorys/add.html")
+def add_article_categorys():
+    """添加文章类别"""
+
+    form = forms.TagsForm(request.args)
+    if not form.validate():
+        raise Exception(form.errors)
+
+    category = articles_model.Category()
+    category.name = form.name.data
+
+    pid = "parent_id" in request.args and request.args.get("parent_id")
+    pid = int(pid) if pid else 0
+    category.parent_id = pid
+    articles_service.ArticlesService.add_category(category)
+    return json_utils.to_json(ResponseData.get_success())
+
+
+@adminBp.route("/blog/categorys/del-<int:category_id>.html")
+def del_categorys(category_id):
+    """删除文章类别"""
+
+    articles_service.ArticlesService.del_category_id(category_id)
+    return json_utils.to_json(ResponseData.get_success())
+
+
 @adminBp.route("/blog/comments.html")
 def article_comments():
     """评论管理"""

@@ -9,7 +9,6 @@ class MyEncoder(json.JSONEncoder):
     def default(self, o):
         if isinstance(o, Serializable):
             __dict = {}
-            print(vars(o).items())
             for name, value in vars(o).items():
                 if name.startswith("_"):
                     continue
