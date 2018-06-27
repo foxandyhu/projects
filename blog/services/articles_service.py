@@ -37,7 +37,8 @@ class ArticlesService(object):
     def add_tag(tag):
         """添加文章标签"""
 
-        t=ArticlesService.get_tag_name(tag.name)
+        tag.name = tag.name.strip()
+        t = ArticlesService.get_tag_name(tag.name)
         if t:
             raise Exception("标签名称已存在!")
         db.session.add(tag)
@@ -51,11 +52,13 @@ class ArticlesService(object):
         if not t:
             raise Exception("标签不存在!")
 
+        tag.name = tag.name.strip()
         if tag.name == t.name:
             return
-        tt = ArticlesService.get_tag_name(tag.name)
-        if tt:
-            raise Exception("该标签已存在!")
+        if tag.name.lower() != t.name.lower():
+            tt = ArticlesService.get_tag_name(tag.name)
+            if tt:
+                raise Exception("该标签已存在!")
         t.name = tag.name
         db.session.commit()
 
@@ -85,3 +88,11 @@ class ArticlesService(object):
         pagination = query.paginate(pagination.page_no, pagination.page_size)
         pagination = pagination_utils.get_pagination_sqlalchemy(pagination)
         return pagination
+
+    @staticmethod
+    def get_category_pid(category_pid):
+        """根据父ID查找类别"""
+
+        result = articles_model.Category.query.filter(articles_model.Category.parent_id == category_pid).order_by(
+            articles_model.Category.seq.asc()).all()
+        return result

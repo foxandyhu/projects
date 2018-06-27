@@ -1,3 +1,4 @@
+{%raw%}
 <section class="content-header">
     <h1>类别管理</h1>
     <ol class="breadcrumb">
@@ -6,22 +7,25 @@
     </ol>
 </section>
 
-<section class="content">
-    <ul data-widget="tree">
-        <li>
-            <a href="javascript:void(1)">类别</a>
-            <ul data-widget="tree-menu">
-                <li class="treeview">
-                    <a href="javascript:void(1)">慢生活</a>
-                    <ul class="treeview-menu">
-                        <li><a href="javascript:void(1)">子类别 2</a></li>
-                        <li><a href="javascript:void(1)">子类别 2</a></li>
-                        <li><a href="javascript:void(1)">子类别 2</a></li>
-                        <li><a href="javascript:void(1)">子类别 2</a></li>
-                        <li><a href="javascript:void(1)">子类别 2</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-    </ul>
+<section class="content" ng-init="initTreeView();loadCategorys();">
+    <div class="panel-group">
+        <div class="panel panel-danger" ng-repeat="item in categorys">
+            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion"
+                 href="#collapse{{ $index }}">
+                <h4 class="panel-title">{{ item.name }}</h4>
+                <div class="pull-right" style="position: relative;top: -18px;right: 15px;clear: both;">
+                    <a href="javascript:void(0)" style="color:#c71212;margin-right:20px;" class="glyphicon glyphicon-plus"></a>
+                    <a href="javascript:void(0)" style="color:#c71212;" class="glyphicon glyphicon-minus"></a>
+                </div>
+            </div>
+            <div id="collapse{{ $index }}" class="panel-collapse collapse in">
+                <label class="list-group-item" ng-repeat="sub in item.items">
+                    <label>{{ sub.name }}</label>
+                    <span class="badge" style="background: #9f191f;"><i class="fa fa-fw fa-remove"></i></span>
+                    <span class="badge" style="background: #00a157;margin-right:10px;" ng-click="editCategory($event)"><i class="fa fa-fw fa-edit"></i></span>
+                </label>
+            </div>
+        </div>
+    </div>
 </section>
+{%endraw%}

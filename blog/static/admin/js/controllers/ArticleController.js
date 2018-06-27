@@ -1,5 +1,5 @@
 define(["BlogApp"],function(BlogApp){
-    BlogApp.controller("ArticleController",function($scope,$http,$location,$routeParams){
+    BlogApp.controller("ArticleController",function($scope,$http,$location,$routeParams,Resource){
 			$("#articlemenu").addClass("active");
 		$scope.loadTags = function () {
 				$http.get("/manage/blog/tags.html",{params:{pageNo:$scope.currentPage,name:$("#name").val()}},{cache:false}).success(function(data){
@@ -34,6 +34,28 @@ define(["BlogApp"],function(BlogApp){
                 $http.get("/manage/blog/tags/edit.html",{params:{id:item.id,name:input.val()}},{cache:false}).success(function(data){
                     $scope.loadTags();
                 });
+			});
+		 	target.hide();
+		};
+		$scope.loadCategorys=function(){
+			$http.get("/manage/blog/categorys.html",{cache:false}).success(function(data){
+                    $scope.categorys=data;
+                });
+		};
+		$scope.editCategory=function(e){
+			console.log(this)
+			var name=this.sub.name;
+			var target=$(e.currentTarget);
+			var label=target.parent().find("label");
+			var input=$("<input name='name' type='text'/>");
+			input.val(name);
+			label.html(input)
+			input.trigger("focus");
+			input.blur(function(){
+		 		if(input.val()==name){label.html(name);target.show();return;}
+                // $http.get("/manage/blog/tags/edit.html",{params:{id:item.id,name:input.val()}},{cache:false}).success(function(data){
+                //     $scope.loadTags();
+                // });
 			});
 		 	target.hide();
 		};

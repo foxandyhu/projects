@@ -58,7 +58,11 @@ def edit_article_tags():
 def article_categorys():
     """类别管理"""
 
-    return render_template("admin/articles/category_list.html")
+    result = articles_service.ArticlesService.get_category_pid(0)
+    if result:
+        for item in result:
+            item.items = articles_service.ArticlesService.get_category_pid(item.id)
+    return json_utils.to_json(result)
 
 
 @adminBp.route("/blog/comments.html")

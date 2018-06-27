@@ -15,13 +15,9 @@ class Article(Serializable, db.Model):
     publish_time = db.Column(db.DateTime, nullable=False)  # 发布时间
     publish_ip = db.Column(db.String(30))  # 发布IP
 
-    member_id = db.Column(db.Integer, db.ForeignKey("d_members.id"))  # 发布者ID
-    member = db.relationship("Member")
+    member_id = db.Column(db.Integer)  # 发布者ID
 
-    category_id = db.Column(db.Integer, db.ForeignKey("d_categorys.id"))  # 文章类别
-    category = db.relationship("Category", backref="articles")
-
-    comments = db.relationship("Comment")  # 评论集合
+    category_id = db.Column(db.Integer)  # 文章类别
 
 
 class Category(Serializable, db.Model):
@@ -31,8 +27,7 @@ class Category(Serializable, db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(15), nullable=False)  # 类别名称
     seq = db.Column(db.Integer, default=0)  # 排序序号
-    parent_id = db.Column(db.Integer, db.ForeignKey("d_categorys.id"))  # 父类别ID
-    parent = db.relationship("Category")
+    parent_id = db.Column(db.Integer)  # 父类别ID
 
 
 class Tag(Serializable, db.Model):
@@ -58,12 +53,10 @@ class Comment(Serializable, db.Model):
     publish_time = db.Column(db.DateTime, nullable=False)  # 发布时间
     publish_ip = db.Column(db.String(30))  # 发布IP
 
-    member_id = db.Column(db.Integer, db.ForeignKey("d_members.id"))  # 发布者ID
-    member = db.relationship("Member")
+    member_id = db.Column(db.Integer)  # 发布者ID
 
-    article_id = db.Column(db.Integer, db.ForeignKey("d_articles.id"))  # 文章ID
+    article_id = db.Column(db.Integer)  # 文章ID
 
-    parent_id = db.Column(db.Integer, db.ForeignKey("d_comments.id"))  # 引用评论父ID
-    parent = db.relationship("Comment")
+    parent_id = db.Column(db.Integer)  # 引用评论父ID
 
     is_show = db.Column(db.Boolean, default=False)  # 评论是否显示
