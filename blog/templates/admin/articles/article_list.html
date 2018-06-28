@@ -1,48 +1,55 @@
+{%raw%}
 <section class="content-header">
     <h1>文章管理</h1>
     <ol class="breadcrumb">
-        <li><a href="manage/index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="#/home"><i class="fa fa-dashboard"></i> 首页</a></li>
         <li class="active">文章管理</li>
     </ol>
 </section>
 
-<section class="content">
+<section class="content" ng-init="initCheck();loadCategorys();loadArticls();">
     <div class="row">
-        <div class="col-md-3">
-            <div class="box box-solid">
-                <div class="box-header pull-center">
-                    <a class="btn btn-social-icon btn-twitter"><i class="fa fa-refresh"></i></a>
+        <div class="col-md-2">
+            <div class="widget-box">
+                <div class="widget-header header-color-green2">
+                    <h4 class="lighter smaller">类别</h4>
                 </div>
-                <div class="box-body">
-                    <ul data-widget="tree">
-                        <li>
-                            <a href="javascript:void(1)">类别</a>
-                            <ul data-widget="tree-menu">
-                                <li class="treeview">
-                                    <a href="javascript:void(1)">慢生活</a>
-                                    <ul class="treeview-menu">
-                                        <li><a href="javascript:void(1)">子类别 2</a></li>
-                                        <li><a href="javascript:void(1)">子类别 2</a></li>
-                                        <li><a href="javascript:void(1)">子类别 2</a></li>
-                                        <li><a href="javascript:void(1)">子类别 2</a></li>
-                                        <li><a href="javascript:void(1)">子类别 2</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                <div class="widget-body">
+                    <div class="widget-main padding-8">
+                        <div id="tree2" class="tree tree-unselectable">
+                            <div class="tree-folder" ng-repeat="c in categorys">
+                                <div class="tree-folder-header" ng-click="categoryTreeChange($event)">
+                                    <i class="fa fa-folder-open"></i>
+                                    <div class="tree-folder-name">{{ c.name}}</div>
+                                </div>
+                                <div class="tree-folder-content">
+                                    <div class="tree-item" style="display: block;" ng-repeat="item in c.items">
+                                        <div class="tree-item-name"><i class="glyphicon glyphicon-list-alt"></i>
+                                            {{ item.name}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-10">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Responsive Hover Table</h3>
+                    <nav>
+                        <a class="btn-sm btn-warning" href="javascript:void(0)" ng-click="loadArticles()"><span
+                                class="glyphicon glyphicon-refresh"></span> 刷新</a>
+                        <a class="btn-sm btn-danger" ng-click="addTag()" href="javascript:void(0)"><span
+                                class="glyphicon glyphicon-plus"></span> 新增</a>
+                    </nav>
                     <div class="box-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                            <input type="text" id="title" class="form-control pull-right"
+                                   placeholder="搜索文章标题...">
                             <div class="input-group-btn">
-                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                <button type="button" ng-click="searchArticle()" class="btn btn-default"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
                     </div>
@@ -50,52 +57,42 @@
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-hover">
                         <tr>
-                            <th>ID</th>
-                            <th>User</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                            <th>Reason</th>
+                            <th><input type="checkbox" class="icheckbox_minimal"/></th>
+                            <th>标题</th>
+                            <th>点击率</th>
+                            <th>作者</th>
+                            <th>发布时间</th>
+                            <th>状态</th>
                         </tr>
-                        <tr>
-                            <td>183</td>
-                            <td>John Doe</td>
-                            <td>11-7-2014</td>
-                            <td><span class="label label-success">Approved</span></td>
-                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                        </tr>
-                        <tr>
-                            <td>219</td>
-                            <td>Alexander Pierce</td>
-                            <td>11-7-2014</td>
-                            <td><span class="label label-warning">Pending</span></td>
-                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                        </tr>
-                        <tr>
-                            <td>657</td>
-                            <td>Bob Doe</td>
-                            <td>11-7-2014</td>
-                            <td><span class="label label-primary">Approved</span></td>
-                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                        </tr>
-                        <tr>
-                            <td>175</td>
-                            <td>Mike Doe</td>
-                            <td>11-7-2014</td>
-                            <td><span class="label label-danger">Denied</span></td>
-                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                        <tr ng-repeat="item in items">
+                            <td><input type="checkbox" class="icheckbox_minimal"></td>
+                            <td>[{{ item.category_name }}]&nbsp;<a>{{ item.title }}</a></td>
+                            <td>{{ item.click_count }}</td>
+                            <td>{{ item.username}}</td>
+                            <td>{{ item.publish_time }}</td>
+                            <td><span class="label {{item.is_verify?'label-success':'lable-danger'}}">{{item.is_verify?"审核通过":"审核未通过"}}</span>
+                            </td>
                         </tr>
                     </table>
                 </div>
                 <div class="box-footer clearfix">
-                    <ul class="pagination pagination-sm no-margin pull-right">
-                        <li><a href="#">&laquo;</a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">&raquo;</a></li>
-                    </ul>
+                    <div class="text-right">
+                        <pager page-count="pageCount" current-page="currentPage" on-page-change="loadArticls()"
+                               first-text="首页"
+                               next-text="下一页" prev-text="上一页" last-text="尾页" show-goto="true" goto-text="跳转到"></pager>
+                    </div>
                 </div>
+            </div>
+            <div class="btn-group">
+                <button disabled="disabled" class="btn btn-social btn-foursquare"><i class="fa fa-bitbucket"></i>删除</button>
+                <button disabled="disabled" class="btn btn-social btn-dropbox"><i class="fa fa-arrow-up"></i>置顶</button>
+                <button disabled="disabled" class="btn btn-social btn-dropbox"><i class="fa  fa-arrow-down"></i>取消置顶</button>
+                <button disabled="disabled" class="btn btn-social btn-google"><i class="fa fa-heart"></i>推荐</button>
+                <button disabled="disabled" class="btn btn-social btn-google"><i class="fa fa-heart-o"></i>取消推荐</button>
+                <button disabled="disabled" class="btn btn-social btn-tumblr"><i class="fa fa-check"></i>审核通过</button>
+                <button disabled="disabled" class="btn btn-social btn-tumblr"><i class="fa fa-close "></i>退回</button>
             </div>
         </div>
     </div>
 </section>
+{%endraw%}

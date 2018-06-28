@@ -12,12 +12,16 @@ class Article(Serializable, db.Model):
     content = db.Column(db.Text, nullable=False)  # 文章内容
     click_count = db.Column(db.Integer, default=0)  # 文章点击率
     is_recommend = db.Column(db.Boolean, default=False)  # 是否推荐
+    is_top = db.Column(db.Boolean, default=False)  # 是否置顶
+    is_verify = db.Column(db.Boolean, default=False)  # 审核是否通过
+    seq = db.Column(db.Integer, default=0)  # 排序
     publish_time = db.Column(db.DateTime, nullable=False)  # 发布时间
     publish_ip = db.Column(db.String(30))  # 发布IP
+    member_id = db.Column(db.Integer, db.ForeignKey("d_members.id"))  # 发布者ID
+    member = db.relationship("members_model.Member", lazy="joined")
 
-    member_id = db.Column(db.Integer)  # 发布者ID
-
-    category_id = db.Column(db.Integer)  # 文章类别
+    category_id = db.Column(db.Integer, db.ForeignKey("d_categorys.id"))  # 文章类别
+    category = db.relationship("Category", lazy="joined")
 
 
 class Category(Serializable, db.Model):

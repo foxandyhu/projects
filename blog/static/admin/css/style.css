@@ -5,4 +5,42 @@
 .tip_success span.ok{font-weight:bold;font-size:20px;}
 /***************提示tip end**********************/
 
+.icheckbox_minimal{display: inline-block;*display: inline;vertical-align: middle;margin: 0;padding: 0;width: 18px;height: 18px;border: none;cursor: pointer;}
 table.member_table tr td{vertical-align: middle}
+
+/*********************************树 begin****************************/
+.widget-box {padding: 0;-webkit-box-shadow: none;box-shadow: none;margin: 3px 0;border-bottom: 1px solid #CCC;}
+.widget-header[class*="header-color-"] {color: #FFF;filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);}
+.widget-header {-webkit-box-sizing: content-box;-moz-box-sizing: content-box;box-sizing: content-box;position: relative;min-height: 38px;background: #f7f7f7;background-image: -webkit-gradient(linear,left 0,left 100%,from(#fff),to(#eee));background-image: -webkit-linear-gradient(top,#fff,0%,#eee,100%);background-image: -moz-linear-gradient(top,#fff 0,#eee 100%);background-image: linear-gradient(to bottom,#fff 0,#eee 100%);background-repeat: repeat-x;filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#ffeeeeee',GradientType=0);color: #669fc7;border: 1px solid #CCC;border-bottom: 1px solid #DDD;padding-left: 12px;}
+.header-color-green2 {background: #2e8965;border-color: #2e8965;}
+.header-color-green2+.widget-body {border-color: #2e8965;}
+.widget-body {border: 1px solid #CCC;border-top: 0;background-color: #FFF;}
+.widget-header:before, .widget-header:after {content: "";display: table;line-height: 0;}
+.widget-header>.widget-caption, .widget-header>:first-child {line-height: 36px;padding: 0;margin: 0;display: inline;}
+.widget-header h4.smaller {font-size: 17px;}
+.lighter {font-weight: lighter;}
+.widget-main.padding-8 {padding: 8px;}
+.widget-main {padding: 12px;}
+.tree {padding-left: 9px;overflow-x: hidden;overflow-y: auto;position: relative;}
+.tree:before {display: inline-block;content: "";position: absolute;top: -20px;bottom: 16px;left: 0;border: 1px dotted #67b2dd;border-width: 0 0 0 1px;z-index: 1;}
+.tree .tree-item, .tree .tree-folder {border: 1px solid #FFF;}
+.tree .tree-folder, .tree .tree-item {position: relative;}
+.tree .tree-folder {width: auto;min-height: 20px;cursor: pointer;}
+.tree .tree-folder:before, .tree .tree-item:before {display: inline-block;content: "";position: absolute;top: 14px;left: -13px;width: 18px;height: 0;border-top: 1px dotted #67b2dd;z-index: 1;}
+.tree .tree-item, .tree .tree-folder .tree-folder-header {margin: 0;padding: 5px;color: #4d6878;-webkit-box-sizing: content-box;-moz-box-sizing: content-box;box-sizing: content-box;}
+.tree .tree-folder .tree-folder-header {border-radius: 0;}
+.tree .tree-folder .tree-folder-header {position: relative;height: 20px;line-height: 20px;}
+.tree .tree-folder .tree-folder-header .tree-folder-name {margin-left: 2px;}
+.tree .tree-folder .tree-folder-header .tree-folder-name, .tree .tree-item .tree-item-name {display: inline;z-index: 2;}
+.tree .tree-folder .tree-folder-content {margin-left: 23px;position: relative;}
+.tree .tree-folder .tree-folder-content:before {display: inline-block;content: "";position: absolute;z-index: 1;top: -14px;bottom: 16px;left: -14px;border: 1px dotted #67b2dd;border-width: 0 0 0 1px;}
+.tree .tree-item, .tree .tree-folder .tree-folder-header {margin: 0;padding: 5px;color: #107709;-webkit-box-sizing: content-box;-moz-box-sizing: content-box;box-sizing: content-box;}
+.tree .tree-item, .tree .tree-folder {border: 1px solid #FFF;}
+.tree .tree-folder, .tree .tree-item {position: relative;}
+.tree .tree-item {position: relative;height: 20px;line-height: 20px;cursor: pointer;}
+.tree .tree-folder:before, .tree .tree-item:before {display: inline-block;content: "";position: absolute;top: 14px;left: -13px;width: 18px;height: 0;border-top: 1px dotted #67b2dd;z-index: 1;}
+.tree .tree-item .tree-item-name {margin-left: 3px;}
+.tree .tree-item:hover {background-color: #e8edf1;cursor:pointer;}
+.tree .tree-folder .tree-folder-header:hover {background-color: #e8edf1;}
+.tree .tree-folder .tree-folder-header .tree-folder-name, .tree .tree-item .tree-item-name {display: inline;z-index: 2;}
+/*********************************树 end****************************/

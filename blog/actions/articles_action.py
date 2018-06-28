@@ -9,7 +9,10 @@ from models import articles_model, forms, ResponseData
 def article_list():
     """文章列表"""
 
-    return render_template("admin/articles/article_list.html")
+    pagination_utils.instantce_page()
+    context_utils.put_to_g("title", 'title' in request.args and request.args.get("title"))
+    pagination = articles_service.ArticlesService.get_page_article()
+    return json_utils.to_json(pagination)
 
 
 @adminBp.route("/blog/tags.html")

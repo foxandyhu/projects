@@ -24,12 +24,22 @@ class ArticlesService(object):
     def get_page_article():
         """返回文章分页对象"""
 
-        pagination = context_utils.get_pagination()
         title = context_utils.get_from_g("title")
-        query = articles_model.Article.query.order_by(articles_model.Article.id.desc())
+        query = articles_model.Article.query.order_by(articles_model.Article.is_top.desc(),
+                                                      articles_model.Article.seq.asc())
         if title:
             query = query.filter(articles_model.Article.title.like("%" + title + "%"))
+
+        pagination = context_utils.get_pagination()
         pagination = query.paginate(pagination.page_no, pagination.page_size)
+        if pagination.items:
+            for item in pagination.items:
+                if item.member:
+                    item.username = item.member.username
+                    del item.member
+                if item.category:
+                    item.category_name = item.category.name
+                    del item.category
         pagination = pagination_utils.get_pagination_sqlalchemy(pagination)
         return pagination
 

@@ -92,5 +92,28 @@ define(["BlogApp"],function(BlogApp){
                 });
             }});
 		};
+       $scope.categoryTreeChange=function (e) {
+    		var target=$(e.currentTarget);
+			var content =target.next();
+			content.fadeToggle(function(){
+				if(content.is(":visible")){
+					target.prev().removeClass("fa-folder");
+					target.prev().addClass(" fa-folder-open");
+				}else{
+					target.prev().removeClass("fa-folder-open");
+					target.prev().addClass("fa-folder");
+				}
+			});
+		};
+
+       $scope.loadArticls = function () {
+		    $http.get("/manage/blog/articles.html",{params:{pageNo:$scope.currentPage,title:$("#title").val()}},{cache:false}).success(function(data){
+				if(data){$scope.items=data.items;$scope.pageCount = data.total;}
+			});
+        };
+       $scope.searchArticle=function(){
+       		$scope.currentPage=1;
+       		$scope.loadArticls();
+	   };
 	});
 });
