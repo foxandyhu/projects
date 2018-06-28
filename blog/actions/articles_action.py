@@ -11,6 +11,7 @@ def article_list():
 
     pagination_utils.instantce_page()
     context_utils.put_to_g("title", 'title' in request.args and request.args.get("title"))
+    context_utils.put_to_g("cid", 'cid' in request.args and request.args.get("cid"))
     pagination = articles_service.ArticlesService.get_page_article()
     return json_utils.to_json(pagination)
 

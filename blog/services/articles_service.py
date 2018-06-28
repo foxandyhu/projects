@@ -24,11 +24,26 @@ class ArticlesService(object):
     def get_page_article():
         """返回文章分页对象"""
 
-        title = context_utils.get_from_g("title")
         query = articles_model.Article.query.order_by(articles_model.Article.is_top.desc(),
                                                       articles_model.Article.seq.asc())
+        title = context_utils.get_from_g("title")
         if title:
             query = query.filter(articles_model.Article.title.like("%" + title + "%"))
+
+        category_id = context_utils.get_from_g("cid")
+
+        if category_id:
+            category = ArticlesService.get_category_id(category_id)
+            if category:
+                if category.parent_id == 0:
+                    sub_categorys = ArticlesService.get_category_pid(category.id)
+                    if sub_categorys:
+                        ids = [sub.id for sub in sub_categorys]
+                        query = query.filter(articles_model.Article.category_id.in_(ids))
+                    else:
+                        query = query.filter(articles_model.Article.category_id == category_id)
+                else:
+                    query = query.filter(articles_model.Article.category_id == category_id)
 
         pagination = context_utils.get_pagination()
         pagination = query.paginate(pagination.page_no, pagination.page_size)

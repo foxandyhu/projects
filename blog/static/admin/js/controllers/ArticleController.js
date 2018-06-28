@@ -97,23 +97,62 @@ define(["BlogApp"],function(BlogApp){
 			var content =target.next();
 			content.fadeToggle(function(){
 				if(content.is(":visible")){
-					target.prev().removeClass("fa-folder");
-					target.prev().addClass(" fa-folder-open");
+					target.find("i").removeClass("fa-folder");
+					target.find("i").addClass(" fa-folder-open");
 				}else{
-					target.prev().removeClass("fa-folder-open");
-					target.prev().addClass("fa-folder");
+					target.find("i").removeClass("fa-folder-open");
+					target.find("i").addClass("fa-folder");
 				}
 			});
 		};
 
-       $scope.loadArticls = function () {
-		    $http.get("/manage/blog/articles.html",{params:{pageNo:$scope.currentPage,title:$("#title").val()}},{cache:false}).success(function(data){
+       $scope.loadArticles = function () {
+       		var cid=undefined;
+       		if($scope.cid){
+       			cid=$scope.cid;
+			}
+		    $http.get("/manage/blog/articles.html",{params:{cid:cid,pageNo:$scope.currentPage,title:$("#title").val()}},{cache:false}).success(function(data){
 				if(data){$scope.items=data.items;$scope.pageCount = data.total;}
 			});
         };
        $scope.searchArticle=function(){
        		$scope.currentPage=1;
-       		$scope.loadArticls();
+       		$scope.loadArticles();
 	   };
+       $scope.chooseCategory=function(){
+		   var cid=undefined;
+		   if(this.item){cid=this.item.id;}else{cid=this.c.id;}
+		   $scope.cid=cid;
+           $scope.loadArticles();
+	   };
+       $scope.checked = [];
+       $scope.is_disabled=true;
+       $scope.selectChkAll=function () {
+       		if($scope.selected_all){
+                angular.forEach($scope.items, function (i) {
+                    i.checked = true;
+                    $scope.checked.push(i.id);
+                });
+			}else{
+                angular.forEach($scope.items, function (i) {
+                    i.checked = false;
+                    $scope.checked = [];
+                });
+			}
+           $scope.is_disabled=!$scope.checked.length>0
+       };
+       $scope.selectOne=function () {
+           angular.forEach($scope.items , function (i) {
+               var index = $scope.checked.indexOf(i.id);
+               if(i.checked && index == -1) {
+                   $scope.checked.push(i.id);
+               } else if (!i.checked && index != -1){
+                   $scope.checked.splice(index, 1);
+               };
+           });
+           $scope.selected_all=$scope.items.length == $scope.checked.length;
+           $scope.is_disabled=!$scope.checked.length>0;
+           console.log($scope.checked);
+       };
 	});
 });
