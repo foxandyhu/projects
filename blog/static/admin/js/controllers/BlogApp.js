@@ -65,7 +65,8 @@ define(["angular","jquery"], function (angular,$) {
     				response:function(response){$(".load_layer").hide();return response || $q.when(response);},
 		    		responseError:function(rejection)
 			    		{
-			    			$(".load_layer").hide();var title="错误代码："+rejection.status+"<br>"+rejection.data;
+							var data =typeof rejection.data =="string" ? rejection.data:JSON.stringify(rejection.data);
+			    			$(".load_layer").hide();var title="错误代码："+rejection.status+"<br>"+data;
 			    			if(-1==rejection.status){title="网络连接失败,服务器无响应!";}
 			    			else if(404==rejection.status){title="错误代码："+rejection.status+"<br>找不到对应的资源!";}
 			    			else if(403==rejection.status){

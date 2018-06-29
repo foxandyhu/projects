@@ -1,20 +1,36 @@
 from extensions import db
 from models import articles_model
-from utils import context_utils, pagination_utils
+from utils import context_utils, pagination_utils, file_utils
 
 
 class ArticlesService(object):
     """文章业务接口"""
 
     @staticmethod
-    def add_article(article):
+    def add_article(article, tag_ids):
         """添加文章"""
 
+        if article.logo:
+            source = context_utils.get_appdir() + article.logo  # LOGO源物理路径
+            dest = context_utils.get_upload_face_dir()
+            article.logo = context_utils.get_upload_face_dir_rlt() + file_utils.get_filename(source)
+
+        tags = []
+        if tag_ids and tag_ids.split(","):
+            ids = tag_ids.split(",")
+            for tid in ids:
+                tag = ArticlesService.get_tag(tid)
+                if tag:
+                    tags.append(tag)
+        article.tags = tags
         db.session.add(article)
         db.session.commit()
 
+        if article.logo:
+            file_utils.move_file(source, dest)
+
     @staticmethod
-    def get_article(article_id):
+    def get_article_id(article_id):
         """根据文章ID获取文章"""
 
         result = articles_model.Article.query.filter(articles_model.Article.id == article_id).first()
@@ -25,7 +41,8 @@ class ArticlesService(object):
         """返回文章分页对象"""
 
         query = articles_model.Article.query.order_by(articles_model.Article.is_top.desc(),
-                                                      articles_model.Article.seq.asc())
+                                                      articles_model.Article.seq.asc(),
+                                                      articles_model.Article.id.desc())
         title = context_utils.get_from_g("title")
         if title:
             query = query.filter(articles_model.Article.title.like("%" + title + "%"))
@@ -57,6 +74,42 @@ class ArticlesService(object):
                     del item.category
         pagination = pagination_utils.get_pagination_sqlalchemy(pagination)
         return pagination
+
+    @staticmethod
+    def edit_top_onoff(ids, flag):
+        """设置文章置顶"""
+        if not ids:
+            raise Exception("未选择文章!")
+
+        for aid in ids:
+            article = ArticlesService.get_article_id(int(aid))
+            if article:
+                article.is_top = flag
+                db.session.commit()
+
+    @staticmethod
+    def edit_recommend_onoff(ids, flag):
+        """设置文章推荐"""
+        if not ids:
+            raise Exception("未选择文章!")
+
+        for aid in ids:
+            article = ArticlesService.get_article_id(int(aid))
+            if article:
+                article.is_recommend = flag
+                db.session.commit()
+
+    @staticmethod
+    def edit_verify_onoff(ids, flag):
+        """设置文章审核"""
+        if not ids:
+            raise Exception("未选择文章!")
+
+        for aid in ids:
+            article = ArticlesService.get_article_id(int(aid))
+            if article:
+                article.is_verify = flag
+                db.session.commit()
 
     @staticmethod
     def add_tag(tag):

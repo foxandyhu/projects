@@ -1,6 +1,11 @@
 from extensions import db
 from models import Serializable
 
+# 文章和标签中间表关系
+article_tag_ship = db.Table("d_article_tag_ship",
+                            db.Column("article_id", db.Integer, db.ForeignKey("d_articles.id"), primary_key=True),
+                            db.Column("d_tags", db.Integer, db.ForeignKey("d_tags.id"), primary_key=True))
+
 
 class Article(Serializable, db.Model):
     """博客文章"""
@@ -15,13 +20,20 @@ class Article(Serializable, db.Model):
     is_top = db.Column(db.Boolean, default=False)  # 是否置顶
     is_verify = db.Column(db.Boolean, default=False)  # 审核是否通过
     seq = db.Column(db.Integer, default=0)  # 排序
+    logo = db.Column(db.String(200))  # 文章Logo图片
+    author = db.Column(db.String(50))  # 作者
+    source = db.Column(db.String(50))  # 来源
+    source_url = db.Column(db.String(200))  # 来源地址
     publish_time = db.Column(db.DateTime, nullable=False)  # 发布时间
     publish_ip = db.Column(db.String(30))  # 发布IP
+
     member_id = db.Column(db.Integer, db.ForeignKey("d_members.id"))  # 发布者ID
     member = db.relationship("members_model.Member", lazy="joined")
 
     category_id = db.Column(db.Integer, db.ForeignKey("d_categorys.id"))  # 文章类别
     category = db.relationship("Category", lazy="joined")
+
+    tags = db.relationship("Tag", secondary=article_tag_ship, backref="articles")
 
 
 class Category(Serializable, db.Model):
@@ -40,12 +52,6 @@ class Tag(Serializable, db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(20), nullable=False, unique=True)  # 标签名称
-
-
-# 文章和标签中间表关系
-article_tag_ship = db.Table("d_article_tag_ship",
-                            db.Column("article_id", db.Integer, db.ForeignKey("d_articles.id"), primary_key=True),
-                            db.Column("d_tags", db.Integer, db.ForeignKey("d_tags.id"), primary_key=True))
 
 
 class Comment(Serializable, db.Model):

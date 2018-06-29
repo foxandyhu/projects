@@ -1,5 +1,5 @@
 define(["BlogApp"],function(BlogApp){
-    BlogApp.controller("ArticleController",function($scope,$http,$location,$routeParams,Resource,Dialog){
+    BlogApp.controller("ArticleController",function($scope,$http,$location,$routeParams,Resource,Dialog,Util,SysInit){
 			$("#articlemenu").addClass("active");
 		$scope.loadTags = function () {
 				$http.get("/manage/blog/tags.html",{params:{pageNo:$scope.currentPage,name:$("#name").val()}},{cache:false}).success(function(data){
@@ -107,6 +107,9 @@ define(["BlogApp"],function(BlogApp){
 		};
 
        $scope.loadArticles = function () {
+       		$scope.checked = [];
+       		$scope.is_disabled=true;
+       		$scope.selected_all=false;
        		var cid=undefined;
        		if($scope.cid){
        			cid=$scope.cid;
@@ -129,6 +132,7 @@ define(["BlogApp"],function(BlogApp){
        $scope.is_disabled=true;
        $scope.selectChkAll=function () {
        		if($scope.selected_all){
+       			$scope.checked = [];
                 angular.forEach($scope.items, function (i) {
                     i.checked = true;
                     $scope.checked.push(i.id);
@@ -143,7 +147,7 @@ define(["BlogApp"],function(BlogApp){
        };
        $scope.selectOne=function () {
            angular.forEach($scope.items , function (i) {
-               var index = $scope.checked.indexOf(i.id);
+               var index = $.inArray(i.id,$scope.checked);
                if(i.checked && index == -1) {
                    $scope.checked.push(i.id);
                } else if (!i.checked && index != -1){
@@ -152,7 +156,66 @@ define(["BlogApp"],function(BlogApp){
            });
            $scope.selected_all=$scope.items.length == $scope.checked.length;
            $scope.is_disabled=!$scope.checked.length>0;
-           console.log($scope.checked);
        };
+       $scope.toSetTop=function (flag) {
+       		if($scope.checked.length<=0){
+       			Dialog.show("请选中要操作的文章!");
+       			return;
+			}
+			 $http.get("/manage/blog/articles/settop.html",{params:{flag:flag,ids:$scope.checked.join(",")}},{cache:false}).success(function(data){
+			 	$scope.loadArticles();
+			});
+       };
+       $scope.toSetRecommend=function (flag) {
+       		if($scope.checked.length<=0){
+       			Dialog.show("请选中要操作的文章!");
+       			return;
+			}
+			 $http.get("/manage/blog/articles/setrecommend.html",{params:{flag:flag,ids:$scope.checked.join(",")}},{cache:false}).success(function(data){
+			 	$scope.loadArticles();
+			});
+       };
+       $scope.toSetVerify=function (flag) {
+       		if($scope.checked.length<=0){
+       			Dialog.show("请选中要操作的文章!");
+       			return;
+			}
+			 $http.get("/manage/blog/articles/setverify.html",{params:{flag:flag,ids:$scope.checked.join(",")}},{cache:false}).success(function(data){
+			 	$scope.loadArticles();
+			});
+       };
+       $scope.initArticleValidate=function(){
+       		Resource.init(["bootstrapValidator"],function(){
+       			$("#articleForm").bootstrapValidator({
+					feedbackIcons:SysInit.validateCss,
+					fields:{
+							category_id:{validators: {notEmpty:{message:"请选择类别!"},callback:{message:"请选择类别!",callback:function(value,validator){return parseInt(value)>0;}}}},
+							title:{validators: {notEmpty:{message:"请输入标题!"},stringLength:{min:1,max:50,message:"标题在1-50个字符之间!"}}},
+							summary:{validators: {notEmpty:{message:"请输入摘要!"},stringLength:{min:1,max:200,message:"摘要在1-200个字符之间!"}}},
+							seq:{validators: {notEmpty:{message:"请输入排序序号!"},integer:{message:"请输入有效整数数字的序号!"}}},
+							content:{validators: {notEmpty:{message:"请输入内容!"},callback:{message:"请输入内容!",callback:function(value,validator){return value.length>0;}}}}
+					}
+				});
+			});
+	   };
+       $scope.initArticleAdd=function(){
+       		Resource.init(["kindeditor","select2"],function () {
+       			Util.createSimpleEditor("content");
+       			$('.select2').select2();
+       			$scope.loadCategorys();
+       			$scope.loadTags();
+            });
+	   };
+       $scope.addArticle=function(){
+       		$("#articleForm").data("bootstrapValidator").validate();
+            if($("#articleForm").data("bootstrapValidator").isValid())
+			{
+				$("#tag_ids").val($("#tags").val().join(","));
+				$http({url:"/manage/blog/articles/add.html",method:"POST",data:$("#articleForm").serialize(),cache:false,headers:{"Content-Type":"application/x-www-form-urlencoded;charset=utf-8"}}).success(function(data){
+					Dialog.successTip("保存成功!");
+					$location.path("/articles");
+				});
+			}
+	   };
 	});
 });

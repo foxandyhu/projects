@@ -62,6 +62,9 @@ define(["BlogApp"],function(BlogApp){
         $routeProvider.when("/articles",{
             templateUrl:"/templates/admin/articles/article_list.html",
             controller:"ArticleController"
+        }).when("/articles/add",{
+            templateUrl:"/templates/admin/articles/article_add.html",
+            controller:"ArticleController"
         }).when("/tags",{
             templateUrl:"/templates/admin/articles/tags_list.html",
             controller:"ArticleController"

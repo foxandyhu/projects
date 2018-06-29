@@ -42,7 +42,7 @@
                     <nav>
                         <a class="btn-sm btn-warning" href="javascript:void(0)" ng-click="loadArticles()"><span
                                 class="glyphicon glyphicon-refresh"></span> 刷新</a>
-                        <a class="btn-sm btn-danger" ng-click="addTag()" href="javascript:void(0)"><span
+                        <a class="btn-sm btn-danger"  href="#/articles/add"><span
                                 class="glyphicon glyphicon-plus"></span> 新增</a>
                     </nav>
                     <div class="box-tools">
@@ -67,11 +67,15 @@
                         </tr>
                         <tr ng-repeat="item in items">
                             <td><input type="checkbox" ng-model="item.checked" class="icheckbox_minimal" ng-change="selectOne()"></td>
-                            <td>[{{ item.category_name }}]&nbsp;<a>{{ item.title }}</a></td>
+                            <td>
+                                <span ng-if="item.is_recommend" class="text-success"><b>[推荐]</b>&nbsp;</span>
+                                <span ng-if="item.is_top" class="text-danger"><b>[置顶]</b>&nbsp;</span>
+                                [{{ item.category_name }}]&nbsp;<a>{{ item.title }}</a>
+                            </td>
                             <td>{{ item.click_count }}</td>
                             <td>{{ item.username}}</td>
                             <td>{{ item.publish_time }}</td>
-                            <td><span class="label {{item.is_verify?'label-success':'lable-danger'}}">{{item.is_verify?"审核通过":"审核未通过"}}</span>
+                            <td><span class="label {{item.is_verify?'label-success':'label-danger'}}">{{item.is_verify?"审核通过":"审核未通过"}}</span>
                             </td>
                         </tr>
                     </table>
@@ -86,12 +90,12 @@
             </div>
             <div class="btn-group">
                 <button ng-disabled="is_disabled" class="btn btn-social btn-foursquare"><i class="fa fa-bitbucket"></i>删除</button>
-                <button ng-disabled="is_disabled" class="btn btn-social btn-dropbox"><i class="fa fa-arrow-up"></i>置顶</button>
-                <button ng-disabled="is_disabled" class="btn btn-social btn-dropbox"><i class="fa  fa-arrow-down"></i>取消置顶</button>
-                <button ng-disabled="is_disabled" class="btn btn-social btn-google"><i class="fa fa-heart"></i>推荐</button>
-                <button ng-disabled="is_disabled" class="btn btn-social btn-google"><i class="fa fa-heart-o"></i>取消推荐</button>
-                <button ng-disabled="is_disabled" class="btn btn-social btn-tumblr"><i class="fa fa-check"></i>审核通过</button>
-                <button ng-disabled="is_disabled" class="btn btn-social btn-tumblr"><i class="fa fa-close "></i>退回</button>
+                <button ng-click="toSetTop(true)" ng-disabled="is_disabled" class="btn btn-social btn-dropbox"><i class="fa fa-arrow-up"></i>置顶</button>
+                <button ng-click="toSetTop(false)" ng-disabled="is_disabled" class="btn btn-social btn-dropbox"><i class="fa  fa-arrow-down"></i>取消置顶</button>
+                <button ng-click="toSetRecommend(true)" ng-disabled="is_disabled" class="btn btn-social btn-google"><i class="fa fa-heart"></i>推荐</button>
+                <button ng-click="toSetRecommend(false)" ng-disabled="is_disabled" class="btn btn-social btn-google"><i class="fa fa-heart-o"></i>取消推荐</button>
+                <button ng-click="toSetVerify(true)" ng-disabled="is_disabled" class="btn btn-social btn-tumblr"><i class="fa fa-check"></i>审核通过</button>
+                <button ng-click="toSetVerify(false)" ng-disabled="is_disabled" class="btn btn-social btn-tumblr"><i class="fa fa-close "></i>退回</button>
             </div>
         </div>
     </div>

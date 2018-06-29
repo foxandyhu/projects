@@ -5,6 +5,7 @@
 .tip_success span.ok{font-weight:bold;font-size:20px;}
 /***************提示tip end**********************/
 
+.red{color:#ff0303;}
 .icheckbox_minimal{display: inline-block;*display: inline;vertical-align: middle;margin: 0;padding: 0;width: 18px;height: 18px;border: none;cursor: pointer;}
 table.member_table tr td{vertical-align: middle}
 

@@ -1,4 +1,4 @@
-from wtforms import Form, StringField, PasswordField, validators
+from wtforms import Form, StringField, PasswordField, validators, IntegerField
 
 
 class MembersForm(Form):
@@ -25,3 +25,16 @@ class CategorysForm(Form):
 
     name = StringField("name", [validators.Length(min=1, max=10, message="类别名称长度为1-10之间!"),
                                 validators.DataRequired("请输入类别名称!")])
+
+
+class ArticlesForm(Form):
+    """文章验证"""
+
+    title = StringField("title", [validators.Length(min=1, max=50, message="标题长度为1-50之间!"),
+                                  validators.DataRequired("请输入文章标题!")])
+    summary = StringField("summary", [validators.Length(min=1, max=200, message="摘要长度为1-200之间!"),
+                                      validators.DataRequired("请输入文章摘要!")])
+    content = StringField("content", [validators.DataRequired("请输入文章内容!")])
+    seq = IntegerField("seq", [validators.NumberRange(min=0, message="排序序号错误!")])
+    category_id = IntegerField("category_id",
+                               [validators.DataRequired("请选择文章类别"), validators.NumberRange(min=1, message="请选择文章类别!")])

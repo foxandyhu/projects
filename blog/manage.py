@@ -25,7 +25,7 @@ def dropdb():
         db.drop_all()
 
 
-manager.add_command("start", Server(host='127.0.0.1', port=80, use_debugger=True))
+# manager.add_command("start", Server(host='127.0.0.1', port=80, use_debugger=True))
 
 if __name__ == '__main__':
     #manager.run()

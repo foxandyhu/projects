@@ -11,3 +11,9 @@ from actions import seo_action
 from actions import users_action
 from actions import logs_action
 from actions import templates_action, files_action
+from utils import json_utils
+
+@adminBp.errorhandler(Exception)
+def admin_error(e):
+    message = json_utils.to_json(e.args[0])
+    return message, 500

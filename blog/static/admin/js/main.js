@@ -13,6 +13,7 @@ requirejs.config({
         "3Dhighchart": "highchart/js/highcharts-3d",
         "fastclick": "fastclick/fastclick.min",
         "adminlte": "../dist/js/adminlte.min",
+        "select2": "select2/js/select2.min",
 
         "BlogApp": "../js/controllers/BlogApp",
         "BlogAppRoute": "../js/routes/BlogAppRoute",
@@ -28,6 +29,10 @@ requirejs.config({
 
     },
     shim: {
+        "select2":{
+            deps: ["jquery"],
+            exports: "select2"
+        },
         "3Dhighchart": {
             deps: ["highchart"],
             exports: "3Dhighchart"
