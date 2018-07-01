@@ -73,6 +73,7 @@ def add_articles():
     article.is_top = not request.form.get("is_top") is None
     article.is_recommend = not request.form.get("is_recommend") is None
     article.is_verify = not request.form.get("is_verify") is None
+    article.logo = request.form.get("logo")
     article.click_count = 0
     article.publish_time = datetime.now()
     article.publish_ip = request.remote_addr
@@ -80,6 +81,47 @@ def add_articles():
 
     articles_service.ArticlesService.add_article(article, tag_ids)
     return json_utils.to_json(ResponseData.get_success())
+
+
+@adminBp.route("/blog/articles/edit.html", methods=["POST"])
+def edit_articles():
+    """编辑文章"""
+
+    form = forms.ArticlesForm(request.form)
+    if not form.validate():
+        raise Exception(form.errors)
+
+    article = articles_model.Article()
+    article.title = form.title.data
+    article.content = form.content.data
+    article.summary = form.summary.data
+    article.id = request.form.get("id")
+    article.category_id = request.form.get("category_id")
+    article.seq = form.seq.data
+    article.author = request.form.get("author")
+    article.source = request.form.get("source")
+    article.source_url = request.form.get("source_url")
+    article.is_top = not request.form.get("is_top") is None
+    article.is_recommend = not request.form.get("is_recommend") is None
+    article.is_verify = not request.form.get("is_verify") is None
+    article.logo = request.form.get("logo")
+    article.click_count = 0
+    article.publish_time = datetime.now()
+    article.publish_ip = request.remote_addr
+    tag_ids = request.form.get("tag_ids")
+
+    articles_service.ArticlesService.edit_article(article, tag_ids)
+    return json_utils.to_json(ResponseData.get_success())
+
+
+@adminBp.route("/blog/articles/<int:article_id>.html")
+def detail_article(article_id):
+    """文章详情"""
+
+    article = articles_service.ArticlesService.get_article_id(article_id)
+    del article.category
+    del article.member
+    return json_utils.to_json(article)
 
 
 @adminBp.route("/blog/tags.html")

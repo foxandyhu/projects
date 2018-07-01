@@ -44,4 +44,5 @@ table.member_table tr td{vertical-align: middle}
 .tree .tree-item:hover {background-color: #e8edf1;cursor:pointer;}
 .tree .tree-folder .tree-folder-header:hover {background-color: #e8edf1;}
 .tree .tree-folder .tree-folder-header .tree-folder-name, .tree .tree-item .tree-item-name {display: inline;z-index: 2;}
+.tree_choose{background-color: #e8edf1;}
 /*********************************树 end****************************/

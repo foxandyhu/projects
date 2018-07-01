@@ -8,6 +8,17 @@ class MemberService(object):
     """用户业务接口"""
 
     @staticmethod
+    def login(username, password):
+        """管理员登录"""
+        member = MemberService.get_member_username(username)
+        if not member:
+            raise Exception("用户名或密码错误!")
+        pwd = context_utils.get_md5(member.salt + password)
+        if member.password != pwd:
+            raise Exception("用户名或密码错误!")
+        return member
+
+    @staticmethod
     def get_page_members():
         """返回分页对象"""
 

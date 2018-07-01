@@ -1,6 +1,15 @@
 from wtforms import Form, StringField, PasswordField, validators, IntegerField
 
 
+class UserLoginForm(Form):
+    """用户登录表单验证"""
+
+    username = StringField("username", [validators.Length(min=5, max=20, message="用户名长度为5-20之间!"),
+                                        validators.DataRequired("请输入用户名!")])
+    password = PasswordField("password", [validators.DataRequired("请输入密码!"),
+                                          validators.Length(min=5, max=20, message="密码长度为5-20之间!")])
+
+
 class MembersForm(Form):
     """用户表单验证"""
 

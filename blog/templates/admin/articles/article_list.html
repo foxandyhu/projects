@@ -18,12 +18,12 @@
                     <div class="widget-main padding-8">
                         <div id="tree2" class="tree tree-unselectable">
                             <div class="tree-folder" ng-repeat="c in categorys">
-                                <div class="tree-folder-header" ng-click="categoryTreeChange($event);chooseCategory()">
+                                <div class="tree-folder-header" ng-click="categoryTreeChange($event);chooseCategory($event)">
                                     <i class="fa fa-folder-open"></i>
                                     <div class="tree-folder-name">{{ c.name}}</div>
                                 </div>
                                 <div class="tree-folder-content">
-                                    <div class="tree-item" style="display: block;" ng-repeat="item in c.items" ng-click="chooseCategory()">
+                                    <div class="tree-item" style="display: block;" ng-repeat="item in c.items" ng-click="chooseCategory($event)">
                                         <div class="tree-item-name">
                                             <i class="glyphicon glyphicon-list-alt"></i>
                                             {{ item.name}}
@@ -64,6 +64,7 @@
                             <th>作者</th>
                             <th>发布时间</th>
                             <th>状态</th>
+                            <th>操作</th>
                         </tr>
                         <tr ng-repeat="item in items">
                             <td><input type="checkbox" ng-model="item.checked" class="icheckbox_minimal" ng-change="selectOne()"></td>
@@ -75,7 +76,11 @@
                             <td>{{ item.click_count }}</td>
                             <td>{{ item.username}}</td>
                             <td>{{ item.publish_time }}</td>
-                            <td><span class="label {{item.is_verify?'label-success':'label-danger'}}">{{item.is_verify?"审核通过":"审核未通过"}}</span>
+                            <td>
+                                <span class="label {{item.is_verify?'label-success':'label-danger'}}">{{item.is_verify?"审核通过":"审核未通过"}}</span>
+                            </td>
+                            <td>
+                                <a class="btn btn-xs btn-info" ng-href="#/articles/{{item.id }}"><span class="glyphicon glyphicon-edit"></span> 编辑</a>
                             </td>
                         </tr>
                     </table>

@@ -65,6 +65,9 @@ define(["BlogApp"],function(BlogApp){
         }).when("/articles/add",{
             templateUrl:"/templates/admin/articles/article_add.html",
             controller:"ArticleController"
+        }).when("/articles/:articleId",{
+            templateUrl:"/templates/admin/articles/article_edit.html",
+            controller:"ArticleController"
         }).when("/tags",{
             templateUrl:"/templates/admin/articles/tags_list.html",
             controller:"ArticleController"

@@ -122,7 +122,9 @@ define(["BlogApp"],function(BlogApp){
        		$scope.currentPage=1;
        		$scope.loadArticles();
 	   };
-       $scope.chooseCategory=function(){
+       $scope.chooseCategory=function(e){
+		   $(".tree_choose").removeClass("tree_choose");
+		   $(e.currentTarget).addClass("tree_choose");
 		   var cid=undefined;
 		   if(this.item){cid=this.item.id;}else{cid=this.c.id;}
 		   $scope.cid=cid;
@@ -200,7 +202,7 @@ define(["BlogApp"],function(BlogApp){
 	   };
        $scope.initArticleAdd=function(){
        		Resource.init(["kindeditor","select2"],function () {
-       			Util.createSimpleEditor("content");
+       			 Util.createSimpleEditor("content");
        			$('.select2').select2();
        			$scope.loadCategorys();
        			$scope.loadTags();
@@ -217,5 +219,39 @@ define(["BlogApp"],function(BlogApp){
 				});
 			}
 	   };
+       $scope.detailArticle=function(){
+       		var articleId=$routeParams.articleId;
+       		$http.get("/manage/blog/articles/"+articleId+".html",{cache:false}).success(function (data) {
+       			$scope.article=data;
+       			if($scope.article && $scope.article.logo){
+					$scope.imageResult={
+						path:$scope.article.logo,
+						fullUrl:$scope.article.logo
+					};
+                }
+       			$scope.initArticleAdd();
+                $scope.ss=$scope.article.category_id
+            });
+	   };
+       $scope.checkExistTagChoose=function(tags,id){
+		   	if(!tags) {return false;}
+			var ids=[];
+		   tags.forEach(function (item) {
+			  ids.push(item.id);
+		   });
+           var flag=$.inArray(id,ids);
+           return flag>=0;
+	   };
+       $scope.editArticle=function () {
+           $("#articleForm").data("bootstrapValidator").validate();
+           if($("#articleForm").data("bootstrapValidator").isValid())
+           {
+               $("#tag_ids").val($("#tags").val().join(","));
+               $http({url:"/manage/blog/articles/edit.html",method:"POST",data:$("#articleForm").serialize(),cache:false,headers:{"Content-Type":"application/x-www-form-urlencoded;charset=utf-8"}}).success(function(data){
+                   Dialog.successTip("保存成功!");
+                   $location.path("/articles");
+               });
+           }
+       };
 	});
 });

@@ -33,7 +33,7 @@ class Article(Serializable, db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey("d_categorys.id"))  # 文章类别
     category = db.relationship("Category", lazy="joined")
 
-    tags = db.relationship("Tag", secondary=article_tag_ship, backref="articles")
+    tags = db.relationship("Tag", secondary=article_tag_ship, backref="articles", lazy="joined")
 
 
 class Category(Serializable, db.Model):

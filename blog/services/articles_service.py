@@ -12,8 +12,8 @@ class ArticlesService(object):
 
         if article.logo:
             source = context_utils.get_appdir() + article.logo  # LOGO源物理路径
-            dest = context_utils.get_upload_face_dir()
-            article.logo = context_utils.get_upload_face_dir_rlt() + file_utils.get_filename(source)
+            dest = context_utils.get_upload_article_dir()
+            article.logo = context_utils.get_upload_article_dir_rlt() + file_utils.get_filename(source)
 
         tags = []
         if tag_ids and tag_ids.split(","):
@@ -27,6 +27,51 @@ class ArticlesService(object):
         db.session.commit()
 
         if article.logo:
+            file_utils.move_file(source, dest)
+
+    @staticmethod
+    def edit_article(article, tag_ids):
+        """添加文章"""
+
+        art = ArticlesService.get_article_id(article.id)
+        has_new_logo = False
+        if not art:
+            raise Exception("文章不存在!")
+        if article.logo and article.logo != art.logo:
+            source = context_utils.get_appdir() + article.logo  # LOGO源物理路径
+            dest = context_utils.get_upload_article_dir()
+            article.logo = context_utils.get_upload_article_dir_rlt() + file_utils.get_filename(source)
+            has_new_logo = True
+        art.logo = article.logo
+
+        tags = []
+        if tag_ids and tag_ids.split(","):
+            ids = tag_ids.split(",")
+            for tid in ids:
+                tag = ArticlesService.get_tag(tid)
+                if tag:
+                    tags.append(tag)
+        art.tags = tags
+
+        art.category_id = article.category_id
+        art.title = article.title
+        art.article = article.summary
+        art.content = article.content
+        art.seq = article.seq
+        art.author = article.author
+        art.source = article.source
+        art.source_url = article.source_url
+        art.is_top = article.is_top
+        art.is_recommend = article.is_recommend
+        art.is_verify = article.is_verify
+        art.click_count = article.click_count
+        art.publish_ip = article.publish_ip
+        art.publish_time = article.publish_time
+        art.member_id = article.member_id
+
+        db.session.commit()
+
+        if has_new_logo:
             file_utils.move_file(source, dest)
 
     @staticmethod

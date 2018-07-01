@@ -8,4 +8,6 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(50), nullable=False, unique=True)
     password = db.Column(db.String(128), nullable=False)
+    salt = db.Column(db.String(10), nullable=False)
     is_enable = db.Column(db.Boolean, nullable=False, default=False)
+    face = db.Column(db.String(200), nullable=False)  # 头像
