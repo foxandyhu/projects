@@ -15,8 +15,8 @@ class Pagination(Serializable):
 
     def get_page_count(self):
         """获得最大页码"""
-        self.total = int((self.total + self.page_size - 1) / self.page_size)
-        return self.total
+        self.page_count = int((self.total + self.page_size - 1) / self.page_size)
+        return self.page_count
 
     def get_pre_page(self):
         """获得上一页码"""

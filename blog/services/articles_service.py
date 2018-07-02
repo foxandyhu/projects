@@ -82,12 +82,15 @@ class ArticlesService(object):
         return result
 
     @staticmethod
-    def get_page_article():
+    def get_page_article(is_verify=None):
         """返回文章分页对象"""
 
         query = articles_model.Article.query.order_by(articles_model.Article.is_top.desc(),
                                                       articles_model.Article.seq.asc(),
                                                       articles_model.Article.id.desc())
+        if is_verify:
+            query = query.filter(articles_model.Article.is_verify == is_verify)
+
         title = context_utils.get_from_g("title")
         if title:
             query = query.filter(articles_model.Article.title.like("%" + title + "%"))
@@ -119,6 +122,78 @@ class ArticlesService(object):
                     del item.category
         pagination = pagination_utils.get_pagination_sqlalchemy(pagination)
         return pagination
+
+    @staticmethod
+    def get_top_article(page_size):
+        """获得置顶的文章"""
+
+        result = articles_model.Article.query.filter(articles_model.Article.is_top == True,
+                                                     articles_model.Article.is_verify == True).order_by(
+            articles_model.Article.seq.asc(), articles_model.Article.id.desc()).limit(page_size).all()
+        return result
+
+    @staticmethod
+    def get_recommend_article(page_size, category_id=None):
+        """获得推荐的文章"""
+
+        query = articles_model.Article.query.filter(articles_model.Article.is_recommend == True,
+                                                    articles_model.Article.is_verify == True)
+        if category_id:
+            query = query.filter(articles_model.Article.category_id == category_id)
+        result = query.order_by(
+            articles_model.Article.seq.asc(), articles_model.Article.id.desc()).limit(page_size).all()
+        return result
+
+    @staticmethod
+    def get_clickcount_article(page_size, category_id=None):
+        """获得点击率前几名的文章"""
+
+        query = articles_model.Article.query.filter(articles_model.Article.is_verify == True)
+        if category_id:
+            query = query.filter(articles_model.Article.category_id == category_id)
+        result = query.order_by(
+            articles_model.Article.click_count.desc(), articles_model.Article.id.desc()).limit(page_size).all()
+        return result
+
+    @staticmethod
+    def get_rlt_category_article(article_id, category_id, page_size):
+        """获得相关类型的文章"""
+
+        result = articles_model.Article.query.filter(articles_model.Article.category_id == category_id,
+                                                     articles_model.Article.id != article_id,
+                                                     articles_model.Article.is_verify == True).order_by(
+            articles_model.Article.seq.desc(), articles_model.Article.id.desc()).limit(page_size).all()
+        return result
+
+    @staticmethod
+    def get_next_article(article_id, category_id):
+        """获得下一篇文章"""
+
+        result = articles_model.Article.query.filter(articles_model.Article.id > article_id,
+                                                     articles_model.Article.category_id == category_id,
+                                                     articles_model.Article.is_verify == True).order_by(
+            articles_model.Article.id.asc()
+        ).limit(1).first()
+        return result
+
+    @staticmethod
+    def get_prev_article(article_id, category_id):
+        """获得上一篇文章"""
+
+        result = articles_model.Article.query.filter(articles_model.Article.id < article_id,
+                                                     articles_model.Article.category_id == category_id,
+                                                     articles_model.Article.is_verify == True).order_by(
+            articles_model.Article.id.desc()
+        ).limit(1).first()
+        return result
+
+    @staticmethod
+    def edit_click_count_article(article_id):
+        """更新文章的点击率"""
+        article = ArticlesService.get_article_id(article_id)
+        if article:
+            article.click_count += 1
+            db.session.commit()
 
     @staticmethod
     def edit_top_onoff(ids, flag):

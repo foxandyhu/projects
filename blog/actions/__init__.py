@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, redirect, abort
 
 adminBp = Blueprint("adminBp", __name__)
 templateAdminBp = Blueprint("templateAdminBp", __name__)
@@ -16,8 +16,10 @@ from utils import json_utils, context_utils
 
 @adminBp.errorhandler(Exception)
 def admin_error(e):
-    message = json_utils.to_json(e.args[0])
-    return message, 500
+    if e.args and e.args[0]:
+        message = json_utils.to_json(e.args[0])
+        return message, e.code if hasattr(e, "code") else 500
+    return e.name, e.code
 
 
 @adminBp.before_request
@@ -28,5 +30,8 @@ def request_intercept():
     path = request.path
     if path not in paths:
         user = context_utils.get_current_user_session()
+        xml_request = request.headers.get("X-Requested-With")
         if not user:
-            return "未登录!", 401
+            if "XMLHttpRequest" == xml_request:
+                return "未登录!", 401
+            return redirect("/manage/login.html")

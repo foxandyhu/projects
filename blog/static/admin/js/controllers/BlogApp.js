@@ -58,7 +58,7 @@ define(["angular","jquery"], function (angular,$) {
     	};
     }])
     .factory("httpInterceptor",function($q,Dialog,$rootScope,$location){
-    	$rootScope.$on("loginEvent",function(errorType){window.location.href="manage/login.html";});
+    	$rootScope.$on("loginEvent",function(errorType){window.location.href="/manage/login.html";});
     	$rootScope.$on("norightEvent",function(errorType){$location.path("/noright");});
     	return {
     				request:function(config){if((config.url.indexOf("views/loading.html")<0)&&config.url.indexOf("views/tip_success.html")<0){$(".load_layer").show();}return config || $q.when(config);},

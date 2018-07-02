@@ -43,7 +43,8 @@ class Category(Serializable, db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(15), nullable=False)  # 类别名称
     seq = db.Column(db.Integer, default=0)  # 排序序号
-    parent_id = db.Column(db.Integer)  # 父类别ID
+    parent_id = db.Column(db.Integer, db.ForeignKey("d_categorys.id"))  # 父类别ID
+    parent = db.relationship("Category",remote_side=[id], lazy="joined")
 
 
 class Tag(Serializable, db.Model):

@@ -8,7 +8,7 @@ from models.forms import UserLoginForm
 @adminBp.route("/index.html")
 def index():
     """后台首页"""
-    return render_template("admin/base.html")
+    return render_template("admin/base.html",login_user=context_utils.get_current_user_session())
 
 
 @adminBp.route("/login.html", methods=["GET", "POST"])
@@ -27,7 +27,7 @@ def login():
 
     try:
         user = users_service.UserService.login(username, password)
-        context_utils.set_current_user_session(user)
+        context_utils.set_current_user_session(user.username)
         return redirect("/manage/index.html")
     except Exception as e:
         return render_template("admin/login.html", message=e)

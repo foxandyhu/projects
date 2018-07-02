@@ -11,10 +11,10 @@ def get_current_user_session():
     return session.get(LOGIN_USER)
 
 
-def set_current_user_session(user):
+def set_current_user_session(username):
     """设置当前登录管理员到Session"""
 
-    session[LOGIN_USER] = user
+    session[LOGIN_USER] = username
 
 
 def put_to_g(key, value):
@@ -29,10 +29,22 @@ def get_from_g(key):
     return g.get(key)
 
 
+def del_from_g(key):
+    """从g请求对象中删除指定的key的值"""
+
+    if g.get(key):
+        g.pop(key)
+
+
 def get_pagination():
     """获得分页对象"""
 
     return g.get(PAGINATION)
+
+
+def del_pagination():
+    """删除分页对象"""
+    del_from_g(PAGINATION)
 
 
 def get_tmpdir():
