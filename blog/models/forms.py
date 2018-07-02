@@ -8,6 +8,7 @@ class UserLoginForm(Form):
                                         validators.DataRequired("请输入用户名!")])
     password = PasswordField("password", [validators.DataRequired("请输入密码!"),
                                           validators.Length(min=5, max=20, message="密码长度为5-20之间!")])
+    captch = StringField("captch", [validators.DataRequired("请输入验证码!")])
 
 
 class MembersForm(Form):

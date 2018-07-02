@@ -8,13 +8,36 @@ LOGIN_USER = "login_user"
 def get_current_user_session():
     """得到当前登录管理员"""
 
-    return session.get(LOGIN_USER)
+    return get_from_session(LOGIN_USER)
 
 
 def set_current_user_session(username):
     """设置当前登录管理员到Session"""
 
-    session[LOGIN_USER] = username
+    put_to_session(LOGIN_USER, username)
+
+
+def del_current_user_session():
+    """删除当前登录管理员退出"""
+
+    session.clear()
+
+
+def put_to_session(key, value):
+    """把数据放入session中"""
+
+    session[key] = value
+
+
+def get_from_session(key):
+    """从session中获得值"""
+
+    return session.get(key)
+
+
+def del_from_session(key):
+    if get_from_session(key):
+        session.pop(key)
 
 
 def put_to_g(key, value):
@@ -84,6 +107,21 @@ def get_upload_article_dir_rlt():
     """获得文章内容图片上传相对路径"""
 
     return "/static/upload/article/"
+
+
+def get_app_image_dir():
+    """获得图片绝对目录"""
+
+    path = os.path.join(os.getcwd(), "static", "images")
+    if not os.path.exists(path):
+        os.makedirs(path)
+    return path + os.path.sep
+
+
+def get_app_image_dir_rlt():
+    """获得APP图片相对路径"""
+
+    return "/static/images/"
 
 
 def get_appdir():

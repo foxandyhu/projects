@@ -33,9 +33,8 @@
                     </div>
                     <div class="form-group">
                         <label class="t">验证码：</label>
-                        <input id="j_captcha" name="j_captcha" type="text" class="form-control x164 in">
-                        <img id="captcha_img" alt="点击更换" title="点击更换" src="/static/admin/images/login/captcha.jpeg"
-                             class="m">
+                        <input id="captch" name="captch" type="text" class="form-control x164 in">
+                        <img id="captcha_img" alt="点击更换" title="点击更换" src="/captch.html" class="m" onclick="this.src='/captch.html?'+Math.random()">
                     </div>
                     <div class="text-danger">{{ message }}</div>
                     <div class="form-group space">
