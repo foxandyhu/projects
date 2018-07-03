@@ -1,6 +1,22 @@
 define(["BlogApp"],function(BlogApp){
 	BlogApp.controller("SystemController",function($scope,$http,Resource,Dialog,Util,SysInit,$location){
 		$("#sysmenu").addClass("active");
+		$scope.initSysTab=function(){
+		    $('a[data-toggle="tab"]').on("shown.bs.tab", function (e) {
+		        var index=e.target.tabIndex
+                if(index==1){
+		            $scope.initSysSettingValidate();
+		            $scope.loadSysInfo();
+                }else if(index==2){
+                    $scope.loadSysCopyRight();
+                }else if(index==3){
+
+                }else if(index==4){
+
+                }
+            });
+		     $(".nav-tabs li:eq(2) a").tab("show");
+		};
 		$scope.loadSysInfo=function () {
           $http.get("/manage/system/web_setting.html",{cache:false}).success(function(data){
                 $scope.sysinfo=data;

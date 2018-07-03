@@ -7,14 +7,16 @@
     </ol>
 </section>
 
-<section class="content">
+<section class="content" ng-init="initSysTab()">
     <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#revenue-chart" data-toggle="tab">基本信息</a></li>
-            <li><a href="#sales-chart" data-toggle="tab">ICP信息</a></li>
+            <li><a href="#info_cc" tabindex="1" data-toggle="tab">基本信息</a></li>
+            <li><a href="#copyright_cc" tabindex="2" data-toggle="tab">ICP信息</a></li>
+            <li><a href="#nav_cc" tabindex="3" data-toggle="tab">导航设置</a></li>
+            <li><a href="#banner_cc" tabindex="4" data-toggle="tab">首页Banner</a></li>
         </ul>
         <div class="tab-content no-padding">
-            <div class="chart tab-pane active" id="revenue-chart" ng-init="initSysSettingValidate();loadSysInfo()">
+            <div class="chart tab-pane" id="info_cc">
                 <form role="form" id="sysinfoForm" method="post" action="manage/system/web_setting.html">
                     <div class="box-body">
                         <div class="form-group">
@@ -60,7 +62,7 @@
                     </div>
                 </form>
             </div>
-            <div class="chart tab-pane" id="sales-chart" ng-init="loadSysCopyRight()">
+            <div class="chart tab-pane" id="copyright_cc">
                 <form role="form" method="post" id="sysCopyRightForm">
                     <div class="box-body">
                         <div class="form-group">
@@ -99,6 +101,67 @@
                         <button type="button" ng-click="mergeSysCopyRight()" class="btn btn-primary">保&nbsp;&nbsp;&nbsp;&nbsp;存</button>
                     </div>
                 </form>
+            </div>
+            <div class="chart tab-pane" id="nav_cc">
+                <div class="box-header">
+                    <div class="box-tools">
+                        <div class="input-group input-group-sm">
+                            <a class="btn-sm btn-danger" href="#/members/add"><span
+                                    class="glyphicon glyphicon-plus"></span>新增</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>导航名称</th>
+                            <th>链接</th>
+                            <th>打开方式</th>
+                            <th>操作</th>
+                        </tr>
+                        <tr ng-repeat="item in [1,2,3,4]">
+                            <td>183</td>
+                            <td>John Doe</td>
+                            <td>11-7-2014</td>
+                            <td>
+                                <button ng-click="editTag($event)" class="btn btn-xs btn-default"><span
+                                        class="glyphicon glyphicon-chevron-up"></span> 上移
+                                </button>
+                                <button ng-click="editTag($event)" class="btn btn-xs btn-info"><span
+                                        class="glyphicon glyphicon-edit"></span> 编辑
+                                </button>
+                                <button ng-click="editTag($event)" class="btn btn-xs btn-danger"><span
+                                        class="glyphicon glyphicon-remove"></span> 删除
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="chart tab-pane" id="banner_cc">
+                <div class="box-header">
+                    <div class="box-tools">
+                        <div class="input-group input-group-sm">
+                            <a class="btn-sm btn-danger" href="#/members/add"><span
+                                    class="glyphicon glyphicon-plus"></span>新增</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <img src="http://dongtingren.com/images/banner01.jpg" class="img-responsive">
+                        </div>
+                        <div class="col-md-3">
+                            链接地址:<input type="text"/>
+                        </div>
+                        <div class="col-md-2">
+                                <button ng-click="editTag($event)" class="btn btn-xs btn-danger"><span
+                                        class="glyphicon glyphicon-remove"></span> 删除
+                                </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
