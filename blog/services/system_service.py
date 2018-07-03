@@ -1,6 +1,6 @@
 from models import system_model
-from utils import context_utils, pagination_utils, string_utils, file_utils
-from extensions import db
+from utils import context_utils, file_utils
+from extensions import db, cache
 
 
 class SystemService(object):
@@ -10,7 +10,7 @@ class SystemService(object):
     def get_sys_info():
         """获得系统基本信息"""
 
-        result = system_model.SysSetting.query.first()
+        result = system_model.SysInfo.query.first()
         return result
 
     @staticmethod
@@ -39,6 +39,7 @@ class SystemService(object):
             if sys_info.logo:
                 file_utils.move_file(source, dest)
         db.session.commit()
+        cache.set("sysinfo", SystemService.get_sys_info(), 0)
 
     @staticmethod
     def get_sys_copyright():
@@ -62,3 +63,46 @@ class SystemService(object):
         else:
             db.session.add(copyright)
         db.session.commit()
+        cache.set("copyright", SystemService.get_sys_copyright(), 0)
+
+    @staticmethod
+    def get_sys_nav_id(navbar_id):
+        """根据ID查找导航栏"""
+
+        result = system_model.SysNavigatorBar.query.filter(system_model.SysNavigatorBar.id == navbar_id).first()
+        return result
+
+    @staticmethod
+    def add_sys_nav(navbar):
+        """添加导航栏"""
+
+        db.session.add(navbar)
+        db.session.commit()
+
+    @staticmethod
+    def edit_sys_nav(navbar):
+        """编辑导航栏"""
+
+        bar = SystemService.get_sys_nav_id(navbar.id)
+        if bar:
+            raise Exception("导航栏不存在!")
+        bar.name = navbar.name
+        bar.seq = navbar.seq
+        bar.link = navbar.link
+        bar.action = navbar.action
+        db.session.commit()
+
+    def del_sys_nav(navbar_id):
+        """删除导航栏"""
+
+        bar = SystemService.get_sys_nav_id(navbar_id)
+        if bar:
+            db.session.delete(bar)
+            db.session.commit()
+
+    @staticmethod
+    def get_sys_navs():
+        """查找所有的导航栏"""
+
+        result = system_model.SysNavigatorBar.query.order_by(system_model.SysNavigatorBar.seq.asc()).all()
+        return result

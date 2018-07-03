@@ -2,7 +2,7 @@ from extensions import db
 from models import Serializable
 
 
-class SysSetting(Serializable, db.Model):
+class SysInfo(Serializable, db.Model):
     """系统管理用户"""
     __tablename__ = "sys_info"
 
@@ -27,3 +27,14 @@ class SysCopyRight(Serializable, db.Model):
     contacts = db.Column(db.String(20))  # 联系人
     phone = db.Column(db.String(30))  # 联系电话
     address = db.Column(db.String(50))  # 联系地址
+
+
+class SysNavigatorBar(Serializable, db.Model):
+    """系统导航栏"""
+
+    __tablename__ = "sys_nav_bar"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(10), nullable=False)  # 名称
+    link = db.Column(db.String(100))  # 链接地址
+    action = db.Column(db.String(10))  # 打开方式
+    seq = db.Column(db.Integer, default=0)  # 排序序号

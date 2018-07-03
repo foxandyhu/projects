@@ -12,14 +12,14 @@ def web_setting():
     if request.method == "GET":
         sys_info = system_service.SystemService.get_sys_info()
         if not sys_info:
-            sys_info = system_model.SysSetting()
+            sys_info = system_model.SysInfo()
         return json_utils.to_json(sys_info)
     else:
         form = forms.SysInfoForm(request.form)
         if not form.validate():
             raise Exception(form.errors)
 
-        info = system_model.SysSetting()
+        info = system_model.SysInfo()
         info.name = form.name.data
         info.website = form.website.data
         info.is_enable = not request.form.get("is_enable") is None
@@ -53,18 +53,39 @@ def web_copyright():
         return json_utils.to_json(ResponseData.get_success())
 
 
-@adminBp.route("/system/web_template.html")
-def web_template():
-    """网站模板设置"""
+@adminBp.route("/system/navbar.html")
+def get_navbars():
+    """网站导航栏设置"""
 
-    return render_template("admin/system/web_template.html")
+    navbars = system_service.SystemService.get_sys_navs()
+    return json_utils.to_json(navbars)
 
 
-@adminBp.route("/system/tasks.html")
-def system_tasks():
-    """系统任务"""
+@adminBp.route("/system/navbar/add.html", methods=["POST"])
+def add_navbar():
+    """添加导航栏"""
 
-    return render_template("admin/system/tasks.html")
+    navbar = system_model.SysNavigatorBar()
+    navbar.name = request.form.get("name")
+    if not navbar.name:
+        raise Exception("导航栏名称为空!")
+
+    navbar.link = request.form.get("link")
+    navbar.action = request.form.get("action")
+    seq = request.form.get("seq")
+    seq = seq if seq else 0
+    if str.isdigit(seq):
+        navbar.seq = int(seq)
+    system_service.SystemService.add_sys_nav(navbar)
+    return json_utils.to_json(ResponseData.get_success())
+
+
+@adminBp.route("system/navbar/del/<int:navbar_id>.html")
+def del_navbar(navbar_id):
+    """删除导航栏"""
+
+    system_service.SystemService.del_sys_nav(navbar_id)
+    return json_utils.to_json(ResponseData.get_success())
 
 
 @adminBp.route("/system/about.html", methods=["GET", "POST"])

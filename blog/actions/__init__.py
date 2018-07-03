@@ -18,7 +18,7 @@ from utils import json_utils, context_utils
 def admin_error(e):
     if e.args and e.args[0]:
         message = json_utils.to_json(e.args[0])
-        return message, e.code if hasattr(e, "code") else 500
+        return message, (e.code if e.code else 500) if hasattr(e, "code") else 500
     return e.name, e.code
 
 
