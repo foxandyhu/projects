@@ -1,5 +1,4 @@
 from flask_script import Manager
-from flask_script import Server
 from flask_script import prompt_bool
 
 from app_config import create_app

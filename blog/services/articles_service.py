@@ -82,77 +82,76 @@ class ArticlesService(object):
         return result
 
     @staticmethod
-    def get_page_article(is_verify=None):
-        """返回文章分页对象"""
+    def get_articles(**kwargs):
+        """返回文章集合对象"""
 
-        query = articles_model.Article.query.order_by(articles_model.Article.is_top.desc(),
-                                                      articles_model.Article.seq.asc(),
-                                                      articles_model.Article.id.desc())
-        if is_verify:
-            query = query.filter(articles_model.Article.is_verify == is_verify)
+        query = articles_model.Article.query
+        if "order_is_top" in kwargs:
+            if kwargs["order_is_top"]:
+                query = query.order_by(articles_model.Article.is_top.asc())
+            else:
+                query = query.order_by(articles_model.Article.is_top.desc())
+        if "order_seq" in kwargs:
+            if kwargs["order_seq"]:
+                query = query.order_by(articles_model.Article.seq.asc())
+            else:
+                query = query.order_by(articles_model.Article.seq.desc())
+        if "order_id" in kwargs:
+            if kwargs["order_id"]:
+                query = query.order_by(articles_model.Article.id.asc())
+            else:
+                query = query.order_by(articles_model.Article.id.desc())
 
-        title = context_utils.get_from_g("title")
-        if title:
-            query = query.filter(articles_model.Article.title.like("%" + title + "%"))
+        if "order_click_count" in kwargs:
+            if kwargs["order_click_count"]:
+                query = query.order_by(articles_model.Article.click_count.asc())
+            else:
+                query = query.order_by(articles_model.Article.click_count.desc())
 
-        category_id = context_utils.get_from_g("cid")
+        if "is_verify" in kwargs:
+            query = query.filter(articles_model.Article.is_verify == kwargs["is_verify"])
 
-        if category_id:
-            category = ArticlesService.get_category_id(category_id)
-            if category:
-                if category.parent_id == 0:
-                    sub_categorys = ArticlesService.get_category_pid(category.id)
-                    if sub_categorys:
-                        ids = [sub.id for sub in sub_categorys]
-                        query = query.filter(articles_model.Article.category_id.in_(ids))
+        if "is_top" in kwargs:
+            query = query.filter(articles_model.Article.is_top == kwargs["is_top"])
+
+        if "is_recommend" in kwargs:
+            query = query.filter(articles_model.Article.is_recommend == kwargs["is_recommend"])
+
+        if "title" in kwargs and kwargs.get("title"):
+            query = query.filter(articles_model.Article.title.like("%" + kwargs["title"] + "%"))
+
+        if "category_id" in kwargs and kwargs.get("category_id"):
+            category_id = kwargs["category_id"]
+            if category_id:
+                category = ArticlesService.get_category_id(category_id)
+                if category:
+                    if category.parent_id == 0:
+                        sub_categorys = ArticlesService.get_category_pid(category.id)
+                        if sub_categorys:
+                            ids = [sub.id for sub in sub_categorys]
+                            query = query.filter(articles_model.Article.category_id.in_(ids))
+                        else:
+                            query = query.filter(articles_model.Article.category_id == category_id)
                     else:
                         query = query.filter(articles_model.Article.category_id == category_id)
-                else:
-                    query = query.filter(articles_model.Article.category_id == category_id)
 
         pagination = context_utils.get_pagination()
-        pagination = query.paginate(pagination.page_no, pagination.page_size)
-        if pagination.items:
-            for item in pagination.items:
-                if item.member:
-                    item.username = item.member.username
-                    del item.member
-                if item.category:
-                    item.category_name = item.category.name
-                    del item.category
-        pagination = pagination_utils.get_pagination_sqlalchemy(pagination)
-        return pagination
-
-    @staticmethod
-    def get_top_article(page_size):
-        """获得置顶的文章"""
-
-        result = articles_model.Article.query.filter(articles_model.Article.is_top == True,
-                                                     articles_model.Article.is_verify == True).order_by(
-            articles_model.Article.seq.asc(), articles_model.Article.id.desc()).limit(page_size).all()
-        return result
-
-    @staticmethod
-    def get_recommend_article(page_size, category_id=None):
-        """获得推荐的文章"""
-
-        query = articles_model.Article.query.filter(articles_model.Article.is_recommend == True,
-                                                    articles_model.Article.is_verify == True)
-        if category_id:
-            query = query.filter(articles_model.Article.category_id == category_id)
-        result = query.order_by(
-            articles_model.Article.seq.asc(), articles_model.Article.id.desc()).limit(page_size).all()
-        return result
-
-    @staticmethod
-    def get_clickcount_article(page_size, category_id=None):
-        """获得点击率前几名的文章"""
-
-        query = articles_model.Article.query.filter(articles_model.Article.is_verify == True)
-        if category_id:
-            query = query.filter(articles_model.Article.category_id == category_id)
-        result = query.order_by(
-            articles_model.Article.click_count.desc(), articles_model.Article.id.desc()).limit(page_size).all()
+        result = None
+        if pagination:
+            pagination = query.paginate(pagination.page_no, pagination.page_size)
+            if pagination.items:
+                for item in pagination.items:
+                    if item.member:
+                        item.username = item.member.username
+                        del item.member
+                    if item.category:
+                        item.category_name = item.category.name
+                        del item.category
+            result = pagination_utils.get_pagination_sqlalchemy(pagination)
+        else:
+            if "query_count" in kwargs and kwargs.get("query_count"):
+                query = query.limit(kwargs["query_count"])
+            result = query.all()
         return result
 
     @staticmethod

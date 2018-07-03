@@ -36,6 +36,9 @@ define(["BlogApp"],function(BlogApp){
         $routeProvider.when("/users",{
             templateUrl:"/templates/admin/users/user_list.html",
             controller:"UserController"
+        }).when("/users/pwd",{
+            templateUrl:"/templates/admin/users/user_pwd.html",
+            controller:"UserController"
         }).when("/menus",{
             templateUrl:"/templates/admin/users/menu_list.html",
             controller:"UserController"

@@ -2,10 +2,30 @@ from flask import Blueprint
 from io import BytesIO
 from utils import captch_utils, context_utils
 from flask import make_response
+from extensions import cache
+from services import system_service
 
 webBp = Blueprint("webBp", __name__)
 
 from web.actions import index
+
+
+@webBp.app_context_processor
+def context_processor_data():
+    """处理模板公共数据"""
+
+    SYSINFO, COPYRIGHT = "sysinfo", "copyright"
+    sysinfo = cache.get(SYSINFO)
+    if not sysinfo:
+        sysinfo = system_service.SystemService.get_sys_info()
+        cache.set(SYSINFO, sysinfo, 0)
+
+    copyright = cache.get(COPYRIGHT)
+    if not copyright:
+        copyright = system_service.SystemService.get_sys_copyright()
+        cache.set(COPYRIGHT, copyright, 0)
+
+    return dict(sysinfo=sysinfo, copyright=copyright)
 
 
 @webBp.route("/captch.html")

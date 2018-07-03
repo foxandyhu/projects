@@ -1,13 +1,14 @@
 from actions import adminBp
 from flask import render_template, request, redirect
-from services import users_service
+from services import users_service, system_service
 from utils import context_utils
 from models.forms import UserLoginForm
 
 
-@adminBp.route("/index.html")
+@adminBp.route("/index.html", methods=["GET", "POST"])
 def index():
     """后台首页"""
+
     return render_template("admin/base.html", login_user=context_utils.get_current_user_session())
 
 

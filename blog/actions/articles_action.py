@@ -11,9 +11,10 @@ def article_list():
     """文章列表"""
 
     pagination_utils.instantce_page()
-    context_utils.put_to_g("title", 'title' in request.args and request.args.get("title"))
-    context_utils.put_to_g("cid", 'cid' in request.args and request.args.get("cid"))
-    pagination = articles_service.ArticlesService.get_page_article()
+    pagination = articles_service.ArticlesService.get_articles(title=request.args.get("title"),
+                                                               category_id=request.args.get("cid"),
+                                                               order_is_top=False,
+                                                               order_seq=True, order_id=False)
     return json_utils.to_json(pagination)
 
 

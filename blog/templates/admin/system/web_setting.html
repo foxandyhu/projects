@@ -1,88 +1,106 @@
-    <section class="content-header">
-        <h1>网站设置</h1>
-        <ol class="breadcrumb">
-            <li><a href="manage/index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
-            <li class="active">网站设置</li>
-        </ol>
-    </section>
+{%raw%}
+<section class="content-header">
+    <h1>网站设置</h1>
+    <ol class="breadcrumb">
+        <li><a href="manage/index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li class="active">网站设置</li>
+    </ol>
+</section>
 
-    <section class="content">
-        <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="#revenue-chart" data-toggle="tab">基本信息</a></li>
-                <li><a href="#sales-chart" data-toggle="tab">ICP信息</a></li>
-            </ul>
-            <div class="tab-content no-padding">
-                <div class="chart tab-pane active" id="revenue-chart">
-                    <form role="form" method="post" action="manage/system/web_setting.html">
-                        <div class="box-body">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">网站名称</label>
-                                <input type="text" name="text" class="form-control" id="name" placeholder="请输入网站名称" maxlength="21">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">域名</label>
-                                <input type="text" name="website" class="form-control" id="website" placeholder="请输入网站域名" maxlength="50">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">网站关键字</label>
-                                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="请输入网站关键字" maxlength="100">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">网站描述</label>
-                                <input type="text" name="remark" class="form-control" id="remark" placeholder="请输入网站描述" maxlength="150">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputFile">LOGO</label>
-                                <input type="file" id="logoFile">
-                                <img src="/static/images/b04.jpg" class="img-thumbnail">
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> 启用站点
-                                </label>
-                            </div>
+<section class="content">
+    <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#revenue-chart" data-toggle="tab">基本信息</a></li>
+            <li><a href="#sales-chart" data-toggle="tab">ICP信息</a></li>
+        </ul>
+        <div class="tab-content no-padding">
+            <div class="chart tab-pane active" id="revenue-chart" ng-init="initSysSettingValidate();loadSysInfo()">
+                <form role="form" id="sysinfoForm" method="post" action="manage/system/web_setting.html">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">网站名称</label>
+                            <input type="text" ng-model="sysinfo.name" name="name" class="form-control" id="name"
+                                   placeholder="请输入网站名称" maxlength="20">
                         </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">域名</label>
+                            <input type="text" ng-model="sysinfo.website" name="website" class="form-control"
+                                   id="website" placeholder="请输入网站域名" maxlength="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">网站关键字</label>
+                            <input type="text" ng-model="sysinfo.key_words" name="keywords" class="form-control"
+                                   id="keywords" placeholder="请输入网站关键字"
+                                   maxlength="200">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">网站描述</label>
+                            <input type="text" ng-model="sysinfo.remark" name="remark" class="form-control" id="remark"
+                                   placeholder="请输入网站描述"
+                                   maxlength="200">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile">LOGO</label>
+                            <input type="file" file-upload="imgFile" id="imgFile">
+                            <input type="hidden" ng-model="sysinfo.logo" name="logo" id="logo"
+                                   value="{{imageResult.path}}"/>
+                            <img ng-if="imageResult" ng-src="{{imageResult.fullUrl}}" class="img-thumbnail"
+                                 width="100px" height="100px">
+                            <img ng-if="!imageResult" src="/static/admin/images/no_picture.gif" class="img-thumbnail">
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="is_enable" ng-model="sysinfo.is_enable"> 启用站点
+                            </label>
+                        </div>
+                    </div>
 
-                        <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">保&nbsp;&nbsp;&nbsp;&nbsp;存</button>
+                    <div class="box-footer">
+                        <button type="button" ng-click="mergeSysInfo()" class="btn btn-primary">保&nbsp;&nbsp;&nbsp;&nbsp;存</button>
+                    </div>
+                </form>
+            </div>
+            <div class="chart tab-pane" id="sales-chart" ng-init="loadSysCopyRight()">
+                <form role="form" method="post" id="sysCopyRightForm">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">备案号</label>
+                            <input type="text" ng-model="copyright.icp" name="icp" class="form-control" id="icp"
+                                   placeholder="请输入网站备案号" maxlength="30">
                         </div>
-                    </form>
-                </div>
-                <div class="chart tab-pane" id="sales-chart">
-                    <form role="form" method="post" action="manage/system/web_setting.html">
-                        <div class="box-body">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">备案号</label>
-                                <input type="text" name="icp" class="form-control" id="icp" placeholder="请输入网站备案号" maxlength="30">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">版权信息</label>
-                                <input type="text" name="copyright" class="form-control" id="copyright" placeholder="请输入版权信息" maxlength="50">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">主办单位</label>
-                                <input type="text" name="organizer" class="form-control" id="organizer" placeholder="请输入网站主办单位" maxlength="50">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">联系人</label>
-                                <input type="text" name="contact" class="form-control" id="contact" placeholder="请输入网站联系人" maxlength="10">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">联系电话</label>
-                                <input type="text" name="telephone" class="form-control" id="telephone" placeholder="请输入联系电话" maxlength="20">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">联系地址</label>
-                                <input type="text" name="address" class="form-control" id="address" placeholder="请输入联系地址" maxlength="20">
-                            </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">版权信息</label>
+                            <input type="text" ng-model="copyright.copyright" name="copyright" class="form-control"
+                                   id="copyright" placeholder="请输入版权信息" maxlength="50">
                         </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">主办单位</label>
+                            <input type="text" ng-model="copyright.organizer" name="organizer" class="form-control"
+                                   id="organizer" placeholder="请输入网站主办单位" maxlength="50" autocomplete="organization">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">联系人</label>
+                            <input type="text" ng-model="copyright.contacts" name="contacts" class="form-control"
+                                   id="contacts" placeholder="请输入网站联系人" maxlength="20">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">联系电话</label>
+                            <input type="text" ng-model="copyright.phone" name="phone" class="form-control" id="phone"
+                                   placeholder="请输入联系电话" maxlength="30" autocomplete='tel'>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">联系地址</label>
+                            <input type="text" ng-model="copyright.address" name="address" class="form-control"
+                                   id="address" placeholder="请输入联系地址" maxlength="50" autocomplete='address-line1'>
+                        </div>
+                    </div>
 
-                        <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">保&nbsp;&nbsp;&nbsp;&nbsp;存</button>
-                        </div>
-                    </form>
-                </div>
+                    <div class="box-footer">
+                        <button type="button" ng-click="mergeSysCopyRight()" class="btn btn-primary">保&nbsp;&nbsp;&nbsp;&nbsp;存</button>
+                    </div>
+                </form>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+{%endraw%}

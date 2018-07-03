@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>后台管理系统</title>
+    <title>{{ sysinfo.name }}--后台管理系统</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="/static/admin/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/admin/plugins/awesome/css/font-awesome.min.css">
@@ -126,7 +126,7 @@
                             </li>
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">修改资料</a>
+                                    <a href="#/users/pwd" class="btn btn-default btn-flat">修改资料</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="/manage/logout.html" class="btn btn-default btn-flat">登出</a>
@@ -245,7 +245,8 @@
                 </li>
                 <li class="header">快捷操作</li>
                 <li><a href="#/home"><i class="fa fa-circle-o text-red"></i> <span>首页</span></a></li>
-                <li><a href="/manage/system/editpwd.html"><i class="fa fa-circle-o text-red"></i> <span>修改密码</span></a></li>
+                <li><a href="#/users/pwd"><i class="fa fa-circle-o text-red"></i> <span>修改密码</span></a>
+                </li>
                 <li><a href="/manage/logout.html"><i class="fa fa-circle-o text-yellow"></i> <span>退出系统</span></a></li>
             </ul>
             <!-- 菜单栏 end -->
@@ -264,10 +265,10 @@
     <!-- 底部 begin -->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>Version</b> 2.3.0
+            <b>{{ copyright.organizer }}</b>
         </div>
-        <strong>Copyright &copy; 2018-2022 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
-        reserved.
+        <strong>{{ copyright.copyright }} <a
+                href="{{ sysinfo.website }}" target="_blank">{{ sysinfo.name }}</a>.</strong> {{ copyright.icp }}
     </footer>
     <!-- 底部 end -->
 
@@ -288,6 +289,7 @@
 <script src="/static/admin/plugins/jquery/jquery.min.js"></script>
 
 <script src="/static/admin/dist/js/adminlte.min.js"></script>
-<script type="text/javascript" data-main="../static/admin/js/main" src="/static/admin/plugins/requirejs/require.js"></script>
+<script type="text/javascript" data-main="../static/admin/js/main"
+        src="/static/admin/plugins/requirejs/require.js"></script>
 </body>
 </html>

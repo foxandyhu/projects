@@ -41,13 +41,26 @@ class UserService(object):
         return result
 
     @staticmethod
-    def edit_user_enable(member_id):
+    def edit_user_enable(user_id):
         """修改管理员状态"""
 
-        user = UserService.get_user(member_id)
+        user = UserService.get_user(user_id)
         if not user:
             raise Exception("用户信息不存在")
         user.is_enable = not user.is_enable
+        db.session.commit()
+
+    @staticmethod
+    def edit_user_pwd(user_id, pwd):
+        """修改管理员状态"""
+
+        user = UserService.get_user(user_id)
+        if not user:
+            raise Exception("用户信息不存在")
+        if not pwd:
+            raise Exception("密码为空!")
+        user.salt = string_utils.get_random_str(5)
+        user.password = context_utils.get_md5(user.salt + pwd)  # 密码混淆
         db.session.commit()
 
     @staticmethod

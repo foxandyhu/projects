@@ -131,6 +131,15 @@ def get_appdir():
     return path + os.path.sep
 
 
+def get_app_template_dir():
+    """获得App模板绝对目录"""
+
+    path = os.path.join(os.getcwd(), "templates")
+    if not os.path.exists(path):
+        os.makedirs(path)
+    return path + os.path.sep
+
+
 def get_md5(str=""):
     """MD5加密"""
 

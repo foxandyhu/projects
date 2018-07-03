@@ -3,12 +3,12 @@ define(["BlogApp"], function (BlogApp) {
         $("#membermenu").addClass("active");
         $scope.loadMembers = function () {
 		    $http.get("/manage/members/list.html",{params:{pageNo:$scope.currentPage,name:$("#name").val()}},{cache:false}).success(function(data){
-				if(data){$scope.items=data.items;$scope.pageCount = data.total;}
+				if(data){$scope.items=data.items;$scope.pageCount = data.page_count;}
 			});
         };
         $scope.loadVerifyMembers = function () {
             $http.get("/manage/members/unverify.html",{params:{pageNo:$scope.currentPage,name:$("#name").val()}},{cache:false}).success(function(data){
-                if(data){$scope.items=data.items;$scope.pageCount = data.total;}
+                if(data){$scope.items=data.items;$scope.pageCount = data.page_count;}
             });
         };
         $scope.enableMember=function(){

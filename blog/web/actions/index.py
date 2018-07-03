@@ -9,9 +9,11 @@ from utils import pagination_utils, context_utils
 def index():
     """博客首页"""
 
-    top_articles = ArticlesService.get_top_article(4)
-    recommend_articles = ArticlesService.get_recommend_article(20)
-    click_count_articles = ArticlesService.get_clickcount_article(6)
+    top_articles = ArticlesService.get_articles(query_count=4, is_top=True, is_verify=True, order_seq=True,
+                                                order_id=False)
+    recommend_articles = ArticlesService.get_articles(query_count=20, is_recommend=True, is_verify=True, order_seq=True,
+                                                      order_id=False)
+    click_count_articles = ArticlesService.get_articles(query_count=6, is_verify=True, order_click_count=False)
     recommend_articles2 = []
     if len(recommend_articles) > 14:
         recommend_articles2 = recommend_articles[14:]
@@ -41,12 +43,14 @@ def article_list(category_id):
     """文章列表"""
 
     pagination_utils.instantce_page(10)
-    context_utils.put_to_g("cid", category_id)
-    pager = ArticlesService.get_page_article(True)
+    pager = ArticlesService.get_articles(is_verify=True, category_id=category_id, order_id=False)
     category = ArticlesService.get_category_id(category_id)
     categorys = ArticlesService.get_category_pid(category.parent_id)
-    click_count_articles = ArticlesService.get_clickcount_article(6, category_id)
-    recommend_article = ArticlesService.get_recommend_article(6, category_id)
+
+    context_utils.del_pagination()
+    click_count_articles = ArticlesService.get_articles(query_count=6, category_id=category_id, order_click_count=False)
+    recommend_article = ArticlesService.get_articles(query_count=6, is_recommend=True, order_seq=True, order_id=False,
+                                                     category_id=category_id)
 
     current_page = int((pager.page_no - 1) / 5) + 1
     end = current_page * 5
@@ -72,3 +76,10 @@ def about_blog():
     """关于博客"""
 
     return render_template("about.html")
+
+
+@webBp.route("/contact.html")
+def contact_blog():
+    """联系我们"""
+
+    return render_template("contact.html")

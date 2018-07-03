@@ -3,7 +3,7 @@ define(["BlogApp"],function(BlogApp){
 			$("#articlemenu").addClass("active");
 		$scope.loadTags = function () {
 				$http.get("/manage/blog/tags.html",{params:{pageNo:$scope.currentPage,name:$("#name").val()}},{cache:false}).success(function(data){
-					if(data){$scope.items=data.items;$scope.pageCount = data.total;}
+					if(data){$scope.items=data.items;$scope.pageCount = data.page_count;}
 				});
 		};
 		$scope.addTag=function(){
@@ -115,7 +115,7 @@ define(["BlogApp"],function(BlogApp){
        			cid=$scope.cid;
 			}
 		    $http.get("/manage/blog/articles.html",{params:{cid:cid,pageNo:$scope.currentPage,title:$("#title").val()}},{cache:false}).success(function(data){
-				if(data){$scope.items=data.items;$scope.pageCount = data.total;}
+				if(data){$scope.items=data.items;$scope.pageCount = data.page_count;}
 			});
         };
        $scope.searchArticle=function(){
@@ -126,6 +126,7 @@ define(["BlogApp"],function(BlogApp){
 		   $(".tree_choose").removeClass("tree_choose");
 		   $(e.currentTarget).addClass("tree_choose");
 		   var cid=undefined;
+		   $scope.currentPage=1;
 		   if(this.item){cid=this.item.id;}else{cid=this.c.id;}
 		   $scope.cid=cid;
            $scope.loadArticles();

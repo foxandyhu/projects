@@ -48,3 +48,11 @@ class ArticlesForm(Form):
     seq = IntegerField("seq", [validators.NumberRange(min=0, message="排序序号错误!")])
     category_id = IntegerField("category_id",
                                [validators.DataRequired("请选择文章类别"), validators.NumberRange(min=1, message="请选择文章类别!")])
+
+
+class SysInfoForm(Form):
+    """网站基本信息验证"""
+
+    name = StringField("name",
+                       [validators.DataRequired("请输入网站名称!"), validators.Length(min=1, max=20, message="名称长度为1-21之间!")])
+    website = StringField("website", [validators.DataRequired("请输入域名!"), validators.URL(message="域名格式不正确!")])

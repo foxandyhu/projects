@@ -27,9 +27,38 @@ class SystemService(object):
             if info.logo != sys_info.logo:
                 info.logo = sys_info.logo
                 source = context_utils.get_appdir() + sys_info.logo  # LOGO源物理路径
-                dest = context_utils.get_app_image_dir()+"logo.png"
+                dest = context_utils.get_app_image_dir() + "logo.png"
                 if sys_info.logo:
                     file_utils.move_file(source, dest)
         else:
+            if sys_info.logo:
+                source = context_utils.get_appdir() + sys_info.logo  # LOGO源物理路径
+                dest = context_utils.get_app_image_dir() + "logo.png"
+                sys_info.logo = context_utils.get_app_image_dir_rlt() + "logo.png"
             db.session.add(sys_info)
+            if sys_info.logo:
+                file_utils.move_file(source, dest)
+        db.session.commit()
+
+    @staticmethod
+    def get_sys_copyright():
+        """获得系统版权信息"""
+
+        result = system_model.SysCopyRight.query.first()
+        return result
+
+    @staticmethod
+    def merge_sys_copyright(copyright):
+        """更新或添加系统版权信息"""
+
+        info = SystemService.get_sys_copyright()
+        if info:
+            info.icp = copyright.icp
+            info.copyright = copyright.copyright
+            info.organizer = copyright.organizer
+            info.contacts = copyright.contacts
+            info.phone = copyright.phone
+            info.address = copyright.address
+        else:
+            db.session.add(copyright)
         db.session.commit()
