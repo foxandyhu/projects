@@ -46,3 +46,13 @@ table.member_table tr td{vertical-align: middle}
 .tree .tree-folder .tree-folder-header .tree-folder-name, .tree .tree-item .tree-item-name {display: inline;z-index: 2;}
 .tree_choose{background-color: #e8edf1;}
 /*********************************树 end****************************/
+
+.marquee {
+　　white-space: nowrap;
+　　overflow:-webkit-marquee;
+　　width: 170px;
+　　-webkit-marquee-direction:left;
+　　-webkit-marquee-speed:normal;
+　　-webkit-marquee-style:scroll;
+　　-webkit-marquee-repetition:infinite;
+}

@@ -172,7 +172,9 @@
 
             <!-- 菜单栏 begin -->
             <ul class="sidebar-menu" data-widget="tree">
-                <li class="header">北京 多云 23 星期一 13:10</li>
+                <li class="header" style="padding:0px">
+                    <marquee id="weather" direction="left" behavior="scroll" scrollamount="50" scrolldelay="1000" onmouseover="this.stop();" onmouseout="this.start();"></marquee>
+                </li>
                 <li class="treeview" id="sysmenu">
                     <a href="javascript:void(0)">
                         <i class="fa fa-dashboard"></i> <span>系统管理</span> <i class="fa fa-angle-left pull-right"></i>
@@ -291,5 +293,15 @@
 <script src="/static/admin/dist/js/adminlte.min.js"></script>
 <script type="text/javascript" data-main="../static/admin/js/main"
         src="/static/admin/plugins/requirejs/require.js"></script>
+<script>
+    $(function(){
+        $.ajax({url:"/manage/weather.html",success:function(result){
+            var json=$.parseJSON(result);
+            var str="<img src='"+json.pic+"' width='25px'/>&nbsp;&nbsp;";
+            str+=json.city+"&nbsp;&nbsp;"+json.weather+"&nbsp;&nbsp;"+json.date;
+            $("#weather").html(str);
+        }});
+    });
+</script>
 </body>
 </html>

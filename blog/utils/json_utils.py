@@ -21,4 +21,12 @@ class MyEncoder(json.JSONEncoder):
 
 
 def to_json(obj):
+    """对象转JSON"""
+
     return json.dumps(obj, cls=MyEncoder)
+
+
+def to_json_str(str):
+    """字符串转为json"""
+
+    return json.loads(str)

@@ -1,8 +1,9 @@
 from actions import adminBp
 from flask import render_template, request, redirect
-from services import users_service, system_service
-from utils import context_utils
+from services import users_service
+from utils import context_utils, extends_utils,json_utils
 from models.forms import UserLoginForm
+from models import ResponseData
 
 
 @adminBp.route("/index.html", methods=["GET", "POST"])
@@ -43,3 +44,20 @@ def logout():
 
     context_utils.del_current_user_session()
     return redirect("/manage/login.html")
+
+
+@adminBp.route("/weather.html")
+def get_weather():
+    """获取天气信息"""
+
+    ip = request.remote_addr
+    city_json = extends_utils.get_city_ip(ip)
+    if city_json:
+        city = city_json.get("city")
+        if not city:
+            city = city_json.get("region")
+        weather_json = extends_utils.get_city_weather("深圳")
+        if not weather_json:
+            raise Exception("获取天气失败!")
+        return json_utils.to_json(weather_json)
+    return json_utils.to_json(ResponseData.get_failed("获取天气失败!"))
