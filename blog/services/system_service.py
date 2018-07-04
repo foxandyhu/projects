@@ -24,12 +24,11 @@ class SystemService(object):
             info.key_words = sys_info.key_words
             info.remark = sys_info.remark
             info.is_enable = sys_info.is_enable
-            if info.logo != sys_info.logo:
-                info.logo = sys_info.logo
+            if sys_info.logo and info.logo != sys_info.logo:
                 source = context_utils.get_appdir() + sys_info.logo  # LOGO源物理路径
                 dest = context_utils.get_app_image_dir() + "logo.png"
-                if sys_info.logo:
-                    file_utils.move_file(source, dest)
+                info.logo = context_utils.get_app_image_dir_rlt() + file_utils.get_filename(dest)
+                file_utils.move_file(source, dest)
         else:
             if sys_info.logo:
                 source = context_utils.get_appdir() + sys_info.logo  # LOGO源物理路径
@@ -64,6 +63,8 @@ class SystemService(object):
             db.session.add(copyright)
         db.session.commit()
         cache.set("copyright", SystemService.get_sys_copyright(), 0)
+
+    ##########################导航栏##############################
 
     @staticmethod
     def get_sys_nav_id(navbar_id):
@@ -105,4 +106,65 @@ class SystemService(object):
         """查找所有的导航栏"""
 
         result = system_model.SysNavigatorBar.query.order_by(system_model.SysNavigatorBar.seq.asc()).all()
+        return result
+
+    ##########################Banner###############################
+
+    @staticmethod
+    def get_sys_banner_id(banner_id):
+        """根据ID查找banner"""
+
+        result = system_model.SysBanner.query.filter(system_model.SysBanner.id == banner_id).first()
+        return result
+
+    @staticmethod
+    def add_sys_banner(banner):
+        """添加banner"""
+
+        source = None
+        if banner.logo:
+            source = context_utils.get_appdir() + banner.logo  # LOGO源物理路径
+            banner.logo = context_utils.get_app_image_dir_rlt() + file_utils.get_filename(source)
+        dest = context_utils.get_app_image_dir()
+
+        db.session.add(banner)
+        db.session.commit()
+        if banner.logo:
+            file_utils.move_file(source, dest)
+
+    @staticmethod
+    def edit_sys_banner(banner):
+        """编辑导banner"""
+
+        bar = SystemService.get_sys_banner_id(banner.id)
+        if not bar:
+            raise Exception("Banner不存在!")
+        bar.title = banner.title
+        bar.seq = banner.seq
+        bar.link = banner.link
+        bar.action = banner.action
+
+        if banner.logo and bar.logo != banner.logo:
+            if not banner.logo.startswith("http://"):   #外部链接
+                source = context_utils.get_appdir() + banner.logo  # LOGO源物理路径
+                dest = context_utils.get_app_image_dir()
+                banner.logo = context_utils.get_app_image_dir_rlt() + file_utils.get_filename(source)
+                file_utils.move_file(source, dest)
+        bar.logo = banner.logo
+
+        db.session.commit()
+
+    def del_sys_banner(banner_id):
+        """删除Banner"""
+
+        banner = SystemService.get_sys_banner_id(banner_id)
+        if banner:
+            db.session.delete(banner)
+            db.session.commit()
+
+    @staticmethod
+    def get_sys_banners():
+        """查找所有的banner"""
+
+        result = system_model.SysBanner.query.order_by(system_model.SysBanner.seq.asc()).all()
         return result

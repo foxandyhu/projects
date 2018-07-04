@@ -3,6 +3,7 @@ from actions import adminBp
 from services import system_service
 from utils import json_utils, context_utils, file_utils
 from models import ResponseData, forms, system_model
+import copy
 
 
 @adminBp.route("/system/web_setting.html", methods=["GET", "POST"])
@@ -55,7 +56,7 @@ def web_copyright():
 
 @adminBp.route("/system/navbar.html")
 def get_navbars():
-    """网站导航栏设置"""
+    """获得网站导航栏"""
 
     navbars = system_service.SystemService.get_sys_navs()
     return json_utils.to_json(navbars)
@@ -82,7 +83,7 @@ def add_navbar():
 
 @adminBp.route("/system/navbar/edit.html", methods=["POST"])
 def edit_navbar():
-    """添加导航栏"""
+    """编辑导航栏"""
 
     navbar = system_model.SysNavigatorBar()
     navbar.name = request.form.get("name")
@@ -105,6 +106,102 @@ def del_navbar(navbar_id):
     """删除导航栏"""
 
     system_service.SystemService.del_sys_nav(navbar_id)
+    return json_utils.to_json(ResponseData.get_success())
+
+
+@adminBp.route("/system/navbar/tohtml.html")
+def create_navbar_html():
+    """生成静态模板"""
+
+    navbars = system_service.SystemService.get_sys_navs()
+    html = render_template("header.html", navbars=navbars)
+
+    path = context_utils.get_app_template_dir()
+    path = path + "header.tpl"
+    with open(file=path, mode="w", encoding="utf8") as file:
+        file.writelines(html)
+
+    return json_utils.to_json(ResponseData.get_success())
+
+
+@adminBp.route("/system/banner.html")
+def get_banners():
+    """获得网站banner"""
+
+    banners = system_service.SystemService.get_sys_banners()
+    return json_utils.to_json(banners)
+
+
+@adminBp.route("/system/banner/add.html", methods=["POST"])
+def add_banner():
+    """添加Banner"""
+
+    banner = system_model.SysBanner()
+    banner.title = request.form.get("title")
+    banner.link = request.form.get("link")
+    banner.action = request.form.get("action")
+    seq = request.form.get("seq")
+    seq = seq if seq else 0
+    if str.isdigit(seq):
+        banner.seq = int(seq)
+    system_service.SystemService.add_sys_banner(banner)
+    return json_utils.to_json(ResponseData.get_success())
+
+
+@adminBp.route("/system/banner/upload.html", methods=["POST"])
+def upload_banner_logo():
+    """上传banner图片"""
+
+    banner_id = request.form.get("banner_id")
+    logo = request.form.get("logo")
+
+    banner = system_service.SystemService.get_sys_banner_id(banner_id)
+
+    b = copy.copy(banner)
+    b.logo = logo
+    system_service.SystemService.edit_sys_banner(b)
+    return json_utils.to_json(ResponseData.get_success())
+
+
+@adminBp.route("/system/banner/edit.html", methods=["POST"])
+def edit_banner():
+    """编辑导航栏"""
+
+    banner = system_model.SysBanner()
+    banner.id = request.form.get("id")
+    banner.title = request.form.get("title")
+    banner.link = request.form.get("link")
+    banner.action = request.form.get("action")
+    banner.logo = request.form.get("logo")
+    seq = request.form.get("seq")
+    seq = seq if seq else 0
+    if str.isdigit(seq):
+        banner.seq = int(seq)
+
+    system_service.SystemService.edit_sys_banner(banner)
+    return json_utils.to_json(ResponseData.get_success())
+
+
+@adminBp.route("/system/banner/del/<int:banner_id>.html")
+def del_banner(banner_id):
+    """删除Banner"""
+
+    system_service.SystemService.del_sys_banner(banner_id)
+    return json_utils.to_json(ResponseData.get_success())
+
+
+@adminBp.route("/system/banner/tohtml.html")
+def create_banner_html():
+    """生成静态模板"""
+
+    banners = system_service.SystemService.get_sys_banners()
+    html = render_template("banner.html", banners=banners)
+
+    path = context_utils.get_app_template_dir()
+    path = path + "banner.tpl"
+    with open(file=path, mode="w", encoding="utf8") as file:
+        file.writelines(html)
+
     return json_utils.to_json(ResponseData.get_success())
 
 

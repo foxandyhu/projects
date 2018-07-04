@@ -107,7 +107,12 @@
                     <h3 class="box-title"></h3>
                     <div class="box-tools">
                         <div class="input-group input-group-sm">
-                            <a ng-show="show_new_navbar" class="btn-sm btn-danger" href="javascript:void(0)" ng-click="newNavBar()">
+                            <a ng-show="show_new_banner" class="btn-sm btn-default" href="javascript:void(0)"
+                               ng-click="createNavBarHtml()"><span
+                                    class="glyphicon glyphicon-cog"></span>生成静态文件</a>
+                            &nbsp;&nbsp;&nbsp;
+                            <a ng-show="show_new_navbar" class="btn-sm btn-danger" href="javascript:void(0)"
+                               ng-click="newNavBar()">
                                 <span class="glyphicon glyphicon-plus"></span>新增</a>
                         </div>
                     </div>
@@ -127,10 +132,12 @@
                             <td>{{ item.action }}</td>
                             <td>{{ item.seq }}</td>
                             <td>
-                                <button ng-show="show_new_navbar" ng-click="editNavBar($event)" class="btn btn-xs btn-info"><span
+                                <button ng-show="show_new_navbar" ng-click="editNavBar($event)"
+                                        class="btn btn-xs btn-info"><span
                                         class="glyphicon glyphicon-edit"></span> 编辑
                                 </button>
-                                <button ng-show="show_new_navbar" ng-click="delNavBar()" class="btn btn-xs btn-danger"><span
+                                <button ng-show="show_new_navbar" ng-click="delNavBar()"
+                                        class="btn btn-xs btn-danger"><span
                                         class="glyphicon glyphicon-remove"></span> 删除
                                 </button>
                             </td>
@@ -143,23 +150,65 @@
                     <h3 class="box-title"></h3>
                     <div class="box-tools">
                         <div class="input-group input-group-sm">
-                            <a class="btn-sm btn-danger" href="#/members/add"><span
+                            <a ng-show="show_new_banner" class="btn-sm btn-default" href="javascript:void(0)"
+                               ng-click="createBannerHtml()"><span
+                                    class="glyphicon glyphicon-cog"></span>生成静态文件</a>
+                            &nbsp;&nbsp;&nbsp;
+                            <a ng-show="show_new_banner" class="btn-sm btn-danger" href="javascript:void(0)"
+                               ng-click="newBanner()"><span
                                     class="glyphicon glyphicon-plus"></span>新增</a>
                         </div>
                     </div>
                 </div>
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-md-5">
-                            <img src="http://dongtingren.com/images/banner01.jpg" class="img-responsive">
-                        </div>
-                        <div class="col-md-3">
-                            链接地址:<input type="text"/>
-                        </div>
-                        <div class="col-md-2">
-                                <button ng-click="editTag($event)" class="btn btn-xs btn-danger"><span
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover" id="bannertable">
+                        <tr>
+                            <th>标题</th>
+                            <th>链接</th>
+                            <th>打开方式</th>
+                            <th>排序</th>
+                            <th>图片</th>
+                            <th>操作</th>
+                        </tr>
+                        <tr ng-repeat="item in banners">
+                            <td>{{ item.title }}</td>
+                            <td>{{ item.link }}</td>
+                            <td>{{ item.action }}</td>
+                            <td>{{ item.seq }}</td>
+                            <td><a href="javascript:void(0)" ng-show="show_new_banner"
+                                   ng-click="showBannerImg()">查看大图</a></td>
+                            <td>
+                                <button ng-show="show_new_banner" ng-click="editBanner($event)"
+                                        class="btn btn-xs btn-info"><span
+                                        class="glyphicon glyphicon-edit"></span> 编辑
+                                </button>
+                                <button ng-show="show_new_banner" ng-click="delBanner()"
+                                        class="btn btn-xs btn-danger"><span
                                         class="glyphicon glyphicon-remove"></span> 删除
                                 </button>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="modal fade" id="bannerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog" style="width:fit-content">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <input type="file" file-upload="imgFile" id="bannerFile" class="hidden">
+                                        <img ng-if="imageResult.path" ng-src="{{imageResult.fullUrl}}" onclick="bannerFile.click()" class="img-rounded">
+                                        <img ng-if="!imageResult.path" src="/static/admin/images/add_img.png" onclick="bannerFile.click()" class="img-rounded">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">链接地址</label>
+                                        <input type="text" class="form-control" ng-model="imageResult.path"/>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="button" class="btn btn-primary" ng-click="addBannerLogo()">提交更改</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

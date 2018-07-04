@@ -1,0 +1,13 @@
+<div class="banner">
+    <div id="banner" class="fader">
+        {% for banner in banners %}
+            <a href="{{ banner.link}}" title="{{ banner.title }}" target="{{ banner.action}}"><img class="slide" src="{{ banner.logo }}" title="{{ banner.title }}"></a>
+        {% endfor %}
+        <div class="fader_controls">
+            <div class="page prev" data-target="prev">&lsaquo;</div>
+            <div class="page next" data-target="next">&rsaquo;</div>
+            <ul class="pager_list">
+            </ul>
+        </div>
+    </div>
+</div>

@@ -38,3 +38,15 @@ class SysNavigatorBar(Serializable, db.Model):
     link = db.Column(db.String(100))  # 链接地址
     action = db.Column(db.String(10))  # 打开方式
     seq = db.Column(db.Integer, default=0)  # 排序序号
+
+
+class SysBanner(Serializable, db.Model):
+    """系统Banner"""
+
+    __tablename__ = "sys_banner"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    title = db.Column(db.String(10), nullable=False)  # 名称
+    link = db.Column(db.String(200))  # 链接地址
+    action = db.Column(db.String(10))  # 打开方式
+    seq = db.Column(db.Integer, default=0)  # 排序序号
+    logo = db.Column(db.String(200), nullable=False)  # 图片地址

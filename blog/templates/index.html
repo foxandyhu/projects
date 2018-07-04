@@ -14,21 +14,9 @@
     </script>
 </head>
 <body>
-{% include("header.html") %}
+{% include("header.tpl") ignore missing %}
 <article>
-    <div class="banner">
-        <div id="banner" class="fader">
-            <img class="slide" src="images/banner01.jpg">
-            <img class="slide" src="images/banner02.jpg">
-            <img class="slide" src="images/banner03.jpg">
-            <div class="fader_controls">
-                <div class="page prev" data-target="prev">&lsaquo;</div>
-                <div class="page next" data-target="next">&rsaquo;</div>
-                <ul class="pager_list">
-                </ul>
-            </div>
-        </div>
-    </div>
+    {% include("banner.tpl") ignore missing %}
     <div class="blog">
         {% for article in topArticles %}
         <figure>

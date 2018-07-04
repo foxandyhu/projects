@@ -202,8 +202,8 @@ define(["BlogApp"],function(BlogApp){
 			});
 	   };
        $scope.initArticleAdd=function(){
-       		Resource.init(["kindeditor","select2"],function () {
-       			 Util.createSimpleEditor("content");
+       		Resource.init(["select2"],function () {
+       			Util.createSimpleEditor("content");
        			$('.select2').select2();
        			$scope.loadCategorys();
        			$scope.loadTags();
