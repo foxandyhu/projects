@@ -127,10 +127,10 @@
                             <td>{{ item.action }}</td>
                             <td>{{ item.seq }}</td>
                             <td>
-                                <button ng-click="editTag($event)" class="btn btn-xs btn-info"><span
+                                <button ng-show="show_new_navbar" ng-click="editNavBar($event)" class="btn btn-xs btn-info"><span
                                         class="glyphicon glyphicon-edit"></span> 编辑
                                 </button>
-                                <button ng-click="delNavBar()" class="btn btn-xs btn-danger"><span
+                                <button ng-show="show_new_navbar" ng-click="delNavBar()" class="btn btn-xs btn-danger"><span
                                         class="glyphicon glyphicon-remove"></span> 删除
                                 </button>
                             </td>

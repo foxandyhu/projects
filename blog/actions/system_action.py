@@ -80,6 +80,26 @@ def add_navbar():
     return json_utils.to_json(ResponseData.get_success())
 
 
+@adminBp.route("/system/navbar/edit.html", methods=["POST"])
+def edit_navbar():
+    """添加导航栏"""
+
+    navbar = system_model.SysNavigatorBar()
+    navbar.name = request.form.get("name")
+    if not navbar.name:
+        raise Exception("导航栏名称为空!")
+
+    navbar.id = request.form.get("id")
+    navbar.link = request.form.get("link")
+    navbar.action = request.form.get("action")
+    seq = request.form.get("seq")
+    seq = seq if seq else 0
+    if str.isdigit(seq):
+        navbar.seq = int(seq)
+    system_service.SystemService.edit_sys_nav(navbar)
+    return json_utils.to_json(ResponseData.get_success())
+
+
 @adminBp.route("system/navbar/del/<int:navbar_id>.html")
 def del_navbar(navbar_id):
     """删除导航栏"""

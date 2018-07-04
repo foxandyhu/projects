@@ -25,39 +25,76 @@ define(["BlogApp"],function(BlogApp){
 		$scope.show_new_navbar=true;
 		$scope.newNavBar=function(){
             $scope.show_new_navbar=false;
-		    var tr=document.createElement("tr");
-		    var names=["name","link","action","seq"];
-		    names.forEach(function (item,index) {
-                var td=document.createElement("td");
-                var ele=undefined;
-                if(index==2){
-                    ele=document.createElement("select");
-                    var values=["_blank","_self"];
-                    values.forEach(function(item,index){
-                        var option=document.createElement("option");
-                        var text=document.createTextNode(item);
-                        option.appendChild(text);
-                        ele.appendChild(option)
-                    });
-                }else{
-                    ele=document.createElement("input");
-                    ele.type="text";
-                }
-                ele.name=item;
-                ele.id="nav_"+item;
-                ele.className="form-control";
-                td.appendChild(ele);
-                tr.appendChild(td);
-            });
+		    var tr=$scope.createTr(undefined);
+            $("#navbartable tr:eq(0)").after(tr);
+        };
+		$scope.createTr=function(data){
+			var tr=document.createElement("tr");
+
+		    var td=document.createElement("td");
+		    var ele=document.createElement("input");
+		    ele.type="text";
+			ele.name="name";
+			ele.id="nav_name";
+			ele.className="form-control";
+			if (data){ele.value=data.name;}
+			td.appendChild(ele);
+			tr.appendChild(td);
+
+			td=document.createElement("td");
+		    var ele=document.createElement("input");
+		    ele.type="text";
+			ele.name="link";
+			ele.id="nav_link";
+			ele.className="form-control";
+			if (data){ele.value=data.link;}
+			td.appendChild(ele);
+			tr.appendChild(td);
+
+			td=document.createElement("td");
+			ele=document.createElement("select");
+			ele.name="action";
+			ele.id="nav_action";
+			ele.className="form-control";
+			if (data){ele.value=data.action;}
+			var values=["_blank","_self"];
+			values.forEach(function(item,index){
+				var option=document.createElement("option");
+				if(data && item == data.action){
+					option.selected=true;
+				}
+				var text=document.createTextNode(item);
+				option.appendChild(text);
+				ele.appendChild(option)
+			});
+			td.appendChild(ele);
+			tr.appendChild(td);
+
+			td=document.createElement("td");
+		    var ele=document.createElement("input");
+		    ele.type="text";
+			ele.name="seq";
+			ele.id="nav_seq";
+			ele.className="form-control";
+			if (data){ele.value=data.seq;}
+			td.appendChild(ele);
+			tr.appendChild(td);
+
 		    td=document.createElement("td");
 		    addBtn=document.createElement("button");
             addBtn.className ="btn btn-xs btn-info";
 		    $(addBtn).on("click",function(){
-		        var data=["name="+$("#nav_name").val(),"link="+$("#nav_link").val(), "action="+$("#nav_action").val(), "seq="+$("#nav_seq").val()];
-                $http({url:"/manage/system/navbar/add.html",method:"POST",data:data.join("&"),cache:false,headers:{"Content-Type":"application/x-www-form-urlencoded;charset=utf-8"}}).success(function(){
+		        var params=["name="+$("#nav_name").val(),"link="+$("#nav_link").val(), "action="+$("#nav_action").val(), "seq="+$("#nav_seq").val()];
+		        var url="/manage/system/navbar/add.html";
+		        if(data){
+		        	params.push("id="+data.id);
+		        	url="/manage/system/navbar/edit.html";
+				}
+                $http({url:url,method:"POST",data:params.join("&"),cache:false,headers:{"Content-Type":"application/x-www-form-urlencoded;charset=utf-8"}}).success(function(){
                     Dialog.successTip("保存成功!");
                     $scope.loadNavBar();
                     tr.remove();
+                    $scope.show_new_navbar=true;
                 });
             });
 		    i=document.createElement("i");
@@ -74,17 +111,27 @@ define(["BlogApp"],function(BlogApp){
                 $scope.show_new_navbar=true;
                 $scope.$apply();
                 tr.remove();
+                $scope.loadNavBar();
             });
             i=document.createElement("i");
-            i.className="glyphicon glyphicon-plus";
-            text=document.createTextNode("清除");
+            i.className="glyphicon glyphicon-minus";
+            text=document.createTextNode("移除");
             removeBtn.appendChild(i);
             removeBtn.appendChild(text);
             td.appendChild(removeBtn);
 
 		    tr.appendChild(td);
-            $("#navbartable tr:eq(0)").after(tr);
-        };
+		    return tr;
+		};
+		$scope.editNavBar=function(e){
+			$scope.show_new_navbar=false;
+			var item =this.item;
+			var currentTr=$(e.currentTarget.parentElement.parentElement);
+			var index=currentTr.index();
+			var tr=$scope.createTr(item);
+			$("#navbartable tr:eq("+index+")").after(tr);
+			currentTr.remove();
+		};
 		$scope.delNavBar=function(){
 		    var navbarId=this.item.id;
 		    Dialog.confirm("dialogId","您确认要删除该导航栏吗?",function (r) {

@@ -84,7 +84,7 @@ class SystemService(object):
         """编辑导航栏"""
 
         bar = SystemService.get_sys_nav_id(navbar.id)
-        if bar:
+        if not bar:
             raise Exception("导航栏不存在!")
         bar.name = navbar.name
         bar.seq = navbar.seq
