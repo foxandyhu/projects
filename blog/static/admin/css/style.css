@@ -23,7 +23,7 @@ table.member_table tr td{vertical-align: middle}
 .widget-main.padding-8 {padding: 8px;}
 .widget-main {padding: 12px;}
 .tree {padding-left: 9px;overflow-x: hidden;overflow-y: auto;position: relative;}
-.tree:before {display: inline-block;content: "";position: absolute;top: -20px;bottom: 16px;left: 0;border: 1px dotted #67b2dd;border-width: 0 0 0 1px;z-index: 1;}
+.tree:before {display: inline-block;content: "";position: absolute;top: -20px;bottom: 16px;left: 0;border-width: 0 0 0 1px;z-index: 1;}
 .tree .tree-item, .tree .tree-folder {border: 1px solid #FFF;}
 .tree .tree-folder, .tree .tree-item {position: relative;}
 .tree .tree-folder {width: auto;min-height: 20px;cursor: pointer;}
@@ -47,12 +47,14 @@ table.member_table tr td{vertical-align: middle}
 .tree_choose{background-color: #e8edf1;}
 /*********************************树 end****************************/
 
-.marquee {
-　　white-space: nowrap;
-　　overflow:-webkit-marquee;
-　　width: 170px;
-　　-webkit-marquee-direction:left;
-　　-webkit-marquee-speed:normal;
-　　-webkit-marquee-style:scroll;
-　　-webkit-marquee-repetition:infinite;
+#weather{height:20px;}
+#weather p{position:relative;animation: fanzhuan 4s infinite;line-height:20px;margin-left:10px;}
+@keyframes fanzhuan { 0%    {top:0px;} 25%   {top:0px;} 50%  {top:-30px;} 75%  {top:-30px;} 100%  {top:0px;}}
+
+.title_shan {
+    text-align: center;
+    background: -webkit-gradient(linear, left top, right top, color-stop(0, white), color-stop(.4, white), color-stop(.5, #31770c), color-stop(.6, white), color-stop(1, white));
+    -webkit-background-clip: text;-webkit-text-fill-color: transparent;-webkit-animation: shan 3s infinite;
 }
+@-webkit-keyframes shan { from {background-position: -100px;} to {background-position: 100px;} }
+@keyframes shan {from {background-position: -100px;} to {background-position: 100px;}}

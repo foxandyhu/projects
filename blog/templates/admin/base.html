@@ -25,7 +25,7 @@
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>BLOG</b></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>博客管理系统</b></span>
+            <span class="logo-lg title_shan"><b>博客管理系统</b></span>
         </a>
 
         <nav class="navbar navbar-static-top" role="navigation">
@@ -172,8 +172,8 @@
 
             <!-- 菜单栏 begin -->
             <ul class="sidebar-menu" data-widget="tree">
-                <li class="header" style="padding:0px">
-                    <marquee id="weather" direction="left" behavior="scroll" scrollamount="50" scrolldelay="1000" onmouseover="this.stop();" onmouseout="this.start();"></marquee>
+                <li class="header" style="padding:0px" id="weather">
+
                 </li>
                 <li class="treeview" id="sysmenu">
                     <a href="javascript:void(0)">
@@ -297,9 +297,10 @@
     $(function(){
         $.ajax({url:"/manage/weather.html",success:function(result){
             var json=$.parseJSON(result);
-            var str="<img src='"+json.pic+"' width='25px'/>&nbsp;&nbsp;";
-            str+=json.city+"&nbsp;&nbsp;"+json.weather+"&nbsp;&nbsp;"+json.date;
-            $("#weather").html(str);
+            var weather="<p><img src='"+json.pic+"' width='25px'/>&nbsp;&nbsp;";
+            weather+=json.city+"&nbsp;&nbsp;"+json.weather+"</p>";
+            var date="<p>"+json.date+"</p>";
+            $("#weather").html(weather+date);
         }});
     });
 </script>
