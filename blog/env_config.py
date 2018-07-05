@@ -4,8 +4,6 @@ import binascii, os
 class BaseConfig(object):
     """默认配置基类"""
 
-    DEBUG = True
-    TESTING = True
     CSRF_ENABLED = True
     JSON_AS_ASCII = False
     SECRET_KEY = binascii.hexlify(os.urandom(32))
@@ -17,7 +15,8 @@ class DevelopmentConfig(BaseConfig):
     SQLALCHEMY_ECHO = True
     SQLALCHEMY_POOL_SIZE = 32
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-
+    DEBUG = True
+    TESTING = True
 
 class ProductConfig(BaseConfig):
     """生产环境配置类"""
@@ -26,7 +25,8 @@ class ProductConfig(BaseConfig):
     SQLALCHEMY_ECHO = True
     SQLALCHEMY_POOL_SIZE = 32
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-
+    DEBUG = False
+    TESTING = False
 
 class ConfigEnum:
     DEVELOPMENT = DevelopmentConfig

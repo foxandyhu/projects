@@ -51,12 +51,13 @@ def get_weather():
     """获取天气信息"""
 
     ip = request.remote_addr
+    print(ip)
     city_json = extends_utils.get_city_ip(ip)
     if city_json:
         city = city_json.get("city")
         if not city:
             city = city_json.get("region")
-        weather_json = extends_utils.get_city_weather("深圳")
+        weather_json = extends_utils.get_city_weather(city)
         if not weather_json:
             raise Exception("获取天气失败!")
         return json_utils.to_json(weather_json)

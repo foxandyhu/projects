@@ -140,6 +140,15 @@ def get_app_template_dir():
     return path + os.path.sep
 
 
+def get_app_static_dir():
+    """获得App静态资源绝对目录"""
+
+    path = os.path.join(os.getcwd(), "static")
+    if not os.path.exists(path):
+        os.makedirs(path)
+    return path + os.path.sep
+
+
 def get_md5(str=""):
     """MD5加密"""
 

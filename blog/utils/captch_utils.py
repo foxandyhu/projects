@@ -1,6 +1,7 @@
 import random
 import string
-from PIL import Image, ImageFont, ImageDraw, ImageFilter
+from PIL import Image, ImageFont, ImageDraw
+from utils import context_utils
 
 
 def rndColor():
@@ -34,7 +35,8 @@ def get_captch():
 
     im = Image.new('RGB', (width, height), 'white')  # 新图片对象
 
-    font = ImageFont.truetype('app/static/STZHONGS.TTF', 40)  # 字体
+    path = context_utils.get_app_static_dir()+"STZHONGS.TTF"
+    font = ImageFont.truetype(path, 40)  # 字体
 
     draw = ImageDraw.Draw(im)  # draw对象
 
