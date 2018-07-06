@@ -157,3 +157,12 @@ def get_md5(str=""):
 
     md5_str = md5.hexdigest()
     return md5_str
+
+
+def get_client_request_ip(request):
+    """获得请求客户端的IP"""
+
+    ip = request.headers["X-Forwarded-For"]
+    if not ip:
+        ip = request.remote_addr
+    return ip

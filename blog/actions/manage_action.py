@@ -50,8 +50,7 @@ def logout():
 def get_weather():
     """获取天气信息"""
 
-    ip = request.remote_addr
-    print(ip)
+    ip = context_utils.get_client_request_ip(request)
     city_json = extends_utils.get_city_ip(ip)
     if city_json:
         city = city_json.get("city")

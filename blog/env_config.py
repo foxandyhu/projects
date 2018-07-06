@@ -6,7 +6,7 @@ class BaseConfig(object):
 
     CSRF_ENABLED = True
     JSON_AS_ASCII = False
-    SECRET_KEY = binascii.hexlify(os.urandom(32))
+    SECRET_KEY = "f61e5028a88794ce00e0865c1f04967a5af4833f5c912d269022d6b3999459a2"  # binascii.hexlify(os.urandom(32))
 
 
 class DevelopmentConfig(BaseConfig):
@@ -18,6 +18,7 @@ class DevelopmentConfig(BaseConfig):
     DEBUG = True
     TESTING = True
 
+
 class ProductConfig(BaseConfig):
     """生产环境配置类"""
 
@@ -27,6 +28,7 @@ class ProductConfig(BaseConfig):
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     DEBUG = False
     TESTING = False
+
 
 class ConfigEnum:
     DEVELOPMENT = DevelopmentConfig
