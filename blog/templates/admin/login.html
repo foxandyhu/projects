@@ -23,17 +23,17 @@
                 <form action="/manage/login.html" method="post">
                     <div class="form-group">
                         <label class="t">账　号：</label>
-                        <input id="username" name="username" type="text" class="form-control x319 in"
+                        <input id="username" name="username" type="text" class="form-control"
                                autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label class="t">密　码：</label>
                         <input id="password" name="password" type="password"
-                               class="password form-control x319 in">
+                               class="password form-control">
                     </div>
                     <div class="form-group">
                         <label class="t">验证码：</label>
-                        <input id="captch" name="captch" type="text" class="form-control x164 in">
+                        <input id="captch" name="captch" type="text" class="form-control" style="width:20%">
                         <img id="captcha_img" alt="点击更换" title="点击更换" src="/captch.html" class="m" onclick="this.src='/captch.html?'+Math.random()">
                     </div>
                     <div class="text-danger">{{ message }}</div>
