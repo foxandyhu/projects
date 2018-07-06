@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, request
+from flask import Blueprint, redirect, request, render_template
 from io import BytesIO
 from utils import captch_utils, context_utils
 from flask import make_response
@@ -43,6 +43,46 @@ def request_beofore():
 def filter_server_request():
     """检测网站是否访问"""
     return SysServer.get_instance().server_enable
+
+
+@webBp.errorhandler(404)
+def page_not_found(e):
+    """404错误"""
+
+    return redirect("/404.html")
+
+
+@webBp.errorhandler(500)
+def inner_error(e):
+    """500错误"""
+
+    return redirect("/500.html")
+
+
+@webBp.route("/404.html")
+def page_404():
+    """404页面"""
+
+    return render_template("404.html")
+
+
+@webBp.route("/500.html")
+def page_500():
+    """500页面"""
+
+    return render_template("500.html")
+
+
+@webBp.route("/upgrade.html")
+def sys_upgrade():
+    """系统升级提示页面"""
+
+    sys_info = system_service.SystemService.get_sys_info()
+    if sys_info:
+        SysServer.get_instance().server_enable = sys_info.is_enable
+        if sys_info.is_enable:
+            return redirect("/index.html")
+    return render_template("upgrade.html")
 
 
 @webBp.route("/captch.html")

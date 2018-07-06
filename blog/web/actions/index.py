@@ -1,21 +1,7 @@
 from web import webBp
 from flask import render_template, redirect
 from services.articles_service import ArticlesService
-from services.system_service import SystemService
 from utils import pagination_utils, context_utils
-from models import SysServer
-
-
-@webBp.route("/upgrade.html")
-def sys_tip_upgrade():
-    """系统升级提示页面"""
-
-    sys_info = SystemService.get_sys_info()
-    if sys_info:
-        SysServer.get_instance().server_enable = sys_info.is_enable
-        if sys_info.is_enable:
-            return redirect("/index.html")
-    return render_template("upgrade.html")
 
 
 @webBp.route("/")
