@@ -59,20 +59,25 @@ def article_list(category_id):
     pagination_utils.instantce_page(10)
     pager = ArticlesService.get_articles(is_verify=True, category_id=category_id, order_id=False)
     category = ArticlesService.get_category_id(category_id)
-    categorys = ArticlesService.get_category_pid(category.parent_id)
 
-    context_utils.del_pagination()
-    click_count_articles = ArticlesService.get_articles(query_count=6, category_id=category_id, order_click_count=False)
-    recommend_article = ArticlesService.get_articles(query_count=6, is_recommend=True, order_seq=True, order_id=False,
-                                                     category_id=category_id)
+    categorys, click_count_articles, recommend_article, pp = [], [], [], None
+    if category:
+        categorys = ArticlesService.get_category_pid(category.parent_id)
 
-    current_page = int((pager.page_no - 1) / 5) + 1
-    end = current_page * 5
-    end = pager.page_count if end > pager.page_count else end
-    end = end + 1
+        context_utils.del_pagination()
+        click_count_articles = ArticlesService.get_articles(query_count=6, category_id=category_id,
+                                                            order_click_count=False)
+        recommend_article = ArticlesService.get_articles(query_count=6, is_recommend=True, order_seq=True,
+                                                         order_id=False,
+                                                         category_id=category_id)
 
-    begin = (current_page - 1) * 5 + 1
-    pp = range(begin, end)
+        current_page = int((pager.page_no - 1) / 5) + 1
+        end = current_page * 5
+        end = pager.page_count if end > pager.page_count else end
+        end = end + 1
+
+        begin = (current_page - 1) * 5 + 1
+        pp = range(begin, end)
     return render_template("list.html", pager=pager, category=category, categorys=categorys,
                            clickCountArticles=click_count_articles,
                            recommendArticle=recommend_article, pp=pp)
