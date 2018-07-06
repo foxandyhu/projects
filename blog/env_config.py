@@ -22,8 +22,8 @@ class DevelopmentConfig(BaseConfig):
 class ProductConfig(BaseConfig):
     """生产环境配置类"""
 
-    SQLALCHEMY_DATABASE_URI = "mysql://root:root@127.0.0.1:3306/blog"
-    SQLALCHEMY_ECHO = True
+    SQLALCHEMY_DATABASE_URI = "mysql://root:jsrroot@113.106.48.159:3306/blog"
+    SQLALCHEMY_ECHO = False
     SQLALCHEMY_POOL_SIZE = 32
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     DEBUG = False
