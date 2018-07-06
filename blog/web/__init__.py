@@ -1,9 +1,10 @@
-from flask import Blueprint
+from flask import Blueprint, redirect, request
 from io import BytesIO
 from utils import captch_utils, context_utils
 from flask import make_response
 from extensions import cache
 from services import system_service
+from models import SysServer
 
 webBp = Blueprint("webBp", __name__)
 
@@ -26,6 +27,22 @@ def context_processor_data():
         cache.set(COPYRIGHT, copyright, 0)
 
     return dict(sysinfo=sysinfo, copyright=copyright)
+
+
+@webBp.before_request
+def request_beofore():
+    """请求拦截"""
+
+    paths = ["/upgrade.html", "/captch.html"]
+    path = request.path
+    if path not in paths:
+        if not filter_server_request():
+            return redirect("/upgrade.html")
+
+
+def filter_server_request():
+    """检测网站是否访问"""
+    return SysServer.get_instance().server_enable
 
 
 @webBp.route("/captch.html")

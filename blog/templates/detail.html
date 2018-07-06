@@ -1,11 +1,11 @@
 <!doctype html>
 <html>
 <head>
-    <base href="http://127.0.0.1/static/"/>
+    <base href="{{ sysinfo.website }}"/>
     <meta charset="UTF-8">
     <title>{{article.title}}</title>
     {% include("res.html") %}
-    <link href="css/info.css" rel="stylesheet">
+    <link href="/static/css/info.css" rel="stylesheet">
 </head>
 <body>
 {% include("header.html") %}

@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <base href="http://127.0.0.1/static/"/>
+    <base href="{{ sysinfo.website }}"/>
     <meta charset="UTF-8">
     <title>{{ category.name }}</title>
     {% include("res.html") %}
@@ -101,7 +101,7 @@
         <div class="weixin">
             <h2 class="hometitle">官方微信</h2>
             <ul>
-                <img src="images/wx.jpg">
+                <img src="/static/images/wx.jpg">
             </ul>
         </div>
     </div>

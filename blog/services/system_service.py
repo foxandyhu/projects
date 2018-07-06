@@ -1,4 +1,4 @@
-from models import system_model
+from models import system_model, SysServer
 from utils import context_utils, file_utils
 from extensions import db, cache
 
@@ -39,6 +39,7 @@ class SystemService(object):
                 file_utils.move_file(source, dest)
         db.session.commit()
         cache.set("sysinfo", SystemService.get_sys_info(), 0)
+        SysServer.get_instance().server_enable = sys_info.is_enable
 
     @staticmethod
     def get_sys_copyright():
@@ -124,8 +125,8 @@ class SystemService(object):
         source = None
         if banner.logo:
             source = context_utils.get_appdir() + banner.logo  # LOGO源物理路径
-            banner.logo = context_utils.get_app_image_dir_rlt() + file_utils.get_filename(source)
-        dest = context_utils.get_app_image_dir()
+            banner.logo = context_utils.get_sys_banner_dir_rlt() + file_utils.get_filename(source)
+        dest = context_utils.get_sys_banner_dir()
 
         db.session.add(banner)
         db.session.commit()
@@ -145,10 +146,10 @@ class SystemService(object):
         bar.action = banner.action
 
         if banner.logo and bar.logo != banner.logo:
-            if not banner.logo.startswith("http://"):   #外部链接
+            if not banner.logo.startswith("http://"):  # 外部链接
                 source = context_utils.get_appdir() + banner.logo  # LOGO源物理路径
-                dest = context_utils.get_app_image_dir()
-                banner.logo = context_utils.get_app_image_dir_rlt() + file_utils.get_filename(source)
+                dest = context_utils.get_sys_banner_dir()
+                banner.logo = context_utils.get_sys_banner_dir_rlt() + file_utils.get_filename(source)
                 file_utils.move_file(source, dest)
         bar.logo = banner.logo
 

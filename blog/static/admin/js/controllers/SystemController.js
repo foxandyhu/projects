@@ -319,7 +319,7 @@ define(["BlogApp"],function(BlogApp){
 					feedbackIcons:SysInit.validateCss,
 					fields:{
 					    name:{validators: {notEmpty:{message:"请输入网站名称!"},stringLength:{min:1,max:20,message:"网站名称在1-20个字符之间!"}}},
-                        website:{validators: {notEmpty:{message:"请输入域名地址!"},uri:{message:"域名地址不正确!"}}}
+                        website:{validators: {notEmpty:{message:"请输入域名地址!"}}}
 					}
 				});
 			});

@@ -1,11 +1,11 @@
 <!doctype html>
 <html>
 <head>
-    <base href="http://127.0.0.1/static/"/>
+    <base href="{{ sysinfo.website }}"/>
     <meta charset="UTF-8">
     <title>关于我_单页_杨青个人博客 - 一个站在web前端设计之路的女技术员个人博客网站</title>
     {% include("res.html") %}
-    <link href="css/about.css" rel="stylesheet">
+    <link href="/static/css/about.css" rel="stylesheet">
 </head>
 <body>
 {% include("header.html") %}
@@ -38,7 +38,7 @@
         <div class="rightbox">
             <div class="aboutme">
                 <h2 class="hometitle">关于我</h2>
-                <div class="avatar"><img src="images/b04.jpg"></div>
+                <div class="avatar"><img src="/static/images/b06.jpg"></div>
                 <div class="ab_con">
                     <p>网名：dancesmile | 杨青</p>
                     <p>职业：Web前端设计师、网页设计 </p>
@@ -50,7 +50,7 @@
             <div class="weixin">
                 <h2 class="hometitle">官方微信</h2>
                 <ul>
-                    <img src="images/wx.jpg">
+                    <img src="/static/images/wx.jpg">
                 </ul>
             </div>
         </div>

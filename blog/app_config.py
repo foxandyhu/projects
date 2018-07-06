@@ -1,7 +1,6 @@
 from flask import Flask
 from env_config import ConfigEnum
 from extensions import db
-from services import system_service
 
 
 def create_app(config=None):
@@ -56,27 +55,3 @@ def configure_app_blueprints(app):
     app.register_blueprint(webBp, url_prefix="")
     app.register_blueprint(adminBp, url_prefix="/manage/")
     app.register_blueprint(templateAdminBp, url_prefix="/templates/admin")
-
-
-def load_server_config():
-    """加载配置WEB服务"""
-
-    sys_info = system_service.SystemService.get_sys_info()
-    if sys_info:
-        SysServer.get_instance().server_enable = sys_info.is_enable
-
-
-class SysServer(object):
-    _instance = None
-
-    def __init__(self):
-        self.server_enable = False  # 网站是否启用
-
-    def __new__(cls, *args, **kwargs):
-        if cls._instance is None:
-            cls._instance = super(SysServer, cls).__new__(cls, **args, **kwargs)
-        return cls._instance
-
-    @staticmethod
-    def get_instance():
-        return SysServer._instance

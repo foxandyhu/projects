@@ -79,6 +79,21 @@ def get_tmpdir():
     return path + os.path.sep
 
 
+def get_sys_banner_dir():
+    """获得系统banner绝对目录"""
+
+    path = os.path.join(os.getcwd(), "static", "images", "banner")
+    if not os.path.exists(path):
+        os.makedirs(path)
+    return path + os.path.sep
+
+
+def get_sys_banner_dir_rlt():
+    """获得系统banner目录相对路径"""
+
+    return "/static/images/banner/"
+
+
 def get_upload_face_dir():
     """获得头像上传绝对目录"""
 
