@@ -45,14 +45,14 @@ def filter_server_request():
     return SysServer.get_instance().server_enable
 
 
-@webBp.errorhandler(404)
+@webBp.app_errorhandler(404)
 def page_not_found(e):
     """404错误"""
 
     return redirect("/404.html")
 
 
-@webBp.errorhandler(500)
+@webBp.app_errorhandler(500)
 def inner_error(e):
     """500错误"""
 
