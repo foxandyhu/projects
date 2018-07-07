@@ -1,12 +1,12 @@
 <!doctype html>
 <html>
 <head>
-    <base href="http://127.0.0.1/static/"/>
+    <base href="{{ sysinfo.website }}"/>
     <meta charset="UTF-8">
     <title>首页_{{ sysinfo.name }}</title>
     {% include("res.html") %}
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery.easyfader.min.js"></script>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/jquery.easyfader.min.js"></script>
     <script>
         $(function () {
             $("#banner").easyFader();
@@ -85,7 +85,7 @@
         <div class="weixin">
             <h2 class="hometitle">官方微信</h2>
             <ul>
-                <img src="images/wx.jpg">
+                <img src="/static/images/wx.jpg">
             </ul>
         </div>
     </div>

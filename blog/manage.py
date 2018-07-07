@@ -5,7 +5,7 @@ from app_config import create_app
 from env_config import ConfigEnum
 from extensions import db
 
-app = create_app(ConfigEnum.PRODUCT)
+app = create_app(ConfigEnum.DEVELOPMENT)
 
 manager = Manager(app)
 
