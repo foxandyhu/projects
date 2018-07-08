@@ -5,13 +5,7 @@
     <meta charset="UTF-8">
     <title>首页_{{ sysinfo.name }}</title>
     {% include("res.html") %}
-    <script src="/static/js/jquery.min.js"></script>
-    <script src="/static/js/jquery.easyfader.min.js"></script>
-    <script>
-        $(function () {
-            $("#banner").easyFader();
-        });
-    </script>
+    <link rel="stylesheet" type="text/css" href="/static/js/plugins/player/styles.css" media="all" >
 </head>
 <body>
 {% include("header.tpl") ignore missing %}
@@ -74,13 +68,14 @@
                 {% endfor %}
             </ul>
         </div>
-        <div class="links">
+        <div class="player">
             <h2 class="hometitle">音乐博客</h2>
-            <ul>
-                <li><a href="http://www.yangqq.com">杨青个人博客</a></li>
-                <li><a href="http://www.yangqq.com/download/">个人博客模板</a></li>
-                <li><a href="http://www.yangqq.com/link.html">优秀个人博客</a></li>
-            </ul>
+            <div class="audio_cc">
+                <audio id="mp3player">
+                    <source title="王若琳 - Wild World.mp3" src="http://rm.sina.com.cn/wm/VZ2010050511043310440VK/music/MUSIC1005051622027270.mp3" />
+                    <source title="王若琳 - 亲密爱人.mp3" src="http://rm.sina.com.cn/wm/VZ2010050511043310440VK/music/MUSIC1005051622027270.mp3" />
+                </audio>
+            </div>
         </div>
         <div class="weixin">
             <h2 class="hometitle">官方微信</h2>
@@ -91,5 +86,28 @@
     </div>
 </article>
 {% include("footer.html") %}
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/jquery.easyfader.min.js"></script>
+<script src="/static/js/plugins/player/audioplayer.js"></script>
+<script>
+    $(function () {
+        $("#banner").easyFader();
+        $(".audio_cc").initAudio();
+        var player=document.getElementById("mp3player");
+        var timer=setInterval(function(){
+            try{
+                if(player.readyState==4){
+                    if(player.paused){
+                        player.play();
+                    }else
+                    {
+                        window.clearInterval(timer);
+                    }
+                }
+            }catch (e){
+            }
+        },4000);
+    });
+</script>
 </body>
 </html>

@@ -55,8 +55,8 @@ h3.blogtitle { line-height: 30px; height: 30px; margin: 10px 0; }
 .paihang li i { width: 100px; height: 90px; overflow: hidden; display: block; border: #efefef 1px solid; float: left; margin-right: 10px }
 .paihang li img { height: 100%; margin: auto; -moz-transition: all .5s ease; -webkit-transition: all .5s ease; transition: all .5s ease; }
 .paihang ul li:hover i img { transform: scale(1.1) }
-/*links*/
-.links { width: 100%; background: #FFF; overflow: hidden; }
+/*player*/
+.player { width: 100%; background: #FFF; overflow: hidden; }
 .links ul { padding: 20px 50px; }
 .links ul li { line-height: 24px; border: 1px solid #ccc; margin: 0 0 10px 0; padding: 5px; text-align: center; border-radius: 5px; }
 .links ul li:hover { }

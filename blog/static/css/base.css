@@ -14,9 +14,10 @@ a { text-decoration: none; color: #555 }
 header { width: 100%; overflow: hidden; background: #299982; position: fixed; z-index: 9999; box-shadow: #165246 0px 1px 5px; }
 .toplogo { width: 1200px; margin: auto; position: relative }
 .logo { position: absolute; top: 31px; left: 1px; }
+.web_name{float:left;margin-left: 60px;color:#FFFFFF}
 /* nav */
 .topnav { width: 100%; overflow: hidden; }  /*导航颜色*/
-nav { width: 1200px; margin: auto; color: #999; line-height: 32px; background: url(../images/logo.png) no-repeat left 10px top 13px }
+nav { width: 1200px; margin: auto; color: #999; line-height: 32px;}
 nav ul { text-align: right; height: 46px; line-height: 46px; }
 nav ul li {  display: inline; font-size: 16px; padding: 0px 20px;  }
 nav ul li a { color: #fff ;}
@@ -90,3 +91,19 @@ opacity:1;
 .hometitle span { float: right; font-weight: normal; font-size: 14px; height: 42px; overflow: hidden; text-align: right }
 .hometitle span a { display: block; float: right; position: relative; overflow: hidden; margin-right: 20px }
 .hometitle span a:after { content: ''; display: block; width: 1px; height: 20px; border-radius: 10px; background: #000; -webkit-transform: rotate(45deg); transform: rotate(45deg); position: absolute; bottom: -10px }
+
+
+.animate {
+ font-size: 50px;
+ margin: 100px 0 0;
+ border-bottom: 2px solid #ccc;
+}
+.one span {
+ color: #24a8e6;
+ opacity: 0;
+ transform: translate(-150px, -50px) rotate(-180deg) scale(3);
+ animation: revolveScale .4s forwards;
+}
+.animate span {
+ display: inline-block;
+}
