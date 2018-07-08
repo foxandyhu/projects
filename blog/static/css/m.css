@@ -4,8 +4,8 @@
   height: 52px;
   line-height: 52px;
   position: absolute;
-  left: 35%;
-  color: #FFFFFF;
+  left: 30%;
+  color: #FFFFFF;font-family: STXingkai;font-size: large;
  }
 /* 大于960px，小于1199px */
  @media screen and (min-width: 960px) and (max-width: 1199px) {
