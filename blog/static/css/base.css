@@ -14,7 +14,7 @@ a { text-decoration: none; color: #555 }
 header { width: 100%; overflow: hidden; background: #299982; position: fixed; z-index: 9999; box-shadow: #165246 0px 1px 5px; }
 .toplogo { width: 1200px; margin: auto; position: relative }
 .logo { position: absolute; top: 31px; left: 1px; }
-.web_name{float:left;margin-left: 60px;color:#FFFFFF;font-family: STXingkai;font-size: x-large;}
+.web_name{float:left;margin-left: 60px;color:#FFFFFF;font-family: STXingkai;font-size: x-large;position: relative;top: 4px;}
 /* nav */
 .topnav { width: 100%; overflow: hidden; }  /*导航颜色*/
 nav { width: 1200px; margin: auto; color: #999; line-height: 32px;}

@@ -1,6 +1,6 @@
 <header>
     <div id="mnav">
-        <span class="m_web_name"><h1>我的博客</h1></span>
+        <span class="m_web_name"><h1>{{ sysinfo.name }}</h1></span>
         <h2><span class="navicon"></span></h2>
         <ul>
             {% for nav in navbars %}
@@ -11,7 +11,7 @@
     <div class="topnav">
         <nav>
             <ul>
-                <li class="web_name"><h1>我的博客</h1></li>
+                <li class="web_name"><h1>{{ sysinfo.name }}</h1></li>
             {% for nav in navbars %}
                 <li><a target="{{ nav.action }}" href="{{ nav.link}}">{{ nav.name }}</a></li>
             {% endfor %}
