@@ -48,7 +48,7 @@ define(["jquery","BlogApp"],function($,BlogApp){
     			{
     				requirejs.undef("kindeditor");
     				Resource.init(["kindeditor"],function(){
-    					KindEditor.create("#"+name,{uploadJson:"/manage/file/upload/editor.html",resizeType:1,formatUploadUrl:false,width:'100%',allowPreviewEmoticons : true,allowImageUpload : true,items : ['preview','source','fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline','removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist','insertunorderedlist','link', '|', 'emoticons','image','baidumap','table'],autoHeightMode:true,afterChange:function(){this.sync();},afterBlur:function(){this.sync();}});
+    					KindEditor.create("#"+name,{uploadJson:"/manage/file/upload/editor.html",resizeType:1,formatUploadUrl:false,width:'100%',allowPreviewEmoticons : true,allowImageUpload : true,autoHeightMode:true,afterChange:function(){this.sync();},afterBlur:function(){this.sync();}});
     				});
     			},
     			checkImage:function(file){if(/.(gif|jpg|jpeg|png|JPG|PNG|GIF)$/.test(file)){return true;}return false;},
