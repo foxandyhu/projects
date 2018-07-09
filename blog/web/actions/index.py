@@ -1,5 +1,5 @@
 from web import webBp
-from flask import render_template, redirect
+from flask import render_template, redirect, request
 from services.articles_service import ArticlesService
 from utils import pagination_utils, context_utils
 
@@ -86,6 +86,28 @@ def article_by_tags(tag_id):
     begin = (current_page - 1) * 5 + 1
     pp = range(begin, end)
     return render_template("list_tag.html", pager=pager, pp=pp, tag=tag)
+
+
+@webBp.route("/article/search.html")
+def article_by_title():
+    """通过文章标签查找对应的文章"""
+
+    pagination_utils.instantce_page(10)
+
+    title = request.args.get("title")
+    pager = None
+    pp = []
+    if title:
+        pager = ArticlesService.get_articles(is_verify=True, title=title, order_id=False)
+
+        current_page = int((pager.page_no - 1) / 5) + 1
+        end = current_page * 5
+        end = pager.page_count if end > pager.page_count else end
+        end = end + 1
+
+        begin = (current_page - 1) * 5 + 1
+        pp = range(begin, end)
+    return render_template("list_search.html", pager=pager, pp=pp,title=title)
 
 
 @webBp.route("/lvmsg.html")

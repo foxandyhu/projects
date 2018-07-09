@@ -12,14 +12,11 @@
     <h2 class="litle"><span>等待就是浪费青春!</span>{{ category.parent.name }}</h2>
     <div class="navtab">
         <div class="search">
-            <form action="/e/search/index.php" method="post" name="searchform" id="searchform">
-                <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字"
+            <form action="/article/search.html" method="get" name="searchform" id="searchform">
+                <input name="title" id="title" class="input_text" value="请输入关键字"
                        style="color: rgb(153, 153, 153);"
                        onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}"
                        onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">
-                <input name="show" value="title" type="hidden">
-                <input name="tempid" value="1" type="hidden">
-                <input name="tbname" value="news" type="hidden">
                 <input name="Submit" class="input_submit" value="搜索" type="submit">
             </form>
         </div>
