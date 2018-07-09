@@ -40,7 +40,7 @@ def configure_app_logs(app):
         handler = StreamHandler()
         handler.setLevel(logging.DEBUG)
     else:
-        handler = TimedRotatingFileHandler("blog.log", 'D', 1, 10)
+        handler = TimedRotatingFileHandler("/usr/soft/www/logs/blog.log", 'D', 1, 10)
         handler.setLevel(logging.INFO)
 
     formatter = logging.Formatter("%(asctime)s %(filename)s.%(funcName)s[line:%(lineno)d] %(levelname)s %(message)s")
