@@ -5,11 +5,11 @@
     <title>{{article.title}}_{{ sysinfo.name }}</title>
     {% include("res.html") %}
     <link href="/static/css/info.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/js/plugins/media/mediaelementplayer.min.css">
 </head>
 <body>
 {% include("header.tpl") %}
 <article>
-
     <div class="infos">
         <div class="newsview">
             <h2 class="intitle">您现在的位置是：<a href="/">网站首页</a>&nbsp;&gt;&nbsp;<a href="/article/category/{{ article.category_id}}.html">{{ article.category.name }}</a></h2>
@@ -25,6 +25,18 @@
                 {% endfor %}
             </div>
             <div class="news_about"><strong>简介</strong>{{ article.summary }}</div>
+            <div class="media-wrapper">
+                <video id="player1" width="640" height="360" style="max-width:100%;" poster="http://www.mediaelementjs.com/images/big_buck_bunny.jpg" preload="none" controls playsinline webkit-playsinline>
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/CastVideos/mp4/BigBuckBunny.mp4" type="video/mp4">
+                    <track srclang="en" kind="subtitles" src="mediaelement.vtt">
+                    <track srclang="en" kind="chapters" src="chapters.vtt">
+                </video>
+            </div>
+            <div class="media-wrapper">
+                <audio id="player2" preload="none" controls style="max-width:100%;">
+                    <source src="http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3" type="audio/mp3">
+                </audio>
+            </div>
             <div class="news_infos">{{article.content |safe}}</div>
         </div>
     </div>
@@ -55,5 +67,8 @@
 
 </article>
 {% include("footer.html") %}
+    <script src="/static/js/plugins/media/mediaelement-and-player.min.js"></script>
+    <script src="/static/js/plugins/media/zh-cn.js"></script>
+    <script src="/static/js/plugins/media/demo.js"></script>
 </body>
 </html>
