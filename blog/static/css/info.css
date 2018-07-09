@@ -37,3 +37,5 @@
 .xzsm ul, .ffsm ul { padding: 20px; line-height: 24px; border-top: 6px solid #a6b5c5; }
 .bt-blue { display: block; line-height: 40px; height: 40px; background: #1e8ec5; width: 100px; text-align: center; }
 .bt-blue a { color: #fff }
+.article-notice {border-radius: 4px;padding: 20px;color: #FF6861;line-height: 24px;width:auto;}
+.article-notice p a{color:#FF6861;}

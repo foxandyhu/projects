@@ -94,17 +94,6 @@ opacity:1;
 .hometitle span a:after { content: ''; display: block; width: 1px; height: 20px; border-radius: 10px; background: #000; -webkit-transform: rotate(45deg); transform: rotate(45deg); position: absolute; bottom: -10px }
 
 
-.animate {
- font-size: 50px;
- margin: 100px 0 0;
- border-bottom: 2px solid #ccc;
-}
-.one span {
- color: #24a8e6;
- opacity: 0;
- transform: translate(-150px, -50px) rotate(-180deg) scale(3);
- animation: revolveScale .4s forwards;
-}
-.animate span {
- display: inline-block;
-}
+.animate {font-size: 50px;margin: 100px 0 0;border-bottom: 2px solid #ccc;}
+.one span {color: #24a8e6;opacity: 0;transform: translate(-150px, -50px) rotate(-180deg) scale(3);animation: revolveScale .4s forwards;}
+.animate span {display: inline-block;}
