@@ -28,6 +28,12 @@
             <div class="news_infos">{{article.content |safe}}</div>
         </div>
     </div>
+    {% if article.source_url or article.source %}
+    <div class="nextinfo article-notice">
+        <p>来源：<a target="_blank" href="{{ article.source_url }}">{{ article.source }}</a></p>
+        <small><i>特别声明：以上文章内容来自互联网转载。如有关于作品内容、涉及版权或其它问题请与本站联系删除。</i></small>
+    </div>
+    {% endif %}
     <div class="nextinfo">
         <p>上一篇：<a href="/article/{{prevArticle.id}}.html">{{ prevArticle.title }}</a></p>
         <p>下一篇：<a href="/article/{{nextArticle.id}}.html">{{ nextArticle.title }}</a></p>
