@@ -43,6 +43,8 @@ def configure_app_logs(app):
         handler = TimedRotatingFileHandler("blog.log", 'D', 1, 10)
         handler.setLevel(logging.INFO)
 
+    formatter = logging.Formatter("%(asctime)s %(filename)s.%(funcName)s[line:%(lineno)d] %(levelname)s %(message)s")
+    handler.setFormatter(formatter)
     logger.addHandler(handler)
 
 
