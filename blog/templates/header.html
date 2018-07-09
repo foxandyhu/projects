@@ -11,7 +11,7 @@
     <div class="topnav">
         <nav>
             <ul>
-                <li class="web_name"><h1>{{ sysinfo.name }}</h1></li>
+                <li class="web_name"><h1><a href="/index.html">{{ sysinfo.name }}</a></h1></li>
             {% for nav in navbars %}
                 <li><a target="{{ nav.action }}" href="{{ nav.link}}">{{ nav.name }}</a></li>
             {% endfor %}

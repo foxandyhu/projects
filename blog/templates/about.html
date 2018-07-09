@@ -2,15 +2,14 @@
 <html>
 <head>
     <base href="{{ sysinfo.website }}"/>
-    <meta charset="UTF-8">
     <title>关于我_{{ sysinfo.name }}</title>
     {% include("res.html") %}
     <link href="/static/css/about.css" rel="stylesheet">
 </head>
 <body>
-{% include("header.html") %}
+{% include("header.tpl") %}
 <article>
-    <h2 class="litle"><span>像“草根”一样，紧贴着地面，低调的存在，冬去春来，枯荣无恙。</span>关于我</h2>
+    <h2 class="litle"><span>等待就是浪费青春</span>关于我</h2>
     <div class="ab_box">
         <div class="leftbox">
             <div class="newsview">
@@ -18,33 +17,16 @@
                     {% include("about.tpl") ignore missing %}
                 </div>
             </div>
-            <div class="meandblog">
-                <h2>我和我的博客</h2>
-                <ul>
-                    <li><a href="http://www.yangqq.com/jstt/bj/2015-01-09/740.html"
-                           target="_blank">【匆匆那些年】总结个人博客经历的这四年</a></li>
-                    <li><a href="http://www.yangqq.com/jstt/bj/2014-11-06/732.html" target="_blank">分享我的个人博客访问量如何做到IP从10到600的</a>
-                    </li>
-                    <li><a href="http://www.yangqq.com/news/s/2014-01-08/635.html" target="_blank">个人博客从简不繁</a></li>
-                    <li><a href="http://www.yangqq.com/jstt/bj/2013-06-18/285.html" target="_blank">如果个人博客网站再没有价值，你还会坚持吗？</a>
-                    </li>
-                    <li><a href="http://www.yangqq.com/news/life/2013-06-06/68.html" target="_blank">Web之路，经历了心酸之后</a>
-                    </li>
-                    <li><a href="http://www.yangqq.com/jstt/web/2014-01-18/644.html"
-                           target="_blank">我的个人博客之――阿里云空间选择</a></li>
-                </ul>
-            </div>
         </div>
         <div class="rightbox">
             <div class="aboutme">
                 <h2 class="hometitle">关于我</h2>
-                <div class="avatar"><img src="/static/images/b06.jpg"></div>
+                <div class="avatar"><img src="/static/images/my.png"></div>
                 <div class="ab_con">
-                    <p>网名：dancesmile | 杨青</p>
-                    <p>职业：Web前端设计师、网页设计 </p>
-                    <p>个人微信：yangqq_1987</p>
-                    <p>邮箱：dancesmiling@qq.com</p>
-
+                    <p>网名：洞庭醉雁</p>
+                    <p>职业：保密 </p>
+                    <p>个人QQ：273506068</p>
+                    <p>邮箱：273506068@qq.com</p>
                 </div>
             </div>
             <div class="weixin">

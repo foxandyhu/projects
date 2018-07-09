@@ -135,6 +135,13 @@ class ArticlesService(object):
                     else:
                         query = query.filter(articles_model.Article.category_id == category_id)
 
+        if "tag_id" in kwargs and kwargs.get("tag_id"):
+            tag_id = kwargs.get("tag_id")
+            if tag_id:
+                tag = ArticlesService.get_tag(tag_id)
+                if tag:
+                    query = query.join(articles_model.Article.tags).filter(articles_model.Tag.id==tag_id)
+
         pagination = context_utils.get_pagination()
         result = None
         if pagination:

@@ -4,7 +4,7 @@ from models import Serializable
 # 文章和标签中间表关系
 article_tag_ship = db.Table("d_article_tag_ship",
                             db.Column("article_id", db.Integer, db.ForeignKey("d_articles.id"), primary_key=True),
-                            db.Column("d_tags", db.Integer, db.ForeignKey("d_tags.id"), primary_key=True))
+                            db.Column("tag_id", db.Integer, db.ForeignKey("d_tags.id"), primary_key=True))
 
 
 class Article(Serializable, db.Model):

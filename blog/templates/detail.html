@@ -2,13 +2,12 @@
 <html>
 <head>
     <base href="{{ sysinfo.website }}"/>
-    <meta charset="UTF-8">
     <title>{{article.title}}_{{ sysinfo.name }}</title>
     {% include("res.html") %}
     <link href="/static/css/info.css" rel="stylesheet">
 </head>
 <body>
-{% include("header.html") %}
+{% include("header.tpl") %}
 <article>
 
     <div class="infos">
@@ -22,7 +21,7 @@
             </div>
             <div class="tags">
                 {% for tag in article.tags %}
-                <a href="/" target="_blank">{{ tag.name }}</a>
+                <a href="/article/tag/{{tag.id}}.html" target="_blank">{{ tag.name }}</a>
                 {% endfor %}
             </div>
             <div class="news_about"><strong>简介</strong>{{ article.summary }}</div>

@@ -2,12 +2,11 @@
 <html>
 <head>
     <base href="{{ sysinfo.website }}"/>
-    <meta charset="UTF-8">
     <title>发生异常了500_{{ sysinfo.name }}</title>
     {% include("res.html") %}
 </head>
 <body>
-{% include("header.html") %}
+{% include("header.tpl") %}
 <article>
     <img src="/static/images/500.png" style="margin-left:50px;margin-top:30px;"/>
 </article>

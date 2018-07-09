@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+    <base href="{{ sysinfo.website }}"/>
+    <title>{{ tag.name }}_{{ sysinfo.name }}</title>
+    {% include("res.html") %}
+</head>
+<body>
+{% include("header.tpl") %}
+<article>
+    <h2 class="litle"><span>等待就是浪费青春!</span></h2>
+    <div class="cls"></div>
+    <div class="newblogs" style="float:none;width:auto">
+        <h2 class="hometitle">{{ tag.name }}相关文章</h2>
+        <ul>
+            {% for article in pager.items %}
+                <li>
+                    <h3 class="blogtitle">
+                        <span><a href="/article/category/{{ article.category_id }}.html" title="css3" target="_blank"
+                                 class="classname">{{ article.category.name }}</a></span>
+                        <a href="/article/{{ article.id }}.html" target="_blank">{{ article.title }}</a>
+                    </h3>
+                    <div class="bloginfo">
+                    <span class="blogpic">
+                        <a href="/article/{{ article.id }}.html" title="{{ article.title }}">
+                            <img src="{{ article.logo }}" alt="{{ article.title }}"/>
+                        </a>
+                    </span>
+                        <p>{{ article.summary }}</p>
+                    </div>
+                    <div class="autor"><span class="lm f_l"></span><span
+                            class="dtime f_l">{{ article.publish_time.date() }}</span><span
+                            class="viewnum f_l">浏览（<a
+                            href="/article/{{ article.id }}.html">{{ article.click_count }}</a>）</span><span
+                            class="f_r"><a
+                            href="/article/{{ article.id }}.html" class="more">阅读原文>></a></span></div>
+                    <div class="line"></div>
+                </li>
+            {% endfor %}
+        </ul>
+        {% if pager.page_count > 0  %}
+        <div class="pagelist">
+            <a title="Total record">&nbsp;<b>{{ pager.page_no }}/{{ pager.page_count }}</b> </a>&nbsp;&nbsp;&nbsp;
+            <a href="/article/tag/{{ tag.id }}.html">首页</a>&nbsp;
+            <a href="/article/tag/{{ tag.id }}.html?pageNo={{ pager.get_pre_page() }}">上一页</a>&nbsp;
+            {% for no in pp %}
+                <a href="/article/tag/{{ tag.id }}.html?pageNo={{ no }}">{{ no }}</a>&nbsp;
+            {% endfor %}
+            <a href="/article/tag/{{ tag.id }}.html?pageNo={{ pager.get_next_page() }}">下一页</a>&nbsp;
+            <a href="/article/tag/{{ tag.id }}.html?pageNo={{ pager.page_count }}">尾页</a>
+        </div>
+        {% endif %}
+    </div>
+</article>
+{% include("footer.html") %}
+</body>
+</html>

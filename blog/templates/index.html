@@ -2,7 +2,6 @@
 <html>
 <head>
     <base href="{{ sysinfo.website }}"/>
-    <meta charset="UTF-8">
     <title>首页_{{ sysinfo.name }}</title>
     {% include("res.html") %}
     <link rel="stylesheet" type="text/css" href="/static/js/plugins/player/styles.css" media="all" >
@@ -47,7 +46,7 @@
     </div>
     <div class="rbox">
         <div class="paihang">
-            <h2 class="hometitle">模板排行</h2>
+            <h2 class="hometitle">博文排行</h2>
             <ul>
                 {% for article in clickCountArticles %}
                 <li>

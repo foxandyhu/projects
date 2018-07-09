@@ -2,12 +2,11 @@
 <html>
 <head>
     <base href="{{ sysinfo.website }}"/>
-    <meta charset="UTF-8">
     <title>无法访问404_{{ sysinfo.name }}</title>
     {% include("res.html") %}
 </head>
 <body>
-{% include("header.html") %}
+{% include("header.tpl") %}
 <article>
     <img src="/static/images/404.png" style="margin-left:100px;margin-top:60px;"/>
 </article>
