@@ -1,6 +1,11 @@
 from models import users_model
+from models.logs_model import LoginLogs, LogType, UserType
+from services.logs_service import LoginLogsService
 from utils import context_utils, pagination_utils, string_utils, file_utils
 from extensions import db
+from datetime import datetime
+from flask import request
+from extensions import logger
 
 
 class UserService(object):
@@ -9,12 +14,25 @@ class UserService(object):
     @staticmethod
     def login(username, password):
         """管理员登录"""
+
+        loginlogs = LoginLogs(log_type=LogType.LOGIN, user_type=UserType.ADMIN, username=username,
+                              login_ip=context_utils.get_client_request_ip(request))
+
         user = UserService.get_user_username(username)
         if not user:
+            loginlogs.is_success = False
+            logger.warn("username : %s 登录失败,用户名不正确!" % username)
+            LoginLogsService.add_loginlogs(loginlogs)
             raise Exception("用户名或密码错误!")
         pwd = context_utils.get_md5(user.salt + password)
         if user.password != pwd:
+            loginlogs.is_success = False
+            logger.warn("username : %s 登录失败,密码不正确!" % username)
+            LoginLogsService.add_loginlogs(loginlogs)
             raise Exception("用户名或密码错误!")
+
+        loginlogs.is_success = True
+        LoginLogsService.add_loginlogs(loginlogs)
         return user
 
     @staticmethod

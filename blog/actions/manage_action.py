@@ -1,9 +1,11 @@
 from actions import adminBp
 from flask import render_template, request, redirect
-from services import users_service
-from utils import context_utils, extends_utils,json_utils
+from services import users_service, logs_service
+from utils import context_utils, extends_utils, json_utils
 from models.forms import UserLoginForm
-from models import ResponseData
+from models import ResponseData, logs_model
+from extensions import logger
+from datetime import datetime
 
 
 @adminBp.route("/index.html", methods=["GET", "POST"])
@@ -24,12 +26,14 @@ def login():
 
     form = UserLoginForm(request.form)
     if not form.validate():
+        logger.warn(form.errors)
         return render_template("admin/login.html", message="用户名或密码输入不正确!")
     username = form.username.data
     password = form.password.data
     captch = form.captch.data
     try:
         if captch.lower() != str(context_utils.get_from_session("captch")).lower():
+            logger.warn("username:%s 登录失败,验证码不正确!" % username)
             raise Exception("验证码不正确!")
         user = users_service.UserService.login(username, password)
         context_utils.set_current_user_session(user.username)
@@ -42,7 +46,15 @@ def login():
 def logout():
     """用户登出"""
 
+    username = context_utils.get_current_user_session()
     context_utils.del_current_user_session()
+    logger.info("username:%s 退出系统!" % username)
+
+    loginlogs = logs_model.LoginLogs(log_type=logs_model.LogType.LOGOUT, user_type=logs_model.UserType.ADMIN,
+                                     username=username, login_ip=context_utils.get_client_request_ip(request),
+                                     is_success=True)
+    logs_service.LoginLogsService.add_loginlogs(loginlogs)
+
     return redirect("/manage/login.html")
 
 

@@ -1,4 +1,5 @@
 from extensions import db
+from models import Serializable
 
 
 class LogType:
@@ -12,7 +13,7 @@ class UserType:
     ADMIN = 2000  # 系统管理员
 
 
-class LoginLogs(db.Model):
+class LoginLogs(Serializable, db.Model):
     """用户登录登出相关日志"""
     __tablename__ = "sys_login_logs"
 
@@ -23,9 +24,10 @@ class LoginLogs(db.Model):
     login_time = db.Column(db.DateTime, nullable=False)  # 登录时间
     login_ip = db.Column(db.String(30))  # 登录IP
     login_area = db.Column(db.String(30))  # 登录地址根据IP获得
+    is_success = db.Column(db.Boolean, default=False)  # 是否登录/登出成功
 
 
-class OperationLog(db.Model):
+class OperationLog(Serializable, db.Model):
     """用户操作日志"""
     __tablename__ = "sys_op_logs"
 

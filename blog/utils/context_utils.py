@@ -177,7 +177,7 @@ def get_md5(str=""):
 def get_client_request_ip(request):
     """获得请求客户端的IP"""
 
-    ip = request.headers["X-Forwarded-For"]
+    ip = request.headers.get("X-Forwarded-For")
     if not ip:
         ip = request.remote_addr
     return ip
