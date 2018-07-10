@@ -71,7 +71,7 @@
                             <td>
                                 <span ng-if="item.is_recommend" class="text-success"><b>[推荐]</b>&nbsp;</span>
                                 <span ng-if="item.is_top" class="text-danger"><b>[置顶]</b>&nbsp;</span>
-                                [{{ item.category_name }}]&nbsp;<a>{{ item.title }}</a>
+                                [{{ item.category_name }}]&nbsp;<a href="/article/{{ item.id}}.html" target="_blank">{{ item.title }}</a>
                             </td>
                             <td>{{ item.click_count }}</td>
                             <td>{{ item.username}}</td>
