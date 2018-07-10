@@ -97,4 +97,4 @@ opacity:1;
 .animate {font-size: 50px;margin: 100px 0 0;border-bottom: 2px solid #ccc;}
 .one span {color: #24a8e6;opacity: 0;transform: translate(-150px, -50px) rotate(-180deg) scale(3);animation: revolveScale .4s forwards;}
 .animate span {display: inline-block;}
-.media-wrapper{margin:10px 0;}
+.media-wrapper{margin:60px 0;}

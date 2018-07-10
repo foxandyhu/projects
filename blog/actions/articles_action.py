@@ -110,9 +110,6 @@ def edit_articles():
     article.logo = request.form.get("logo")
     article.mp3_url = request.form.get("mp3_url")
     article.mp4_url = request.form.get("mp4_url")
-    article.click_count = 0
-    article.publish_time = datetime.now()
-    article.publish_ip = request.remote_addr
     tag_ids = request.form.get("tag_ids")
 
     articles_service.ArticlesService.edit_article(article, tag_ids)

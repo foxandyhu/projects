@@ -89,7 +89,7 @@ class ArticlesService(object):
 
         art.category_id = article.category_id
         art.title = article.title
-        art.article = article.summary
+        art.summary = article.summary
         art.content = article.content
         art.seq = article.seq
         art.author = article.author
@@ -98,10 +98,6 @@ class ArticlesService(object):
         art.is_top = article.is_top
         art.is_recommend = article.is_recommend
         art.is_verify = article.is_verify
-        art.click_count = article.click_count
-        art.publish_ip = article.publish_ip
-        art.publish_time = article.publish_time
-        art.member_id = article.member_id
 
         db.session.commit()
 
