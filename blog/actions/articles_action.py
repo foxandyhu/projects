@@ -75,6 +75,8 @@ def add_articles():
     article.is_recommend = not request.form.get("is_recommend") is None
     article.is_verify = not request.form.get("is_verify") is None
     article.logo = request.form.get("logo")
+    article.mp3_url = request.form.get("mp3_url")
+    article.mp4_url = request.form.get("mp4_url")
     article.click_count = 0
     article.publish_time = datetime.now()
     article.publish_ip = request.remote_addr
@@ -106,6 +108,8 @@ def edit_articles():
     article.is_recommend = not request.form.get("is_recommend") is None
     article.is_verify = not request.form.get("is_verify") is None
     article.logo = request.form.get("logo")
+    article.mp3_url = request.form.get("mp3_url")
+    article.mp4_url = request.form.get("mp4_url")
     article.click_count = 0
     article.publish_time = datetime.now()
     article.publish_ip = request.remote_addr

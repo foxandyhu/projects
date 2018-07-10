@@ -58,6 +58,13 @@ define(["jquery","BlogApp"],function($,BlogApp){
     				fd.append("imgFile",imageFile);
     				var http=$http({url:"/manage/file/upload/img.html",data:fd,cache:false,method:"POST",headers:{"Content-Type":undefined},transformRequest:angular.identity});
     				return http;
+    			},
+				uploadFile:function(file)
+    			{
+    				var fd = new FormData();
+    				fd.append("file",file);
+    				var http=$http({url:"/manage/file/upload.html",data:fd,cache:false,method:"POST",headers:{"Content-Type":undefined},transformRequest:angular.identity});
+    				return http;
     			}
     	};
     	return util;

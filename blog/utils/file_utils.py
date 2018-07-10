@@ -17,6 +17,12 @@ def get_filename(file_path):
     return filename
 
 
+def get_file_suffix(file_path):
+    """获取文件后缀"""
+
+    return os.path.splitext(file_path)[1]
+
+
 def exists(file_path):
     """检查文件是否存在"""
 

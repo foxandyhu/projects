@@ -124,6 +124,21 @@ def get_upload_article_dir_rlt():
     return "/static/upload/article/"
 
 
+def get_upload_media_dir():
+    """获得多媒体文件上传绝对目录"""
+
+    path = os.path.join(os.getcwd(), "static", "upload", "media")
+    if not os.path.exists(path):
+        os.makedirs(path)
+    return path + os.path.sep
+
+
+def get_upload_media_dir_rlt():
+    """获得多媒体文件上传相对路径"""
+
+    return "/static/upload/media/"
+
+
 def get_app_image_dir():
     """获得图片绝对目录"""
 

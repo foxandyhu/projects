@@ -10,10 +10,23 @@ class ArticlesService(object):
     def add_article(article, tag_ids):
         """添加文章"""
 
+        has_mp3, has_mp4 = False, False
         if article.logo:
-            source = context_utils.get_appdir() + article.logo  # LOGO源物理路径
-            dest = context_utils.get_upload_article_dir()
-            article.logo = context_utils.get_upload_article_dir_rlt() + file_utils.get_filename(source)
+            logo_source = context_utils.get_appdir() + article.logo  # LOGO源物理路径
+            logo_dest = context_utils.get_upload_article_dir()
+            article.logo = context_utils.get_upload_article_dir_rlt() + file_utils.get_filename(logo_source)
+
+        if article.mp3_url and not article.mp3_url.startswith("http://"):
+            mp3_source = context_utils.get_appdir() + article.mp3_url  # 音频源物理路径
+            mp3_dest = context_utils.get_upload_media_dir()
+            article.mp3_url = context_utils.get_upload_media_dir_rlt() + file_utils.get_filename(mp3_source)
+            has_mp3 = True
+
+        if article.mp4_url and not article.mp4_url.startswith("http://"):
+            mp4_source = context_utils.get_appdir() + article.mp4_url  # 音频源物理路径
+            mp4_dest = context_utils.get_upload_media_dir()
+            article.mp4_url = context_utils.get_upload_media_dir_rlt() + file_utils.get_filename(mp4_source)
+            has_mp4 = True
 
         tags = []
         if tag_ids and tag_ids.split(","):
@@ -22,27 +35,48 @@ class ArticlesService(object):
                 tag = ArticlesService.get_tag(tid)
                 if tag:
                     tags.append(tag)
+
         article.tags = tags
         db.session.add(article)
         db.session.commit()
 
         if article.logo:
-            file_utils.move_file(source, dest)
+            file_utils.move_file(logo_source, logo_dest)
+
+        if has_mp3:
+            file_utils.move_file(mp3_source, mp3_dest)
+
+        if has_mp4:
+            file_utils.move_file(mp4_source, mp4_dest)
 
     @staticmethod
     def edit_article(article, tag_ids):
         """添加文章"""
 
         art = ArticlesService.get_article_id(article.id)
-        has_new_logo = False
+        has_new_logo, has_new_mp3, has_new_mp4 = False, False, False
         if not art:
             raise Exception("文章不存在!")
         if article.logo and article.logo != art.logo:
-            source = context_utils.get_appdir() + article.logo  # LOGO源物理路径
-            dest = context_utils.get_upload_article_dir()
-            article.logo = context_utils.get_upload_article_dir_rlt() + file_utils.get_filename(source)
+            logo_source = context_utils.get_appdir() + article.logo  # LOGO源物理路径
+            logo_dest = context_utils.get_upload_article_dir()
+            article.logo = context_utils.get_upload_article_dir_rlt() + file_utils.get_filename(logo_source)
             has_new_logo = True
         art.logo = article.logo
+
+        if article.mp3_url and article.mp3_url != art.mp3_url and not article.mp3_url.startswith("http://"):
+            mp3_source = context_utils.get_appdir() + article.mp3_url  # 音频源物理路径
+            mp3_dest = context_utils.get_upload_media_dir()
+            article.mp3_url = context_utils.get_upload_media_dir_rlt() + file_utils.get_filename(mp3_source)
+            has_new_mp3 = True
+        art.mp3_url = article.mp3_url
+
+        if article.mp4_url and article.mp4_url != art.mp4_url and not article.mp4_url.startswith("http://"):
+            mp4_source = context_utils.get_appdir() + article.mp4_url  # 视频源物理路径
+            mp4_dest = context_utils.get_upload_media_dir()
+            article.mp4_url = context_utils.get_upload_media_dir_rlt() + file_utils.get_filename(mp4_source)
+            has_new_mp4 = True
+        art.mp4_url = article.mp4_url
 
         tags = []
         if tag_ids and tag_ids.split(","):
@@ -72,7 +106,11 @@ class ArticlesService(object):
         db.session.commit()
 
         if has_new_logo:
-            file_utils.move_file(source, dest)
+            file_utils.move_file(logo_source, logo_dest)
+        if has_new_mp3:
+            file_utils.move_file(mp3_source, mp3_dest)
+        if has_new_mp4:
+            file_utils.move_file(mp4_source, mp4_dest)
 
     @staticmethod
     def get_article_id(article_id):
@@ -140,7 +178,7 @@ class ArticlesService(object):
             if tag_id:
                 tag = ArticlesService.get_tag(tag_id)
                 if tag:
-                    query = query.join(articles_model.Article.tags).filter(articles_model.Tag.id==tag_id)
+                    query = query.join(articles_model.Article.tags).filter(articles_model.Tag.id == tag_id)
 
         pagination = context_utils.get_pagination()
         result = None

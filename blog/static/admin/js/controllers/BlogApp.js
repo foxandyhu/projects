@@ -28,22 +28,39 @@ define(["angular","jquery"], function (angular,$) {
     			var modelSetter=model.assign;
     			element.bind("change",function(event){
     				scope.$apply(function(){modelSetter(scope,element[0].files[0]);});
-    				scope.imageFile=(event.srcElement||event.target).files[0];
-    				if(!scope.imageFile){
+    				scope.file=(event.srcElement||event.target).files[0];
+    				var target = event.target.getAttribute("targetPath");
+    				var targetFull=event.target.getAttribute("targetFull");
+    				var isImg=!(target || targetFull);
+    				if(!scope.file){
     					return;
 					}
-    				if(!Util.checkImage(scope.imageFile.name))
-    				{
-    					Dialog.show("亲,您上传的文件非图片类型哦!");
-    					return;
-					}
-    				fileReader.readAsDataUrl(scope.imageFile,scope).then(function(result){
-    					scope.imageSrc = result;
-    					var http=Util.uploadImg(scope.imageFile);
-    					http.success(function(data){
-    						scope.imageResult=data;
-    						Dialog.successTip("上传成功!");
-    					});
+					if(isImg) {
+                        if (!Util.checkImage(scope.file.name)) {
+                            Dialog.show("亲,您上传的文件非图片类型哦!");
+                            return;
+                        }
+                    }
+    				fileReader.readAsDataUrl(scope.file,scope).then(function(result){
+    					var http=undefined;
+    					if(isImg){
+    						http=Util.uploadImg(scope.file);
+    						http.success(function(data){
+    							Dialog.successTip("上传成功!");
+    							scope.imageResult=data;
+							});
+						}else{
+    						http=Util.uploadFile(scope.file);
+    						http.success(function(data){
+    							Dialog.successTip("上传成功!");
+    							if(target){
+    								document.getElementById(target).value=data.path;
+								}
+								if(targetFull){
+									document.getElementById(targetFull).src=data.fullUrl;
+								}
+							});
+						}
 					});
     			});
     		}

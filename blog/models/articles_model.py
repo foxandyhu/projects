@@ -24,6 +24,8 @@ class Article(Serializable, db.Model):
     author = db.Column(db.String(50))  # 作者
     source = db.Column(db.String(50))  # 来源
     source_url = db.Column(db.String(200))  # 来源地址
+    mp3_url = db.Column(db.String(200))  # 音频地址
+    mp4_url = db.Column(db.String(200))  # 视频地址
     publish_time = db.Column(db.DateTime, nullable=False)  # 发布时间
     publish_ip = db.Column(db.String(30))  # 发布IP
 
@@ -44,7 +46,7 @@ class Category(Serializable, db.Model):
     name = db.Column(db.String(15), nullable=False)  # 类别名称
     seq = db.Column(db.Integer, default=0)  # 排序序号
     parent_id = db.Column(db.Integer, db.ForeignKey("d_categorys.id"))  # 父类别ID
-    parent = db.relationship("Category",remote_side=[id], lazy="joined")
+    parent = db.relationship("Category", remote_side=[id], lazy="joined")
 
 
 class Tag(Serializable, db.Model):
