@@ -71,7 +71,7 @@
             <h2 class="hometitle">音乐博客</h2>
             <div class="audio_cc">
                 <audio id="mp3player">
-                    <source title="赵雷 - 我们的时光" src="/static/upload/media/dujiaoxi.mp3" />
+                    <source title="赵雷 - 我们的时光" src="http://blog.dongtingren.com/static/upload/media/dujiaoxi.mp3" />
                 </audio>
             </div>
         </div>
@@ -96,6 +96,7 @@
             try{
                 if(player.readyState==4){
                     if(player.paused){
+                        player.changeVolumeTo(0.1);
                         player.play();
                     }else
                     {
