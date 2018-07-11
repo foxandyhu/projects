@@ -1,6 +1,4 @@
 from flask import Flask
-from env_config import ConfigEnum
-from extensions import db
 
 
 def create_app(config=None):
@@ -17,6 +15,7 @@ def create_app(config=None):
 def configure_app_env(app, config):
     """配置Flask的运行环境"""
 
+    from env_config import ConfigEnum
     if not config:
         config = ConfigEnum.DEVELOPMENT
     app.config.from_object(config)
@@ -25,6 +24,7 @@ def configure_app_env(app, config):
 def configure_app_db(app):
     """配置APP 应用的数据库"""
 
+    from extensions import db
     db.init_app(app)
 
 

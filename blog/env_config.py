@@ -15,6 +15,12 @@ class DevelopmentConfig(BaseConfig):
     DEBUG = True
     TESTING = True
 
+    REDIS_HOST = "127.0.0.1"
+    REDIS_PORT = 6379
+    REDIS_KEY_PREFIX = "BLOG_CACHE"
+    REDIS_DB = 0
+    REDIS_PWD = None
+
 
 class ProductConfig(BaseConfig):
     """生产环境配置类"""
@@ -25,6 +31,12 @@ class ProductConfig(BaseConfig):
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     DEBUG = False
     TESTING = False
+
+    REDIS_HOST = "127.0.0.1"
+    REDIS_PORT = 6379
+    REDIS_KEY_PREFIX = "BLOG_CACHE"
+    REDIS_DB = 0
+    REDIS_PWD = "hulibo"
 
 
 class ConfigEnum:
