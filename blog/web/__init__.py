@@ -8,7 +8,7 @@ from models import SysServer
 
 webBp = Blueprint("webBp", __name__)
 
-from web.actions import index
+from web.actions import index, flow_action
 
 
 @webBp.app_context_processor

@@ -17,9 +17,11 @@ class DevelopmentConfig(BaseConfig):
 
     REDIS_HOST = "127.0.0.1"
     REDIS_PORT = 6379
-    REDIS_KEY_PREFIX = "BLOG_CACHE"
+    REDIS_KEY_PREFIX = "BLOG_CACHE_"
     REDIS_DB = 0
     REDIS_PWD = None
+
+    SESSION_TYPE = "redis"
 
 
 class ProductConfig(BaseConfig):
@@ -37,6 +39,8 @@ class ProductConfig(BaseConfig):
     REDIS_KEY_PREFIX = "BLOG_CACHE_"
     REDIS_DB = 0
     REDIS_PWD = "hulibo"
+
+    SESSION_TYPE = "redis"
 
 
 class ConfigEnum:

@@ -1,4 +1,6 @@
-from flask import Flask
+from flask import Flask, Session
+from flask_session import Session
+from redis import Redis
 
 
 def create_app(config=None):
@@ -6,6 +8,7 @@ def create_app(config=None):
 
     app = Flask(__name__)
     configure_app_env(app, config)
+    configure_app_session(app, config)
     configure_app_db(app)
     configure_app_logs(app)
     configure_app_blueprints(app)
@@ -19,6 +22,13 @@ def configure_app_env(app, config):
     if not config:
         config = ConfigEnum.DEVELOPMENT
     app.config.from_object(config)
+
+
+def configure_app_session(app, config):
+    """配置APP Session"""
+
+    app.config["SESSION_REDIS"] = Redis(host=config.REDIS_HOST, port=config.REDIS_PORT)
+    Session(app)
 
 
 def configure_app_db(app):

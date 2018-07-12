@@ -1,3 +1,7 @@
 <footer>
     <p>{{ copyright.copyright }} <a href="/">{{ sysinfo.name }}</a> <a href="{{ sysinfo.website }}">{{ copyright.icp }}</a></p>
 </footer>
+<script>
+    console.log(document.referrer)
+    $(function () {$.ajax({url:"/flow_statistic.html",data:{page:location.href,referrer:document.referrer}});});
+</script>

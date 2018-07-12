@@ -57,6 +57,7 @@ class SysAccess(Serializable, db.Model):
 
     __tablename__ = "sys_access"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    session_id = db.Column(db.String(64), nullable=False)  # session_id
     access_time = db.Column(db.Time, nullable=False)  # 访问时间
     access_date = db.Column(db.Date, nullable=False)  # 访问日期
     access_ip = db.Column(db.String(50), nullable=False)  # 访问IP
@@ -71,3 +72,16 @@ class SysAccess(Serializable, db.Model):
     operating_system = db.Column(db.String(50))  # 操作系统
     browser = db.Column(db.String(50))  # 浏览器
     keyword = db.Column(db.String(255))  # 来访关键字
+
+
+class SysAccessPage(Serializable, db.Model):
+    """每个页面的访问详情"""
+
+    __tablename__ = "sys_access_pages"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    session_id = db.Column(db.String(64), nullable=False)  # session_id
+    access_page = db.Column(db.String(255), nullable=False)  # 访问的页面
+    access_time = db.Column(db.Time, nullable=False)  # 访问时间
+    access_date = db.Column(db.Date, nullable=False)  # 访问日期
+    visit_second = db.Column(db.Integer, nullable=False)  # 访问时长/秒
+    seq = db.Column(db.Integer, default=0, nullable=False)  # 页面访问顺序

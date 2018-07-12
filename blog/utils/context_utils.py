@@ -196,3 +196,18 @@ def get_client_request_ip(request):
     if not ip:
         ip = request.remote_addr
     return ip
+
+
+def get_client_request_brower(request):
+    """获得请求客户端的浏览器信息"""
+
+    name = request.user_agent.browser
+    version = request.user_agent.version
+    return f"{name}  {version}"
+
+
+def get_client_request_os(request):
+    """获得请求客户端的操作系统信息"""
+
+    name = request.user_agent.platform
+    return name
