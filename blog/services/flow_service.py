@@ -11,8 +11,8 @@ class FlowService(object):
 
     ACCESS_COUNT_SESSION_FLAG = "access_count_flag"  # 每个客户端访问的次数统计标识
     ACCESS_LAST_SESSION_TIME = "access_last_time"  # 每个客户端最后一次的访问时间
-    ACCESS_CACHE_FLAG = "_access"  # session访问记录 缓存标识
-    ACCESS_CACHE_PAGE_FLAG = "_page_"  # 页面访问记录 缓存标识
+    ACCESS_CACHE_SITE_FLAG, SESSION_SITE_NAMESPACE = "_site_", "SESSION_SITE:"  # session访问站点记录 缓存标识
+    ACCESS_CACHE_PAGE_FLAG, SESSION_PAGE_NAMESPACE = "_page_", "SESSION_PAGE:"  # 页面访问记录 缓存标识
     CACHE_FRESH_DB_TIME = datetime.now()  # 缓存中的数据写入数据库的时间标识（10分钟写入访问统计数据到数据库）
 
     @staticmethod
@@ -44,8 +44,10 @@ class FlowService(object):
         session[FlowService.ACCESS_COUNT_SESSION_FLAG] = access.visit_page_count
         session[FlowService.ACCESS_LAST_SESSION_TIME] = now
 
-        cache.set(session_id, access)  # 把每个session的访问信息放入到缓存中，统一处理
-        cache.set(f"{session_id}{FlowService.ACCESS_CACHE_PAGE_FLAG}{access_count}", access_page)
+        cache.set(f"{FlowService.SESSION_SITE_NAMESPACE}{session_id}{FlowService.ACCESS_CACHE_SITE_FLAG}", access,
+                  0)  # 把每个session的访问信息放入到缓存中，统一处理
+        cache.set(f"{FlowService.SESSION_PAGE_NAMESPACE}{session_id}{FlowService.ACCESS_CACHE_PAGE_FLAG}{access_count}",
+                  access_page, 0)
 
         if (now - FlowService.CACHE_FRESH_DB_TIME).seconds > 10 * 60:
             FlowService.flush_cache_to_db()
@@ -98,7 +100,7 @@ class FlowService(object):
     def find_access(session_id):
         """根据session_id 查找访问对象"""
 
-        access = cache.get(f"{session_id}{FlowService.ACCESS_CACHE_FLAG}")
+        access = cache.get(f"{FlowService.SESSION_SITE_NAMESPACE}{session_id}{FlowService.ACCESS_CACHE_SITE_FLAG}")
         if access is None:  # 如果缓存中不存在则从数据库中查找
             access = SysAccess.query.filter(SysAccess.session_id == session_id).first()
         return access
@@ -114,15 +116,16 @@ class FlowService(object):
         access_page.visit_second = 0
         access_page.seq = access_count
 
-        pre_cache_key = f"{session_id}{FlowService.ACCESS_CACHE_PAGE_FLAG}{access_count-1}"
+        pre_cache_key = f"{FlowService.SESSION_PAGE_NAMESPACE}" \
+                        f"{session_id}{FlowService.ACCESS_CACHE_PAGE_FLAG}{access_count-1}"
         pre_page = cache.get(pre_cache_key)
         if pre_page is None:
             pre_page = SysAccessPage.query.filter(
                 SysAccessPage.session_id == session_id and SysAccessPage.seq == access_count - 1).first()
         if pre_page:
             seconds = (date_time - datetime.combine(pre_page.access_date, pre_page.access_time)).seconds
-            pre_page.visit_second(seconds)
-            cache.set(pre_cache_key, pre_page)
+            pre_page.visit_second = seconds
+            cache.set(pre_cache_key, pre_page, 0)
         return access_page
 
     @staticmethod
