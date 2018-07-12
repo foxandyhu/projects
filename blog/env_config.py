@@ -1,3 +1,6 @@
+from datetime import timedelta
+
+
 class BaseConfig(object):
     """默认配置基类"""
 
@@ -22,6 +25,7 @@ class DevelopmentConfig(BaseConfig):
     REDIS_PWD = None
 
     SESSION_TYPE = "redis"
+    PERMANENT_SESSION_LIFETIME = timedelta(minutes=30)
 
 
 class ProductConfig(BaseConfig):
@@ -41,6 +45,7 @@ class ProductConfig(BaseConfig):
     REDIS_PWD = "hulibo"
 
     SESSION_TYPE = "redis"
+    PERMANENT_SESSION_LIFETIME = timedelta(minutes=30)
 
 
 class ConfigEnum:
