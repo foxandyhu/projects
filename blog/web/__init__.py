@@ -36,11 +36,11 @@ def request_beofore():
     paths = ["/upgrade.html", "/captch.html"]
     path = request.path
     if path not in paths:
-        if not filter_server_request():
+        if not check_server_enable():
             return redirect("/upgrade.html")
 
 
-def filter_server_request():
+def check_server_enable():
     """检测网站是否访问"""
     return SysServer.get_instance().server_enable
 

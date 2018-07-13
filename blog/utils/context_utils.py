@@ -203,7 +203,7 @@ def get_client_request_brower(request):
 
     name = request.user_agent.browser
     version = request.user_agent.version
-    return f"{name}  {version}"
+    return f"{name}:{version}"
 
 
 def get_client_request_os(request):
