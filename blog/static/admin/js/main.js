@@ -9,8 +9,10 @@ requirejs.config({
         "bootstrap": "bootstrap/js/bootstrap.min",
         "bootstrapValidator": "bootstrapvalid/js/bootstrapValidator.min",
         "kindeditor": "kindeditor/kindeditor-min",
-        "highchart": "highchart/js/highcharts",
-        "3Dhighchart": "highchart/js/highcharts-3d",
+        "highchart": "highchart/code/highcharts",
+        "3Dhighchart": "highchart/code/highcharts-3d",
+        "dark-unica":"highchart/code/themes/dark-unica",
+        "sand-signika":"highchart/code/themes/sand-signika",
         "fastclick": "fastclick/fastclick.min",
         "adminlte": "../dist/js/adminlte.min",
         "select2": "select2/js/select2.min",
@@ -36,6 +38,14 @@ requirejs.config({
         "3Dhighchart": {
             deps: ["highchart"],
             exports: "3Dhighchart"
+        },
+        "sand-signika":{
+            deps:["3Dhighchart"],
+            exports:"sand-signika"
+        },
+        "dark-unica":{
+            deps:["3Dhighchart"],
+            exports:"dark-unica"
         },
         "highchart": {
             deps: ["jquery"],

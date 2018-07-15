@@ -18,6 +18,7 @@ class MyEncoder(json.JSONEncoder):
                     value = value.strftime("%Y-%m-%d %H:%M:%S")
                 __dict[name] = value
             return __dict
+        return json.JSONEncoder.default(self, o)
 
 
 def to_json(obj):

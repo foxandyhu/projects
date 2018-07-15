@@ -1,11 +1,11 @@
-from models.system_model import SysAccess, SysAccessPage
+from models.system_model import SysAccess, SysAccessPage, SysAccessStatistic, SysAccessCount, SysAccessCountHour
 from flask import session
 from utils import context_utils, date_utils
-from datetime import datetime, timedelta
-from extensions import cache, db
+from datetime import datetime
+from extensions import cache, db, logger
 import itertools, re
 import threading
-from sqlalchemy import inspect
+from sqlalchemy import inspect,desc
 
 
 class FlowService(object):
@@ -13,7 +13,7 @@ class FlowService(object):
 
     CACHE_TIMEOUT_ADAY = 24 * 60 * 60  # 缓存超时时间
     ACCESS_COUNT_SESSION_FLAG = "access_count_flag"  # 每个客户端访问的次数统计标识
-    ACCESS_LAST_TIME = "access_last_time"  # 网站最后一次的访问时间
+    ACCESS_LAST_TIME = "access_last_time"  # 站点最后一次的访问时间
     ACCESS_CACHE_SITE_FLAG, SESSION_SITE_NAMESPACE = "_site_", "SESSION_SITE:"  # session访问站点记录 缓存标识
     ACCESS_CACHE_PAGE_FLAG, SESSION_PAGE_NAMESPACE = "_page_", "SESSION_PAGE:"  # 页面访问记录 缓存标识
     CACHE_FRESH_DB_TIME = datetime.now()  # 缓存中的数据写入数据库的时间标识（10分钟写入访问统计数据到数据库）
@@ -38,13 +38,6 @@ class FlowService(object):
 
         now, session_id = datetime.now(), session.sid
 
-        access_last_time = cache.get(FlowService.ACCESS_LAST_TIME)
-        is_new_day = False  # 每天第一个访问标识统计昨日的流量
-        if access_last_time:
-            access_last_time = date_utils.parse_str_datetime(access_last_time)
-            if access_last_time.date() < now.date():
-                is_new_day = True
-
         access_count = session.get(FlowService.ACCESS_COUNT_SESSION_FLAG) or 0
         if access_count == 0:  # 新客户第一次访问
             access = FlowService.wrap_access(request, session_id, ip, page, referrer, brower, os, now)
@@ -64,19 +57,24 @@ class FlowService(object):
 
         session[FlowService.ACCESS_COUNT_SESSION_FLAG] = access.visit_page_count
 
-        cache.set(FlowService.ACCESS_LAST_TIME, date_utils.parse_datetime_str(now), 0)  # 重新设置站点的访问时间
         cache.set(FlowService.get_cache_site_namespace(session_id), access,
                   FlowService.CACHE_TIMEOUT_ADAY)  # 把每个session的访问信息放入到缓存中，统一处理
         cache.set(FlowService.get_cache_page_namespace(session_id, access_count), access_page,
                   FlowService.CACHE_TIMEOUT_ADAY)
 
-        if (now - FlowService.CACHE_FRESH_DB_TIME).seconds > 10 * 60:
+        if (now - FlowService.CACHE_FRESH_DB_TIME).seconds > 10 * 60:  # 每隔10分钟刷新缓存数据到数据库
             FlowService.CACHE_FRESH_DB_TIME = now
             FlowService.flush_cache_to_db()
 
-        if is_new_day:  # 统计昨日的流量
-            statistic_thread = FlowStatisticThread()
-            statistic_thread.start()
+        site_last_time = cache.get(FlowService.ACCESS_LAST_TIME)
+        if site_last_time:  # 每天第一个访问标识统计昨日的流量
+            site_last_time = date_utils.parse_str_datetime(site_last_time)
+            if site_last_time.date() < now.date():
+                context = db.get_app().app_context()
+                statistic_thread = FlowStatisticThread(context)
+                statistic_thread.start()
+
+        cache.set(FlowService.ACCESS_LAST_TIME, date_utils.parse_datetime_str(now), 0)  # 重新设置站点最后的访问时间
 
     @staticmethod
     def wrap_access(request, session_id, ip, stop_page, referrer, brower, os, date_time):
@@ -118,8 +116,8 @@ class FlowService(object):
                     index = start
             referrer = referrer[0:index]
             access.external_link = referrer
-        if referrer.find(request.host) < 0:
-            access.access_source = "external_access"
+            if referrer.find(request.host) < 0:
+                access.access_source = "external_access"
         return access
 
     @staticmethod
@@ -217,15 +215,251 @@ class FlowService(object):
                 db.session.merge(access)
         db.session.commit()
 
+
+class FlowStatisticService(object):
+    """流量统计服务类"""
+
+    @staticmethod
+    def get_statistic_pre_days(date):
+        """查找访问日期是否存在之前日期 避免之前日期数据统计丢失"""
+
+        result = db.session.query(db.distinct(SysAccess.access_date)).filter(SysAccess.access_date < date).all()
+        return result
+
+    @staticmethod
+    def add_statistic(statistic_date, pv, ip, visitors, pages_aver, visit_second_aver, statistic_key,
+                      statistic_value=None):
+        """保存统计的流量数据"""
+
+        statistic = SysAccessStatistic()
+        statistic.statistic_date = statistic_date
+        statistic.pv = pv
+        statistic.ip = ip
+        statistic.visitors = visitors
+        statistic.pages_aver = pages_aver
+        statistic.visit_second_aver = visit_second_aver
+        statistic.statistic_key = statistic_key
+        statistic.statistic_value = statistic_value
+
+        db.session.add(statistic)
+        db.session.commit()
+
+    @staticmethod
     def statistic_day(date):
-        """根据指定"""
-        pass
+        """根据指定日期统计PV，UV，IP等汇总信息"""
+        result = db.session.query(db.func.count(db.distinct(SysAccess.access_ip)).label("IP"),
+                                  db.func.count(db.distinct(SysAccess.session_id)).label("UV"),
+                                  db.func.sum(SysAccess.visit_page_count).label("PV"),
+                                  db.func.sum(SysAccess.visit_second).label("ST"), db.func.count(1)).filter(
+            SysAccess.access_date == date).all()
+        return result
+
+    @staticmethod
+    def statistic_area(date):
+        """在指定的日期根据访问地区统计"""
+
+        result = db.session.query(db.func.count(db.distinct(SysAccess.access_ip)).label("IP"),
+                                  db.func.count(db.distinct(SysAccess.session_id)).label("UV"),
+                                  db.func.sum(SysAccess.visit_page_count).label("PV"),
+                                  db.func.sum(SysAccess.visit_second).label("ST"), SysAccess.access_area).filter(
+            SysAccess.access_date == date).filter(SysAccess.access_area != "").group_by(SysAccess.access_area).all()
+        return result
+
+    @staticmethod
+    def statistic_source(date):
+        """在指定的日期根据访问来源统计"""
+
+        result = db.session.query(db.func.count(db.distinct(SysAccess.access_ip)).label("IP"),
+                                  db.func.count(db.distinct(SysAccess.session_id)).label("UV"),
+                                  db.func.sum(SysAccess.visit_page_count).label("PV"),
+                                  db.func.sum(SysAccess.visit_second).label("ST"), SysAccess.access_source).filter(
+            SysAccess.access_date == date).filter(SysAccess.access_source != "").group_by(SysAccess.access_source).all()
+        return result
+
+    @staticmethod
+    def statistic_engine(date):
+        """在指定的日期根据搜索引擎统计"""
+
+        result = db.session.query(db.func.count(db.distinct(SysAccess.access_ip)).label("IP"),
+                                  db.func.count(db.distinct(SysAccess.session_id)).label("UV"),
+                                  db.func.sum(SysAccess.visit_page_count).label("PV"),
+                                  db.func.sum(SysAccess.visit_second).label("ST"), SysAccess.engine).filter(
+            SysAccess.access_date == date).filter(SysAccess.engine != "").group_by(SysAccess.engine).all()
+        return result
+
+    @staticmethod
+    def statistic_link(date):
+        """在指定的日期根据外部链接统计"""
+
+        result = db.session.query(db.func.count(db.distinct(SysAccess.access_ip)).label("IP"),
+                                  db.func.count(db.distinct(SysAccess.session_id)).label("UV"),
+                                  db.func.sum(SysAccess.visit_page_count).label("PV"),
+                                  db.func.sum(SysAccess.visit_second).label("ST"), SysAccess.external_link).filter(
+            SysAccess.access_date == date).filter(SysAccess.external_link != "").group_by(SysAccess.external_link).all()
+        return result
+
+    @staticmethod
+    def statistic_keyword(date):
+        """在指定的日期根据关键字统计"""
+
+        result = db.session.query(db.func.count(db.distinct(SysAccess.access_ip)).label("IP"),
+                                  db.func.count(db.distinct(SysAccess.session_id)).label("UV"),
+                                  db.func.sum(SysAccess.visit_page_count).label("PV"),
+                                  db.func.sum(SysAccess.visit_second).label("ST"), SysAccess.keyword).filter(
+            SysAccess.access_date == date).filter(SysAccess.keyword != "").group_by(SysAccess.keyword).all()
+        return result
+
+    @staticmethod
+    def statistic_brower(date):
+        """在指定的日期根据浏览器统计"""
+
+        result = db.session.query(db.func.count(db.distinct(SysAccess.access_ip)).label("IP"),
+                                  db.func.count(db.distinct(SysAccess.session_id)).label("UV"),
+                                  db.func.sum(SysAccess.visit_page_count).label("PV"),
+                                  db.func.sum(SysAccess.visit_second).label("ST"),
+                                  db.func.substring_index(SysAccess.browser, ":", 1).label("brower")).filter(
+            SysAccess.access_date == date).filter(SysAccess.browser != "").group_by("brower").all()
+        return result
+
+    @staticmethod
+    def statictis_page_count(date):
+        """统计指定日期的页面访问量和访客总量"""
+
+        result = db.session.query(db.func.count(db.distinct(SysAccess.session_id)).label("UV"),
+                                  db.func.sum(SysAccess.visit_page_count).label("PV")).filter(
+            SysAccess.access_date == date).first()
+
+        access_count = SysAccessCount()
+        access_count.visitors = result[0]
+        access_count.page_count = result[1]
+        access_count.statistic_date = date
+
+        db.session.add(access_count)
+        db.session.commit()
+
+    @staticmethod
+    def statistis_hour(date):
+        """根据指定日期的小时段统计"""
+
+        results = db.session.query(db.func.count(db.distinct(SysAccess.access_ip)).label("IP"),
+                                   db.func.count(db.distinct(SysAccess.session_id)).label("UV"),
+                                   db.func.sum(SysAccess.visit_page_count).label("PV"),
+                                   db.func.hour(SysAccess.access_time).label("hour")).filter(
+            SysAccess.access_date == date).group_by("hour").all()
+
+        for result in results:
+            access_hour = SysAccessCountHour()
+            access_hour.hour_ip = result[0]
+            access_hour.hour_uv = result[1]
+            access_hour.hour_pv = result[2]
+            access_hour.statistic_date = date
+            access_hour.statistic_time = result[3]
+
+            db.session.add(access_hour)
+            db.session.commit()
 
 
 class FlowStatisticThread(threading.Thread):
     """流量统计线程类"""
+    STATISTIC_ALL, STATISTIC_SOURCE, STATISTIC_ENGINE, STATISTIC_LINK, STATISTIC_KEYWORD, STATISTIC_AREA, STATISTIC_BROWER = "all", "source", "engine", "link", "keyword", "area", "brower"
+
+    def __init__(self, context):
+        self.context = context
+        super().__init__()
 
     def run(self):
-        date, delta = datetime.now(), timedelta(days=-1)
-        date = date + delta
-        FlowService.statistic_day(date)
+
+        logger.info("开始统计今日之前的数据!")
+        date = datetime.now().date()
+        with self.context:
+            days = FlowStatisticService.get_statistic_pre_days(date)
+            for day in days:
+                self.statistic_key(day[0], self.STATISTIC_ALL)
+                self.statistic_key(day[0], self.STATISTIC_SOURCE)
+                self.statistic_key(day[0], self.STATISTIC_ENGINE)
+                self.statistic_key(day[0], self.STATISTIC_LINK)
+                self.statistic_key(day[0], self.STATISTIC_KEYWORD)
+                self.statistic_key(day[0], self.STATISTIC_AREA)
+                self.statistic_key(day[0], self.STATISTIC_BROWER)
+
+                FlowStatisticService.statictis_page_count(day[0])
+                FlowStatisticService.statistis_hour(day[0])
+
+                self.clear_access(day[0])
+                self.clear_access_page(day[0])
+
+    def statistic_key(self, date, key):
+        """根据不同维度统计数据"""
+
+        if key == self.STATISTIC_ALL:
+            results = FlowStatisticService.statistic_day(date)
+        elif key == self.STATISTIC_AREA:
+            results = FlowStatisticService.statistic_area(date)
+        elif key == self.STATISTIC_SOURCE:
+            results = FlowStatisticService.statistic_source(date)
+        elif key == self.STATISTIC_ENGINE:
+            results = FlowStatisticService.statistic_engine(date)
+        elif key == self.STATISTIC_LINK:
+            results = FlowStatisticService.statistic_link(date)
+        elif key == self.STATISTIC_KEYWORD:
+            results = FlowStatisticService.statistic_keyword(date)
+        elif key == self.STATISTIC_BROWER:
+            results = FlowStatisticService.statistic_brower(date)
+
+        for result in results:
+            ip = result[0]
+            visitors = result[1]
+            pv = result[2]
+            visit_second_aver = int(result[3] / visitors)
+            pages_aver = int(pv / visitors)
+            statistic_key = key
+            statistic_value = result[4]
+            FlowStatisticService.add_statistic(date, pv, ip, visitors, pages_aver, visit_second_aver, statistic_key,
+                                               statistic_value)
+
+    def clear_access(self, date):
+        """清除指定日期的访问记录"""
+
+        db.session.query(SysAccess).filter(SysAccess.access_date == date).delete()
+        db.session.commit()
+
+    def clear_access_page(self, date):
+        """清除指定日期的页面访问记录"""
+
+        db.session.query(SysAccessPage).filter(SysAccessPage.access_date == date).delete()
+        db.session.commit()
+
+
+class FlowReportService(object):
+    """流量报表统计展示服务类"""
+
+    @staticmethod
+    def statistic_today():
+        """统计今日的总流量汇总数据"""
+
+        date = datetime.now().date()
+        results = db.session.query(db.func.count(db.distinct(SysAccess.access_ip)).label("IP"),
+                                   db.func.count(db.distinct(SysAccess.session_id)).label("UV"),
+                                   db.func.cast(db.func.sum(SysAccess.visit_page_count), db.Integer).label("PV"),
+                                   db.func.cast(db.func.round(db.func.avg(SysAccess.visit_second), 0),
+                                                db.Integer).label("VS"),
+                                   db.func.hour(SysAccess.access_time).label("hour")).filter(
+            SysAccess.access_date == date).group_by("hour").order_by("hour").all()
+
+        return results
+
+    @staticmethod
+    def statistic_source(begin, end, key_word="source", limit=-1):
+        """在指定的日期根据访问来源统计"""
+
+        query = db.session.query(db.func.cast(db.func.sum(SysAccessStatistic.ip), db.Integer).label("IP"),
+                                 db.func.cast(db.func.count(SysAccessStatistic.visitors), db.Integer).label("UV"),
+                                 db.func.cast(db.func.sum(SysAccessStatistic.pv), db.Integer).label("PV"),
+                                 SysAccessStatistic.statistic_value).filter(
+            SysAccessStatistic.statistic_date <= end).filter(SysAccessStatistic.statistic_date >= begin).filter(
+            SysAccessStatistic.statistic_key == key_word).group_by(SysAccessStatistic.statistic_value).order_by(
+            desc("PV"))
+        if limit > 0:
+            query = query.limit(limit)
+        result = query.all()
+        return result

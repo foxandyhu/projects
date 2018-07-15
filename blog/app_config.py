@@ -27,7 +27,8 @@ def configure_app_env(app, config):
 def configure_app_session(app, config):
     """配置APP Session"""
 
-    app.config["SESSION_REDIS"] = Redis(host=config.REDIS_HOST, port=config.REDIS_PORT)
+    app.config["SESSION_REDIS"] = Redis(host=config.REDIS_HOST, port=config.REDIS_PORT, password=config.REDIS_PWD,
+                                        db=config.REDIS_DB)
     Session(app)
 
 

@@ -3,5 +3,5 @@
 </footer>
 <script>
     console.log(document.referrer)
-    $(function () {$.ajax({url:"/flow_statistic.html",cache:false,data:{page:location.href,referrer:document.referrer}});});
+    $(function () {$.ajax({url:"/flow_statistic.html?"+new Date().getTime(),cache:false,data:{page:location.href,referrer:document.referrer}});});
 </script>
