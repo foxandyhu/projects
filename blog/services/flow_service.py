@@ -5,7 +5,7 @@ from datetime import datetime
 from extensions import cache, db, logger
 import itertools, re
 import threading
-from sqlalchemy import inspect,desc
+from sqlalchemy import inspect, desc
 
 
 class FlowService(object):
@@ -116,8 +116,15 @@ class FlowService(object):
                     index = start
             referrer = referrer[0:index]
             access.external_link = referrer
-            if referrer.find(request.host) < 0:
+
+            sysinfo = cache.get("sysinfo")
+            host = None
+            if sysinfo:
+                host = sysinfo.website
+            if host and referrer.find(host) < 0:
                 access.access_source = "external_access"
+            else:
+                access.access_source = "direct_access"
         return access
 
     @staticmethod
