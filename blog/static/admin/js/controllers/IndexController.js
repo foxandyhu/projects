@@ -34,13 +34,13 @@ define(["BlogApp"],function(BlogApp){
             var cpu_chart_line = Highcharts.chart("cpu_report_line",{
                 chart:{type:"spline",marginRight: 10}, title: {text:null},legend: {enabled: false},
                 xAxis: {type:"datetime", tickPixelInterval: 150},yAxis:{labels:{formatter:function(){return this.value+" %";}},title: {text: null}},credits:{enabled: false},
-		        tooltip:{formatter: function () {return Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' + Highcharts.numberFormat(this.y, 0)+"%";}},
+		        tooltip:{formatter: function () {return Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' + Highcharts.numberFormat(this.y, 1)+"%";}},
                 series: [{name:"时间",data: [{}]}]
             });
             var mem_chart_line = Highcharts.chart("mem_chart_line",{
                 chart:{type:"spline",marginRight: 10}, title: {text:null},legend: {enabled: false},
                 xAxis: {type:"datetime", tickPixelInterval: 150},yAxis:{labels:{formatter:function(){return this.value+" %";}},title: {text: null}},credits:{enabled: false},
-		        tooltip:{formatter: function () {return '<b>' + this.series.name + '</b><br/>' + Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' + Highcharts.numberFormat(this.y, 0);}},
+		        tooltip:{formatter: function () {return '<b>' + this.series.name + '</b><br/>' + Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' + Highcharts.numberFormat(this.y, 1);}},
                 series: [{name:"时间",data: []}]
             });
 
