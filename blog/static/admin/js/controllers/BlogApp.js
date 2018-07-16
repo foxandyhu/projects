@@ -78,7 +78,7 @@ define(["angular","jquery"], function (angular,$) {
     	$rootScope.$on("loginEvent",function(errorType){window.location.href="/manage/login.html";});
     	$rootScope.$on("norightEvent",function(errorType){$location.path("/noright");});
     	return {
-    				request:function(config){if((config.url.indexOf("views/loading.html")<0)&&config.url.indexOf("views/tip_success.html")<0){$(".load_layer").show();}return config || $q.when(config);},
+    				request:function(config){if((config.url.indexOf("views/loading.html")<0)&&config.url.indexOf("views/tip_success.html")<0&&config.url.indexOf("seo/sys_res.html")<0){$(".load_layer").show();}return config || $q.when(config);},
     				response:function(response){$(".load_layer").hide();return response || $q.when(response);},
 		    		responseError:function(rejection)
 			    		{

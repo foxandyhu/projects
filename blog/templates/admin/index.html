@@ -3,7 +3,7 @@
     <h1>系统概况</h1>
 </section>
 
-<section class="content">
+<section class="content" ng-init="loadData()">
     <div class="row">
         <div class="col-lg-3 col-xs-6">
             <div class="small-box bg-aqua">
@@ -56,11 +56,30 @@
     </div>
 
     <div class="row">
-        <section class="col-lg-7">
+        <section class="col-lg-6">
+            <div class="box box-solid">
+                <div class="box-body">
+                    <div id="cpu_report" class="col-lg-4" style="height:200px;"></div>
+                    <div id="cpu_report_line" class="col-lg-8" style="height:200px;"></div>
+                </div>
+            </div>
+        </section>
+        <section class="col-lg-6">
+            <div class="box box-solid">
+                <div class="box-body">
+                    <div id="mem_report" class="col-lg-4" style="height:200px;"></div>
+                    <div id="mem_chart_line" class="col-lg-8" style="height:200px;"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="row">
+        <section class="col-lg-6">
             <!-- 今日网站流量统计 begin-->
             <div class="box box-solid">
                 <div class="box-body">
-                    <div id="pv_report"></div>
+                    <div id="pv_report" style="height:300px;"></div>
                 </div>
             </div>
             <!-- 今日网站流量统计 end-->
@@ -68,17 +87,17 @@
             <!-- 搜索词 Top 10  begin-->
             <div class="box box-success">
                 <div class="box-body">
-                    <div id="keywords_report"></div>
+                    <div id="keywords_report" style="height:300px;"></div>
                 </div>
             </div>
             <!-- 搜索词 Top 10  end-->
         </section>
 
-        <section class="col-lg-5">
+        <section class="col-lg-6">
             <!-- 网站访问来源统计 begin -->
             <div class="box box-solid">
                 <div class="box-body">
-                    <div id="source_report"></div>
+                    <div id="source_report" style="height:300px;"></div>
                 </div>
             </div>
             <!-- 网站访问来源统计 end -->
@@ -112,5 +131,4 @@
         </section>
     </div>
 </section>
-<div ng-init="loadData()"></div>
 {% endraw %}

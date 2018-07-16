@@ -3,7 +3,7 @@ from services.flow_service import FlowReportService, FlowStatisticService
 from datetime import datetime, date
 from flask_sqlalchemy import SQLAlchemy
 from env_config import ConfigEnum
-import unittest
+import unittest,psutil,time
 
 
 class T(unittest.TestCase):
@@ -30,6 +30,15 @@ class T(unittest.TestCase):
         result = FlowReportService.statistic_source(begin, end)
         print(result)
 
+    def test_ps(self):
+        total_befor = psutil.net_io_counters()
+        time.sleep(1)
+        total_after =psutil.net_io_counters()
 
-if __name__ == '__main__':
-    unittest.main()
+        print(total_after.bytes_sent - total_befor.bytes_sent)
+        print(total_after.bytes_recv - total_befor.bytes_recv)
+
+        print("CPU:",psutil.cpu_percent())
+        print("Mem:",psutil.virtual_memory())
+# if __name__ == '__main__':
+#     unittest.main()

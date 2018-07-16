@@ -11,6 +11,8 @@ requirejs.config({
         "kindeditor": "kindeditor/kindeditor-min",
         "highchart": "highchart/code/highcharts",
         "3Dhighchart": "highchart/code/highcharts-3d",
+        "solid-gauge":"highchart/code/modules/solid-gauge",
+        "highcharts-more":"highchart/code/highcharts-more",
         "dark-unica":"highchart/code/themes/dark-unica",
         "sand-signika":"highchart/code/themes/sand-signika",
         "fastclick": "fastclick/fastclick.min",
@@ -46,6 +48,14 @@ requirejs.config({
         "dark-unica":{
             deps:["3Dhighchart"],
             exports:"dark-unica"
+        },
+        "solid-gauge":{
+            deps: ["highcharts-more"],
+            exports:"solid-gauge"
+        },
+        "highcharts-more":{
+            deps:["3Dhighchart"],
+            exports:"highcharts-more"
         },
         "highchart": {
             deps: ["jquery"],

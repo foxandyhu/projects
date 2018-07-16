@@ -1,8 +1,9 @@
 from flask import render_template, request
 from actions import adminBp
 from services.flow_service import FlowReportService
-from utils import json_utils
+from utils import json_utils, string_utils
 from datetime import datetime, date
+import psutil, time
 
 
 @adminBp.route("/seo/pv.html")
@@ -71,6 +72,20 @@ def get_flow_link():
     for result in results:
         pv_total += result[2]
     data = [[result[3], result[2], "%.2f%%" % (result[2] / pv_total * 100)] for result in results]
+    return json_utils.to_json(data)
+
+
+@adminBp.route("/seo/sys_res.html")
+def get_sys_used():
+    """获得系统的使用率"""
+
+    cpu = psutil.cpu_percent()  # CPU使用率
+    mem = psutil.virtual_memory().percent  # 内存使用率
+    total_mem = string_utils.bytes2human(psutil.virtual_memory().total)
+    used = string_utils.bytes2human(psutil.virtual_memory().used)
+    timestamp = int(round(time.time() * 1000))
+
+    data = [cpu, mem, used, total_mem, timestamp]
     return json_utils.to_json(data)
 
 

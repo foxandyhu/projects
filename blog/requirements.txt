@@ -26,4 +26,4 @@ SQLAlchemy==1.2.8
 webencodings==0.5.1
 Werkzeug==0.14.1
 WTForms==2.2.1
-tornado==5.0.2
+psutil==5.4.6
