@@ -1,8 +1,12 @@
 from flask import render_template, request
 from actions import adminBp
 from services.flow_service import FlowReportService
-from utils import json_utils, string_utils
+from services.seo_service import FriendLinkService
+from utils import json_utils, string_utils, pagination_utils
 from datetime import datetime, date
+from models import ResponseData
+from models.forms import FriendlinkForm
+from models.system_model import FriendLink
 import psutil, time
 
 
@@ -93,4 +97,49 @@ def get_sys_used():
 def frienlink_list():
     """友情链接"""
 
-    return render_template("admin/seo/friendlink_list.html")
+    pagination_utils.instantce_page(10)
+    pagination = FriendLinkService.get_friendlinks()
+    return json_utils.to_json(pagination)
+
+
+@adminBp.route("/seo/friendlink/add.html", methods=["POST"])
+def add_friendlink():
+    """添加友情链接"""
+
+    form = FriendlinkForm(request.form)
+    if not form.validate():
+        raise Exception([value for key, value in form.errors.items()][0][0])
+
+    friendlink = FriendLink()
+    friendlink.name = form.name.data
+    friendlink.link = form.link.data
+    friendlink.seq = form.seq.data
+
+    FriendLinkService.add_friendlink(friendlink)
+    return json_utils.to_json(ResponseData.get_success())
+
+
+@adminBp.route("/seo/friendlink/edit.html", methods=["POST"])
+def edit_friendlink():
+    """编辑友情链接"""
+
+    form = FriendlinkForm(request.form)
+    if not form.validate():
+        raise Exception(form.errors)
+
+    friendlink = FriendLink()
+    friendlink.name = form.name.data
+    friendlink.link = form.link.data
+    friendlink.seq = form.seq.data
+    friendlink.id = request.form.get("id")
+
+    FriendLinkService.edit_friendlink(friendlink)
+    return json_utils.to_json(ResponseData.get_success())
+
+
+@adminBp.route("/seo/friendlink/del/<int:friendlink_id>.html")
+def del_friendlink(friendlink_id):
+    """删除友情链接"""
+
+    FriendLinkService.del_friendlink(friendlink_id)
+    return json_utils.to_json(ResponseData.get_success())

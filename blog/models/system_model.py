@@ -122,3 +122,13 @@ class SysAccessCountHour(Serializable, db.Model):
     hour_uv = db.Column(db.Integer, default=0, nullable=False)  # 小时访客数
     statistic_date = db.Column(db.Date, nullable=False)  # 统计日期
     statistic_time = db.Column(db.Integer, nullable=False)  # 统计小时
+
+
+class FriendLink(Serializable, db.Model):
+    """友情链接"""
+
+    __tablename__ = "d_friendlink"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(20), nullable=False)  # 链接名称
+    link = db.Column(db.String(200), nullable=False)  # 链接地址
+    seq = db.Column(db.Integer, default=0, nullable=False)  # 排序

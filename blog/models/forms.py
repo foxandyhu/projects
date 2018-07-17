@@ -56,3 +56,13 @@ class SysInfoForm(Form):
     name = StringField("name",
                        [validators.DataRequired("请输入网站名称!"), validators.Length(min=1, max=20, message="名称长度为1-21之间!")])
     website = StringField("website", [validators.DataRequired("请输入域名!"), validators.URL(message="域名格式不正确!")])
+
+
+class FriendlinkForm(Form):
+    """友情链接信息验证"""
+
+    name = StringField("name", [validators.DataRequired("请输入链接网站名称!"),
+                                validators.Length(min=1, max=20, message="网站名称长度为1-20之间!")])
+    link = StringField("link", [validators.DataRequired("请输入链接网站链接!"),
+                                validators.Length(min=1, max=200, message="网站链接长度为1-20之间!")])
+    seq = IntegerField("seq", [validators.DataRequired("请输入排序序号!"), validators.NumberRange(min=0, message="排序序号错误!")])

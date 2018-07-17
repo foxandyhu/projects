@@ -1,6 +1,7 @@
 from web import webBp
 from flask import render_template, redirect, request
 from services.articles_service import ArticlesService
+from services.seo_service import FriendLinkService
 from utils import pagination_utils, context_utils
 
 
@@ -107,7 +108,7 @@ def article_by_title():
 
         begin = (current_page - 1) * 5 + 1
         pp = range(begin, end)
-    return render_template("list_search.html", pager=pager, pp=pp,title=title)
+    return render_template("list_search.html", pager=pager, pp=pp, title=title)
 
 
 @webBp.route("/lvmsg.html")
@@ -129,3 +130,11 @@ def contact_blog():
     """联系我们"""
 
     return render_template("contact.html")
+
+
+@webBp.route("/friendlink.html")
+def friend_link():
+    """友情链接页面"""
+
+    links = FriendLinkService.get_friendlinks()
+    return render_template("friendlink.html", links=links)

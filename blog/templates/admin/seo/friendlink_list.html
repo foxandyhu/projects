@@ -1,71 +1,52 @@
-    <section class="content-header">
-        <h1>友情链接</h1>
-        <ol class="breadcrumb">
-            <li><a href="#/home"><i class="fa fa-dashboard"></i> 首页</a></li>
-            <li class="active">友情链接</li>
-        </ol>
-    </section>
+{% raw %}
+<section class="content-header">
+    <h1>友情链接</h1>
+    <ol class="breadcrumb">
+        <li><a href="#/home"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li class="active">友情链接</li>
+    </ol>
+</section>
 
-    <section class="content">
-        <div class="box">
-            <div class="box-header">
-                <div class="box-tools">
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-
-                        <div class="input-group-btn">
-                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="box-body table-responsive no-padding">
-                <table class="table table-hover">
-                    <tr>
-                        <th>ID</th>
-                        <th>User</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Reason</th>
-                    </tr>
-                    <tr>
-                        <td>183</td>
-                        <td>John Doe</td>
-                        <td>11-7-2014</td>
-                        <td><span class="label label-success">Approved</span></td>
-                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                    </tr>
-                    <tr>
-                        <td>219</td>
-                        <td>Alexander Pierce</td>
-                        <td>11-7-2014</td>
-                        <td><span class="label label-warning">Pending</span></td>
-                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                    </tr>
-                    <tr>
-                        <td>657</td>
-                        <td>Bob Doe</td>
-                        <td>11-7-2014</td>
-                        <td><span class="label label-primary">Approved</span></td>
-                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                    </tr>
-                    <tr>
-                        <td>175</td>
-                        <td>Mike Doe</td>
-                        <td>11-7-2014</td>
-                        <td><span class="label label-danger">Denied</span></td>
-                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="box-footer clearfix">
-                <ul class="pagination pagination-sm no-margin pull-right">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">&raquo;</a></li>
-                </ul>
+<section class="content" ng-init="loadFriendlinks()">
+    <div class="box">
+        <div class="box-header">
+            <nav>
+                <a class="btn-sm btn-warning" href="javascript:void(0)" ng-click="loadFriendlinks()"><span
+                        class="glyphicon glyphicon-refresh"></span> 刷新</a>
+                <a ng-show="show_new_friendlink" class="btn-sm btn-danger" ng-click="addFriendlink()" href="javascript:void(0)"><span
+                        class="glyphicon glyphicon-plus"></span> 新增</a>
+            </nav>
+        </div>
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+                <tr>
+                    <th>网站名称</th>
+                    <th>链接地址</th>
+                    <th>排序</th>
+                    <th>操作</th>
+                </tr>
+                <tr ng-repeat="item in items">
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.link }}</td>
+                    <td>{{ item.seq }}</td>
+                    <td>
+                        <button ng-show="show_new_friendlink" ng-click="editFriendlink($event)" class="btn btn-xs btn-info">
+                            <span class="glyphicon glyphicon-edit"></span> 编辑
+                        </button>
+                        <button ng-show="show_new_friendlink" ng-click="delFriendlink()" class="btn btn-xs btn-danger">
+                            <span class="glyphicon glyphicon-remove"></span> 删除
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="box-footer clearfix">
+            <div class="text-right">
+                <pager page-count="pageCount" current-page="currentPage" on-page-change="loadFriendlinks()"
+                       first-text="首页"
+                       next-text="下一页" prev-text="上一页" last-text="尾页" show-goto="true" goto-text="跳转到"></pager>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+{% endraw %}

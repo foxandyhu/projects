@@ -177,7 +177,6 @@ class ArticlesService(object):
                     query = query.join(articles_model.Article.tags).filter(articles_model.Tag.id == tag_id)
 
         pagination = context_utils.get_pagination()
-        result = None
         if pagination:
             pagination = query.paginate(pagination.page_no, pagination.page_size)
             if pagination.items:

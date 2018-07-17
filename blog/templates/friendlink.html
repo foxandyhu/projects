@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+    <base href="{{ sysinfo.website }}"/>
+    <title>友情链接_{{ sysinfo.name }}</title>
+    <link href="/static/css/link.css" rel="stylesheet">
+    {% include("res.html") %}
+</head>
+<body>
+{% include("header.tpl") %}
+<article>
+    <h2 class="litle"><span>不要以为你的努力徒劳无功，权当做磨炼你的意志!</span>友情链接</h2>
+    <div class="link_box">
+        <h2 class="ctitle"><b>友情链接推荐</b></h2>
+        <ul class="blogsite">
+            {% for link in links %}
+            <li><a href="{{ link.link }}" target="_blank" title="{{ link.name }}">{{ link.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</article>
+{% include("footer.html") %}
+</body>
+</html>
