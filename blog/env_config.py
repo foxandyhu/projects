@@ -18,11 +18,11 @@ class DevelopmentConfig(BaseConfig):
     DEBUG = True
     TESTING = True
 
-    REDIS_HOST = "127.0.0.1"
+    REDIS_HOST = "192.168.0.154"
     REDIS_PORT = 6379
     REDIS_KEY_PREFIX = "BLOG_CACHE_"
     REDIS_DB = 0
-    REDIS_PWD = None
+    REDIS_PWD = "hulibo"
 
     SESSION_TYPE = "redis"
     PERMANENT_SESSION_LIFETIME = timedelta(minutes=30)
