@@ -114,7 +114,7 @@ def article_by_title():
 def leave_message():
     """博客留言"""
 
-    return render_template("gbook.html")
+    return render_template("lvmsg.html")
 
 
 @webBp.route("/about.html")
