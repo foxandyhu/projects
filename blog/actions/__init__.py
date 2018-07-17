@@ -1,4 +1,4 @@
-from flask import Blueprint, request, redirect, abort
+from flask import Blueprint, request, redirect
 
 adminBp = Blueprint("adminBp", __name__)
 templateAdminBp = Blueprint("templateAdminBp", __name__)
@@ -12,10 +12,12 @@ from actions import users_action
 from actions import logs_action
 from actions import templates_action, files_action
 from utils import json_utils, context_utils
+from extensions import logger
 
 
 @adminBp.errorhandler(Exception)
 def admin_error(e):
+    logger.error(e)
     if e.args and e.args[0]:
         message = json_utils.to_json(e.args[0])
         return message, (e.code if e.code else 500) if hasattr(e, "code") else 500
