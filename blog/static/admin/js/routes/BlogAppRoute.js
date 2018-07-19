@@ -26,13 +26,6 @@ define(["BlogApp"],function(BlogApp){
 	});
 
     BlogApp.config(function($routeProvider){
-        $routeProvider.when("/friendlink",{
-            templateUrl:"/templates/admin/seo/friendlink_list.html",
-            controller:"SeoController"
-        });
-    });
-
-    BlogApp.config(function($routeProvider){
         $routeProvider.when("/users",{
             templateUrl:"/templates/admin/users/user_list.html",
             controller:"UserController"
@@ -109,6 +102,19 @@ define(["BlogApp"],function(BlogApp){
         }).when("/seo/:category",{
             templateUrl:"/templates/admin/seo/source_analysis.html",
             controller:"SeoController"
+        }).when("/friendlink",{
+            templateUrl:"/templates/admin/seo/friendlink_list.html",
+            controller:"SeoController"
+        });
+    });
+
+    BlogApp.config(function($routeProvider){
+        $routeProvider.when("/page/template",{
+            templateUrl:"/templates/admin/system/page_template.html",
+            controller:"SystemController"
+        }).when("/page/static",{
+            templateUrl:"/templates/admin/system/page_static.html",
+            controller:"SystemController"
         });
     });
 });
