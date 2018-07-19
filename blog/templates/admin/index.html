@@ -114,14 +114,12 @@
                         <tr>
                             <th>域名</th>
                             <th>浏览量(PV)</th>
-                            <th>占比</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-repeat="link in links">
                             <td><a href="{{ link[0] }}" target="_blank">{{ link[0] }}</a></td>
                             <td>{{ link[1] }}</td>
-                            <td><span class="label label-success">{{ link[2] }}</span></td>
                         </tr>
                         </tbody>
                     </table>

@@ -18,6 +18,8 @@ requirejs.config({
         "fastclick": "fastclick/fastclick.min",
         "adminlte": "../dist/js/adminlte.min",
         "select2": "select2/js/select2.min",
+        "daterangepicker":"daterangepicker/daterangepicker",
+        "moment":"daterangepicker/moment.min",
 
         "BlogApp": "../js/controllers/BlogApp",
         "BlogAppRoute": "../js/routes/BlogAppRoute",
@@ -33,6 +35,14 @@ requirejs.config({
 
     },
     shim: {
+        "moment":{
+            deps:["jquery"],
+            exports:"moment"
+        },
+        "daterangepicker":{
+            deps:["moment"],
+            exports:"daterangepicker"
+        },
         "select2":{
             deps: ["jquery"],
             exports: "select2"

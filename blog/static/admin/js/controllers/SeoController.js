@@ -1,5 +1,5 @@
 define(["BlogApp"],function(BlogApp){
-    BlogApp.controller("SeoController",function($scope,$http,Dialog){
+    BlogApp.controller("SeoController",function($scope,$http,Dialog,Resource,$routeParams){
         $("#seomenu").addClass("active");
 
         $scope.loadFriendlinks=function(){
@@ -126,6 +126,155 @@ define(["BlogApp"],function(BlogApp){
             var tr =$scope.createFriendlinkTr(data);
             $("table tr:eq("+index+")").after(tr);
             currentTr.remove();
+        };
+
+        $scope.initPvReport=function(){
+            Highcharts.setOptions({ global: { useUTC: false } });
+            var pv_chart = Highcharts.chart('pv_report', {credits: {enabled: false},tooltip:{shared: true, crosshairs: true},
+                title: {text:""},yAxis: {title: {text: "访问量"}}, xAxis: {title: {text: "时间段"}},
+                legend:{layout: "horizontal", align: "center", verticalAlign: "top",series:[]}
+            });
+            $scope.pv_chart=pv_chart;
+        };
+        $scope.statistic={ips:0,uvs:0,pvs:0,list:[]};
+        $scope.loadPv=function (type,begin,end) {
+            while($scope.pv_chart.series.length){
+                    $scope.pv_chart.series[0].remove(true);
+            }
+            $http.get("/manage/seo/pv.html",{params:{type:type,begin:begin,end:end}},{cache:false}).success(function(data){
+                var ips=new Array(),uvs=new Array(),pvs= new Array(),x_points=new Array();
+                $(data.list).each(function(index,item){
+                    for(var key in item){
+                        x_points.push(key);
+                        var ip=item[key][0],uv=item[key][1],pv=item[key][2],hour =item[key][3];
+                        ips.push({name:hour,y:ip});
+                        uvs.push({name:hour,y:uv});
+                        pvs.push({name:hour,y:pv});
+                    }
+                });
+
+                $scope.statistic={ips:data.ipTotal,uvs:data.visitorTotal,pvs:data.pvTotal,list:data.list,period:data.period};
+                $scope.pv_chart.xAxis[0].update({categories: x_points})
+                $scope.pv_chart.addSeries({name:"独立IP统计",data:ips,color:"#40ff3b"});
+                $scope.pv_chart.addSeries({name:"UV统计",data:uvs,color:"#8c2d7e"});
+                $scope.pv_chart.addSeries({name:"PV统计",data:pvs,color:"#15ccad"});
+            });
+        };
+        $scope.enable_btn_flow=true;
+        $scope.initSeoFlow=function(){
+          Resource.init(["daterangepicker","solid-gauge"],function(){
+              $("#reservation").on("focus",function(){
+                  $(".btn-group button").removeClass("btn-info");
+                 $("#reservation").daterangepicker(
+                     {"locale":{separator: " 至 ", format: "YYYY-MM-DD"},autoApply:true,autoUpdateInput:false
+                },function(){
+                         $scope.enable_btn_flow=false;$scope.$apply();
+                         var begin =this.startDate.format(this.locale.format);
+                         var end = this.endDate.format(this.locale.format);
+                         this.element.val(begin + this.locale.separator + end);
+                         $scope.loadPv(5,begin,end);
+                     });
+                 $("#reservation").val("");
+              });
+              $("#btn_clearn_calendar").on("click",function(){
+                  $(".btn-group button").removeClass("btn-info");
+                  $("#reservation").val("");
+                  $scope.enable_btn_flow=true;$scope.$apply();
+              });
+              $(".btn-group button").on("click",function(){
+                  $(".btn-group button").removeClass("btn-info");
+                  $(this).addClass("btn-info");$(this).blur();
+                  var type =$(this).attr("data");
+                  $scope.loadPv(type,null,null);
+              });
+              $scope.initPvReport();
+              $(".btn-group button:eq(0)").click();
+          });
+        };
+
+
+        $scope.initPvSourceReport=function(){
+            Highcharts.setOptions({ global: { useUTC: false } });
+            var source_chart_line = Highcharts.chart("source_report_line",{chart: {type: "spline"},
+                plotOptions:{spline:{marker:{enabled: true}}},credits: {enabled: false},tooltip:{shared: true, crosshairs: true},
+                title: {text:""},yAxis: {title: {text: "访问量"}}, xAxis: {title: {text: "时间段"}},
+                legend:{layout: "horizontal", align: "center", verticalAlign: "top",series:[]}
+            });
+            var source_chart_pie = Highcharts.chart("source_report_pie", {
+                credits:{enabled: false},title:{text:""},chart:{type:"pie", options3d: {enabled: true,beta: 0, alpha: 45}},
+                plotOptions: {pie:{allowPointSelect: true, cursor: 'pointer', depth: 35, slicedOffset: 20, point: {events: {mouseOver: function() {this.slice();}, mouseOut: function() {this.slice();}, click: function() {return false;}}}}
+                },colors:["#77a1e5", "#c42525", "#a6c96a"],series: [{data: []}]
+            });
+            $scope.source_chart_line=source_chart_line;
+            $scope.source_chart_line=source_chart_line;
+            $scope.source_chart_pie=source_chart_pie;
+        };
+        $scope.loadPvSource=function (type,category,begin,end) {
+            while($scope.source_chart_line.series.length){
+                    $scope.source_chart_line.series[0].remove(true);
+            }
+            while($scope.source_chart_pie.series.length){
+                $scope.source_chart_pie.series[0].remove(true);
+            }
+            $http.get("/manage/seo/source.html",{params:{type:type,category:category,begin:begin,end:end}},{cache:false}).success(function(data){
+                $scope.statistic={ips:data.ip_total,uvs:data.uv_total,pvs:data.pv_total,list:data.list,period:data.period,items:data.items,c_name:data.c_name};
+                var pie_date=new Array();
+                $(data.items).each(function(index,item){
+                    for(var key in item){
+                     pie_date.push([key,item[key][2]]);
+                    }
+                });
+                var series_map={},x_points=new Array();
+                $(data.list).each(function(index,item){
+                    for(var key in item){
+                        x_points.push(key);
+                        var obj=item[key];
+                        for(var type in obj){
+                            if (series_map[type]){
+                                series_map[type].push(obj[type][2]);
+                            }else{
+                                series_map[type]=[obj[type][2]];
+                            }
+                        }
+                    }
+                });
+                $scope.source_chart_pie.addSeries({name:"访问来源PV:",data:pie_date,color:"#8c2d7e"});
+                $scope.source_chart_line.xAxis[0].update({categories: x_points});
+                for(var key in series_map){
+                        $scope.source_chart_line.addSeries({name:key,data:series_map[key]});
+                    }
+            });
+        };
+        $scope.initSeoSource=function(){
+            var category =$routeParams.category;
+          Resource.init(["daterangepicker","solid-gauge"],function(){
+              $("#reservation").on("focus",function(){
+                  $(".btn-group button").removeClass("btn-info");
+                 $("#reservation").daterangepicker(
+                     {"locale":{separator: " 至 ", format: "YYYY-MM-DD"},autoApply:true,autoUpdateInput:false
+                },function(){
+                         $scope.enable_btn_flow=false;$scope.$apply();
+                         var begin =this.startDate.format(this.locale.format);
+                         var end = this.endDate.format(this.locale.format);
+                         this.element.val(begin + this.locale.separator + end);
+                         $scope.loadPvSource(5,category,begin,end);
+                     });
+                 $("#reservation").val("");
+              });
+              $("#btn_clearn_calendar").on("click",function(){
+                  $(".btn-group button").removeClass("btn-info");
+                  $("#reservation").val("");
+                  $scope.enable_btn_flow=true;$scope.$apply();
+              });
+              $(".btn-group button").on("click",function(){
+                  $(".btn-group button").removeClass("btn-info");
+                  $(this).addClass("btn-info");$(this).blur();
+                  var type =$(this).attr("data");
+                  $scope.loadPvSource(type,category,null,null);
+              });
+              $scope.initPvSourceReport();
+              $(".btn-group button:eq(0)").click();
+          });
         };
 	});
 });

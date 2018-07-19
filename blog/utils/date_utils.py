@@ -13,8 +13,21 @@ def parse_datetime_str(date):
     return date.strftime("%Y-%m-%d %H:%M:%S")
 
 
+def parse_date_str(date):
+    """日期转换为常用的格式字符串类型"""
+
+    return date.strftime("%Y-%m-%d")
+
+
 def parse_str_datetime(date_str):
     """将字符串转换为日期时间类型"""
 
     date = datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S")
+    return date
+
+
+def parse_str_date(date_str):
+    """将字符串转换为日期时间类型"""
+
+    date = datetime.strptime(date_str, "%Y-%m-%d")
     return date

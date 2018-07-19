@@ -101,4 +101,14 @@ define(["BlogApp"],function(BlogApp){
             controller:"SystemController"
         });
     });
+
+    BlogApp.config(function($routeProvider){
+        $routeProvider.when("/seo/flow",{
+            templateUrl:"/templates/admin/seo/flow_analysis.html",
+            controller:"SeoController"
+        }).when("/seo/:category",{
+            templateUrl:"/templates/admin/seo/source_analysis.html",
+            controller:"SeoController"
+        });
+    });
 });

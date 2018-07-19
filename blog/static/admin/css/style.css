@@ -58,3 +58,4 @@ table.member_table tr td{vertical-align: middle}
 }
 @-webkit-keyframes shan { from {background-position: -100px;} to {background-position: 100px;} }
 @keyframes shan {from {background-position: -100px;} to {background-position: 100px;}}
+.clear_calendar_btn{border:0px;position: relative;left: -10%;z-index: 100;}

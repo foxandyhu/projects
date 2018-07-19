@@ -1,7 +1,7 @@
 from models.system_model import SysAccess, SysAccessPage, SysAccessStatistic, SysAccessCount, SysAccessCountHour
 from flask import session
 from utils import context_utils, date_utils
-from datetime import datetime
+from datetime import datetime, timedelta
 from extensions import cache, db, logger
 import itertools, re
 import threading
@@ -441,32 +441,44 @@ class FlowReportService(object):
     """流量报表统计展示服务类"""
 
     @staticmethod
-    def statistic_today():
+    def statistic_flow_today():
         """统计今日的总流量汇总数据"""
 
         date = datetime.now().date()
         results = db.session.query(db.func.count(db.distinct(SysAccess.access_ip)).label("IP"),
                                    db.func.count(db.distinct(SysAccess.session_id)).label("UV"),
                                    db.func.cast(db.func.sum(SysAccess.visit_page_count), db.Integer).label("PV"),
-                                   db.func.cast(db.func.round(db.func.avg(SysAccess.visit_second), 0),
-                                                db.Integer).label("VS"),
-                                   db.func.hour(SysAccess.access_time).label("hour")).filter(
-            SysAccess.access_date == date).group_by("hour").order_by("hour").all()
-
+                                   db.func.date_format(SysAccess.access_time, "%H:00-%H:59").label("hour")).filter(
+            SysAccess.access_date == date).group_by("hour").all()
         return results
 
     @staticmethod
-    def statistic_source(begin, end, key_word="source", limit=-1):
-        """在指定的日期根据访问来源统计"""
+    def statistic_source_type(begin, end, key_word="source", limit=-1):
+        """根据指定类型来源统计"""
 
         query = db.session.query(db.func.cast(db.func.sum(SysAccessStatistic.ip), db.Integer).label("IP"),
                                  db.func.cast(db.func.count(SysAccessStatistic.visitors), db.Integer).label("UV"),
                                  db.func.cast(db.func.sum(SysAccessStatistic.pv), db.Integer).label("PV"),
                                  SysAccessStatistic.statistic_value).filter(
             SysAccessStatistic.statistic_date <= end).filter(SysAccessStatistic.statistic_date >= begin).filter(
-            SysAccessStatistic.statistic_key == key_word).group_by(SysAccessStatistic.statistic_value).order_by(
-            desc("PV"))
+            SysAccessStatistic.statistic_key == key_word).group_by(
+            SysAccessStatistic.statistic_value)
         if limit > 0:
             query = query.limit(limit)
-        result = query.all()
-        return result
+        results = query.all()
+        return results
+
+    @staticmethod
+    def statistic_source_date(begin, end, key_word="source"):
+        """在指定的日期根据访问来源统计"""
+
+        query = db.session.query(db.func.cast(db.func.sum(SysAccessStatistic.ip), db.Integer).label("IP"),
+                                 db.func.cast(db.func.count(SysAccessStatistic.visitors), db.Integer).label("UV"),
+                                 db.func.cast(db.func.sum(SysAccessStatistic.pv), db.Integer).label("PV"),
+                                 SysAccessStatistic.statistic_value,
+                                 db.func.date_format(SysAccessStatistic.statistic_date, "%Y-%m-%d")).filter(
+            SysAccessStatistic.statistic_date <= end).filter(SysAccessStatistic.statistic_date >= begin).filter(
+            SysAccessStatistic.statistic_key == key_word).group_by(SysAccessStatistic.statistic_value).group_by(
+            SysAccessStatistic.statistic_date)
+        results = query.all()
+        return results
