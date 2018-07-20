@@ -1,9 +1,10 @@
 from flask import render_template, request
 from actions import adminBp
 from services import system_service
-from utils import json_utils, context_utils, file_utils
+from utils import json_utils, context_utils, file_utils, string_utils, date_utils
 from models import ResponseData, forms, system_model
-import copy
+from models.system_model import File
+import copy, os
 
 
 @adminBp.route("/system/web_setting.html", methods=["GET", "POST"])
@@ -242,4 +243,74 @@ def system_contact():
     about = request.form.get("content")
     with open(file=path, mode="w", encoding="utf8") as file:
         file.writelines(about)
+    return json_utils.to_json(ResponseData.get_success())
+
+
+@adminBp.route("/system/page/template.html")
+def system_page_template():
+    """返回系统模板目录文件"""
+
+    rel_path = request.args.get("path") or os.sep
+    path = context_utils.get_app_template_dir() + rel_path
+    files = os.listdir(path)
+    result = list(map(lambda file: File(file, string_utils.bytes2human(os.path.getsize(path + file), 0),
+                                        date_utils.parse_timestamp_datetime(
+                                            os.path.getmtime(os.path.abspath(path + file))),
+                                        File.DIR if os.path.isdir(os.path.abspath(path + file)) else File.FILE,
+                                        f"{rel_path}{file}{os.sep}"),
+                      files))
+    return json_utils.to_json(result)
+
+
+@adminBp.route("/system/page/rename.html")
+def system_page_rename():
+    """修改文件名称"""
+
+    path = request.args.get("path")
+    nname = request.args.get("nname")
+    flag = "true" == request.args.get("flag")
+
+    if flag:
+        path = context_utils.get_app_template_dir() + path
+    else:
+        path = context_utils.get_app_static_dir() + path
+    path = os.path.normpath(path)
+    nname = os.path.join(os.path.dirname(path), nname)
+    file_utils.move_file(path, nname)
+    return json_utils.to_json(ResponseData.get_success())
+
+
+@adminBp.route("/system/page/del.html")
+def del_system_page():
+    """删除文件"""
+
+    path = request.args.get("path")
+    if path == "/":
+        raise Exception("根路径不能删除!")
+    flag = "true" == request.args.get("flag")
+
+    if flag:
+        path = context_utils.get_app_template_dir() + path
+    else:
+        path = context_utils.get_app_static_dir() + path
+    path = os.path.normpath(path)
+    if path != context_utils.get_app_static_dir() and path != context_utils.get_app_template_dir():
+        file_utils.del_file(path)
+    return json_utils.to_json(ResponseData.get_success())
+
+
+@adminBp.route("/system/page/mkdir.html")
+def create_new_dir():
+    """新建目录"""
+
+    path = request.args.get("path")
+    dir_name = request.args.get("dirname")
+    flag = "true" == request.args.get("flag")
+
+    if flag:
+        path = context_utils.get_app_template_dir() + path
+    else:
+        path = context_utils.get_app_static_dir() + path
+    path = os.path.normpath(path + os.sep + dir_name)
+    file_utils.mkdir(path)
     return json_utils.to_json(ResponseData.get_success())

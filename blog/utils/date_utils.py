@@ -31,3 +31,9 @@ def parse_str_date(date_str):
 
     date = datetime.strptime(date_str, "%Y-%m-%d")
     return date
+
+
+def parse_timestamp_datetime(timestamp):
+    """时间戳转换为日期时间"""
+
+    return datetime.fromtimestamp(timestamp)

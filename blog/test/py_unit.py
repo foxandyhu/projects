@@ -4,6 +4,9 @@ from datetime import datetime, date
 from flask_sqlalchemy import SQLAlchemy
 from env_config import ConfigEnum
 import unittest,psutil,time
+import os
+from utils import context_utils,string_utils
+from models.system_model import File
 
 
 class T(unittest.TestCase):
@@ -40,5 +43,16 @@ class T(unittest.TestCase):
 
         print("CPU:",psutil.cpu_percent())
         print("Mem:",psutil.virtual_memory())
+
+    def test_file(self):
+        path = "G:\\GIT\\blog\\templates" + os.sep
+        files = os.listdir(path)
+        for file in files:
+            print("路径:",string_utils.bytes2human(os.path.getsize(path+file),0))
+            if os.path.isdir(path+file):
+                print(file+"是目录")
+            else:
+                print(file)
+
 # if __name__ == '__main__':
 #     unittest.main()

@@ -132,3 +132,19 @@ class FriendLink(Serializable, db.Model):
     name = db.Column(db.String(20), nullable=False)  # 链接名称
     link = db.Column(db.String(200), nullable=False)  # 链接地址
     seq = db.Column(db.Integer, default=0, nullable=False)  # 排序
+
+
+class File(Serializable):
+    """文件模型"""
+
+    DIR, FILE, LINK = 1, 2, 3  # 文件类型
+
+    def __init__(self, name=None, size=0, modify_time=None, c_type=None, path=""):
+        self.name = name  # 文件名称
+        self.size = size  # 文件大小
+        self.modify_time = modify_time  # 最后修改时间
+        self.type = c_type  # 文件类型
+        self.path = path  # 相对路径
+
+    def __str__(self):
+        return f"name:{self.name},size:{self.size},type:{self.type},modify_time:{self.modify_time},path:{self.path}"

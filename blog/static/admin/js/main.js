@@ -20,6 +20,7 @@ requirejs.config({
         "select2": "select2/js/select2.min",
         "daterangepicker":"daterangepicker/daterangepicker",
         "moment":"daterangepicker/moment.min",
+        "ztree":"ztree/ztree.min",
 
         "BlogApp": "../js/controllers/BlogApp",
         "BlogAppRoute": "../js/routes/BlogAppRoute",
@@ -35,6 +36,10 @@ requirejs.config({
 
     },
     shim: {
+        "ztree":{
+            deps:["jquery"],
+            exports:"ztree"
+        },
         "moment":{
             deps:["jquery"],
             exports:"moment"

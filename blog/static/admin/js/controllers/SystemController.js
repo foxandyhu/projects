@@ -367,5 +367,98 @@ define(["BlogApp"],function(BlogApp){
 					Dialog.successTip("保存成功!");
 				});
         };
+		$scope.initTemplateTree=function(){
+			Resource.init(["ztree"],function(){
+				$scope.loadTemplateDir();
+			});
+		};
+		$scope.loadTemplateDir=function () {
+			var root=[{path:"/",name:"根目录",isParent:true,open:true}];
+			var treeObj=null;$scope.rel_path=root[0].path;
+			var setting = {
+				async: {
+					enable:true,type:"GET",url:"/manage/system/page/template.html",autoParam:["path"],
+					dataFilter: function(treeId, parentNode, childNodes){
+						if (!childNodes) return null;
+						$scope.items = childNodes;$scope.$apply();var nodes=[];
+						for (var i=0, l=childNodes.length; i<l; i++) {
+							nodes.push({path:childNodes[i].path,name:childNodes[i].name,isParent:childNodes[i].type==1});
+						}
+						return nodes;
+					}
+				},
+				callback:{
+					onClick:function(event,treeId, treeNode){
+						$scope.rel_path=treeNode.path;
+						if(treeNode){treeObj.reAsyncChildNodes(treeNode, "refresh");}
+					}
+				}
+			};
+			$.fn.zTree.init($("#templateTree"), setting, root);
+			treeObj = $.fn.zTree.getZTreeObj("templateTree");
+			var node = treeObj.getNodeByTId("templateTree_1");
+			treeObj.reAsyncChildNodes(node, "refresh");
+        };
+		$scope.loadFiles=function(path){
+				$http.get("/manage/system/page/template.html",{params:{path:path}},{cache:false}).success(function(data){
+					$scope.items=data;
+				});
+		};
+		$scope.clickFile=function(){
+			if(this.item.type ==1){
+				$scope.rel_path=this.item.path;
+				$scope.loadFiles($scope.rel_path);
+			}
+		};
+		$scope.renameFile=function(e,flag){
+			var btn =$(e.currentTarget);
+			var index=$(e.currentTarget.parentElement.parentElement).index();
+			var td=$("table tr:eq("+index+") td:eq(0) div");
+			var item=this.item;
+			var input=document.createElement("input")
+			input.className="form-control"
+			input.value=item.name;
+			$(input).on("blur",function(){
+				if (item.name==input.value){td.html(item.name);btn.attr("disabled",false);return;}
+				$http.get("/manage/system/page/rename.html",{params:{flag:flag,path:item.path,nname:input.value}},{cache:false}).success(function(data){
+					Dialog.successTip("修改成功!")
+					btn.attr("disabled",false);
+					item.path=item.path.replace(item.name,input.value);
+					item.name=input.value;
+					if(item.type==1){
+						td.html("<i class='fa fa-folder text-yellow'></i> "+input.value);
+					}else{
+						td.html(input.value);
+					}
+				});
+			});
+			td.html(input);
+			btn.attr("disabled",true);
+			input.focus();
+		};
+		$scope.deleteFile=function(flag){
+			var item=this.item;
+			Dialog.confirm("dialog","您确定要删除文件 "+item.name+" 吗?",function(r){
+				if(r){
+						$http.get("/manage/system/page/del.html",{params:{flag:flag,path:item.path}},{cache:false}).success(function(data){
+							Dialog.successTip("删除成功!")
+							var index=$scope.items.indexOf(item);
+							$scope.items.splice(index,1);
+					});
+				}
+			});
+		};
+		$scope.create_dir=function(flag){
+			var name =$("#newdir").val();
+			if(name){
+				$http.get("/manage/system/page/mkdir.html",{params:{dirname:name,flag:flag,path:$scope.rel_path}},{cache:false}).success(function(data){
+						Dialog.successTip("创建成功!");
+						$("#newdir").val("");
+						$scope.loadFiles($scope.rel_path);
+				});
+			}else{
+				Dialog.show("请输入要创建的文件夹名称!")
+			}
+		};
 	});
 });

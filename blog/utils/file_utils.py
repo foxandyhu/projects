@@ -1,6 +1,21 @@
 import os, shutil
 
 
+def mkdir(path):
+    """创建目录"""
+
+    os.mkdir(path)
+
+
+def del_file(source):
+    """删除文件或目录"""
+
+    if os.path.isfile(source):
+        os.remove(source)
+    else:
+        shutil.rmtree(source)
+
+
 def move_file(source, dest):
     """移动文件"""
 

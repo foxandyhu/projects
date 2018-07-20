@@ -10,7 +10,7 @@ def get_random_str(length):
     return str
 
 
-def bytes2human(n):
+def bytes2human(n, precision=2):
     """直接转换为可读的大小单位"""
 
     symbols = ("K", "M", "G", "T", "P", "E", "Z", "Y")
@@ -20,5 +20,5 @@ def bytes2human(n):
     for s in reversed(symbols):
         if n >= prefix[s]:
             value = float(n) / prefix[s]
-            return "%.2f %s" % (value, s)
-    return "%.2f B" % (n)
+            return f"%.{precision}f %s" % (value, s)
+    return f"%.{precision}f B" % (n)
