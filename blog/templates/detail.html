@@ -29,7 +29,11 @@
             <div class="news_about"><strong>简介</strong>{{ article.summary }}</div>
             {% if article.mp4_url %}
             <div class="media-wrapper">
-                <video id="playerMp4" poster="/static/images/video_poster.png" width="640" height="360" style="max-width:100%;" preload="none" controls playsinline webkit-playsinline>
+                {% if article.logo %}
+                    <video id="playerMp4" poster="{{article.logo  }}" width="640" height="360" style="max-width:100%;" preload="none" controls playsinline webkit-playsinline>
+                {% else %}
+                    <video id="playerMp4" poster="/static/images/video_poster.png" width="640" height="360" style="max-width:100%;" preload="none" controls playsinline webkit-playsinline>
+                {% endif %}
                     <source src="{{ article.mp4_url }}" type="video/mp4">
                 </video>
             </div>
