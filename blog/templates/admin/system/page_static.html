@@ -1,106 +1,97 @@
-{%raw%}
 <section class="content-header">
-    <h1>文章管理</h1>
+    <h1>界面管理</h1>
     <ol class="breadcrumb">
         <li><a href="#/home"><i class="fa fa-dashboard"></i> 首页</a></li>
-        <li class="active">文章管理</li>
+        <li class="active">资源管理</li>
     </ol>
 </section>
-
-<section class="content" ng-init="initCheck();loadCategorys();loadArticles();">
+{%raw%}
+<section class="content" ng-init="typeflag=false;show_edit_file=false;initTemplateTree()">
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2" style="padding: 0px 0px 0px 10px;">
             <div class="widget-box">
-                <div class="widget-header header-color-green2">
-                    <h4 class="lighter smaller">类别</h4>
+                <div class="widget-header">
+                    <h4 class="smaller">
+                        <a href="javascript:void(0)"><i class="fa  fa-refresh"></i>刷新</a>
+                    </h4>
                 </div>
-                <div class="widget-body">
+                <div class="widget-body" style="min-height:476px;border-bottom: 0px;">
                     <div class="widget-main padding-8">
-                        <div id="tree2" class="tree tree-unselectable">
-                            <div class="tree-folder" ng-repeat="c in categorys">
-                                <div class="tree-folder-header" ng-click="categoryTreeChange($event);chooseCategory($event)">
-                                    <i class="fa fa-folder-open"></i>
-                                    <div class="tree-folder-name">{{ c.name}}</div>
-                                </div>
-                                <div class="tree-folder-content">
-                                    <div class="tree-item" style="display: block;" ng-repeat="item in c.items" ng-click="chooseCategory($event)">
-                                        <div class="tree-item-name">
-                                            <i class="glyphicon glyphicon-list-alt"></i>
-                                            {{ item.name}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <ul id="templateTree" class="ztree"></ul>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-10">
-            <div class="box">
+        <div class="col-md-10" style="padding: 0px;">
+            <div ng-show="!show_edit_file" class="box" style="border-top: 1px solid #d2d6de;margin-top: 3px;">
                 <div class="box-header">
-                    <nav>
-                        <a class="btn-sm btn-warning" href="javascript:void(0)" ng-click="loadArticles()"><span
-                                class="glyphicon glyphicon-refresh"></span> 刷新</a>
-                        <a class="btn-sm btn-danger"  href="#/articles/add"><span
-                                class="glyphicon glyphicon-plus"></span> 新增</a>
-                    </nav>
-                    <div class="box-tools">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" id="title" class="form-control pull-right"
-                                   placeholder="搜索文章标题...">
-                            <div class="input-group-btn">
-                                <button type="button" ng-click="searchArticle()" class="btn btn-default"><i class="fa fa-search"></i></button>
+                    <ul class="page_bar">
+                        <li>
+                            <div>当前位置:{{ rel_path }}</div>
+                        </li>
+                        <li>
+                            <input type="file" class="hide" id="file">
+                            <button class="btn btn-sm btn-default" ng-click="bindUploadPageFile()">
+                                <span class="glyphicon glyphicon-upload"></span> 上传文件
+                            </button>
+                        </li>
+                        <li>
+                            <span>新建目录:</span>
+                        </li>
+                        <li>
+                            <div class="input-group" style="width: 200px;">
+                                <input id="newdir" type="text" class="form-control">
+                                <span style="cursor:pointer" class="input-group-addon"
+                                      ng-click="create_dir()">新建</span>
                             </div>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
                 </div>
-                <div class="box-body table-responsive no-padding">
+                <div class="box-body table-responsive no-padding" style="min-height:450px">
                     <table class="table table-hover">
                         <tr>
-                            <th><input type="checkbox" class="icheckbox_minimal" ng-model="selected_all" ng-click="selectChkAll()"/></th>
-                            <th>标题</th>
-                            <th>点击率</th>
-                            <th>作者</th>
-                            <th>发布时间</th>
-                            <th>状态</th>
+                            <th>文件名</th>
+                            <th>大小</th>
+                            <th>最后修改时间</th>
                             <th>操作</th>
                         </tr>
                         <tr ng-repeat="item in items">
-                            <td><input type="checkbox" ng-model="item.checked" class="icheckbox_minimal" ng-change="selectOne()"></td>
                             <td>
-                                <span ng-if="item.is_recommend" class="text-success"><b>[推荐]</b>&nbsp;</span>
-                                <span ng-if="item.is_top" class="text-danger"><b>[置顶]</b>&nbsp;</span>
-                                [{{ item.category_name }}]&nbsp;<a href="/article/{{ item.id}}.html" target="_blank">{{ item.title }}</a>
+                                <div style="cursor:pointer" ng-click="clickFile()">
+                                    <i class="{{ item.type ==1?'fa fa-folder text-yellow':'' }}"></i> {{ item.name }}
+                                </div>
                             </td>
-                            <td>{{ item.click_count }}</td>
-                            <td>{{ item.username}}</td>
-                            <td>{{ item.publish_time }}</td>
+                            <td>{{ item.size}}</td>
+                            <td>{{ item.modify_time }}</td>
                             <td>
-                                <span class="label {{item.is_verify?'label-success':'label-danger'}}">{{item.is_verify?"审核通过":"审核未通过"}}</span>
-                            </td>
-                            <td>
-                                <a class="btn btn-xs btn-info" ng-href="#/articles/{{item.id }}"><span class="glyphicon glyphicon-edit"></span> 编辑</a>
+                                <a class="btn btn-xs btn-info" ng-click="renameFile($event)"><span
+                                        class="glyphicon glyphicon-edit"></span> 重命名</a>
+                                <a class="btn btn-xs btn-danger" ng-click="deleteFile()"><span
+                                        class="glyphicon glyphicon-remove"></span> 删除</a>
                             </td>
                         </tr>
                     </table>
                 </div>
-                <div class="box-footer clearfix">
-                    <div class="text-right">
-                        <pager page-count="pageCount" current-page="currentPage" on-page-change="loadArticles()"
-                               first-text="首页"
-                               next-text="下一页" prev-text="上一页" last-text="尾页" show-goto="true" goto-text="跳转到"></pager>
-                    </div>
-                </div>
             </div>
-            <div class="btn-group">
-                <button ng-disabled="is_disabled" class="btn btn-social btn-foursquare"><i class="fa fa-bitbucket"></i>删除</button>
-                <button ng-click="toSetTop(true)" ng-disabled="is_disabled" class="btn btn-social btn-dropbox"><i class="fa fa-arrow-up"></i>置顶</button>
-                <button ng-click="toSetTop(false)" ng-disabled="is_disabled" class="btn btn-social btn-dropbox"><i class="fa  fa-arrow-down"></i>取消置顶</button>
-                <button ng-click="toSetRecommend(true)" ng-disabled="is_disabled" class="btn btn-social btn-google"><i class="fa fa-heart"></i>推荐</button>
-                <button ng-click="toSetRecommend(false)" ng-disabled="is_disabled" class="btn btn-social btn-google"><i class="fa fa-heart-o"></i>取消推荐</button>
-                <button ng-click="toSetVerify(true)" ng-disabled="is_disabled" class="btn btn-social btn-tumblr"><i class="fa fa-check"></i>审核通过</button>
-                <button ng-click="toSetVerify(false)" ng-disabled="is_disabled" class="btn btn-social btn-tumblr"><i class="fa fa-close "></i>退回</button>
+            <div ng-show="show_edit_file" class="box" style="border-top: 1px solid #d2d6de;margin-top: 3px;">
+                <div class="box-body">
+                    <form role="form" id="pageFileForm" method="post" action="manage/system/web_setting.html">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">文件名称</label>
+                                <input type="text" readonly="readonly" ng-model="pageFile.name" name="name" class="form-control" maxlength="20">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">文件内容</label>
+                                <textarea class="form-control" rows="15" ng-model="pageFile.content"></textarea>
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            <button type="button" ng-click="modifyPageFile()" class="btn btn-primary">保&nbsp;&nbsp;&nbsp;&nbsp;存</button>
+                            <button type="button" ng-click="canclePageFile()" class="btn btn-default">取&nbsp;&nbsp;&nbsp;&nbsp;消</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
