@@ -1,11 +1,11 @@
 from models.system_model import SysAccess, SysAccessPage, SysAccessStatistic, SysAccessCount, SysAccessCountHour
 from flask import session
 from utils import context_utils, date_utils
-from datetime import datetime, timedelta
+from datetime import datetime
 from extensions import cache, db, logger
 import itertools, re
 import threading
-from sqlalchemy import inspect, desc
+from sqlalchemy import inspect
 
 
 class FlowService(object):

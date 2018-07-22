@@ -3,7 +3,7 @@ from actions import adminBp
 from services.flow_service import FlowReportService
 from services.seo_service import FriendLinkService
 from utils import json_utils, string_utils, pagination_utils, date_utils
-from datetime import datetime, date, timedelta
+from datetime import datetime, timedelta
 from models import ResponseData
 from models.forms import FriendlinkForm
 from models.system_model import FriendLink

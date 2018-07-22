@@ -2,7 +2,7 @@ from flask import Blueprint, redirect, request, render_template
 from io import BytesIO
 from utils import captch_utils, context_utils
 from flask import make_response
-from extensions import cache
+from extensions import cache, logger
 from services import system_service
 from models import SysServer
 
@@ -49,6 +49,7 @@ def check_server_enable():
 def page_not_found(e):
     """404错误"""
 
+    logger.error(e)
     return redirect("/404.html")
 
 
@@ -56,6 +57,7 @@ def page_not_found(e):
 def inner_error(e):
     """500错误"""
 
+    logger.error(e)
     return redirect("/500.html")
 
 
