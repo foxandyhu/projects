@@ -1,4 +1,3 @@
-{%raw%}
 <section class="content-header">
     <h1>界面管理</h1>
     <ol class="breadcrumb">
@@ -6,8 +5,8 @@
         <li class="active">模板管理</li>
     </ol>
 </section>
-
-<section class="content" ng-init="initTemplateTree()">
+{%raw%}
+<section class="content" ng-init="typeflag=true;show_edit_file=false;initTemplateTree()">
     <div class="row">
         <div class="col-md-2" style="padding: 0px 0px 0px 10px;">
             <div class="widget-box">
@@ -24,21 +23,17 @@
             </div>
         </div>
         <div class="col-md-10" style="padding: 0px;">
-            <div class="box" style="border-top: 1px solid #d2d6de;margin-top: 3px;">
+            <div ng-show="!show_edit_file" class="box" style="border-top: 1px solid #d2d6de;margin-top: 3px;">
                 <div class="box-header">
                     <ul class="page_bar">
                         <li>
                             <div>当前位置:{{ rel_path }}</div>
                         </li>
                         <li>
-                            <a class="btn-sm btn-danger" href="#/articles/add">
-                                <span class="glyphicon glyphicon-plus"></span> 新建文件
-                            </a>
-                        </li>
-                        <li>
-                            <a class="btn-sm btn-success" href="#/articles/add">
-                                <span class="glyphicon glyphicon-plus"></span> 上传文件
-                            </a>
+                            <input type="file" class="hide" id="file">
+                            <button class="btn btn-sm btn-default" ng-click="bindUploadPageFile()">
+                                <span class="glyphicon glyphicon-upload"></span> 上传文件
+                            </button>
                         </li>
                         <li>
                             <span>新建目录:</span>
@@ -46,7 +41,8 @@
                         <li>
                             <div class="input-group" style="width: 200px;">
                                 <input id="newdir" type="text" class="form-control">
-                                <span class="input-group-addon" ng-click="create_dir(true)">新建</span>
+                                <span style="cursor:pointer" class="input-group-addon"
+                                      ng-click="create_dir()">新建</span>
                             </div>
                         </li>
                     </ul>
@@ -68,13 +64,33 @@
                             <td>{{ item.size}}</td>
                             <td>{{ item.modify_time }}</td>
                             <td>
-                                <a class="btn btn-xs btn-info" ng-click="renameFile($event,true)"><span
+                                <a class="btn btn-xs btn-info" ng-click="renameFile($event)"><span
                                         class="glyphicon glyphicon-edit"></span> 重命名</a>
-                                <a class="btn btn-xs btn-info" ng-click="deleteFile(true)"><span
+                                <a class="btn btn-xs btn-danger" ng-click="deleteFile()"><span
                                         class="glyphicon glyphicon-remove"></span> 删除</a>
                             </td>
                         </tr>
                     </table>
+                </div>
+            </div>
+            <div ng-show="show_edit_file" class="box" style="border-top: 1px solid #d2d6de;margin-top: 3px;">
+                <div class="box-body">
+                    <form role="form" id="pageFileForm" method="post" action="manage/system/web_setting.html">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">文件名称</label>
+                                <input type="text" readonly="readonly" ng-model="pageFile.name" name="name" class="form-control" maxlength="20">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">文件内容</label>
+                                <textarea class="form-control" rows="15" ng-model="pageFile.content"></textarea>
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            <button type="button" ng-click="modifyPageFile()" class="btn btn-primary">保&nbsp;&nbsp;&nbsp;&nbsp;存</button>
+                            <button type="button" ng-click="canclePageFile()" class="btn btn-default">取&nbsp;&nbsp;&nbsp;&nbsp;消</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

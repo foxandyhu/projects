@@ -377,7 +377,7 @@ define(["BlogApp"],function(BlogApp){
 			var treeObj=null;$scope.rel_path=root[0].path;
 			var setting = {
 				async: {
-					enable:true,type:"GET",url:"/manage/system/page/template.html",autoParam:["path"],
+					enable:true,type:"GET",url:"/manage/system/page/res.html",autoParam:["path"],otherParam:{"flag":$scope.typeflag},
 					dataFilter: function(treeId, parentNode, childNodes){
 						if (!childNodes) return null;
 						$scope.items = childNodes;$scope.$apply();var nodes=[];
@@ -391,6 +391,7 @@ define(["BlogApp"],function(BlogApp){
 					onClick:function(event,treeId, treeNode){
 						$scope.rel_path=treeNode.path;
 						if(treeNode){treeObj.reAsyncChildNodes(treeNode, "refresh");}
+                        $scope.show_edit_file=false;
 					}
 				}
 			};
@@ -400,17 +401,39 @@ define(["BlogApp"],function(BlogApp){
 			treeObj.reAsyncChildNodes(node, "refresh");
         };
 		$scope.loadFiles=function(path){
-				$http.get("/manage/system/page/template.html",{params:{path:path}},{cache:false}).success(function(data){
+				$http.get("/manage/system/page/res.html",{params:{path:path,flag:$scope.typeflag}},{cache:false}).success(function(data){
 					$scope.items=data;
 				});
 		};
 		$scope.clickFile=function(){
-			if(this.item.type ==1){
-				$scope.rel_path=this.item.path;
+		    var item=this.item;
+			if(item.type ==1){
+				$scope.rel_path=item.path;
 				$scope.loadFiles($scope.rel_path);
-			}
+			}else{
+			    var path =item.path;
+                if(/.(html|txt|tpl|css|js|TXT)$/.test(item.name)){
+                    $scope.show_edit_file=true;
+                    $http.get("/manage/system/page/get.html?"+new Date(),{params:{path:path,flag:$scope.typeflag}},{cache:false}).success(function(data){
+                    	$scope.pageFile={path:item.path,name:item.name,content:data};
+                    });
+                }else{
+                    window.open("/manage/system/page/get.html?path="+path+"&flag="+$scope.typeflag+"&="+new Date());
+                }
+            }
 		};
-		$scope.renameFile=function(e,flag){
+		$scope.canclePageFile=function(){
+		    $scope.pageFile={path:"",name:"",content:""};
+            $scope.show_edit_file=false;
+        };
+		$scope.modifyPageFile=function () {
+            var params=["flag="+$scope.typeflag,"path="+$scope.pageFile.path,"content="+encodeURIComponent($scope.pageFile.content)];
+            $http({url:"/manage/system/page/edit.html",method:"POST",data:params.join("&"),cache:false,headers:{"Content-Type":"application/x-www-form-urlencoded;charset=utf-8"}}).success(function(){
+                Dialog.successTip("修改成功!");
+                $scope.canclePageFile();
+            });
+        };
+		$scope.renameFile=function(e){
 			var btn =$(e.currentTarget);
 			var index=$(e.currentTarget.parentElement.parentElement).index();
 			var td=$("table tr:eq("+index+") td:eq(0) div");
@@ -420,7 +443,7 @@ define(["BlogApp"],function(BlogApp){
 			input.value=item.name;
 			$(input).on("blur",function(){
 				if (item.name==input.value){td.html(item.name);btn.attr("disabled",false);return;}
-				$http.get("/manage/system/page/rename.html",{params:{flag:flag,path:item.path,nname:input.value}},{cache:false}).success(function(data){
+				$http.get("/manage/system/page/rename.html",{params:{flag:$scope.typeflag,path:item.path,nname:input.value}},{cache:false}).success(function(data){
 					Dialog.successTip("修改成功!")
 					btn.attr("disabled",false);
 					item.path=item.path.replace(item.name,input.value);
@@ -436,11 +459,11 @@ define(["BlogApp"],function(BlogApp){
 			btn.attr("disabled",true);
 			input.focus();
 		};
-		$scope.deleteFile=function(flag){
+		$scope.deleteFile=function(){
 			var item=this.item;
-			Dialog.confirm("dialog","您确定要删除文件 "+item.name+" 吗?",function(r){
+			Dialog.confirm("dialog","您确定要删除文件 <b class='red'>"+item.name+"</b> 吗?",function(r){
 				if(r){
-						$http.get("/manage/system/page/del.html",{params:{flag:flag,path:item.path}},{cache:false}).success(function(data){
+						$http.get("/manage/system/page/del.html",{params:{flag:$scope.typeflag,path:item.path}},{cache:false}).success(function(data){
 							Dialog.successTip("删除成功!")
 							var index=$scope.items.indexOf(item);
 							$scope.items.splice(index,1);
@@ -448,10 +471,10 @@ define(["BlogApp"],function(BlogApp){
 				}
 			});
 		};
-		$scope.create_dir=function(flag){
+		$scope.create_dir=function(){
 			var name =$("#newdir").val();
 			if(name){
-				$http.get("/manage/system/page/mkdir.html",{params:{dirname:name,flag:flag,path:$scope.rel_path}},{cache:false}).success(function(data){
+				$http.get("/manage/system/page/mkdir.html",{params:{dirname:name,flag:$scope.typeflag,path:$scope.rel_path}},{cache:false}).success(function(data){
 						Dialog.successTip("创建成功!");
 						$("#newdir").val("");
 						$scope.loadFiles($scope.rel_path);
@@ -459,6 +482,22 @@ define(["BlogApp"],function(BlogApp){
 			}else{
 				Dialog.show("请输入要创建的文件夹名称!")
 			}
+		};
+		$scope.bindUploadPageFile=function(){
+            $("#file").on("change",function(){
+                $scope.uploadPageFile();
+            });
+            $("#file").click();
+        };
+		$scope.uploadPageFile=function(){
+            var fd = new FormData();
+            fd.append("file",document.getElementById("file").files[0]);
+            fd.append("path",$scope.rel_path);
+            fd.append("flag",$scope.typeflag);
+            $http({url:"/manage/system/page/upload.html",data:fd,cache:false,method:"POST",headers:{"Content-Type":undefined},transformRequest:angular.identity}).success(function(data){
+                Dialog.successTip("上传成功!")
+                $scope.loadFiles($scope.rel_path);
+            });
 		};
 	});
 });

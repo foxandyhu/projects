@@ -1,4 +1,4 @@
-from flask import render_template, request
+from flask import render_template, request, send_file
 from actions import adminBp
 from services import system_service
 from utils import json_utils, context_utils, file_utils, string_utils, date_utils
@@ -246,12 +246,17 @@ def system_contact():
     return json_utils.to_json(ResponseData.get_success())
 
 
-@adminBp.route("/system/page/template.html")
-def system_page_template():
-    """返回系统模板目录文件"""
+@adminBp.route("/system/page/res.html")
+def system_page_res():
+    """返回系统资源目录文件"""
 
     rel_path = request.args.get("path") or os.sep
-    path = context_utils.get_app_template_dir() + rel_path
+    flag = "true" == request.args.get("flag")
+
+    if flag:
+        path = context_utils.get_app_template_dir() + rel_path
+    else:
+        path = context_utils.get_app_static_dir() + rel_path
     files = os.listdir(path)
     result = list(map(lambda file: File(file, string_utils.bytes2human(os.path.getsize(path + file), 0),
                                         date_utils.parse_timestamp_datetime(
@@ -285,7 +290,7 @@ def del_system_page():
     """删除文件"""
 
     path = request.args.get("path")
-    if path == "/":
+    if not path or path == "/":
         raise Exception("根路径不能删除!")
     flag = "true" == request.args.get("flag")
 
@@ -306,11 +311,70 @@ def create_new_dir():
     path = request.args.get("path")
     dir_name = request.args.get("dirname")
     flag = "true" == request.args.get("flag")
-
+    if dir_name is None or not dir_name.strip():
+        raise Exception("文件夹名称为空!")
     if flag:
         path = context_utils.get_app_template_dir() + path
     else:
         path = context_utils.get_app_static_dir() + path
     path = os.path.normpath(path + os.sep + dir_name)
     file_utils.mkdir(path)
+    return json_utils.to_json(ResponseData.get_success())
+
+
+@adminBp.route("/system/page/upload.html", methods=["POST"])
+def upload_page_file():
+    """文件上传"""
+
+    path = request.form.get("path")
+    file = request.files.get("file")
+    if file and path:
+        flag = "true" == request.form.get("flag")
+        if flag:
+            path = context_utils.get_app_template_dir() + path
+        else:
+            path = context_utils.get_app_static_dir() + path
+        path = path + file.filename
+        file.save(path)
+    return json_utils.to_json(ResponseData.get_success())
+
+
+@adminBp.route("/system/page/get.html")
+def get_page_file():
+    """读取文件"""
+
+    path = request.args.get("path")
+    if not path or path == "/":
+        raise Exception("未选择要读取的文件!")
+    flag = "true" == request.args.get("flag")
+    if flag:
+        path = context_utils.get_app_template_dir() + path
+    else:
+        path = context_utils.get_app_static_dir() + path
+    path = os.path.normpath(path)
+
+    static_suffixs = [".html", ".js", ".css", ".tpl", ".map"]
+    if file_utils.is_image(path) or file_utils.is_audio(path) or file_utils.is_audio(
+            path) or file_utils.get_file_suffix(path) in static_suffixs:
+        return send_file(path)
+    else:
+        return send_file(path, as_attachment=True, attachment_filename=file_utils.get_filename(path))
+
+
+@adminBp.route("/system/page/edit.html", methods=["POST"])
+def edit_page_file():
+    """修改文件"""
+
+    path = request.form.get("path")
+    if not path or path == "/":
+        raise Exception("未选择文件!")
+    flag = "true" == request.form.get("flag")
+    if flag:
+        path = context_utils.get_app_template_dir() + path
+    else:
+        path = context_utils.get_app_static_dir() + path
+    path = os.path.normpath(path)
+    content = request.form.get("content")
+    with open(file=path, mode="w", encoding="utf8") as file:
+        file.writelines(content)
     return json_utils.to_json(ResponseData.get_success())

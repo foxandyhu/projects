@@ -18,11 +18,11 @@ class DevelopmentConfig(BaseConfig):
     DEBUG = True
     TESTING = True
 
-    REDIS_HOST = "192.168.0.154"
+    REDIS_HOST = "127.0.0.1"
     REDIS_PORT = 6379
     REDIS_KEY_PREFIX = "BLOG_CACHE_"
     REDIS_DB = 0
-    REDIS_PWD = "hulibo"
+    REDIS_PWD = None
 
     SESSION_TYPE = "redis"
     PERMANENT_SESSION_LIFETIME = timedelta(minutes=30)
@@ -31,7 +31,7 @@ class DevelopmentConfig(BaseConfig):
 class ProductConfig(BaseConfig):
     """生产环境配置类"""
 
-    SQLALCHEMY_DATABASE_URI = "mysql://root:jsrroot@113.106.48.159:3306/blog"
+    SQLALCHEMY_DATABASE_URI = "mysql://root:jsrroot@127.0.0.1:3306/blog"
     SQLALCHEMY_ECHO = False
     SQLALCHEMY_POOL_SIZE = 32
     SQLALCHEMY_TRACK_MODIFICATIONS = True

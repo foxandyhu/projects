@@ -3,21 +3,20 @@ import string
 from PIL import Image, ImageFont, ImageDraw
 from utils import context_utils
 
-
 def rndColor():
-    '''随机颜色'''
+    """随机颜色"""
 
     return (random.randint(32, 127), random.randint(32, 127), random.randint(32, 127))
 
 
 def gene_text():
-    '''生成4位验证码'''
+    """生成4位验证码"""
 
     return ''.join(random.sample(string.ascii_letters + string.digits, 4))
 
 
 def draw_lines(draw, num, width, height):
-    '''划线'''
+    """划线"""
 
     for num in range(num):
         x1 = random.randint(0, width / 2)
@@ -28,7 +27,7 @@ def draw_lines(draw, num, width, height):
 
 
 def get_captch():
-    '''生成验证码图形'''
+    """生成验证码图形"""
 
     code = gene_text()
     width, height = 120, 35  # 图片大小100×35
