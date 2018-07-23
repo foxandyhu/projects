@@ -1,7 +1,19 @@
 <footer>
     <p>{{ copyright.copyright }} <a href="/">{{ sysinfo.name }}</a> <a href="{{ sysinfo.website }}">{{ copyright.icp }}</a></p>
 </footer>
+<a href="#" class="cd-top">Top</a>
 <script>
-    console.log(document.referrer)
-    $(function () {$.ajax({url:"/flow_statistic.html?"+new Date().getTime(),cache:false,data:{page:location.href,referrer:document.referrer}});});
+    $(function () {
+        $.ajax({url:"/flow_statistic.html?"+new Date().getTime(),cache:false,data:{page:location.href,referrer:document.referrer}});
+        $(window).scroll(function () {
+            ($(this).scrollTop() > 300) ? $(".cd-top").addClass("cd-is-visible") : $(".cd-top").removeClass("cd-is-visible cd-fade-out");
+            if ($(this).scrollTop() > 1200) {
+                $(".cd-top").addClass("cd-fade-out");
+            }
+        });
+        $(".cd-top").on("click", function (event) {
+            event.preventDefault();
+            $("body,html").animate({scrollTop: 0,},700);
+        });
+    });
 </script>
