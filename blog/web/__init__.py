@@ -1,7 +1,7 @@
 from flask import Blueprint, redirect, request, render_template
 from io import BytesIO
 from utils import captch_utils, context_utils
-from flask import make_response
+from flask import make_response, request
 from extensions import cache, logger
 from services import system_service
 from models import SysServer
@@ -49,7 +49,7 @@ def check_server_enable():
 def page_not_found(e):
     """404错误"""
 
-    logger.error(e)
+    logger.error(f"{request.full_path} not found!")
     return redirect("/404.html")
 
 
