@@ -43,6 +43,7 @@ def login():
 
 
 @adminBp.route("/logout.html")
+@NoNeedlogin
 def logout():
     """用户登出"""
 

@@ -1,12 +1,24 @@
-from flask import Blueprint, redirect, request, render_template
+from flask import Blueprint, redirect, current_app, render_template
 from io import BytesIO
 from utils import captch_utils, context_utils
 from flask import make_response, request
 from extensions import cache, logger
 from services import system_service
 from models import SysServer
+import functools
 
 webBp = Blueprint("webBp", __name__)
+
+
+def NoCheckServerStatus(fun):
+    """该函数作为目标函数的装饰器用来标识目标函数是否需要检测服务器状态"""
+
+    @functools.wraps(fun)
+    def no_check_server(*args, **kwargs):
+        return fun()
+
+    return no_check_server
+
 
 from web.actions import index, flow_action
 
@@ -33,9 +45,8 @@ def context_processor_data():
 def request_beofore():
     """请求拦截"""
 
-    paths = ["/upgrade.html", "/captch.html"]
-    path = request.path
-    if path not in paths:
+    fun = current_app.view_functions[request.url_rule.endpoint]
+    if fun.__code__.co_name != NoCheckServerStatus(None).__name__:
         if not check_server_enable():
             return redirect("/upgrade.html")
 
@@ -76,6 +87,7 @@ def page_500():
 
 
 @webBp.route("/upgrade.html")
+@NoCheckServerStatus
 def sys_upgrade():
     """系统升级提示页面"""
 
@@ -88,6 +100,7 @@ def sys_upgrade():
 
 
 @webBp.route("/captch.html")
+@NoCheckServerStatus
 def get_captch():
     """生成验证码响应输出"""
 
