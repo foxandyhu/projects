@@ -66,9 +66,10 @@ def get_weather():
     ip = context_utils.get_client_request_ip(request)
     city_json = extends_utils.get_city_ip(ip)
     if city_json:
-        city = city_json.get("city")
-        if not city:
-            city = city_json.get("region")
+        city = city_json.get("region")
+        city = city.decode("UTF-8")
+        city = city.split("|")
+        city = city[3]
         weather_json = extends_utils.get_city_weather(city)
         if not weather_json:
             raise Exception("获取天气失败!")

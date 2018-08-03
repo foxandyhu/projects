@@ -2,28 +2,28 @@ from urllib.request import urlopen
 from urllib.parse import urlencode
 from utils import json_utils
 from datetime import datetime
+from utils.ip2Region import Ip2Region
+import os
 
 
 def get_city_ip(ip):
     """根据IP获得城市"""
 
-    ip_url = "http://ip.taobao.com/service/getIpInfo.php?ip=" + ip
-    content = get_net_request(ip_url)
-    if not content:
+    path = os.path.dirname(os.path.abspath(__file__))
+    query = Ip2Region(os.path.join(path, "ip2region.db"))
+    if not query.isip(ip):
         return None
 
-    content = json_utils.to_json_str(content)
-    if "code" not in content or content.get("code") != 0:
-        return None
-    json = content.get("data")
-    return dict(country=json.get("country"), area=json.get("area"), region=json.get("region"), city=json.get("city"))
+    data = query.btreeSearch(ip)
+    query.close()
+    return data
 
 
 def get_city_weather(name):
     """获取城市天气信息"""
 
     location = urlencode({"location": name})
-    weather_url = "http://api.map.baidu.com/telematics/v3/weather?output=json&ak=1LrIn254h4UEd72vrMVFBsFf&"+location
+    weather_url = "http://api.map.baidu.com/telematics/v3/weather?output=json&ak=1LrIn254h4UEd72vrMVFBsFf&" + location
 
     content = get_net_request(weather_url)
     if not content:
