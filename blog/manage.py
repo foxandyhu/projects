@@ -16,7 +16,7 @@ app = create_app(ConfigEnum.DEVELOPMENT)
 #
 #     if prompt_bool("您确定要重新创建数据库表结构?"):
 #         db.create_all()
-#
+
 #
 # @manager.command
 # def dropdb():
