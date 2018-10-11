@@ -1,11 +1,10 @@
-from actions import adminBp
+from actions import adminBp, NoNeedlogin
 from flask import render_template, request, redirect
 from services import users_service, logs_service
 from utils import context_utils, extends_utils, json_utils
 from models.forms import UserLoginForm
 from models import ResponseData, logs_model
 from extensions import logger
-from datetime import datetime
 
 
 @adminBp.route("/index.html", methods=["GET", "POST"])
@@ -16,6 +15,7 @@ def index():
 
 
 @adminBp.route("/login.html", methods=["GET", "POST"])
+@NoNeedlogin
 def login():
     """后台登录"""
 
@@ -43,6 +43,7 @@ def login():
 
 
 @adminBp.route("/logout.html")
+@NoNeedlogin
 def logout():
     """用户登出"""
 
@@ -65,9 +66,10 @@ def get_weather():
     ip = context_utils.get_client_request_ip(request)
     city_json = extends_utils.get_city_ip(ip)
     if city_json:
-        city = city_json.get("city")
-        if not city:
-            city = city_json.get("region")
+        city = city_json.get("region")
+        city = city.decode("UTF-8")
+        city = city.split("|")
+        city = city[3]
         weather_json = extends_utils.get_city_weather(city)
         if not weather_json:
             raise Exception("获取天气失败!")

@@ -1,7 +1,19 @@
-from flask import Blueprint, request, redirect
+from flask import Blueprint, request, redirect, current_app
+import functools
 
 adminBp = Blueprint("adminBp", __name__)
 templateAdminBp = Blueprint("templateAdminBp", __name__)
+
+
+def NoNeedlogin(fun):
+    """该函数作为目标函数的装饰器用来标识目标函数是否需要用户登录"""
+
+    @functools.wraps(fun)
+    def no_need_login(*args, **kwargs):
+        return fun()
+
+    return no_need_login
+
 
 from actions import manage_action
 from actions import system_action
@@ -28,9 +40,8 @@ def admin_error(e):
 def request_intercept():
     """请求拦截器"""
 
-    paths = ["/manage/login.html"]
-    path = request.path
-    if path not in paths:
+    fun = current_app.view_functions[request.url_rule.endpoint]
+    if fun.__code__.co_name != NoNeedlogin(None).__name__:
         user = context_utils.get_current_user_session()
         xml_request = request.headers.get("X-Requested-With")
         if not user:
