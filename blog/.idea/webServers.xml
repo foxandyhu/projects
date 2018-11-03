@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="be65facf-a007-4e36-8d1a-dbb911caf6db" name="服务器" url="http://www.dongtingren.com">
+        <fileTransfer host="www.dongtingren.com" port="88" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="88" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
