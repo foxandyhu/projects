@@ -1,3 +1,0 @@
-eclipse.preferences.version=1
-validator.Checked=resources/jeebbs-servlet-front.xml,resources/jeebbs-servlet-admin-api.xml,src/main/resources/shiro-context.xml,src/main/resources/jeebbs-servlet-front.xml,src/main/resources/jeebbs-servlet-admin-api.xml,src/main/resources/logback.xml,resources/jeebbs-servlet-member-api.xml,src/main/resources/jeebbs-servlet-member-api.xml,pom.xml,resources/shiro-context.xml,src/main/webapp
-validator.Unchecked=
