@@ -1,0 +1,54 @@
+<nb-card style="width:500px">
+  <nb-card-header>
+    编辑数据字典
+  </nb-card-header>
+  <nb-card-body>
+    <form id="dictionaryForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-3 col-form-label text-right">名称</label>
+        <div class="form-group col-md-9">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="dictionary.name"
+                 name="name"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-3 col-form-label text-right">值</label>
+        <div class="form-group col-md-9">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="dictionary.value"
+                 name="value"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-3 col-form-label text-right">排序</label>
+        <div class="form-group col-md-9">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="dictionary.seq"
+                 name="seq"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-3 col-form-label text-right">图标</label>
+        <div class="col-md-9 vertical-center">
+          <div class="img-wrap">
+            <img src="{{previewIcon}}" width="140px" height="140px" (click)="chooseIcon()">
+            <span class="close" *ngIf="isRemove" (click)="removeIcon()">&times;</span>
+          </div>
+        </div>
+      </div>
+      <div class="row margin-top-2p">
+        <label class="col-md-3 col-form-label text-right">类型</label>
+        <div class="form-group col-md-9">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="dictionary.remark"
+                 name="remark"/>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="modal-footer">
+    <button type="buttom" class="btn btn-success" (click)="submit()">
+      <i class="ion-checkmark"></i> 确 认
+    </button>&nbsp;&nbsp;&nbsp;
+    <button type="buttom" class="btn btn-default" (click)="cancel()">
+      <i class="ion-checkmark"></i> 取 消
+    </button>
+  </nb-card-footer>
+</nb-card>

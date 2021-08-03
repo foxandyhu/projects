@@ -1,0 +1,103 @@
+<nb-card>
+  <nb-card-header>
+    {{model?.name}} 模型项
+  </nb-card-header>
+  <nb-list>
+    <nb-list-item>
+      <form class="form-inline">
+        <div class="form-group">
+          <button class="btn btn-success" (click)="showAddModelItem()">
+            <span class="ion-plus-round"></span> 添加自定义项
+          </button>&nbsp;&nbsp;
+          <button class="btn btn-outline-primary" [disabled]="!(selectItems.length>0)" (click)="delMutilModelItem()">
+            批量删除
+          </button>&nbsp;&nbsp;
+          <a href="#/pages/content/model" class="btn btn-info">
+            <i class="ion-arrow-return-left"></i> 返回列表</a>
+        </div>
+      </form>
+      <div class="margin-top-2p">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>
+              <nb-checkbox #selectAllBox status="success" [value]="isSelectAll"
+                           (change)="changeAllBox(selectAllBox.value)"></nb-checkbox>
+            </th>
+            <th>字段</th>
+            <th>数据类型</th>
+            <th>名称</th>
+            <th>独占一行</th>
+            <th>是否必填</th>
+            <th>系统字段</th>
+            <th>排序</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of list">
+            <td>
+              <nb-checkbox #selectBox status="success" [value]="isSelectAll"
+                           (change)="changeBox(selectBox.value,item.id)"></nb-checkbox>
+            </td>
+            <td>{{item.field}}</td>
+            <td>{{item.dataTypeName}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.single ? "是" : "否"}}</td>
+            <td>{{item.required ? "是" : "否"}}</td>
+            <td>{{!item.custom ? "是" : "否"}}</td>
+            <td>
+              <i class="sort-op ion-arrow-down-a pointer" (click)="sort(item.id,false)"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <i class="sort-op ion-arrow-up-a pointer" (click)="sort(item.id,true)"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </td>
+            <td>
+              <button class="btn btn-info btn-smaller" (click)="showEditModelItem(item.id)">
+                <i class="ion-edit"></i> 编辑
+              </button>&nbsp;&nbsp;
+              <button class="btn btn-danger btn-smaller" (click)="delModelItem(item.id)">
+                <i class="ion-trash-a"></i> 删除
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </nb-list-item>
+  </nb-list>
+
+  <nb-list>
+    <nb-list-item>
+      <div class="form-group">
+        <span class="font-red">请选择系统默认模型项</span>
+      </div>
+      <div class="margin-top-2p">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>字段</th>
+            <th>数据类型</th>
+            <th>名称</th>
+            <th>独占一行</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of defaultModelItem">
+            <td>{{item.field}}</td>
+            <td>{{item.dataTypeName}}</td>
+            <td>{{item.name}}</td>
+            <td>
+              {{item.single ? "是" : "否"}}
+            </td>
+            <td>
+              <button class="btn btn-outline-info btn-smaller" (click)="bindModel(item.id)">
+                <i class="ion-android-add"></i> 添加
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </nb-list-item>
+  </nb-list>
+</nb-card>

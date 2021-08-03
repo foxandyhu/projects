@@ -1,0 +1,123 @@
+section {
+  height: 100%;
+  width: 100%;
+  background: #fff url(~assets/images/login_bg.png) 50% 50% no-repeat;
+  background-size: cover;
+  position: absolute;
+}
+
+.dowebok {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 430px;
+  height: 550px;
+  margin: -300px 0 0 -215px;
+  border: 1px solid #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.logo {
+  background: url(../../../assets/images/logo.png) 45% 0 no-repeat;
+  width: 430px;
+  height: 150px;
+  margin: 30px auto 20px;
+  background-size: contain;
+}
+
+.form-item {
+  position: relative;
+  width: 360px;
+  margin: 0 auto;
+  padding-bottom: 30px;
+}
+
+.form-item input {
+  width: 100%;
+  height: 48px;
+  padding-left: 70px;
+  border: 1px solid #fcc34d;
+  border-radius: 25px;
+  font-size: 18px;
+  background-color: transparent;
+  outline: none;
+}
+
+#username {
+  background: url(~assets/images/login_user.png) 15px 8px no-repeat;
+  background-size: 30px;
+}
+
+#password {
+  background: url(~assets/images/login_pwd.png) 15px 8px no-repeat;
+  background-size: 30px;
+}
+
+#captcha {
+  background: url(~assets/images/login_captcha.png) 15px 8px no-repeat;
+  background-size: 30px;
+  width: 65%;
+}
+
+.submit {
+  padding: 0px !important;color: #fcc34d;
+}
+
+.tip {
+  font-size: 14px;
+  color: #ff0808;
+  text-align: center;
+}
+
+.dowebok ::-webkit-input-placeholder {
+  font-size: 18px;
+  line-height: 1.4;
+  color: #fff;
+}
+
+.dowebok :-moz-placeholder {
+  font-size: 18px;
+  line-height: 1.4;
+  color: #fff;
+}
+
+.dowebok ::-moz-placeholder {
+  font-size: 18px;
+  line-height: 1.4;
+  color: #fff;
+}
+
+.dowebok :-ms-input-placeholder {
+  font-size: 18px;
+  line-height: 1.4;
+  color: #fff;
+}
+
+@media screen and (max-width: 500px) {
+  * {
+    box-sizing: border-box;
+  }
+
+  .dowebok {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0 30px;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .logo {
+    margin: 50px auto;
+  }
+
+  .form-item {
+    width: auto;
+  }
+
+  .form-item input {
+    width: 100%;
+  }
+}

@@ -1,0 +1,15 @@
+<nb-card style="width:500px;max-height:550px;">
+  <nb-card-header>请选择菜单权限</nb-card-header>
+  <nb-card-body>
+    <div>当前角色:&nbsp;&nbsp;&nbsp;{{roleName}}</div>
+    <ul id="menuTree" class="ztree margin-top-1p"></ul>
+  </nb-card-body>
+  <nb-card-footer class="modal-footer">
+    <button type="buttom" class="btn btn-success" (click)="submit()">
+      <i class="ion-checkmark"></i> 确 认
+    </button>&nbsp;&nbsp;&nbsp;
+    <button type="buttom" class="btn btn-default" (click)="cancel()">
+      <i class="ion-checkmark"></i> 取 消
+    </button>
+  </nb-card-footer>
+</nb-card>

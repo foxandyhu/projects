@@ -1,0 +1,65 @@
+<nb-card>
+  <nb-card-header>
+    会员组管理
+  </nb-card-header>
+  <nb-list>
+    <nb-list-item>
+      <form class="form-inline">
+        <div class="form-group">
+          <button class="btn btn-success" (click)="showAddGroup()">
+            <span class="ion-plus-round"></span> 新增
+          </button>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <button class="btn btn-outline-primary" [disabled]="!(selectItems.length>0)" (click)="delMulti()">
+            批量删除
+          </button>
+        </div>
+      </form>
+      <table class="table table-hover margin-top-2p">
+        <thead>
+        <tr>
+          <th>
+            <nb-checkbox #selectAllBox status="success" [value]="isSelectAll"
+                         (change)="changeAllBox(selectAllBox.value)"></nb-checkbox>
+          </th>
+          <th>名称</th>
+          <th>每日允许上传附件总大小/KB</th>
+          <th>最大允许上传附件总大小/KB</th>
+          <th>允许上传文件后缀</th>
+          <th>评论需要审核</th>
+          <th>评论需要验证码</th>
+          <th>默认会员组</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of pager?.data">
+          <td>
+            <nb-checkbox #selectBox status="success" [value]="isSelectAll"
+                         (change)="changeBox(selectBox.value,item.id)"></nb-checkbox>
+          </td>
+          <td>{{item.name}}</td>
+          <td>{{item.allowUploadPerDayHuman}}</td>
+          <td>{{item.allowUploadMaxFileHuman}}</td>
+          <td>{{item.allowUploadSuffix}}</td>
+          <td>{{item.commentNeedCheck ? "是" : "否"}}</td>
+          <td>{{item.commentNeedCaptcha ? "是" : "否"}}</td>
+          <td>{{item.defaults ? "是" : "否"}}</td>
+          <td>
+            <button class="btn btn-info btn-smaller" (click)="showEditGroup(item.id)">
+              <i class="ion-edit"></i> 编辑
+            </button>&nbsp;&nbsp;
+            <button class="btn btn-danger btn-smaller" (click)="del(item.id)">
+              <i class="ion-trash-a"></i> 删除
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </nb-list-item>
+  </nb-list>
+  <nb-card-footer class="text-right">
+    <ngb-pagination ngClass="ng2-smart-pagination" maxSize="10" [collectionSize]="pager?.totalCount"
+                    [pageSize]="pager?.pageSize" (pageChange)="changePager($event)"></ngb-pagination>
+  </nb-card-footer>
+</nb-card>

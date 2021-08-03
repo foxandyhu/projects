@@ -1,0 +1,468 @@
+<nb-card style="min-height:500px">
+  <nb-card-header>
+    编辑 "{{article.channel?.name}}" 内容
+  </nb-card-header>
+  <nb-card-body>
+    <ng-container *ngFor="let item of modelItems">
+      <div class="row {{item.single?'clear-both signle-width':'float-left width-50p'}}">
+        <label class="col-md-3 col-form-label text-right"><i class="font-red" *ngIf="item.required">*</i> {{item.name}}
+        </label>
+        <div class="form-group col-md-9">
+          <!--系统默认字段-->
+          <ng-container [ngSwitch]="item.field">
+            <ng-container *ngSwitchCase="'title'">
+              <ng-container *ngTemplateOutlet="titleTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'shorttitle'">
+              <ng-container *ngTemplateOutlet="shortTitleTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'link'">
+              <ng-container *ngTemplateOutlet="linkTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'top'">
+              <ng-container *ngTemplateOutlet="topTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'recommend'">
+              <ng-container *ngTemplateOutlet="recommendTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'tplpc'">
+              <ng-container *ngTemplateOutlet="tplPcTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'tplmobile'">
+              <ng-container *ngTemplateOutlet="tplMobileTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'titleimg'">
+              <ng-container *ngTemplateOutlet="titleImgTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'contentimg'">
+              <ng-container *ngTemplateOutlet="contentImgTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'file'">
+              <ng-container *ngTemplateOutlet="fileTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'share'">
+              <ng-container *ngTemplateOutlet="shareTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'updown'">
+              <ng-container *ngTemplateOutlet="updownTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'comment'">
+              <ng-container *ngTemplateOutlet="commentTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'score'">
+              <ng-container *ngTemplateOutlet="scoreTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'author'">
+              <ng-container *ngTemplateOutlet="authorTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'postdate'">
+              <ng-container *ngTemplateOutlet="postdateTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'origin'">
+              <ng-container *ngTemplateOutlet="originTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'originurl'">
+              <ng-container *ngTemplateOutlet="originurlTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'tags'">
+              <ng-container *ngTemplateOutlet="tagsTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'summary'">
+              <ng-container *ngTemplateOutlet="summaryTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'keywords'">
+              <ng-container *ngTemplateOutlet="keywordsTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'description'">
+              <ng-container *ngTemplateOutlet="descriptionTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'txt'">
+              <ng-container *ngTemplateOutlet="txtTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'pictures'">
+              <ng-container *ngTemplateOutlet="picturesTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'attachments'">
+              <ng-container *ngTemplateOutlet="attachmentsTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+
+            <!--自定义字段-->
+            <ng-container *ngSwitchDefault>
+              <ng-container *ngTemplateOutlet="customTemplate;context:{$implicit:item}"></ng-container>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+
+    <!--图片集-->
+    <ng-template #picturesTemplate let-item>
+      <ngx-uploader-bar multiple="true" text="批量上传" (complete)="uploadFileChange($event,'pictures')"></ngx-uploader-bar>
+      <nb-accordion *ngIf="article?.pictures.length>0">
+        <nb-accordion-item expanded="true">
+          <nb-accordion-item-header>图片集</nb-accordion-item-header>
+          <nb-accordion-item-body>
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th>图片</th>
+                <th>名称</th>
+                <th>说明</th>
+                <th>排序</th>
+                <th>操作</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let pic of article?.pictures">
+                <td><img [src]="initImgPreView(pic)" width="60" height="60"/></td>
+                <td>{{pic.name}}</td>
+                <td><textarea class="form-control" maxlength="500" [(ngModel)]="pic.remark" name="remark"></textarea>
+                </td>
+                <td>
+                  <i class="sort-op ion-arrow-down-a pointer" (click)="sortPic(pic.seq,false)"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <i class="sort-op ion-arrow-up-a pointer" (click)="sortPic(pic.seq,true)"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td>
+                  <button class="btn btn-danger btn-smaller" (click)="removeUploadFile('pictures',pic.imgPath)">
+                    <i class="ion-trash-a"></i> 删除
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+      </nb-accordion>
+    </ng-template>
+
+    <!--附件集-->
+    <ng-template #attachmentsTemplate let-item>
+      <ngx-uploader-bar [type]="3" tip="" multiple="true" text="批量上传"
+                        (complete)="uploadFileChange($event,'attachments')"></ngx-uploader-bar>
+      <nb-accordion *ngIf="article?.attachments.length>0">
+        <nb-accordion-item expanded="true">
+          <nb-accordion-item-header>附件集</nb-accordion-item-header>
+          <nb-accordion-item-body>
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th>名称</th>
+                <th>说明</th>
+                <th>操作</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let att of article?.attachments">
+                <td>{{att.name}}</td>
+                <td><textarea class="form-control" maxlength="500" [(ngModel)]="att.remark" name="remark"></textarea>
+                </td>
+                <td>
+                  <button class="btn btn-danger btn-smaller" (click)="removeUploadFile('attachments',att.path)">
+                    <i class="ion-trash-a"></i> 删除
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+      </nb-accordion>
+    </ng-template>
+
+    <!--Txt-->
+    <ng-template #txtTemplate let-item>
+      <editor [(ngModel)]="article.articleTxt.txt" name="txt"
+              [init]="editParam"></editor>
+    </ng-template>
+
+    <!--作者-->
+    <ng-template #authorTemplate let-item>
+      <input type="text" autocomplete="off" [required]="item.required" class="form-control" maxlength="50"
+             [(ngModel)]="article.articleExt.author" name="author"/>
+    </ng-template>
+
+    <!--发布时间-->
+    <ng-template #postdateTemplate let-item>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <button class="btn btn-primary btn-icon">
+            <i class="ion-ios-calendar-outline"></i>
+          </button>
+        </div>
+        <input autocomplete="off" type="text" class="form-control" placeholder="选择日期"
+               [nbDatepicker]="postDatePicker" (input)="article.articleExt.postDate=$event.target.value"
+               [value]="article.articleExt.postDate" name="postDate">
+        <nb-datepicker #postDatePicker format="YYYY-MM-DD" (dateChange)="dateChange($event,'postdate')"></nb-datepicker>
+      </div>
+    </ng-template>
+
+    <!--来源-->
+    <ng-template #originTemplate let-item>
+      <input type="text" autocomplete="off" [required]="item.required" class="form-control" maxlength="100"
+             [(ngModel)]="article.articleExt.origin" name="origin"/>
+    </ng-template>
+
+    <!--标签-->
+    <ng-template #tagsTemplate let-item>
+      <input type="text" autocomplete="off" [required]="item.required" class="form-control" maxlength="255"
+             [(ngModel)]="article.articleExt.tags" name="tags" placeholder="多个标签用','隔开"/>
+    </ng-template>
+
+    <!--来源Url-->
+    <ng-template #originurlTemplate let-item>
+      <input type="text" autocomplete="off" [required]="item.required" class="form-control" maxlength="255"
+             [(ngModel)]="article.articleExt.originUrl" name="originUrl"/>
+    </ng-template>
+
+    <!--摘要-->
+    <ng-template #summaryTemplate let-item>
+      <textarea type="text" autocomplete="off" [required]="item.required" class="form-control" maxlength="255"
+                [(ngModel)]="article.articleExt.summary" name="summary"></textarea>
+    </ng-template>
+
+    <!--SEO关键字-->
+    <ng-template #keywordsTemplate let-item>
+      <input type="text" autocomplete="off" [required]="item.required" class="form-control" maxlength="255"
+             [(ngModel)]="article.articleExt.keywords" name="keywords"/>
+    </ng-template>
+
+    <!--SEO描述-->
+    <ng-template #descriptionTemplate let-item>
+      <textarea autocomplete="off" [required]="item.required" class="form-control" maxlength="255"
+                [(ngModel)]="article.articleExt.description" name="author"></textarea>
+    </ng-template>
+
+    <!--标题-->
+    <ng-template #titleTemplate let-item>
+      <div class="row">
+        <div class="form-group col-md-12 form-inline">
+          <input style="width:80%" type="text" autocomplete="off" [required]="item.required"
+                 class="form-control" name="title" [(ngModel)]="article.articleExt.title" maxlength="150"
+                 placeholder="请输入文章标题"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <div title="标题颜色" class="pickSize" [ngStyle]="{'color':article.articleExt.titleColor}"
+               [(colorPicker)]="color" (colorPickerChange)="pickColor(color)">
+            <i class="ion-android-color-palette"></i>
+          </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <nb-checkbox status="success" [(ngModel)]="article.articleExt.bold" name="bold">加粗
+          </nb-checkbox>
+        </div>
+      </div>
+    </ng-template>
+
+    <!--简短标题-->
+    <ng-template #shortTitleTemplate let-item>
+      <input type="text" autocomplete="off" [required]="item.required"
+             class="form-control" name="shortTitle" [(ngModel)]="article.articleExt.shortTitle" maxlength="150"
+             placeholder="请输入文章简短标题"/>
+    </ng-template>
+
+    <!--外部连接-->
+    <ng-template #linkTemplate let-item>
+      <div class="row">
+        <div class="form-group col-md-12 form-inline">
+          <nb-checkbox #outLink status="success" [value]="article.articleExt.link" (change)="isOutLink()">外部连接
+          </nb-checkbox>&nbsp;&nbsp;&nbsp;
+          <input *ngIf="outLink.value" style="width:80%" type="text" autocomplete="off" [required]="item.required"
+                 class="form-control" name="link" [(ngModel)]="article.articleExt.link" maxlength="150"
+                 placeholder="请输入外部连接地址"/>
+        </div>
+      </div>
+    </ng-template>
+
+    <!--是否置顶-->
+    <ng-template #topTemplate let-item>
+      <div class="row">
+        <div class="form-group col-md-12 form-inline">
+          <nb-checkbox #topCheck status="success" [value]="article.topLevel>0" (change)="isTop()"></nb-checkbox>&nbsp;&nbsp;&nbsp;
+          <ng-container *ngIf="topCheck.value">
+            <i class="ion-help-circled help" [title]="item.remark"></i>&nbsp;
+            <label class="col-form-label text-right">置顶级别:</label>&nbsp;&nbsp;
+            <input style="width:20%" type="text" autocomplete="off" [required]="item.required"
+                   class="form-control" name="topLevel" [(ngModel)]="article.topLevel" maxlength="3"
+                   placeholder="请输入置顶级别"/>&nbsp;&nbsp;
+            <i class="ion-help-circled help" title="不指定长期置顶,级别为0设置期限将会无效"></i>&nbsp;
+            <label class="col-form-label text-right">置顶期限:</label>&nbsp;&nbsp;
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <button class="btn btn-primary btn-icon">
+                  <i class="ion-ios-calendar-outline"></i>
+                </button>
+              </div>
+              <input autocomplete="off" type="text" class="form-control" placeholder="选择日期"
+                     [nbDatepicker]="datePicker" (input)="article.topExpired=$event.target.value"
+                     [value]="article.topExpired" name="expired">
+              <nb-datepicker #datePicker format="YYYY-MM-DD" (dateChange)="dateChange($event,'top')"></nb-datepicker>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </ng-template>
+
+    <!--是否推荐-->
+    <ng-template #recommendTemplate let-item>
+      <div class="row">
+        <div class="form-group col-md-12 form-inline">
+          <nb-checkbox [(ngModel)]="article.recommend" name="recommend" status="success"
+                       (change)="isRecommend()"></nb-checkbox>&nbsp;&nbsp;&nbsp;
+        </div>
+      </div>
+    </ng-template>
+
+    <!--是否顶踩-->
+    <ng-template #updownTemplate let-item>
+      <nb-checkbox [(ngModel)]="article.updown" name="updown"
+                   status="success"></nb-checkbox>
+    </ng-template>
+
+    <!--是否分享-->
+    <ng-template #shareTemplate let-item>
+      <nb-checkbox [(ngModel)]="article.share" name="share" status="success"></nb-checkbox>
+    </ng-template>
+
+    <!--是否评论-->
+    <ng-template #commentTemplate let-item>
+      <nb-checkbox [(ngModel)]="article.comment" name="comment"
+                   status="success"></nb-checkbox>
+    </ng-template>
+
+    <!--是否评分-->
+    <ng-template #scoreTemplate let-item>
+      <div class="row">
+        <div class="form-group col-md-12 form-inline">
+          <nb-checkbox [(ngModel)]="article.score" name="score" status="success"></nb-checkbox>
+          <ng-container *ngIf="article.score">
+            <label class="col-form-label text-right">分值:</label>&nbsp;&nbsp;
+            <input style="width:20%" type="text" autocomplete="off" class="form-control" name="scores"
+                   [(ngModel)]="article.scores" maxlength="3"/>&nbsp;&nbsp;
+            <label class="col-form-label text-right">评分组:</label>&nbsp;&nbsp;
+            <select [(ngModel)]="article.scoreGroupId" class="form-control" name="scoreGroupId">
+              <option value="">选择评分组</option>
+              <option *ngFor="let group of scoreGroups" [value]="group.id">{{group.name}}</option>
+            </select>
+          </ng-container>
+        </div>
+      </div>
+    </ng-template>
+
+    <!--PC模版选择-->
+    <ng-template #tplPcTemplate let-item>
+      <select [required]="item.required" [(ngModel)]="article.articleExt.tplPc" class="form-control" name="tplpc">
+        <option value="">选择模版</option>
+        <option *ngFor="let tpl of pcTemplates" [value]="tpl">{{tpl}}</option>
+      </select>
+      <small class="font-italic">模版为空将采用所属栏目指定的模版</small>
+    </ng-template>
+
+    <!--Mobile模版选择-->
+    <ng-template #tplMobileTemplate let-item>
+      <select [required]="item.required" [(ngModel)]="article.articleExt.tplMobile" class="form-control" name="tplpc">
+        <option value="">选择模版</option>
+        <option *ngFor="let tpl of mobileTemplates" [value]="tpl">{{tpl}}</option>
+      </select>
+      <small class="font-italic">模版为空将采用所属栏目指定的模版</small>
+    </ng-template>
+
+    <!--标题图-->
+    <ng-template #titleImgTemplate let-item>
+      <ngx-uploader-bar [previewPic]="article.articleExt.titlePicUrl" id="titleImg" isPicture="true" (complete)="imgFileChange($event,'titleImg')"></ngx-uploader-bar>
+    </ng-template>
+
+    <!--内容图-->
+    <ng-template #contentImgTemplate let-item>
+      <ngx-uploader-bar [previewPic]="article.articleExt.contentPicUrl" id="contentImg" isPicture="true" (complete)="imgFileChange($event,'contentImg')"></ngx-uploader-bar>
+    </ng-template>
+
+    <!--文件-->
+    <ng-template #fileTemplate let-item>
+      <div class="row">
+        <div class="col-md-2">
+          <select class="form-control" [(ngModel)]="article.articleExt.fileType" name="fileType">
+              <option value="">选择文件类型</option>
+              <option *ngFor="let c of fileCategory" [value]="c.id">{{c.name}}</option>
+            </select>&nbsp;
+        </div>
+        <div class="col-md-10">
+          <input type="hidden" readonly="readonly" class="img_input form-control"
+             [(ngModel)]="article.articleExt.filePath" name="filePath"/>
+          <ngx-uploader-bar tip="" *ngIf="article.articleExt.fileType" [type]="article.articleExt.fileType" text="上传文件" (complete)="uploadFileChange($event,'file')"></ngx-uploader-bar>
+            <nb-alert *ngIf="showFileResult.show" (close)="removeUploadFile('file','')" closable="true"
+                      status="success">{{showFileResult.text}}</nb-alert>
+        </div>
+      </div>
+    </ng-template>
+
+    <!--自定义字段-->
+    <ng-template #customTemplate let-item>
+      <ng-container [ngSwitch]="item.dataType">
+        <!--字符串文本-->
+        <ng-container *ngSwitchCase="1">
+          <input type="text" autocomplete="off" [required]="item.required" class="form-control"
+                 [(ngModel)]="article.attr[item.field]"
+                 [name]="item.field"/>
+        </ng-container>
+
+        <!--文本域-->
+        <ng-container *ngSwitchCase="2">
+          <textarea autocomplete="off" [required]="item.required" class="form-control"
+                    [(ngModel)]="article.attr[item.field]"
+                    [name]="item.field"></textarea>
+        </ng-container>
+
+        <!--日期-->
+        <ng-container *ngSwitchCase="3">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <button class="btn btn-primary btn-icon">
+                <i class="ion-ios-calendar-outline"></i>
+              </button>
+            </div>
+            <input [required]="item.required" autocomplete="off" type="text" class="form-control" placeholder="选择日期"
+                   [nbDatepicker]="datePicker"
+                   (input)="article.attr[item.field]=$event.target.value"
+                   [value]="article.attr[item.field]"
+                   [name]="item.field">
+            <nb-datepicker #datePicker format="YYYY-MM-DD"
+                           (dateChange)="setAttr(item.field,$event)"></nb-datepicker>
+          </div>
+        </ng-container>
+
+        <!--下拉列表-->
+        <ng-container *ngSwitchCase="4">
+          <select [required]="item.required" class="form-control"
+                  (select)="setAttr(item.field,$event.target.value)"
+                  [(ngModel)]="article.attr[item.field]"
+                  [name]="item.field">
+            <option value="">选择</option>
+            <option *ngFor="let sl of item.optValue | stringToArray" [value]="sl">{{sl}}</option>
+          </select>
+        </ng-container>
+
+        <!--复选框-->
+        <ng-container *ngSwitchCase="5">
+          <nb-checkbox #cks [value]="initMutilCheck(item.field,op)" (change)="setAttrChk(item.field,op,cks.value)"
+                       status="success"
+                       *ngFor="let op of item.optValue | stringToArray">{{op}}</nb-checkbox>
+        </ng-container>
+
+        <!--单选框-->
+        <ng-container *ngSwitchCase="6">
+          <nb-checkbox status="success" [(ngModel)]="article.attr[item.field]" [name]="item.field"></nb-checkbox>
+        </ng-container>
+
+        <!--富文本-->
+        <ng-container *ngSwitchCase="9">
+          <editor [(ngModel)]="article.attr[item.field]" [name]="item.field"
+                  [init]="editParam"></editor>
+        </ng-container>
+      </ng-container>
+    </ng-template>
+
+  </nb-card-body>
+  <nb-card-footer class="modal-footer">
+    <button *ngIf="modelItems?.length>0" type="buttom" class="btn btn-success" (click)="editArticle()">
+      <i class="ion-checkmark"></i> 确 认
+    </button>
+    <a href="#/pages/content/article" class="btn btn-info">
+      <i class="ion-arrow-return-left"></i> 返回列表</a>
+  </nb-card-footer>
+</nb-card>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache updateCheck="false">
+    <diskStore path="../../../temps/cache"/>
+
+    <defaultCache maxElementsInMemory="10000" eternal="false" timeToLiveSeconds="120"
+                  overflowToDisk="true" diskSpoolBufferSizeMB="300" maxElementsOnDisk="1000000"
+                  diskPersistent="false" diskExpiryThreadIntervalSeconds="120"/>
+
+    <cache name="default-update-timestamps-region" maxElementsInMemory="5000" eternal="false"
+           timeToLiveSeconds="60" overflowToDisk="true"/>
+    <cache name="default-query-results-region" maxElementsInMemory="5000" eternal="false"
+           timeToLiveSeconds="60" overflowToDisk="true"/>
+
+
+    <!--系统常用基础数据的缓存-->
+    <cache name="userRightCache" maxElementsInMemory="5000" eternal="false" timeToIdleSeconds="7200"
+           overflowToDisk="true" diskPersistent="false"/>
+
+    <!--站点一次会话访问缓存-->
+    <cache name="siteAccessCache" maxElementsInMemory="5000" eternal="false" timeToLiveSeconds="7200"
+           overflowToDisk="true" diskPersistent="true"/>
+
+    <!--每次访问页面缓存-->
+    <cache name="siteAccessPageCache" maxElementsInMemory="500" eternal="false" timeToLiveSeconds="7200"
+           overflowToDisk="true" diskPersistent="true"/>
+
+
+    <!--评论顶踩缓存 缓存一个小时内不可重复顶踩-->
+    <cache name="commentUpDownCache" maxElementsInMemory="10000" eternal="false" timeToLiveSeconds="3600"
+           overflowToDisk="true" diskPersistent="false"/>
+
+    <!--文章顶踩评分缓存 缓存一个小时内不可重复顶踩-->
+    <cache name="articleUpDownScoreCache" maxElementsInMemory="10000" eternal="false" timeToLiveSeconds="3600"
+           overflowToDisk="true" diskPersistent="false"/>
+
+</ehcache>

@@ -1,0 +1,40 @@
+<nb-card>
+  <nb-card-header>
+    查看站内信
+  </nb-card-header>
+  <nb-card-body>
+    <form id="letterForm" class="form-horizontal">
+      <div class="row">
+        <label class="col-md-2 text-right"><i class="font-red">*</i> 发件人</label>
+        <div class="form-group col-md-4">{{letter?.fromAdmin?"[管理员]":""}}{{letter?.sender}}</div>
+        <label class="col-md-2 text-right"><i class="font-red">*</i> 收件人</label>
+        <div class="form-group col-md-4">{{letter?.receiver}}</div>
+      </div>
+      <div class="row margin-top-2p">
+        <label class="col-md-2 text-right"><i class="font-red">*</i> 发送时间</label>
+        <div class="form-group col-md-4">{{letter?.sendTime}}</div>
+        <label class="col-md-2 text-right">来源</label>
+        <div class="form-group col-md-4">{{letter?.boxName}}</div>
+      </div>
+      <div class="row margin-top-2p">
+        <label class="col-md-2 text-right">阅读时间</label>
+        <div class="form-group col-md-4">{{letter?.readTime}}</div>
+        <label class="col-md-2 text-right">阅读状态</label>
+        <div class="form-group col-md-4">{{letter?.read ? "已阅读" : "未阅读"}}</div>
+      </div>
+      <div class="row margin-top-2p">
+        <label class="col-md-2 text-right"><i class="font-red">*</i> 标题</label>
+        <div class="form-group col-md-10">{{letter?.letterTxt?.title}}</div>
+      </div>
+      <div class="row margin-top-2p">
+        <label class="col-md-2 text-right"><i class="font-red">*</i> 内容</label>
+        <div class="form-group col-md-10">{{letter?.letterTxt?.content}}</div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="text-center">
+    <a href="#/pages/message/letter" class="btn btn-info">
+      <i class="ion-arrow-return-left"></i> 返回列表</a>
+  </nb-card-footer>
+</nb-card>
+

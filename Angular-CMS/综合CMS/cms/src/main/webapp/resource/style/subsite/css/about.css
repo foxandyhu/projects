@@ -1,0 +1,27 @@
+.contact-info p{margin:10px;}
+.case-list .case-item {margin-bottom:24px;}
+.case-list .case-item figure{position: relative; margin: 0 0 23px;line-height:1.0;}
+.case-list .case-item figure a{position: absolute; top: 45%; left: 50%; z-index: 200; width: 160px; margin: -22px 0 0 -79px; opacity: 0; padding: 10px 0; text-align: center; font-size: 14px; font-weight: 700; color: #ffffff; border: 2px solid #ffffff;background-color: #ff4500;}
+.case-list .case-item figure:hover a{opacity: 1;}
+.case-list .case-item img{padding: 0; margin: 0; max-width: 100%;border:1px #ededed solid;-webkit-transform: rotateX(0deg) rotateY(0deg);-webkit-transform-style: preserve-3d;-moz-transform: rotateX(0deg) rotateY(0deg);-moz-transform-style: preserve-3d;-moz-backface-visibility: hidden;-o-transition: all .4s ease-in-out;-ms-transition: all .4s ease-in-out;-moz-transition: all .4s ease-in-out;-webkit-transition: all .4s ease-in-out;transition: all .4s ease-in-out;overflow:hidden;}
+.case-list .case-item img:hover{-webkit-transform:rotateY(180deg);-moz-transform:rotateY(180deg);}
+.case-list .case-item h5{font-weight: 600; margin-top:0;margin-bottom: 0px; padding-bottom:0;position:relative;z-index:999;overflow-x:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.4;text-align: center;}
+
+.h5_desc,.brand_desc{margin:5em;}
+.h5_desc .item_cc li{margin-top:6em;}
+.h5_desc i{font-size: 5em;margin: 5rem 0 2rem;color: #ffffff;border-radius: 50%;width: 2em;background: #ff4500;height: 2em;line-height: 2em;}
+.h5_desc p{margin: 1em;}
+.h5_desc h3,.h5_desc h2{color: #ff4500;}
+.h5_desc li i{float: left;font-size: 1.5em;margin: 0;width: 2em;height: 2em;}
+
+.brand_desc h3,.brand_desc h2{color: #ff4500;}
+.brand_desc p{margin: 3em;font-size: 16px;}
+.line_adbar{height: 80px;text-align: center;background-color: #ff4500;color: #fff;font-size: 20px;line-height: 80px;}
+.xcx_indu li{width: 168px;margin: 0 2em 1em;padding: 0;background: #ffffff;height: 166px;transition: 0.5s all;-webkit-transition: 0.5s all;-moz-transition: 0.5s all;-o-transition: 0.5s all;-ms-transition: 0.5s all;position: relative;display: block;float: left;}
+.xcx_indu li label {display: block;font-weight: 300;margin: 0.5em 0 0;color: #444;height: 20px;position: absolute;text-align: center;width: 100%;padding: 0 1em;transition: 0.4s all;-webkit-transition: 0.4s all;-moz-transition: 0.4s all;-o-transition: 0.4s all;-ms-transition: 0.4s all;box-sizing: border-box;}
+.xcx_way{margin-top:10em;}
+.xcx_way li i{float:unset;}
+.h5_desc i.orange_bg{background: #fda336}
+.h5_desc i.green_bg{background: #31cd86}
+.h5_desc i.purple_bg{background: #c473fe}
+.h5_desc i.blue_bg{background: #62bcff}

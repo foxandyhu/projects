@@ -1,0 +1,26 @@
+<section class="right-container hidden-xs">
+    <h3 class="title">热点新闻</h3>
+    <div class="news_right">
+        <ul>
+            <@articleListDirective pageSize="3" channelId="116" recommend="true">
+                <#list articles as article>
+                    <li>
+                        <figure>
+                            <a href="/${channel.alias}/id_${article.idStr}.html"​ title="${article.articleExt.title}">
+                                <img alt="长沙网站制作,长沙网站建设" src="${article.articleExt.titlePicUrl}_120_80" title="${article.articleExt.title}"/>
+                            </a>
+                        </figure>
+                        <div>
+                            <p>
+                                <a href="/${channel.alias}/id_${article.idStr}.html" ​ title="${article.articleExt.title}">
+                                    ${chartCutMethod(article.articleExt.title,20)}
+                                </a>
+                            </p>
+                            <i class="fa fa-calendar"></i>&nbsp;&nbsp;${article.articleExt.postDate?date}
+                        </div>
+                    </li>
+                </#list>
+            </@articleListDirective>
+        </ul>
+    </div>
+</section>

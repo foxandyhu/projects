@@ -1,0 +1,59 @@
+<nb-card style="width:130%">
+  <nb-card-header>
+    添加调查问题
+  </nb-card-header>
+  <nb-card-body>
+    <form id="voteItemForm" class="form-horizontal" onSubmit="return false;">
+      <div class="container">
+        <div class="row">
+          <label class="col-md-1 col-form-label text-right">问题</label>
+          <div class="form-group col-md-11">
+            <input autocomplete="off" type="text" required="required" class="form-control" [(ngModel)]="subTopic.title"
+                   name="subTopicTitle" maxlength="100" placeholder="请输入问题标题"/>
+          </div>
+        </div>
+        <div class="row {{type!=3?'':'hidden'}}" style="max-height:400px;overflow:auto;">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>选项 <i class="sort-op ion-android-add-circle" (click)="addCount()"></i></th>
+              <th>图片</th>
+              <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of items">
+              <td>
+                <div class="row">
+                  <label class="col-md-1 col-form-label text-right">{{item.seq}}:</label>
+                  <div class="form-group col-md-10">
+                    <input autocomplete="off" type="text" required="required" class="form-control"
+                           (input)="item.title=$event.target.value" [value]="item.title" name="itemTitle"
+                           maxlength="100" placeholder="请输入问题答案选项"/>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <ngx-uploader-bar [id]="'itemPic'+item.seq" isPicture="true" (complete)="fileChange($event,item)"></ngx-uploader-bar>
+              </td>
+              <td>
+                <i class="sort-op ion-android-remove-circle pointer" (click)="removeCount(item.seq)"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <i class="sort-op ion-arrow-down-a pointer" (click)="down(item.seq)"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <i class="sort-op ion-arrow-up-a pointer" (click)="up(item.seq)"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="modal-footer">
+    <button type="buttom" class="btn btn-success" (click)="submit()">
+      <i class="ion-checkmark"></i> 确 认
+    </button>&nbsp;&nbsp;&nbsp;
+    <button type="buttom" class="btn btn-default" (click)="cancel()">
+      <i class="ion-checkmark"></i> 取 消
+    </button>
+  </nb-card-footer>
+</nb-card>

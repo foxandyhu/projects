@@ -1,0 +1,35 @@
+<nb-card>
+  <nb-card-header>
+    新增搜索词
+  </nb-card-header>
+  <nb-card-body>
+    <form id="searchForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-4 col-form-label text-right">搜索词</label>
+        <div class="form-group col-md-8">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="search.name" name="name" maxlength="10"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-4 col-form-label text-right">搜索次数</label>
+        <div class="form-group col-md-8">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="search.hitCount" name="hitCount"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-4 col-form-label text-right">是否推荐</label>
+        <div class="form-group col-md-8">
+          <nb-checkbox status="success" name="recommend" [(ngModel)]="search.recommend">是</nb-checkbox>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="modal-footer">
+      <button type="buttom" class="btn btn-success" (click)="submit()">
+        <i class="ion-checkmark"></i> 确 认
+      </button>&nbsp;&nbsp;&nbsp;
+      <button type="buttom" class="btn btn-default" (click)="cancel()">
+        <i class="ion-checkmark"></i> 取 消
+      </button>
+    </nb-card-footer>
+</nb-card>

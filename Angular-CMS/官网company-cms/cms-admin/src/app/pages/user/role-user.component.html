@@ -1,0 +1,42 @@
+<nb-card>
+  <nb-card-header>
+    人员管理
+  </nb-card-header>
+  <nb-list>
+    <nb-list-item>
+      <a href="#/pages/user/role" class="btn btn-info">
+            <i class="ion-arrow-return-left"></i> 返回列表
+      </a>
+      <table class="table table-hover margin-top-2p">
+        <thead>
+        <tr>
+          <th>用户名</th>
+          <th>电子邮箱</th>
+          <th>最后登录时间</th>
+          <th>登录次数</th>
+          <th>状态</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of pager?.data">
+          <td>{{item.userName}}</td>
+          <td>{{item.email}}</td>
+          <td>{{item.lastLoginTime}}</td>
+          <td>{{item.loginCount}}</td>
+          <td>{{item.statusName}}</td>
+          <td>
+            <button class="btn btn-danger btn-smaller" (click)="recycleUserRole(item.id)">
+              <i class="ion-trash-a"></i> 移除
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </nb-list-item>
+  </nb-list>
+  <nb-card-footer class="text-right">
+    <ngb-pagination ngClass="ng2-smart-pagination" maxSize="10" [collectionSize]="pager?.totalCount"
+                    [pageSize]="pager?.pageSize" (pageChange)="changePager($event)"></ngb-pagination>
+  </nb-card-footer>
+</nb-card>

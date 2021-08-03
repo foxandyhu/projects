@@ -1,0 +1,78 @@
+<nb-card>
+  <nb-card-header>
+    新增专题
+  </nb-card-header>
+  <nb-card-body>
+    <form id="topicForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 名称</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="topic.name"
+                 name="name" maxlength="100"/>
+        </div>
+        <label class="col-md-2 col-form-label text-right">简称</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="topic.shortName" name="shortName"
+                 maxlength="100"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">META关键字</label>
+        <div class="form-group col-md-10">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="topic.keywords" name="keywords"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">META描述</label>
+        <div class="form-group col-md-10">
+          <textarea class="form-control" [(ngModel)]="topic.remark" name="remark"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">概要</label>
+        <div class="form-group col-md-10">
+          <textarea class="form-control" [(ngModel)]="topic.summary" name="summary"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">推荐</label>
+        <div class="form-group col-md-4">
+          <nb-checkbox [(ngModel)]="topic.recommend" name="recommend" status="success">是</nb-checkbox>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> PC模版</label>
+        <div class="col-md-4 form-group vertical-center">
+          <select class="form-control" [(ngModel)]="topic.tplPc" name="tplPc">
+            <option value="">请选择模版</option>
+            <option *ngFor="let item of pcTemplates" [value]="item">{{item}}</option>
+          </select>
+        </div>
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 手机模版</label>
+        <div class="col-md-4 form-group vertical-center">
+          <select class="form-control" [(ngModel)]="topic.tplMobile" name="tplMobile">
+            <option value="">请选择模版</option>
+            <option *ngFor="let item of mobileTemplates" [value]="item">{{item}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row margin-top-1p">
+        <label class="col-md-2 col-form-label text-right">标题图</label>
+        <div class="col-md-4 vertical-center">
+          <ngx-uploader-bar [id]="'titleImg'" isPicture="true" (complete)="titleImgChange($event)"></ngx-uploader-bar>
+        </div>
+        <label class="col-md-2 col-form-label text-right">内容图</label>
+        <div class="col-md-4 vertical-center">
+          <ngx-uploader-bar [id]="'contentImg'" isPicture="true" (complete)="contentImgChange($event)"></ngx-uploader-bar>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="modal-footer">
+    <button type="buttom" class="btn btn-success" (click)="saveTopic()">
+      <i class="ion-checkmark"></i> 确 认
+    </button>
+    <a href="#/pages/content/topic" class="btn btn-info">
+      <i class="ion-arrow-return-left"></i> 返回列表</a>
+  </nb-card-footer>
+</nb-card>

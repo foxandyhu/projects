@@ -1,0 +1,54 @@
+<footer>
+    <div class="footer1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-12"><h2>公司简介</h2>
+                    <p>${chartCutMethod(removeHtmlTagMethod(company.remark),100)}...</p>
+                    <ul class="icons">
+                        <li><a href="#" ​ target="_blank" title="长沙网站建设,长沙网站制作"> <i class="fa fa-weixin"> </i> </a></li>
+                        <li><a href="#" ​ target="_blank" title="长沙网站建设,长沙网站制作"> <i class="fa fa-weibo"> </i> </a></li>
+                        <li><a href="#" ​ target="_blank" title="长沙网站建设,长沙网站制作"> <i class="fa fa-apple"> </i> </a></li>
+                        <li><a href="#" ​ target="_blank" title="长沙网站建设,长沙网站制作"> <i class="fa fa-qq"> </i> </a></li>
+                        <li><a href="#" ​ target="_blank" title="长沙网站建设,长沙网站制作"> <i class="fa fa-android"> </i> </a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 hidden-sm hidden-xs"><h2>联系信息</h2>
+                    <p>&nbsp;地址：${company.address}</p>
+                    <p>&nbsp;电话：${company.phone}</p>
+                    <p>&nbsp;传真：${company.phone}</p>
+                    <p>&nbsp;邮箱：${company.email}</p>
+                    <p>&nbsp;名称：${company.name}</p>
+                    <p>&nbsp;网址：${site.webSite}</p></div>
+                <div class="col-md-3 col-sm-6 hidden-sm hidden-xs">
+                    <div class="links"><h2>友情链接</h2>
+                        <ul>
+                              <@friendLinkDirective>
+                                   <#list links as link>
+                                        <li><a href="${link.url}" ​ target="_blank" title="${link.name}">${link.name}</a></li>
+                                    </#list>
+                              </@friendLinkDirective>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 hidden-sm hidden-xs">
+                    <h2>企业二维码</h2>
+                    <img  alt="长沙网站制作,长沙网站建设" src="${company.weiXinUrl}_200_200"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer2">
+        <div class="container"><p>${site.copyRight} ${site.copyRightOwner} <strong>${site.filingCode}</strong></p></div>
+    </div>
+</footer>
+<div class="phone_foot">
+    <div class="pfoot_box">
+        <div class="pfoot_col"><a class="" href="tel:${company.phone}">电话沟通</a></div>
+        <div class="pfoot_col">
+            <a class="pfoot_col_qiao" target="_blank" href="http://p.qiao.baidu.com/cps/chat?siteId=10661362&amp;userId=23731119">在线客服</a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<#include "/tongji.html">
+

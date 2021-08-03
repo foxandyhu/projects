@@ -1,0 +1,95 @@
+<nb-card>
+  <nb-card-header>
+    新增问卷调查
+  </nb-card-header>
+  <nb-card-body>
+    <form id="voteForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 标题</label>
+        <div class="form-group col-md-10">
+          <input autocomplete="off" type="text" required="required" class="form-control" [(ngModel)]="vote.title"
+                 name="title" maxlength="50"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">描述</label>
+        <div class="form-group col-md-10">
+          <textarea class="form-control" [(ngModel)]="vote.remark" name="remark" maxlength="250"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 重复答卷限制</label>
+        <div class="form-group col-md-4">
+          <input autocomplete="off" type="text" required="required" class="form-control" [(ngModel)]="vote.repeatHour"
+                 name="repeatHour" maxlength="50"/>
+          <span class="font-italic">&nbsp;&nbsp;<small>单位：小时。0为禁止重复投票；-1为不限制重复投票。</small></span>
+        </div>
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 需要登录</label>
+        <div class="form-group col-md-4">
+          <nb-radio-group [(ngModel)]="vote.needLogin" name="needLogin">
+            <nb-radio class="float-left" value="true">是</nb-radio>
+            <nb-radio class="float-left" value="false">否</nb-radio>
+          </nb-radio-group>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 开始时间</label>
+        <div class="form-group col-md-4">
+          <input autocomplete="off" type="text" class="form-control" [(ngModel)]="vote.startTime" name="startTime"
+                 readonly="readonly" [nbDatepicker]="startPicker"/>
+          <nb-datepicker #startPicker format="YYYY-MM-DD" [max]="vote.endTime"
+                         (dateChange)="changeDate('startTime')"></nb-datepicker>
+        </div>
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 结束时间</label>
+        <div class="form-group col-md-4">
+          <input autocomplete="off" type="text" class="form-control" [(ngModel)]="vote.endTime" name="endTime"
+                 readonly="readonly" [nbDatepicker]="endPicker"/>
+          <nb-datepicker #endPicker format="YYYY-MM-DD" [min]="vote.startTime"
+                         (dateChange)="changeDate('endTime')"></nb-datepicker>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-10">
+          <button class="btn btn-outline-light" (click)="showAddItem(item.id)" *ngFor="let item of types">
+            <i class="ion-plus-round"></i> {{item.name}}
+          </button>
+        </div>
+      </div>
+      <div class="margin-top-2p">
+        <nb-accordion>
+          <nb-accordion-item *ngFor="let subTopic of vote?.subtopics">
+            <nb-accordion-item-header>
+              <span class="sort-op ion-android-remove-circle pointer" (click)="removeSubTopic(subTopic.seq)"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+              <span class="sort-op ion-arrow-down-a pointer" (click)="down(subTopic.seq)"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+              <span class="sort-op ion-arrow-up-a pointer" (click)="up(subTopic.seq)"></span>&nbsp;&nbsp;
+              问题 {{subTopic.seq}}. &nbsp;{{subTopic.title}}
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+              <div [ngSwitch]="subTopic.type">
+                <div *ngSwitchCase="1">
+                  <nb-radio-group>
+                    <nb-radio disabled="true" class="float-left"
+                              *ngFor="let item of subTopic.voteItems">{{item.title}}</nb-radio>
+                  </nb-radio-group>
+                </div>
+                <div *ngSwitchCase="2">
+                  <nb-checkbox disabled="true" *ngFor="let item of subTopic.voteItems"
+                               status="success">{{item.title}}</nb-checkbox>
+                </div>
+                <div *ngSwitchCase="3">
+                  <textarea class="form-control" disabled="disabled"></textarea>
+                </div>
+              </div>
+            </nb-accordion-item-body>
+          </nb-accordion-item>
+        </nb-accordion>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="text-center">
+    <button class="btn btn-success" (click)="saveVote()">确 认</button>&nbsp;&nbsp;
+    <a href="#vote/list" class="btn btn-info">
+      <i class="ion-arrow-return-left"></i> 返回列表</a>
+  </nb-card-footer>
+</nb-card>

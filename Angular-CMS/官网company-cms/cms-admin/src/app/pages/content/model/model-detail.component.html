@@ -1,0 +1,40 @@
+<nb-card style="width:600px">
+  <nb-card-header>
+    编辑模型
+  </nb-card-header>
+  <nb-card-body>
+    <form id="modelForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-3 col-form-label text-right"><i class="font-red">*</i> 模型名称</label>
+        <div class="form-group col-md-9">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="model.name"
+                 name="name" maxlength="20"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-3 col-form-label text-right">是否有内容</label>
+        <div class="form-group col-md-3">
+          <nb-checkbox status="success" name="hasContent" [(ngModel)]="model.hasContent">是</nb-checkbox>
+        </div>
+        <label class="col-md-3 col-form-label text-right">启用</label>
+        <div class="form-group col-md-3">
+          <nb-checkbox status="success" name="enabled" [(ngModel)]="model.enabled">是</nb-checkbox>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-3 col-form-label text-right">描述</label>
+        <div class="form-group col-md-9">
+          <textarea class="form-control" [(ngModel)]="model.remark" name="remark" maxlength="200"></textarea>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="modal-footer">
+      <button type="buttom" class="btn btn-success" (click)="submit()">
+        <i class="ion-checkmark"></i> 确 认
+      </button>&nbsp;&nbsp;&nbsp;
+      <button type="buttom" class="btn btn-default" (click)="cancel()">
+        <i class="ion-checkmark"></i> 取 消
+      </button>
+    </nb-card-footer>
+</nb-card>

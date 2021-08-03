@@ -1,0 +1,66 @@
+<nb-card>
+  <nb-card-body>
+    <form id="registConfigForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 开启注册</label>
+        <div class="form-group col-md-3">
+          <nb-radio-group [(ngModel)]="registConfig.openRegiste" name="openRegiste">
+            <nb-radio class="float-left" value="true">是</nb-radio>
+            <nb-radio class="float-left" value="false">否</nb-radio>
+          </nb-radio-group>
+        </div>
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 注册审核</label>
+        <div class="form-group col-md-3">
+          <nb-radio-group [(ngModel)]="registConfig.needCheckRegisted" name="needCheckRegisted">
+            <nb-radio class="float-left" value="true">是</nb-radio>
+            <nb-radio class="float-left" value="false">否</nb-radio>
+          </nb-radio-group>
+        </div>
+      </div>
+      <div class="row vertical-center">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 用户名最小长度</label>
+        <div class="form-group col-md-2 vertical-center">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="registConfig.minLengthUserName" name="minLengthUserName"
+                 maxlength="2"/>
+        </div>
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 密码最小长度</label>
+        <div class="form-group col-md-2 vertical-center">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="registConfig.minLengthPassword" name="minLengthPassword"
+                 maxlength="2"/>
+        </div>
+      </div>
+      <div class="form-group row vertical-center">
+        <label class="col-md-2 col-form-label text-right">用户名保留字</label>
+        <div class="col-md-10">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="registConfig.denyUserName" name="denyUserName"
+                 maxlength="500" nbPopover="用','号隔开,可以使用 * 作为通配符，如: *Admin*" nbPopoverTrigger="hint"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 邮件服务器</label>
+        <div class="form-group col-md-10 vertical-center">
+          <select class="form-control width-15p" [(ngModel)]="registConfig.emailProvider.id" name="emailId" nbPopover="用于注册时发送确认邮件" nbPopoverTrigger="hint">
+            <option value="">选择邮件服务器</option>
+            <option *ngFor="let item of emails" [value]="item.id">{{item.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row vertical-center">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 会员注册标题</label>
+        <div class="form-group col-md-10 vertical-center">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="registConfig.registeTitle" name="registeTitle"/>
+        </div>
+      </div>
+      <div class="row vertical-center">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 会员注册内容</label>
+        <div class="form-group col-md-10">
+          <editor [(ngModel)]="registConfig.registeText" name="registeText" [init]="editParam"></editor>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="text-center">
+    <button class="btn btn-success" (click)="saveRegistConfig()">确 认</button>
+  </nb-card-footer>
+</nb-card>
+

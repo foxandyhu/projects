@@ -1,0 +1,43 @@
+<nb-card>
+  <nb-card-header>
+    发送站内信
+  </nb-card-header>
+  <nb-card-body>
+    <form id="letterForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 收件人</label>
+        <div class="form-group col-md-4">
+          <input [readOnly]="receiverReadOnly" type="text" autocomplete="off" class="form-control" [(ngModel)]="letter.receiver" name="receiver"
+                 maxlength="50" (change)="changeReceiver()"/>
+          <span class="font-italic">&nbsp;&nbsp;<small>请填写收件人或者选择会员组 (两者必选其一，选择会员组批量发送站内信)</small></span>
+        </div>
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 会员组</label>
+        <div class="form-group col-md-4">
+          <select class="form-control" [(ngModel)]="letter.letterTxt.groupId" name="groupId" (change)="changeGroup()">
+            <option value="">请选择会员组</option>
+            <option *ngFor="let item of groups" [value]="item.id">{{item.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 标题</label>
+        <div class="form-group col-md-10">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="letter.letterTxt.title" name="title"
+                 maxlength="100"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 内容</label>
+        <div class="form-group col-md-10">
+          <editor [(ngModel)]="letter.letterTxt.content" name="content" [init]="editParam"></editor>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="text-center">
+    <button class="btn btn-success" (click)="saveLetter()">确 认</button>&nbsp;&nbsp;
+    <a href="#/pages/message/letter" class="btn btn-info">
+      <i class="ion-arrow-return-left"></i> 返回列表</a>
+  </nb-card-footer>
+</nb-card>
+

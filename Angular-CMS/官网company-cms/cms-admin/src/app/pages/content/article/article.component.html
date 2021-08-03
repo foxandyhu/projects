@@ -1,0 +1,109 @@
+<nb-card style="min-height:500px">
+  <nb-card-header>
+    内容管理
+  </nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <div class="col-md-2">
+        <ngx-content-article-channel-tree (sendData)="getChannel($event)"></ngx-content-article-channel-tree>
+      </div>
+      <div class="col-md-10">
+        <form class="form-inline">
+          <div class="form-group">
+            当前栏目: {{channel?.name}}&nbsp;&nbsp;
+            <div class="dropdown" ngbDropdown>
+              <button class="btn btn-success" type="button" ngbDropdownToggle>
+                <i class="ion-plus-round"></i> 添加内容
+              </button>
+              <ul class="dropdown-menu" ngbDropdownMenu>
+                <li *ngFor="let item of models">
+                  <a href="#/pages/content/article/add/{{item.id}}" class="dropdown-item">{{item.name}}</a>
+                </li>
+              </ul>
+            </div>&nbsp;&nbsp;
+            <select class="form-control" [(ngModel)]="searchType" name="searchType" (change)="search()">
+              <option value="">所有类型</option>
+              <option *ngFor="let item of types" [value]="item.id">{{item.name}}</option>
+            </select>&nbsp;&nbsp;
+            <select class="form-control" [(ngModel)]="searchStatus" name="searchStatus" (change)="search()">
+              <option value="">所有状态</option>
+              <option *ngFor="let item of statuss" [value]="item.id">{{item.name}}</option>
+            </select>&nbsp;&nbsp;
+            <button class="btn btn-success" (click)="search()">
+              查询
+            </button>
+          </div>
+        </form>
+        <table class="table table-hover margin-top-2p">
+          <thead>
+          <tr>
+            <th>
+              <nb-checkbox #selectAllBox status="success" [value]="isSelectAll"
+                           (change)="changeAllBox(selectAllBox.value)"></nb-checkbox>
+            </th>
+            <th width="25%">标题</th>
+            <th>栏目</th>
+            <th>点击</th>
+            <th width="10%">置顶期限</th>
+            <th width="10%">发布时间</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of list">
+            <td>
+              <nb-checkbox #selectBox status="success" [value]="isSelectAll" [(ngModel)]="item.selected" name="selected"
+                           (change)="changeBox(selectBox.value,item.id)"></nb-checkbox>
+            </td>
+            <td>
+              <span *ngIf="item.topLevel>0" class="text-danger">[顶{{item.topLevel}}]&nbsp;</span>
+              <span *ngIf="item.recommend" class="text-warning">[推荐]&nbsp;</span>
+              <span *ngIf="item.channelName">[{{item.channelName}}]</span>
+              <a href="javascript:void(0)">&nbsp;{{item.articleExt?.title}}</a>
+            </td>
+            <td>{{item.channel?.name}}</td>
+            <td>{{item.views}}</td>
+            <td>{{item.topExpired}}</td>
+            <td>{{item.articleExt?.postDate}}</td>
+            <td>{{item.statusName}}</td>
+            <td>
+              <button class="btn btn-success btn-smaller" (click)="showArticleRelatedTopic(item.id)">
+                <i class="ion-ios-arrow-up"></i> 关联专题
+              </button>&nbsp;&nbsp;
+              <button class="btn btn-primary btn-smaller" (click)="showTop(item.id)">
+                <i class="ion-ios-arrow-up"></i> 置顶
+              </button>&nbsp;&nbsp;
+              <a class="btn btn-info btn-smaller" href="#/pages/content/article/{{item.id}}">
+                <i class="ion-edit"></i> 编辑
+              </a>&nbsp;&nbsp;
+              <button class="btn btn-danger btn-smaller" (click)="del(item.id)">
+                <i class="ion-trash-a"></i> 删除
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </nb-card-body>
+  <nb-card-footer class="text-right">
+    <button class="btn btn-outline-primary" (click)="resetAllIndex()">重构索引库
+    </button>&nbsp;&nbsp;
+    <button class="btn btn-outline-primary" [disabled]="!(selectItems?.length>0)" (click)="showRelatedTopic()">关联专题
+    </button>&nbsp;&nbsp;
+    <button class="btn btn-outline-primary" [disabled]="!(selectItems?.length>0)" (click)="recommendMulti(true)">推荐
+    </button>&nbsp;&nbsp;
+    <button class="btn btn-outline-primary" [disabled]="!(selectItems?.length>0)" (click)="recommendMulti(false)">取消推荐
+    </button>&nbsp;&nbsp;
+    <button class="btn btn-outline-primary" [disabled]="!(selectItems?.length>0)" (click)="verifyMulti(true)">审核通过
+    </button>&nbsp;&nbsp;
+    <button class="btn btn-outline-primary" [disabled]="!(selectItems?.length>0)" (click)="verifyMulti(false)">审核不通过
+    </button>&nbsp;&nbsp;
+    <button class="btn btn-outline-primary" [disabled]="!(selectItems?.length>0)" (click)="delMulti()"><i
+      class="ion-trash-b"></i> 删除
+    </button>&nbsp;&nbsp;
+    <ngb-pagination ngClass="ng2-smart-pagination" maxSize="10" [collectionSize]="pager?.totalCount"
+                    [pageSize]="pager?.pageSize" (pageChange)="changePager($event)"></ngb-pagination>
+  </nb-card-footer>
+</nb-card>

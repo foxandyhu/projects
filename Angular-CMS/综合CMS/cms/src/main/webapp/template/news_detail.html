@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<@articleDirective articleId="${articleId}">
+    <#assign article=article/>
+</@articleDirective>
+<head>
+    <title>${article.articleExt.title}----${site.name}</title>
+    <#assign resRoot="${resServer}/style/"/>
+    <#include "/meta.html">
+    <link rel="stylesheet" type="text/css" href="${resRoot}css/font-awesome.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="${resRoot}css/bootstrap.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="${resRoot}css/animate.css" media="screen"/>
+    <link type="text/css" rel="stylesheet" href="${resRoot}css/jquery.mmenu.all.css"/>
+    <link rel="stylesheet" type="text/css" href="${resRoot}css/style.css" media="screen"/>
+</head>
+
+<body>
+<!-- 头部导航 begin-->
+<#include "/header.html">
+<!-- 头部导航 end-->
+
+<!--正文 start-->
+<article>
+    <div class="page-container">
+        <div class="container">
+            <div clas="row">
+                <div class="col-md-12 page-title"><i class="fa fa-cogs"></i>&nbsp;新闻资讯</div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="news-info-container">
+                        <h1 class="title">${article.articleExt.title}</h1>
+                        <div class="meta">
+                            <#if article.articleExt.origin?length gt 1>
+                                <i class="fa fa-tag"></i>&nbsp;
+                                <a href="${article.articleExt.originUrl}" target="_blank" ​title="${article.articleExt.title}">${article.articleExt.origin}</a>
+                                &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                            </#if>
+                            <i class="fa fa-calendar"></i>
+                            &nbsp;${article.articleExt.postDate?date}
+                            &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-eye"></i>
+                            &nbsp;${article.views}次浏览
+                        </div>
+                        <div class="page-content">
+                            ${article.articleTxt.txt}
+                        </div>
+                    </div>
+                </div>
+                <aside class="col-md-3 hidden-xs">
+                    <#include "/right_contact.html">
+                    <#include "/right_news.html">
+                </aside>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="avow">
+                        <div class="title"></div>
+                        <p>
+                            1.本站发布此文目的在于促进信息交流，不存在盈利性目的，此文观点与本站立场无关，不承担任何责任。<br>
+                            2.部分内容文章及图片来自互联网或自媒体，版权归属于原作者，不保证该信息（包括但不限于文字、图片、图表及数据）的准确性、真实性、完整性、有效性、及时性、原创性等，如无意侵犯媒体或个人知识产权，请来电或致函告之，本站将在第一时间处理。<br>
+                            3.未经证实的信息仅供参考，不做任何投资和交易根据，据此操作风险自担。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+<!--正文 end-->
+
+<!--底部 start-->
+<#include "/footer.html">
+<!--底部 end-->
+</body>
+<script type="text/javascript" src="${resRoot}js/jquery.min.js"></script>
+<script type="text/javascript" src="${resRoot}js/bootstrap.js"></script>
+<script type="text/javascript" src="${resRoot}js/jquery.mmenu.all.min.js"></script>
+<script type="text/javascript" src="${resRoot}js/common.js"></script>
+</html>

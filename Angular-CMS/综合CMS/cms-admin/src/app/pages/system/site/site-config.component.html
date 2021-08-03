@@ -1,0 +1,108 @@
+<nb-card>
+  <nb-card-header>
+    站点设置
+  </nb-card-header>
+  <nb-card-body>
+    <form id="siteConfigForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 站点名称</label>
+        <div class="form-group col-md-4">
+          <input autocomplete="off" type="text" required="required" class="form-control" [(ngModel)]="siteConfig.name"
+                 name="name" maxlength="20"/>
+        </div>
+        <label class="col-md-2 col-form-label text-right">站点简称</label>
+        <div class="form-group col-md-4">
+          <input autocomplete="off" type="text" class="form-control" [(ngModel)]="siteConfig.shortName" name="shortName"
+                 maxlength="20"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 站点域名</label>
+        <div class="form-group col-md-4">
+          <input autocomplete="off" required="required" type="text" class="form-control width-50p"
+                 [(ngModel)]="siteConfig.webSite" name="webSite"
+                 maxlength="100"/>
+        </div>
+        <label class="col-md-2 col-form-label text-right">站点LOGO</label>
+        <div class="form-group col-md-4">
+        <ngx-uploader-bar [previewPic]="siteConfig.url" isPicture="true" (complete)="uploadLogo($event)"
+                          tip="只能上传jpg/png图片，且不超过2M"></ngx-uploader-bar>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label text-right">站点关键字</label>
+        <div class="form-group col-md-10">
+          <input autocomplete="off" type="text" class="form-control" [(ngModel)]="siteConfig.keywords" name="keywords"
+                 maxlength="200"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">站点描述</label>
+        <div class="form-group col-md-10">
+          <textarea class="form-control" [(ngModel)]="siteConfig.remark" name="remark" maxlength="200"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"> 备案号</label>
+        <div class="form-group col-md-4">
+          <input autocomplete="off" type="text" required="required" class="form-control"
+                 [(ngModel)]="siteConfig.filingCode" name="filingCode" maxlength="30"/>
+        </div>
+        <label class="col-md-2 col-form-label text-right">主办单位</label>
+        <div class="form-group col-md-4">
+          <input autocomplete="off" type="text" class="form-control" [(ngModel)]="siteConfig.organizer" name="organizer"
+                 maxlength="30"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"> 版权所有</label>
+        <div class="form-group col-md-4">
+          <input autocomplete="off" type="text" required="required" class="form-control"
+                 [(ngModel)]="siteConfig.copyRightOwner" name="copyRightOwner" maxlength="30"/>
+        </div>
+        <label class="col-md-2 col-form-label text-right">版权说明</label>
+        <div class="form-group col-md-4">
+          <input autocomplete="off" type="text" class="form-control" [(ngModel)]="siteConfig.copyRight" name="copyRight"
+                 maxlength="50"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 开启站点</label>
+        <div class="form-group col-md-9">
+          <nb-radio-group [(ngModel)]="siteConfig.openSite" name="openSite">
+            <nb-radio class="float-left" value="true">是</nb-radio>
+            <nb-radio class="float-left" value="false">否</nb-radio>
+          </nb-radio-group>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 开启流量统计</label>
+        <div class="form-group col-md-9">
+          <nb-radio-group [(ngModel)]="siteConfig.openFlow" name="openFlow">
+            <nb-radio class="float-left" value="true">是</nb-radio>
+            <nb-radio class="float-left" value="false">否</nb-radio>
+          </nb-radio-group>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">首页PC模版</label>
+        <div class="form-group col-md-4">
+          <select class="form-control" [(ngModel)]="siteConfig.tplPc" name="tplPc">
+            <option value="">选择模版</option>
+            <option *ngFor="let item of pcTemplates" [value]="item">{{item}}</option>
+          </select>
+        </div>
+        <label class="col-md-2 col-form-label text-right">首页手机模版</label>
+        <div class="form-group col-md-4">
+          <select class="form-control" [(ngModel)]="siteConfig.tplMobile" name="tplMobile">
+            <option value="">选择模版</option>
+            <option *ngFor="let item of mobileTemplates" [value]="item">{{item}}</option>
+          </select>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="text-center">
+    <button class="btn btn-success" (click)="editSiteConfig()">确 认</button>
+  </nb-card-footer>
+</nb-card>

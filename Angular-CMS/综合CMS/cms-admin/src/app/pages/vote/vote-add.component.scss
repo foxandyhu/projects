@@ -1,0 +1,10 @@
+.btn-outline-light:hover {
+  border-color: #f8f9fa !important;
+  background-color: transparent !important;
+}
+
+.btn-outline-light:not(:disabled):not(.disabled):active, .btn-outline-light:not(:disabled):not(.disabled).active, .show > .btn-outline-light.dropdown-toggle {
+  color: #f8f9fa !important;
+  border-color: #f8f9fa !important;
+  background-color: transparent;
+}

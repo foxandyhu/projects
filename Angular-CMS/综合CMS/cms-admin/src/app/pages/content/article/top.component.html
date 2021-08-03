@@ -1,0 +1,40 @@
+<nb-card style="width:120%;">
+  <nb-card-header>
+    置顶设置
+  </nb-card-header>
+  <nb-card-body>
+    <form id="topForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-3 col-form-label text-right">置顶级别</label>
+        <div class="form-group col-md-9">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="top.level"
+                 name="level" maxlength="3" nbPopover="级别越高越靠前" nbPopoverTrigger="hint"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-3 col-form-label text-right">置顶期限</label>
+        <div class="form-group col-md-9">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <button class="btn btn-primary btn-icon">
+                <i class="ion-ios-calendar-outline"></i>
+              </button>
+            </div>
+            <input autocomplete="off" type="text" class="form-control" placeholder="选择日期"
+                   [nbDatepicker]="datePicker" (input)="top.expired=$event.target.value" [value]="top.expired"
+                   name="expired" nbPopover="不指定长期置顶,级别为0设置期限将会无效" nbPopoverTrigger="hint">
+            <nb-datepicker #datePicker format="YYYY-MM-DD" (dateChange)="dateChange($event)"></nb-datepicker>
+          </div>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="modal-footer">
+    <button type="buttom" class="btn btn-success" (click)="submit()">
+      <i class="ion-checkmark"></i> 确 认
+    </button>&nbsp;&nbsp;&nbsp;
+    <button type="buttom" class="btn btn-default" (click)="cancel()">
+      <i class="ion-checkmark"></i> 取 消
+    </button>
+  </nb-card-footer>
+</nb-card>

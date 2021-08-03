@@ -1,0 +1,64 @@
+<nb-card>
+  <nb-card-header>
+    模版管理
+  </nb-card-header>
+  <nb-list>
+    <nb-list-item>
+      <div class="container row">
+        <div class="col-md-2">
+          <ngx-system-template-tree #resTree (node)="getCurrentPath($event)"
+                                    (showData)="getTemplate($event)"></ngx-system-template-tree>
+        </div>
+        <div class="col-md-10">
+          <div class="form-group">
+            当前目录:{{currentNode?.path}}&nbsp;&nbsp;
+            <input type="file" class="d-none" id="file" (change)="fileChange($event)"/>
+            <button class="btn btn-outline-primary" (click)="mkdir()">新建目录</button>&nbsp;&nbsp;
+            <button class="btn btn-outline-primary" onclick="file.click()">上传文件</button>&nbsp;&nbsp;
+            <button class="btn btn-outline-primary" [disabled]="!(selectItems.length>0)" (click)="delMultiRes()">批量删除
+            </button>
+          </div>
+          <table class="table table-hover margin-top-2p">
+            <thead>
+            <tr>
+              <th>
+                <nb-checkbox #selectAllBox status="success" [value]="isSelectAll"
+                             (change)="changeAllBox(selectAllBox.value)"></nb-checkbox>
+              </th>
+              <th>文件名</th>
+              <th>大小</th>
+              <th>最后修改时间</th>
+              <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of nodes">
+              <td>
+                <nb-checkbox #selectBox status="success" [value]="isSelectAll"
+                             (change)="changeBox(selectBox.value,item.path)"></nb-checkbox>
+              </td>
+              <td>
+                <a *ngIf="!item.isDir">
+                  <i class="ion-ios-paper-outline"></i> {{item.name}}
+                </a>
+                <i *ngIf="item.isDir" class="res-folder ion-ios-folder-outline"
+                   (click)="cdDir(item.path)"> {{item.name}}</i>
+              </td>
+              <td>{{item.size}}</td>
+              <td>{{item.date}}</td>
+              <td>
+                <button *ngIf="!item.isDir" class="btn btn-info btn-smaller" (click)="showEditTemplate(item.path)">
+                  <i class="ion-edit"></i> 编辑
+                </button>&nbsp;&nbsp;
+                <button class="btn btn-danger btn-smaller" (click)="delRes(item.path)">
+                  <i class="ion-trash-a"></i> 删除
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </nb-list-item>
+  </nb-list>
+</nb-card>

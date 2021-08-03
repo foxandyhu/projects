@@ -1,0 +1,40 @@
+<nb-card>
+  <nb-card-header>
+    搜索引擎分析
+  </nb-card-header>
+  <nb-list>
+    <nb-list-item>
+      <div class="form-inline">
+        <label>日期:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <div ngModel="1" name="type" ngbRadioGroup
+             class='btn-group btn-group-toggle btn-outline-toggle-group btn-toggle-radio-group'>
+          <label class='btn btn-outline-primary' ngbButtonLabel *ngFor="let item of times">
+            <input type='radio' ngbButton value='{{item.id}}' (click)="chooseTime(item.id)">{{item.name}}
+          </label>
+        </div>&nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <button class="btn btn-primary btn-icon">
+              <i class="ion-ios-calendar-outline"></i>
+            </button>
+          </div>
+          <input readonly="readonly" class="form-control" placeholder="选择日期" [nbDatepicker]="rangepicker">
+          <nb-rangepicker #rangepicker (rangeChange)="changeDate($event)" format="YYYY-MM-DD"></nb-rangepicker>
+        </div>
+      </div>
+      <div class="margin-top-5p">
+        <div class="row">
+          <div class="col-md-3">
+            <ngx-analysis-engine-pie #pieChart></ngx-analysis-engine-pie>
+          </div>
+          <div class="col-md-9">
+            <ngx-analysis-engine-line #lineChart></ngx-analysis-engine-line>
+          </div>
+        </div>
+      </div>
+      <div class="margin-top-5p">
+        <ngx-analysis-engine-table #tableChart></ngx-analysis-engine-table>
+      </div>
+    </nb-list-item>
+  </nb-list>
+</nb-card>

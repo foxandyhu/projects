@@ -1,0 +1,52 @@
+<nb-card>
+  <nb-card-header>
+    菜单管理
+  </nb-card-header>
+  <nb-list>
+    <nb-list-item>
+      <button class="btn btn-success" (click)="showAddNode(0)">
+        <span class="ion-plus-round"></span> 新增根菜单
+      </button>
+      <table class="table table-hover margin-top-1p" [nbTreeGrid]="dataSource" [nbSort]="dataSource">
+        <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
+        <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
+
+        <ng-container [nbTreeGridColumnDef]="customColumn">
+          <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>
+            {{headerNames[customColumn]}}
+          </th>
+          <td nbTreeGridCell *nbTreeGridCellDef="let row">
+            <ngx-menu-icon [length]="row.children?.length>0" [expanded]="row.expanded"></ngx-menu-icon>
+            {{row.data[customColumn]}}
+          </td>
+        </ng-container>
+
+        <ng-container *ngFor="let column of defaultColumns; let index = index"
+                      [nbTreeGridColumnDef]="column">
+          <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef width="{{getShowOn(index)}}px">
+            {{headerNames[column]}}
+          </th>
+          <td nbTreeGridCell *nbTreeGridCellDef="let row">
+            <div *ngIf="column=='op'">
+              <button *ngIf="!row.data['action']" class="btn btn-success btn-smaller" (click)="showAddNode(row.data['id'])">
+                <i class="ion-plus-round"></i> 添加子菜单
+              </button>&nbsp;&nbsp;
+              <button class="btn btn-info btn-smaller" (click)="showEditNode(row.data['id'])">
+                <i class="ion-edit"></i> 编辑
+              </button>&nbsp;&nbsp;
+              <button class="btn btn-danger btn-smaller" (click)="del(row.data['id'])">
+                <i class="ion-trash-a"></i> 删除
+              </button>
+            </div>
+            <div *ngIf="column=='name'">
+              <i class="{{row.data['icon']}}"></i>&nbsp;{{row.data[column]}}
+            </div>
+            <div *ngIf="column!='op' && column!='name'">
+              {{row.data[column]}}
+            </div>
+          </td>
+        </ng-container>
+      </table>
+    </nb-list-item>
+  </nb-list>
+</nb-card>

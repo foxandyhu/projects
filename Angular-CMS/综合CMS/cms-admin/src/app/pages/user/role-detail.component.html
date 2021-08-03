@@ -1,0 +1,23 @@
+<nb-card>
+  <nb-card-header>
+    编辑系统角色
+  </nb-card-header>
+  <nb-card-body>
+    <form id="roleForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <div class="form-group col-md-12">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="role.name"
+                 name="name" placeholder="角色名称"/>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="modal-footer">
+    <button type="buttom" class="btn btn-success" (click)="submit()">
+      <i class="ion-checkmark"></i> 确 认
+    </button>&nbsp;&nbsp;&nbsp;
+    <button type="buttom" class="btn btn-default" (click)="cancel()">
+      <i class="ion-checkmark"></i> 取 消
+    </button>
+  </nb-card-footer>
+</nb-card>

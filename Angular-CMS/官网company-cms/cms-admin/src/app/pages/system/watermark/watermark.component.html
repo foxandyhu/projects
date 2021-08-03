@@ -1,0 +1,102 @@
+<nb-card>
+  <nb-card-header>
+    水印设置
+  </nb-card-header>
+  <nb-card-body>
+    <form id="watermarkConfigForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">开启水印</label>
+        <div class="form-group col-md-9">
+          <nb-radio-group [(ngModel)]="watermarkConfig.openWaterMark" name="openWaterMark">
+            <nb-radio class="float-left" [value]="true">是</nb-radio>
+            <nb-radio class="float-left" [value]="false">否</nb-radio>
+          </nb-radio-group>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">图片水印</label>
+        <div class="form-group col-md-9">
+          <nb-radio-group [(ngModel)]="watermarkConfig.imgWaterMark" name="imgWaterMark">
+            <nb-radio class="float-left" [value]="true">是</nb-radio>
+            <nb-radio class="float-left" [value]="false">否</nb-radio>
+          </nb-radio-group>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">图片水印控制</label>
+        <div class="form-group col-md-9 vertical-center">
+          <input type="text" autocomplete="off" [(ngModel)]="watermarkConfig.imgWidth" name="imgWidth" placeholder="宽"
+                 class="width-10p form-control float-left" maxlength="3"/>
+          <span class="float-left"> &nbsp;&nbsp;&nbsp;&nbsp;×&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <input type="text" autocomplete="off" [(ngModel)]="watermarkConfig.imgHeight" name="imgHeight" placeholder="高"
+                 class="width-10p form-control float-left" maxlength="3"/>
+          &nbsp;&nbsp;<small>宽 × 高 ; 小于该尺寸的图片不添加水印</small>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">水印图片</label>
+        <div class="form-group col-md-9 vertical-center">
+          <ngx-uploader-bar [previewPic]="watermarkConfig.url" isPicture="true" (complete)="fileChange($event)"
+                            tip="只能上传jpg/png图片，且不超过2M."></ngx-uploader-bar>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">水印文字</label>
+        <div class="form-group col-md-4 vertical-center">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="watermarkConfig.text" name="text"
+                 maxlength="10"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">文字字体</label>
+        <div class="form-group col-md-4 vertical-center">
+          <select class="form-control" [(ngModel)]="watermarkConfig.font" name="font">
+            <option value="">选择字体</option>
+            <option *ngFor="let f of fonts" value="{{f}}">{{f}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row vertical-center">
+        <label class="col-md-2 col-form-label text-right">文字大小</label>
+        <div class="form-group col-md-2 vertical-center">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="watermarkConfig.size" name="size"
+                 maxlength="2"/>
+        </div>
+        <label class="col-md-1 col-form-label">文字颜色</label>
+        <div class="form-group col-md-2 vertical-center">
+          <input type="text" autocomplete="off" readonly="readonly" class="form-control" [(colorPicker)]="color"
+                 (colorPickerChange)="pickColor(color)" [(ngModel)]="watermarkConfig.color" name="color"
+                 maxlength="15"/>
+        </div>
+        <label class="col-md-1 col-form-label">透明度</label>
+        <div class="form-group col-md-4 vertical-center">
+          <input type="text" autocomplete="off" class="form-control width-15p" [(ngModel)]="watermarkConfig.alpha"
+                 name="alpha"
+                 maxlength="3"/>
+          &nbsp;&nbsp;<small class="font-italic">0-100，越小越透明</small>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">水印位置</label>
+        <div class="form-group col-md-2 vertical-center">
+          <select class="form-control" [(ngModel)]="watermarkConfig.pos" name="pos">
+            <option *ngFor="let item of poss" [value]="item.id">{{item.name}}</option>
+          </select>&nbsp;&nbsp;
+        </div>
+        <label class="col-md-1 col-form-label text-right">x偏移量</label>
+        <div class="form-group col-md-1 vertical-center">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="watermarkConfig.offsetX"
+                 name="offsetX" maxlength="2"/>
+        </div>
+        <label class="col-md-1 col-form-label text-right">y偏移量</label>
+        <div class="form-group col-md-1 vertical-center">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="watermarkConfig.offsetY"
+                 name="offsetY" maxlength="2"/>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="text-center">
+    <button class="btn btn-success" (click)="editWatermarkConfig()">确 认</button>
+  </nb-card-footer>
+</nb-card>

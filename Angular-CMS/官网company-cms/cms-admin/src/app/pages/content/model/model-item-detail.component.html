@@ -1,0 +1,59 @@
+<nb-card style="width:120%">
+  <nb-card-header>
+    编辑模型项
+  </nb-card-header>
+  <nb-card-body>
+    <form id="modelItemForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-2 text-right"><i class="font-red">*</i> 字段名</label>
+        <div class="form-group col-md-4">{{modelItem?.field}}</div>
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 名称</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="modelItem.name"
+                 name="name" maxlength="20"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 text-right"><i class="font-red">*</i> 数据类型</label>
+        <div class="form-group col-md-4">{{modelItem?.dataTypeName}}</div>
+        <label class="col-md-2 col-form-label text-right">默认值</label>
+        <div class="form-group col-md-4">
+          <input [disabled]="disabledDef" type="text" autocomplete="off" class="form-control" [(ngModel)]="modelItem.defValue"
+                 name="defValue" maxlength="255"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">可选项</label>
+        <div class="form-group col-md-10">
+          <input [disabled]="disabledDef" type="text" autocomplete="off" class="form-control" [(ngModel)]="modelItem.optValue"
+                 name="optValue" maxlength="20"/>
+          <span class="font-italic">&nbsp;&nbsp;<small>多个值用","分开</small></span>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">是否必填</label>
+        <div class="form-group col-md-4">
+          <nb-checkbox status="success" name="required" [(ngModel)]="modelItem.required">是</nb-checkbox>
+        </div>
+        <label class="col-md-2 col-form-label text-right">独占一行</label>
+        <div class="form-group col-md-4">
+          <nb-checkbox status="success" name="single" [(ngModel)]="modelItem.single">是</nb-checkbox>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">描述</label>
+        <div class="form-group col-md-10">
+          <textarea class="form-control" [(ngModel)]="modelItem.remark" name="remark" maxlength="200"></textarea>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="modal-footer">
+      <button type="buttom" class="btn btn-success" (click)="submit()">
+        <i class="ion-checkmark"></i> 确 认
+      </button>&nbsp;&nbsp;&nbsp;
+      <button type="buttom" class="btn btn-default" (click)="cancel()">
+        <i class="ion-checkmark"></i> 取 消
+      </button>
+    </nb-card-footer>
+</nb-card>

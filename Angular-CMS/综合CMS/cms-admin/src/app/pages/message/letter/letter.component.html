@@ -1,0 +1,90 @@
+<nb-card>
+  <nb-card-header>
+    站内信管理
+  </nb-card-header>
+  <nb-list>
+    <nb-list-item>
+      <form class="form-inline">
+        <div class="form-group">
+          <a href="#/pages/message/letter/add" class="btn btn-success">
+            <i class="ion-plus-round"></i> 发送站内信
+          </a>&nbsp;&nbsp;
+          <select class="form-control" [(ngModel)]="box" name="box" (change)="search()">
+            <option value="">消息来源</option>
+            <option *ngFor="let item of boxes" [value]="item.id">{{item.name}}</option>
+          </select>&nbsp;&nbsp;
+          <select class="form-control" [(ngModel)]="isRead" name="isRead" (change)="search()">
+            <option value="">消息状态</option>
+            <option value="true">已读</option>
+            <option value="false">未读</option>
+          </select>&nbsp;&nbsp;
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <button class="btn btn-primary btn-icon">
+                <i class="ion-ios-calendar-outline"></i>
+              </button>
+            </div>
+            <input class="form-control" placeholder="选择日期" [nbDatepicker]="rangepicker" [(ngModel)]="dateStr"
+                   name="dateStr">
+            <nb-rangepicker #rangepicker format="YYYY-MM-DD" (rangeChange)="changeDate($event)"></nb-rangepicker>
+          </div>
+          &nbsp;&nbsp;
+          <button type="button" class="btn btn-outline-warning" (click)="resetForm()">
+            重置
+          </button>&nbsp;&nbsp;
+          <button class="btn btn-outline-primary" [disabled]="!(selectItems.length>0)" (click)="delMulti()">
+            批量删除
+          </button>
+        </div>
+      </form>
+      <div class="margin-top-2p">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>
+              <nb-checkbox #selectAllBox status="success" [value]="isSelectAll"
+                           (change)="changeAllBox(selectAllBox.value)"></nb-checkbox>
+            </th>
+            <th>标题</th>
+            <th>发件人</th>
+            <th>收件人</th>
+            <th>发送时间</th>
+            <th>阅读时间</th>
+            <th>阅读状态</th>
+            <th>消息来源</th>
+            <th>操作</th>
+
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of pager?.data">
+            <td>
+              <nb-checkbox #selectBox status="success" [value]="isSelectAll"
+                           (change)="changeBox(selectBox.value,item.id)"></nb-checkbox>
+            </td>
+            <td nbPopover="{{item.letterTxt?.title}}" nbPopoverTrigger="hint">{{(item.letterTxt?.title |slice:0:20)+'...' }}</td>
+            <td >{{item.fromAdmin ? "[管理员]" : ""}}{{item.sender}}</td>
+            <td>{{item.receiver}}</td>
+            <td>{{item.sendTime}}</td>
+            <td>{{item.readTime}}</td>
+            <td>{{item.read ? "已阅读" : "未阅读"}}</td>
+            <td>{{item.boxName}}</td>
+            <td>
+            <a href="#/pages/message/letter/{{item.id}}" class="btn btn-info btn-smaller">
+              <i class="ion-information"></i> 查看
+            </a>&nbsp;&nbsp;
+              <button class="btn btn-danger btn-smaller" (click)="del(item.id)">
+                <i class="ion-trash-a"></i> 删除
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </nb-list-item>
+  </nb-list>
+  <nb-card-footer class="text-right">
+    <ngb-pagination ngClass="ng2-smart-pagination" maxSize="10" [collectionSize]="pager?.totalCount"
+                    [pageSize]="pager?.pageSize" (pageChange)="changePager($event)"></ngb-pagination>
+  </nb-card-footer>
+</nb-card>

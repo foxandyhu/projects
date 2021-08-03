@@ -1,0 +1,130 @@
+<nb-card>
+  <nb-card-header>
+    新增会员
+  </nb-card-header>
+  <nb-card-body>
+    <form id="memberForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 用户名</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="member.userName"
+                 name="userName" maxlength="20"/>
+        </div>
+        <label class="col-md-2 col-form-label text-right">电子邮箱</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="member.memberExt.email" name="email"
+                 maxlength="50"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 密码</label>
+        <div class="form-group col-md-4">
+          <input type="password" autocomplete="off" class="form-control" [(ngModel)]="member.password" name="password"/>
+        </div>
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 确认密码</label>
+        <div class="form-group col-md-4">
+          <input type="password" autocomplete="off" class="form-control" [(ngModel)]="member.confirmPassword"
+                 name="confirmPassword"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 会员组</label>
+        <div class="form-group col-md-4">
+          <select class="form-control" [(ngModel)]="member.group.id" name="groupId">
+            <option value="">所有组</option>
+            <option *ngFor="let item of groups" [value]="item.id">{{item.name}}</option>
+          </select>
+        </div>
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 状态</label>
+        <div class="form-group col-md-4">
+          <select class="form-control" [(ngModel)]="member.status" name="status">
+            <option value="">所有状态</option>
+            <option *ngFor="let item of statuss" [value]="item.id">{{item.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">头像</label>
+        <div class="col-md-3 vertical-center">
+          <ngx-uploader-bar isPicture="true" (complete)="faceFileChange($event)"></ngx-uploader-bar>
+        </div>
+        <label class="col-md-3 col-form-label text-right">个性签名</label>
+        <div class="col-md-4 vertical-center">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="member.memberExt.signature"
+                 name="signature" maxlength="50"/>
+        </div>
+      </div>
+      <div class="row margin-top-1p">
+        <label class="col-md-2 col-form-label text-right">真实姓名</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" class="form-control"
+                 [(ngModel)]="member.memberExt.realName"
+                 name="realName" maxlength="10"/>
+        </div>
+        <label class="col-md-2 col-form-label text-right">性别</label>
+        <div class="form-group col-md-4">
+          <nb-radio-group [(ngModel)]="member.memberExt.girl" name="girl">
+            <nb-radio class="float-left" value="true">男</nb-radio>
+            <nb-radio class="float-left" value="false">女</nb-radio>
+          </nb-radio-group>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">出生日期</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" class="form-control"
+                 [nbDatepicker]="datepicker" [value]="member.memberExt.birthday" readonly="readonly"/>
+          <nb-datepicker (dateChange)="dateChange($event)" #datepicker format="YYYY-MM-DD"></nb-datepicker>
+        </div>
+        <label class="col-md-2 col-form-label text-right">来自</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" class="form-control"
+                 [(ngModel)]="member.memberExt.comeFrom"
+                 name="comeFrom" maxlength="10"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">QQ</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" class="form-control"
+                 [(ngModel)]="member.memberExt.qq"
+                 name="qq" maxlength="12"/>
+        </div>
+        <label class="col-md-2 col-form-label text-right">微信</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" class="form-control"
+                 [(ngModel)]="member.memberExt.weiXin"
+                 name="weixin" maxlength="50"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">手机</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" class="form-control"
+                 [(ngModel)]="member.memberExt.mobile"
+                 name="mobile" maxlength="12"/>
+        </div>
+        <label class="col-md-2 col-form-label text-right">电话</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" class="form-control"
+                 [(ngModel)]="member.memberExt.phone"
+                 name="phone" maxlength="15"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">描述</label>
+        <div class="form-group col-md-10">
+          <textarea class="form-control" rows="5" [(ngModel)]="member.memberExt.intro" name="intro"
+                    maxlength="200"></textarea>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="modal-footer">
+    <button type="buttom" class="btn btn-success" (click)="saveMember()">
+      <i class="ion-checkmark"></i> 确 认
+    </button>
+    <a href="#member/list" class="btn btn-info">
+      <i class="ion-arrow-return-left"></i> 返回列表</a>
+  </nb-card-footer>
+</nb-card>

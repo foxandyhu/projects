@@ -1,0 +1,52 @@
+<nb-card>
+  <nb-card-header>
+    系统任务
+  </nb-card-header>
+  <nb-list>
+    <nb-list-item>
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th>任务名称</th>
+          <th>上一次执行时间</th>
+          <th>下一次执行时间</th>
+          <th>上一次执行结果</th>
+          <th>执行次数</th>
+          <th>执行周期</th>
+          <th>状态</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of pager?.data" nbPopover="{{item.remark}}" nbPopoverTrigger="hint">
+          <td>{{item.name}}</td>
+          <td>{{item.preExecTime}}</td>
+          <td>{{item.nextExecTime}}</td>
+          <td>{{item.preExecResult}}</td>
+          <td>{{item.count}}</td>
+          <td>{{item.period}}</td>
+          <td>{{item.statusName}}</td>
+          <td>
+            <div [ngSwitch]="item.status">
+              <div *ngSwitchCase="1">
+                <button class="btn btn-danger btn-smaller" (click)="stopTask(item.name)">
+                  <i class="ion-android-radio-button-off"></i> 关闭
+                </button>
+              </div>
+              <div *ngSwitchCase="2">
+                <button class="btn btn-success btn-smaller" (click)="startTask(item.name)">
+                  <i class="ion-power"></i> 开启
+                </button>
+              </div>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </nb-list-item>
+  </nb-list>
+  <nb-card-footer class="text-right">
+    <ngb-pagination ngClass="ng2-smart-pagination" maxSize="10" [collectionSize]="pager?.totalCount"
+                    [pageSize]="pager?.pageSize" (pageChange)="changePager($event)"></ngb-pagination>
+  </nb-card-footer>
+</nb-card>

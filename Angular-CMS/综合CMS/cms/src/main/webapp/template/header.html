@@ -1,0 +1,77 @@
+<@channelListDirect>
+    <#assign channels=channels/>
+</@channelListDirect>
+<!--PC 头部导航 begin-->
+<header>
+    <nav class="container">
+        <div class="navbar-header">
+            <a class="navbar-toggle mmenu-btn" href="#mmenu" title="长沙网站建设,长沙网站制作">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a href="/index.html" title="长沙网站建设,长沙网站制作"><img alt="${site.name}" class="logo" src="${site.url}" title="${site.name}"/></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <#list channels as item>
+                    <li id="nav_${item.id}">
+                        <a href="${(item.link?length gt 0)?then(item.link,item.path)}" style="${(channel.id == item.id)?then('color: #009b08 !important','')}" target="${item.target}" title="${item.name}">
+                            ${item.name}
+                            <#if item.children?size gt 0>
+                                <i class="fa fa-caret-down"></i>
+                            </#if>
+                        </a>
+                        <#if item.children?size gt 0>
+                            <ul class="drop-down">
+                                <#list item.children as subItem>
+                                    <li>
+                                        <a href="${(subItem.link?length gt 0)?then(subItem.link,subItem.path)}"​ class="menu2" title="${subItem.name}">
+                                            ${subItem.name}
+                                        </a>
+                                    </li>
+                                </#list>
+                            </ul>
+                        </#if>
+                    </li>
+                </#list>
+                <li class="phone-icon">
+                    <a href="#" title="长沙网站建设,长沙网站制作 电话:${company.phone}">
+                        <i class="fa fa-phone">${company.phone}</i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<!--PC 头部导航 end-->
+
+<!--mobile 头部导航 begin-->
+<nav id="mmenu">
+    <div class="mmDiv">
+        <div class="MMhead">
+            <a href="#" ​ class="closemenu noblock" title="长沙网站建设,长沙网站制作">
+                x
+            </a>
+        </div>
+        <ul>
+        <#list channels as item>
+            <li class="m-Lev1 m-nav_0">
+                <a href="${(item.link?length gt 0)?then(item.link,item.path)}" target="${item.target}" title="${item.name}">${item.name}</a>
+                <#if item.children?size gt 0>
+                    <ul class="m-submenu2">
+                        <#list item.children as subItem>
+                            <li>
+                                <a href="${(subItem.link?length gt 0)?then(subItem.link,subItem.path)}"​ class="m-menu3" title="${subItem.name}">
+                                    ${subItem.name}
+                                </a>
+                            </li>
+                        </#list>
+                    </ul>
+                </#if>
+            </li>
+        </#list>
+        </ul>
+    </div>
+</nav>
+<!--mobile 头部导航 end-->

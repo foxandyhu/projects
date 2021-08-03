@@ -1,0 +1,27 @@
+<nb-card>
+  <nb-card-header>
+    水印设置
+  </nb-card-header>
+  <nb-card-body>
+    <form id="firewallConfigForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">开启防火墙</label>
+        <div class="form-group col-md-3">
+          <nb-radio-group [(ngModel)]="firewallConfig.openFirewall" name="openFirewall">
+            <nb-radio class="float-left" value="true">是</nb-radio>
+            <nb-radio class="float-left" value="false">否</nb-radio>
+          </nb-radio-group>
+        </div>
+      </div>
+      <div class="row vertical-center">
+        <label class="col-md-2 col-form-label text-right">拦截IP</label>
+        <div class="form-group col-md-10">
+          <textarea class="form-control" maxlength="500" [(ngModel)]="firewallConfig.denyIps" name="denyIps" nbPopover="多个IP用','号隔开支持'*'号通配符,IP段用'-'号隔开" nbPopoverTrigger="hint"></textarea>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="text-center">
+    <button class="btn btn-success" (click)="editFirewall()">确 认</button>
+  </nb-card-footer>
+</nb-card>

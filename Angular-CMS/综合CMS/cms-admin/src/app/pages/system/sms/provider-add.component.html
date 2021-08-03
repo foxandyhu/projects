@@ -1,0 +1,53 @@
+<nb-card>
+  <nb-card-header>
+    新增短信服务商
+  </nb-card-header>
+  <nb-card-body>
+    <form id="smsProviderForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">名称</label>
+        <div class="form-group col-md-10">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="smsProvider.name"
+                 name="name"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">用户名</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="smsProvider.userName"
+                 name="userName"/>
+        </div>
+        <label class="col-md-2 col-form-label text-right">密码</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="smsProvider.password"
+                 name="password"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">接口地址</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="smsProvider.url"
+                 name="url"/>
+        </div>
+        <label class="col-md-2 col-form-label text-right">启用</label>
+        <div class="form-group col-md-4">
+          <nb-checkbox status="success" name="superAdmin" [(ngModel)]="smsProvider.enable">是</nb-checkbox>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">描述</label>
+        <div class="form-group col-md-10">
+          <textarea class="form-control" [(ngModel)]="smsProvider.remark" name="remark"></textarea>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="modal-footer">
+      <button type="buttom" class="btn btn-success" (click)="submit()">
+        <i class="ion-checkmark"></i> 确 认
+      </button>&nbsp;&nbsp;&nbsp;
+      <button type="buttom" class="btn btn-default" (click)="cancel()">
+        <i class="ion-checkmark"></i> 取 消
+      </button>
+    </nb-card-footer>
+</nb-card>

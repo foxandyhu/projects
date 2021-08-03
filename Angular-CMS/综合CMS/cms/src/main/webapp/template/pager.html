@@ -1,0 +1,55 @@
+<#macro pagerMacro pager url>
+    <div class="page">
+        <#if (pager.totalPage>1)>
+            <a href="${url?replace(':pageNo',1)}" title="长沙网站建设,长沙网站制作">首页</a>
+            <a href="${url?replace(':pageNo',pager.prePage)}" title="长沙网站建设,长沙网站制作">上一页</a>
+            <#if (pager.totalPage >6) >
+                <#if pager.pageNo < 5 >
+                    <#list 1..6 as i>
+                        <#if pager.pageNo != i>
+                            <a href="${url?replace(':pageNo',i)}" title="长沙网站建设,长沙网站制作">${i}</a>
+                        <#else>
+                            <span>${i}</span>
+                        </#if>
+                    </#list>
+                    <span>. . .</span>
+                    <a href="${url?replace(':pageNo',pager.totalPage)}" title="长沙网站建设,长沙网站制作">${pager.totalPage}</a>
+                <#else>
+                    <#if pager.pageNo < (pager.totalPage - 3)>
+                        <#list (pager.pageNo - 2)..(pager.pageNo + 3) as i>
+                            <#if pager.pageNo != i>
+                                <a href="${url?replace(':pageNo',i)}" title="长沙网站建设,长沙网站制作">${i}</a>
+                            <#else>
+                                <span>${i}</span>
+                            </#if>
+                        </#list>
+                        <span>. . .</span>
+                        <a href="${url?replace(':pageNo',pager.totalPage)}" title="长沙网站建设,长沙网站制作">${pager.totalPage}</a>
+                    <#else>
+                        <a href="${url?replace(':pageNo',i)}" title="长沙网站建设,长沙网站制作">1</a>
+                        <span>. . .</span>
+                        <#list (pager.totalPage - 4)..(pager.totalPage) as i>
+                            <#if pager.pageNo != i>
+                                <a href="${url?replace(':pageNo',i)}" title="长沙网站建设,长沙网站制作">${i}</a>
+                            <#else>
+                                <span>${i}</span>
+                            </#if>
+                        </#list>
+                    </#if>
+                </#if>
+            <#else>
+                <#list 1..(pager.totalPage) as i>
+                    <#if pager.pageNo != i>
+                        <a href="${url?replace(':pageNo',i)}" title="长沙网站建设,长沙网站制作">${i}</a>
+                    <#else>
+                        <span>${i}</span>
+                    </#if>
+                </#list>
+            </#if>
+        </#if>
+        <#if (pager.totalPage>1)>
+            <a href="${url?replace(':pageNo',pager.nextPage)}" title="长沙网站建设,长沙网站制作">下一页</a>
+            <a href="${url?replace(':pageNo',pager.totalPage)}" title="长沙网站建设,长沙网站制作">尾页</a>
+        </#if>
+    </div>
+</#macro>

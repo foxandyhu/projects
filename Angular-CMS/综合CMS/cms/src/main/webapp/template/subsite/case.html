@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <#include "/subsite/meta.html">
+    <link rel="stylesheet" type="text/css" href="${resRoot}css/bootstrap.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="${resRoot}css/common.css">
+    <link rel="stylesheet" type="text/css" href="${resRoot}css/respond.css">
+    <link rel="stylesheet" type="text/css" href="${resRoot}css/about.css">
+</head>
+
+<body>
+<!--头部 begin-->
+<#include "/subsite/header.html">
+<!--头部 end-->
+
+<!--正文 start-->
+<article>
+    <div class="page-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="case-list">
+                        <@articleListDirective pageSize="9" pageNo=RequestParameters['pageNo']???then(RequestParameters['pageNo'],'1') channelId="115">
+                            <div class="row">
+                                <#list articles as article>
+                                    <div class="case-item col-lg-4 col-sm-4 col-xs-6">
+                                        <figure>
+                                            <a target="_blank" href="/site/${city.pinyin}/id_${article.idStr}.html"  title="${article.articleExt.title}">查看详情</a>
+                                            <img alt="长沙网站制作,长沙网站建设" src="${article.articleExt.titlePicUrl}_420_300" title="${article.articleExt.title}"/>
+                                        </figure>
+                                        <h5 class="item-title">${article.articleExt.title}</h5>
+                                    </div>
+                                </#list>
+                            </div>
+                            <@pagerMacro pager=pager url="/site/"+city.pinyin+channel.path+"?pageNo=:pageNo"></@pagerMacro>
+                        </@articleListDirective>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+<!--正文 end-->
+
+<!-- 底部 start -->
+<#include "/subsite/footer.html">
+<!-- 底部 end -->
+</body>
+<script src="${resRoot}js/jquery-1.11.3.min.js"></script>
+<script src="${resRoot}js/common.js" type="text/javascript"></script>
+<script>
+</script>
+</html>

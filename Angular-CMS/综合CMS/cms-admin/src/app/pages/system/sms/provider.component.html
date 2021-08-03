@@ -1,0 +1,62 @@
+<nb-card>
+  <nb-card-header>
+    短信服务商管理
+  </nb-card-header>
+  <nb-list>
+    <nb-list-item>
+      <form class="form-inline">
+        <div class="form-group">
+          <button class="btn btn-success" (click)="showAddProvider()">
+            <span class="ion-plus-round"></span> 新增
+          </button>&nbsp;&nbsp;&nbsp;
+          <button class="btn btn-outline-primary" [disabled]="!(selectItems.length>0)" (click)="delMulti()">
+            批量删除
+          </button>
+        </div>
+      </form>
+      <div class="margin-top-2p">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>
+              <nb-checkbox #selectAllBox status="success" [value]="isSelectAll"
+                           (change)="changeAllBox(selectAllBox.value)"></nb-checkbox>
+            </th>
+            <th>名称</th>
+            <th>用户名</th>
+            <th>地址</th>
+            <th>状态</th>
+            <th>描述</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of pager?.data">
+            <td>
+              <nb-checkbox #selectBox status="success" [value]="isSelectAll"
+                           (change)="changeBox(selectBox.value,item.id)"></nb-checkbox>
+            </td>
+            <td>{{item.name}}</td>
+            <td>{{item.userName}}</td>
+            <td>{{item.url}}</td>
+            <td>{{item.enable ? "启用" : "禁用"}}</td>
+            <td>{{item.remark}}</td>
+            <td>
+              <button class="btn btn-info btn-smaller" (click)="showEditProvider(item.id)">
+                <i class="ion-edit"></i> 编辑
+              </button>&nbsp;&nbsp;
+              <button class="btn btn-danger btn-smaller" (click)="del(item.id)">
+                <i class="ion-trash-a"></i> 删除
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </nb-list-item>
+  </nb-list>
+  <nb-card-footer class="text-right">
+    <ngb-pagination ngClass="ng2-smart-pagination" maxSize="10" [collectionSize]="pager?.totalCount"
+                    [pageSize]="pager?.pageSize" (pageChange)="changePager($event)"></ngb-pagination>
+  </nb-card-footer>
+</nb-card>

@@ -1,0 +1,81 @@
+<nb-card>
+  <nb-card-header>
+    新增邮件服务商
+  </nb-card-header>
+  <nb-card-body>
+    <form id="emailProviderForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 名称</label>
+        <div class="form-group col-md-10">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="emailProvider.name"
+                 name="name"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 服务器地址</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="emailProvider.host"
+                 name="host"/>
+        </div>
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 端口</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="emailProvider.port"
+                 name="port" value="UTF-8" maxlength="5"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 服务器协议</label>
+        <div class="form-group col-md-4">
+          <select class="form-control" [(ngModel)]="emailProvider.protocol" name="protocol">
+            <option value="">请选择服务协议</option>
+            <option *ngFor="let item of protocols" [value]="item">{{item}}</option>
+          </select>
+        </div>
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 编码</label>
+        <div class="form-group col-md-4">
+          <select class="form-control" [(ngModel)]="emailProvider.encoding" name="encoding">
+            <option value="">请选择编码</option>
+            <option *ngFor="let item of charsets" [value]="item">{{item}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 用户名</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="emailProvider.userName"
+                 name="userName"/>
+        </div>
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 密码</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="emailProvider.password"
+                 name="password"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">发件人</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="emailProvider.personal"
+                 name="personal"/>
+        </div>
+        <label class="col-md-2 col-form-label text-right">启用</label>
+        <div class="form-group col-md-4">
+          <nb-checkbox status="success" name="superAdmin" [(ngModel)]="emailProvider.enable">是</nb-checkbox>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">描述</label>
+        <div class="form-group col-md-10">
+          <textarea class="form-control" [(ngModel)]="emailProvider.remark" name="remark"></textarea>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="modal-footer">
+    <button type="buttom" class="btn btn-success" (click)="submit()">
+      <i class="ion-checkmark"></i> 确 认
+    </button>&nbsp;&nbsp;&nbsp;
+    <button type="buttom" class="btn btn-default" (click)="cancel()">
+      <i class="ion-checkmark"></i> 取 消
+    </button>
+  </nb-card-footer>
+</nb-card>

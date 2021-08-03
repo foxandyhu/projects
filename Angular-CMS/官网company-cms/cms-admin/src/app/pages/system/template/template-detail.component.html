@@ -1,0 +1,20 @@
+<nb-card>
+  <nb-card-header>
+    编辑模版内容
+  </nb-card-header>
+  <nb-card-body>
+    <div class="row" style="width:800px">
+      <div class="col-md-12">
+        <textarea class="form-control" [(ngModel)]="content" name="content" rows="20" wrap="hard" style="word-wrap : break-word;"></textarea>
+      </div>
+    </div>
+  </nb-card-body>
+  <nb-card-footer class="modal-footer">
+    <button type="buttom" class="btn btn-success" (click)="submit()">
+      <i class="ion-checkmark"></i> 确 认
+    </button>&nbsp;&nbsp;&nbsp;
+    <button type="buttom" class="btn btn-default" (click)="cancel()">
+      <i class="ion-checkmark"></i> 取 消
+    </button>
+  </nb-card-footer>
+</nb-card>

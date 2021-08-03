@@ -1,0 +1,42 @@
+<nb-card style="width:120%">
+  <nb-card-header>
+    编辑评分项
+  </nb-card-header>
+  <nb-card-body>
+    <form id="scoreItemForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-3 col-form-label text-right">评分组</label>
+        <div class="form-group col-md-9">{{scoreGroup.name}}</div>
+      </div>
+      <div class="row">
+        <label class="col-md-3 col-form-label text-right">名称</label>
+        <div class="form-group col-md-9">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="scoreItem.name"
+                 name="name"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-3 col-form-label text-right">分值</label>
+        <div class="form-group col-md-9">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="scoreItem.score"
+                 name="score"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-3 col-form-label text-right">图片</label>
+        <div class="form-group col-md-9">
+          <ngx-uploader-bar [previewPic]="scoreItem.url" isPicture="true" (complete)="fileChange($event)"
+                            tip="只能上传jpg/png图片，且不超过2M. 建议64 x 64尺寸"></ngx-uploader-bar>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="modal-footer">
+      <button type="buttom" class="btn btn-success" (click)="submit()">
+        <i class="ion-checkmark"></i> 确 认
+      </button>&nbsp;&nbsp;&nbsp;
+      <button type="buttom" class="btn btn-default" (click)="cancel()">
+        <i class="ion-checkmark"></i> 取 消
+      </button>
+    </nb-card-footer>
+</nb-card>

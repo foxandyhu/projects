@@ -1,0 +1,77 @@
+<nb-card>
+  <nb-card-header>
+    友情链接管理
+  </nb-card-header>
+  <nb-list>
+    <nb-list-item>
+      <form class="form-inline">
+        <div class="form-group">
+          <button class="btn btn-success" (click)="showAddFriendLink()">
+            <span class="ion-plus-round"></span> 新增
+          </button>&nbsp;&nbsp;
+          <select class="form-control" [(ngModel)]="type" name="name" (change)="changeType()">
+            <option value="">所有类型</option>
+            <option *ngFor="let item of types" [value]="item.id">{{item.name}}</option>
+          </select>&nbsp;&nbsp;&nbsp;
+          <a href="#/pages/friendlink/type/list" class="btn btn-outline-info">
+            <i class="ion-navicon"></i> 类型管理
+          </a>&nbsp;&nbsp;&nbsp;
+          <button class="btn btn-outline-primary" [disabled]="!(selectItems.length>0)" (click)="delMulti()">
+            <i class="ion-trash-b"></i> 批量删除
+          </button>
+        </div>
+      </form>
+      <table class="table table-hover margin-top-2p">
+        <thead>
+        <tr>
+          <th>
+            <nb-checkbox #selectAllBox status="success" [value]="isSelectAll"
+                         (change)="changeAllBox(selectAllBox.value)"></nb-checkbox>
+          </th>
+          <th>名称</th>
+          <th>类型</th>
+          <th width="10%">链接</th>
+          <th>显示</th>
+          <th>排序</th>
+          <th>序号</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of friendLinks" nbPopover="{{item.remark}}" nbPopoverTrigger="hint" nbPopoverPlacement="top">
+          <td>
+            <nb-checkbox #selectBox status="success" [value]="isSelectAll"
+                         (change)="changeBox(selectBox.value,item.id)"></nb-checkbox>
+          </td>
+          <td>
+            <a href="{{item.url}}" target="_blank">
+              {{item.name}}<br>
+              <img width="90" height="60" [src]="item.logoUrl"/>
+            </a>
+          </td>
+          <td>{{item.type?.name}}</td>
+          <td>{{item.url}}</td>
+          <td>{{item.enabled ? "是" : "否"}}</td>
+          <td>
+            <i class="sort-op ion-arrow-down-a pointer" (click)="sort(item.id,false)"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <i class="sort-op ion-arrow-up-a pointer" (click)="sort(item.id,true)"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </td>
+          <td>{{item.seq}}</td>
+          <td>
+            <button class="btn btn-info btn-smaller" (click)="showEditFriendLink(item.id)">
+              <i class="ion-edit"></i> 编辑
+            </button>&nbsp;&nbsp;
+            <button class="btn btn-danger btn-smaller" (click)="del(item.id)">
+              <i class="ion-trash-a"></i> 删除
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </nb-list-item>
+  </nb-list>
+  <nb-card-footer class="text-right">
+    <ngb-pagination ngClass="ng2-smart-pagination" maxSize="10" [collectionSize]="pager?.totalCount"
+                    [pageSize]="pager?.pageSize" (pageChange)="changePager($event)"></ngb-pagination>
+  </nb-card-footer>
+</nb-card>

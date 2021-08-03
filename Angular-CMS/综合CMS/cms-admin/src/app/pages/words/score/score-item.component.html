@@ -1,0 +1,69 @@
+<nb-card>
+  <nb-card-header>
+    评分项管理 &nbsp;--&nbsp;&nbsp;{{scoreGroup.name}}
+  </nb-card-header>
+  <nb-list>
+    <nb-list-item>
+      <form class="form-inline">
+        <div class="form-group">
+          <button class="btn btn-success" (click)="showAddScoreItem()">
+            <span class="ion-plus-round"></span> 新增
+          </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button class="btn btn-outline-primary" [disabled]="!(selectItems.length>0)" (click)="delMulti()">
+            批量删除
+          </button>&nbsp;&nbsp;&nbsp;&nbsp;
+          <a href="#/pages/words/score/group" class="btn btn-info">
+            <i class="ion-arrow-return-left"></i> 返回评分组列表</a>
+        </div>
+      </form>
+      <div class="margin-top-2p">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>
+              <nb-checkbox #selectAllBox status="success" [value]="isSelectAll"
+                           (change)="changeAllBox(selectAllBox.value)"></nb-checkbox>
+            </th>
+            <th>分组名</th>
+            <th>名称</th>
+            <th>分值</th>
+            <th>图片</th>
+            <th>排序</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of items">
+            <td>
+              <nb-checkbox #selectBox status="success" [value]="isSelectAll"
+                           (change)="changeBox(selectBox.value,item.id)"></nb-checkbox>
+            </td>
+            <td>{{item.group?.name}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.score}}</td>
+            <td>
+              <img width="90" height="60" [src]="item.url"/>
+            </td>
+          <td>
+            <i class="sort-op ion-arrow-down-a pointer" (click)="sort(item.id,false)"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <i class="sort-op ion-arrow-up-a pointer" (click)="sort(item.id,true)"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </td>
+            <td>
+              <button class="btn btn-info btn-smaller" (click)="showEditScoreItem(item.id)">
+                <i class="ion-edit"></i> 编辑
+              </button>&nbsp;&nbsp;
+              <button class="btn btn-danger btn-smaller" (click)="del(item.id)">
+                <i class="ion-trash-a"></i> 删除
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </nb-list-item>
+  </nb-list>
+  <nb-card-footer class="text-right">
+    <ngb-pagination ngClass="ng2-smart-pagination" maxSize="10" [collectionSize]="pager?.totalCount"
+                    [pageSize]="pager?.pageSize" (pageChange)="changePager($event)"></ngb-pagination>
+  </nb-card-footer>
+</nb-card>

@@ -1,0 +1,21 @@
+<div class="header-container"
+     [class.left]="position === 'normal'"
+     [class.right]="position === 'inverse'">
+  <div class="logo-containter">
+    <a (click)="toggleSidebar()" href="#" class="navigation"><i class="ion-navicon-round"></i></a>
+    <div class="logo"><span>{{siteName}}</span></div>
+  </div>
+</div>
+
+<div class="header-container">
+  <nb-actions
+    size="medium"
+    [class.right]="position === 'normal'"
+    [class.left]="position === 'inverse'">
+    <nb-action>
+      <nb-user [nbContextMenu]="userMenu" [name]="user?.userName" [picture]="user?.face"></nb-user>
+    </nb-action>
+    <nb-action class="control-item" disabled icon="nb-notifications"></nb-action>
+    <nb-action class="control-item" icon="nb-email"></nb-action>
+  </nb-actions>
+</div>

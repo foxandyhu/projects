@@ -1,0 +1,19 @@
+.width-50p {
+  width: 50%;
+}
+
+.signle-width {
+  width: 112%;
+  margin-left: -17%;
+  clear: both;
+}
+
+.pickSize {
+  font-size: 2rem;
+}
+
+.custom-file-input ~ .custom-file-label::after {
+  content: "浏览";
+}
+
+nb-alert a{color:#ec2031;}

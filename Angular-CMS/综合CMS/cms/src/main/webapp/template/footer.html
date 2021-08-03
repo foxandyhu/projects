@@ -1,0 +1,86 @@
+<footer>
+    <div class="footer1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-12"><h2>公司简介</h2>
+                    <p>${chartCutMethod(removeHtmlTagMethod(company.remark),100)}...</p>
+                    <ul class="icons">
+                        <li><a href="#" ​ target="_blank" title="长沙网站建设,长沙网站制作"> <i class="fa fa-weixin"> </i> </a></li>
+                        <li><a href="#" ​ target="_blank" title="长沙网站建设,长沙网站制作"> <i class="fa fa-weibo"> </i> </a></li>
+                        <li><a href="#" ​ target="_blank" title="长沙网站建设,长沙网站制作"> <i class="fa fa-apple"> </i> </a></li>
+                        <li><a href="#" ​ target="_blank" title="长沙网站建设,长沙网站制作"> <i class="fa fa-qq"> </i> </a></li>
+                        <li><a href="#" ​ target="_blank" title="长沙网站建设,长沙网站制作"> <i class="fa fa-android"> </i> </a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 hidden-sm hidden-xs"><h2>联系信息</h2>
+                    <p>&nbsp;地址：${company.address}</p>
+                    <p>&nbsp;电话：${company.phone}</p>
+                    <p>&nbsp;传真：${company.phone}</p>
+                    <p>&nbsp;邮箱：${company.email}</p>
+                    <p>&nbsp;名称：${company.name}</p>
+                    <p>&nbsp;网址：${site.webSite}</p></div>
+                <div class="col-md-3 col-sm-6 hidden-sm hidden-xs">
+                    <div class="links"><h2>友情链接</h2>
+                        <ul>
+                              <@friendLinkDirective>
+                                   <#list links as link>
+                                        <li><a href="${link.url}" ​ target="_blank" title="${link.name}">${link.name}</a></li>
+                                    </#list>
+                              </@friendLinkDirective>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 hidden-sm hidden-xs">
+                    <h2>企业二维码</h2>
+                    <img  alt="长沙网站制作,长沙网站建设" src="${company.weiXinUrl}_200_200"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer2">
+        <div class="container"><p>${site.copyRight} ${site.copyRightOwner} <strong>${site.filingCode}</strong></p></div>
+    </div>
+</footer>
+<div class="phone_foot">
+    <div class="pfoot_box">
+        <div class="pfoot_col"><a class="" href="tel:${company.phone}">电话沟通</a></div>
+        <div class="pfoot_col">
+            <a class="pfoot_col_qiao" target="_blank" href="http://p.qiao.baidu.com/cps/chat?siteId=10661362&amp;userId=23731119">在线客服</a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<!--baidu统计-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?682def44bbaa92389033c7a6affead02";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!--360自动收录-->
+<script>
+    (function(){
+        var src = "https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba";
+        document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+</script>
+<!--360统计-->
+<script>
+    (function(b,a,e,h,f,c,g,s){b[h]=b[h]||function(){(b[h].c=b[h].c||[]).push(arguments)};
+        b[h].s=!!c;g=a.getElementsByTagName(e)[0];s=a.createElement(e);
+        s.src="//s.union.360.cn/"+f+".js";s.defer=!0;s.async=!0;g.parentNode.insertBefore(s,g)
+    })(window,document,"script","_qha",357559,false);
+</script>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-33201991-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-33201991-1');
+</script>
+

@@ -1,0 +1,63 @@
+<nb-card>
+  <nb-card-header>
+    新增会员组
+  </nb-card-header>
+  <nb-card-body>
+    <form id="memberGroupForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 组名称</label>
+        <div class="form-group col-md-10">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="group.name"
+                 name="name"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">
+          <i class="font-red">*</i>&nbsp;
+          <i class="ion-help-circled help" title="0为无限制"></i> 每日允许上传附件总大小/KB</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" required="true" class="form-control"
+                 [(ngModel)]="group.allowUploadPerDay"
+                 name="allowUploadPerDay"/>
+        </div>
+        <label class="col-md-2 col-form-label text-right">
+          <i class="font-red">*</i>  &nbsp;
+          <i class="ion-help-circled help" title="0为无限制"></i> 最大允许上传附件总大小/KB</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" required="true" class="form-control"
+                 [(ngModel)]="group.allowUploadMaxFile"
+                 name="allowUploadMaxFile"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">允许上传文件后缀(","隔开)</label>
+        <div class="form-group col-md-10">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="group.allowUploadSuffix"
+                 name="allowUploadSuffix"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">评论需要审核</label>
+        <div class="form-group col-md-2">
+          <nb-checkbox status="success" name="commentNeedCheck" [(ngModel)]="group.commentNeedCheck">是</nb-checkbox>
+        </div>
+        <label class="col-md-2 col-form-label text-right">评论需要验证码</label>
+        <div class="form-group col-md-2">
+          <nb-checkbox status="success" name="commentNeedCaptcha" [(ngModel)]="group.commentNeedCaptcha">是</nb-checkbox>
+        </div>
+        <label class="col-md-2 col-form-label text-right">默认会员组</label>
+        <div class="form-group col-md-2">
+          <nb-checkbox status="success" name="defaults" [(ngModel)]="group.defaults">是</nb-checkbox>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="modal-footer">
+      <button type="buttom" class="btn btn-success" (click)="submit()">
+        <i class="ion-checkmark"></i> 确 认
+      </button>&nbsp;&nbsp;&nbsp;
+      <button type="buttom" class="btn btn-default" (click)="cancel()">
+        <i class="ion-checkmark"></i> 取 消
+      </button>
+    </nb-card-footer>
+</nb-card>

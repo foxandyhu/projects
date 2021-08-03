@@ -1,0 +1,37 @@
+<nb-card>
+  <nb-card-header>
+    评论设置
+  </nb-card-header>
+  <nb-card-body>
+    <form id="commentConfigForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 开启评论</label>
+        <div class="form-group col-md-9">
+          <nb-radio-group [(ngModel)]="commentConfig.openComment" name="openComment">
+            <nb-radio class="float-left" [value]="true">是</nb-radio>
+            <nb-radio class="float-left" [value]="false">否</nb-radio>
+          </nb-radio-group>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 评论是否登录</label>
+        <div class="form-group col-md-9">
+          <nb-radio-group [(ngModel)]="commentConfig.needLoginComment" name="needLoginComment">
+            <nb-radio class="float-left" [value]="true">是</nb-radio>
+            <nb-radio class="float-left" [value]="false">否</nb-radio>
+          </nb-radio-group>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 评论日最高限制数</label>
+        <div class="form-group col-md-10">
+          <input autocomplete="off" type="text" class="form-control" [(ngModel)]="commentConfig.maxCommentLimit" name="maxCommentLimit" maxlength="2"
+          nbPopover="0则无限制" nbPopoverTrigger="hint"/>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="text-center">
+    <button class="btn btn-success" (click)="editCommentConfig()">确 认</button>
+  </nb-card-footer>
+</nb-card>

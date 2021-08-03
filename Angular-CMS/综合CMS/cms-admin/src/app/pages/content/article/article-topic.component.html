@@ -1,0 +1,28 @@
+<nb-card style="width:500px">
+  <nb-card-header>
+    已关联专题
+  </nb-card-header>
+  <nb-card-body style="max-height:400px;overflow:auto;">
+    <div class="text-center">
+      <button *ngIf="list?.length<=0" class="btn btn-large btn-primary" (click)="toRelated()">去关联专题</button>
+    </div>
+    <table *ngIf="list?.length>0" class="table table-hover">
+      <thead>
+      <tr>
+        <th>名称</th>
+        <th>移除</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of list">
+        <td>{{item.name}}</td>
+        <td>
+          <button class="btn btn-danger btn-smaller" (click)="removeShip(item.id)">
+            <i class="ion-trash-a"></i> 移除
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </nb-card-body>
+</nb-card>

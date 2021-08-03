@@ -1,0 +1,26 @@
+<nb-card size="small icon-card">
+  <nb-tabset>
+    <nb-tab tabTitle="系统图标">
+      <div class="margin-top-2p icon-container float-left">
+        <div *ngFor="let item of icons;let index=index" class="float-left icon-cc">
+          <img class="icon" src="{{item.url}}"/>
+          <nb-radio value="{{index}}" name="radio" (valueChange)="radioChange($event)">{{item.name}}</nb-radio>
+        </div>
+      </div>
+    </nb-tab>
+    <nb-tab tabTitle="自定义图标">
+      <div class="container text-center margin-top-2p">
+        <ngx-uploader-bar isPicture="true" (complete)="uploadIcon($event)"
+                          tip="只能上传jpg/png图片，且不超过2M. 建议64 x 64尺寸"></ngx-uploader-bar>
+      </div>
+    </nb-tab>
+  </nb-tabset>
+  <nb-card-footer class="modal-footer">
+    <button type="buttom" class="btn btn-success" (click)="ok()">
+      <i class="ion-checkmark"></i> 确 认
+    </button>&nbsp;&nbsp;&nbsp;
+    <button type="buttom" class="btn btn-default" (click)="cancel()">
+      <i class="ion-checkmark"></i> 取 消
+    </button>
+  </nb-card-footer>
+</nb-card>

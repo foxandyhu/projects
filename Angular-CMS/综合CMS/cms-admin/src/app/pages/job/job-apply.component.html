@@ -1,0 +1,61 @@
+<nb-card>
+  <nb-card-header>
+    职位申请管理
+  </nb-card-header>
+  <nb-list>
+    <nb-list-item>
+      <div class="form-inline">
+        <input type="text" autocomplete="off" placeholder="职位关键字" class="form-control" [(ngModel)]="title"
+               name="title"/>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button nbButton status="success" (click)="search()">
+          查询
+        </button>&nbsp;&nbsp;
+        <button class="btn btn-outline-primary" [disabled]="!(selectItems.length>0)" (click)="delMulti()">
+          批量删除
+        </button>
+      </div>
+      <div class="margin-top-2p">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>
+              <nb-checkbox #selectAllBox status="success" [value]="isSelectAll"
+                           (change)="changeAllBox(selectAllBox.value)"></nb-checkbox>
+            </th>
+            <th>申请用户</th>
+            <th>职位申请</th>
+            <th>申请时间</th>
+            <th>简历</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of pager?.data">
+            <td>
+              <nb-checkbox #selectBox status="success" [value]="isSelectAll"
+                           (change)="changeBox(selectBox.value,item.id)"></nb-checkbox>
+            </td>
+            <td>
+              <img width="60" height="40" src="{{item.face}}"/>
+              <div class="">{{item.userName}}</div>
+            </td>
+            <td>{{item.title}}</td>
+            <td>{{item.applyTime}}</td>
+            <td><a href="#job/resume/{{item.memberId}}">查看</a></td>
+            <td>
+              <button class="btn btn-danger btn-smaller" (click)="del(item.id)">
+                <i class="ion-trash-a"></i> 删除
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </nb-list-item>
+  </nb-list>
+  <nb-card-footer class="text-right">
+    <ngb-pagination ngClass="ng2-smart-pagination" maxSize="10" [collectionSize]="pager?.totalCount"
+                    [pageSize]="pager?.pageSize" (pageChange)="changePager($event)"></ngb-pagination>
+  </nb-card-footer>
+</nb-card>

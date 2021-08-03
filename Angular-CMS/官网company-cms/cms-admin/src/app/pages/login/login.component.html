@@ -1,0 +1,25 @@
+<section>
+  <form (ngSubmit)="submit()">
+    <div class="dowebok">
+      <div class="logo"></div>
+      <p class="tip">&nbsp;{{msg}}</p>
+      <div class="form-item">
+        <input id="username" name="userName" [(ngModel)]="data.userName" type="text" autocomplete="off"
+               placeholder="请输入用户名">
+      </div>
+      <div class="form-item">
+        <input id="password" name="password" [(ngModel)]="data.password" type="password" autocomplete="off"
+               placeholder="请输入密码">
+      </div>
+      <div class="form-item">
+        <input id="captcha" name="captcha" [(ngModel)]="data.captcha" type="text" autocomplete="off"
+               placeholder="请输入验证码">&nbsp;
+        <img src="{{captcha}}" (click)="generateNewCaptcha()"/>
+      </div>
+      <div class="form-item">
+        <input class="submit" type="submit" value="登 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录">
+      </div>
+    </div>
+  </form>
+</section>
+<ngx-loading-bar></ngx-loading-bar>

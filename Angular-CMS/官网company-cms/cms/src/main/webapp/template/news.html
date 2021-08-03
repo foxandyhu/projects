@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>${site.name}----新闻资讯</title>
+    <#assign resRoot="${resServer}/style/"/>
+    <#include "/meta.html">
+    <link rel="stylesheet" type="text/css" href="${resRoot}css/font-awesome.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="${resRoot}css/bootstrap.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="${resRoot}css/animate.css" media="screen"/>
+    <link type="text/css" rel="stylesheet" href="${resRoot}css/jquery.mmenu.all.css"/>
+    <link rel="stylesheet" type="text/css" href="${resRoot}css/style.css" media="screen"/>
+</head>
+
+<body>
+    <!-- 头部导航 begin-->
+    <#include "/header.html">
+    <!-- 头部导航 end-->
+
+    <!--正文 start-->
+    <article>
+        <div class="page-container">
+            <div class="container">
+                <div clas="row">
+                    <div class="col-md-12 page-title"><i class="fa fa-cogs"></i>&nbsp;新闻资讯</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9">
+                        <#assign pageNo="${pageNo? then(pageNo,1)}"/>
+                        <#assign channelId="${channelId? then(channelId,116)}"/>
+                        <@articleListDirective pageSize="4" pageNo="${pageNo}" channelId="${channelId}">
+                            <#list articles as article>
+                                <div class="news-item">
+                                    <figure>
+                                        <a href="/news/id_${article.idStr}.html" title="长沙网站制作,长沙网站建设" target="_blank">
+                                            <img  alt="长沙网站制作,长沙网站建设" class="img-responsive" src="${article.articleExt.titlePicUrl}_250_178" title="${article.articleExt.title}"/>
+                                        </a>
+                                    </figure>
+                                    <h2 class="title">
+                                        <a href="/news/id_${article.idStr}.html" ​ title="${article.articleExt.title}" target="_blank">
+                                            ${article.articleExt.title}
+                                        </a>
+                                    </h2>
+                                    <div class="meta">
+                                        <ul>
+                                            <li class="date">
+                                                <time datetime="${article.articleExt.postDate}">
+                                                    ${article.articleExt.postDate?date}
+                                                </time>
+                                            </li>
+                                            <li class="link">
+                                                <a href="${article.articleExt.originUrl}" title="长沙网站制作,长沙网站建设" target="_blank">
+                                                    ${article.articleExt.origin}
+                                                </a>
+                                            </li>
+                                            <li class="view">${article.views}次浏览</li>
+                                        </ul>
+                                    </div>
+                                    <p>${chartCutMethod(article.articleExt.summary,100)}...</p>
+                                    <a href="/news/id_${article.idStr}.html" ​ class="link-detail" title="${article.articleExt.title}" target="_blank">查看详情</a>
+                                </div>
+                            </#list>
+                        <@pagerMacro pager=pager url="/article/"+channelId+"/:pageNo.html"></@pagerMacro>
+                        </@articleListDirective>
+                    </div>
+                    <aside class="col-md-3">
+                        <#include "/right_contact.html">
+                        <#include "/right_news.html">
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </article>
+    <!--正文 end-->
+
+    <!--底部 start-->
+    <#include "/footer.html">
+    <!--底部 end-->
+</body>
+<script type="text/javascript" src="${resRoot}js/jquery.min.js"></script>
+<script type="text/javascript" src="${resRoot}js/bootstrap.js"></script>
+<script type="text/javascript" src="${resRoot}js/jquery.mmenu.all.min.js"></script>
+<script type="text/javascript" src="${resRoot}js/common.js"></script>
+</html>

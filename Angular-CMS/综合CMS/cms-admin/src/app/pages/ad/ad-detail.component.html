@@ -1,0 +1,159 @@
+<nb-card>
+  <nb-card-header>
+    编辑广告
+  </nb-card-header>
+  <nb-card-body>
+    <form id="adForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 名称</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" required="required" class="form-control" [(ngModel)]="ad.name" name="name"/>
+        </div>
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 广告位</label>
+        <div class="form-group col-md-4">
+          <select class="form-control" [(ngModel)]="ad.spaceId" name="spaceId">
+            <option value="">选择广告位</option>
+            <option *ngFor="let item of spaces" [value]="item.id">{{item.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 点击次数</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" required="required" class="form-control" [(ngModel)]="ad.clickCount" name="clickCount"/>
+        </div>
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 展现次数</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" required="required" class="form-control" [(ngModel)]="ad.displayCount"
+                 name="displayCount"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">启用</label>
+        <div class="col-md-4">
+          <nb-checkbox status="success" name="enabled" [(ngModel)]="ad.enabled">是</nb-checkbox>
+        </div>
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 展示时间</label>
+        <div class="form-group col-md-4">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <button class="btn btn-primary btn-icon">
+                <i class="ion-ios-calendar-outline"></i>
+              </button>
+            </div>
+            <input name="showTime" autocomplete="off" class="form-control" placeholder="选择日期" [nbDatepicker]="rangepicker" [value]="date" readonly>
+            <nb-rangepicker #rangepicker (rangeChange)="changeDate($event)" format="YYYY-MM-DD"></nb-rangepicker>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 类型</label>
+        <div class="form-group col-md-8">
+          <nb-radio-group [(ngModel)]="ad.type" name="type">
+            <nb-radio class="float-left" *ngFor="let item of types" [(value)]="item.id">
+              {{item.name}}
+            </nb-radio>
+          </nb-radio-group>
+        </div>
+      </div>
+      <div [ngSwitch]="ad.type">
+        <!--图片-->
+        <div *ngSwitchCase="1">
+          <div class="row">
+            <label class="col-md-2 col-form-label text-right">链接地址</label>
+            <div class="form-group col-md-4">
+              <input type="text" class="form-control" [(ngModel)]="ad.txt.link" name="link"/>
+            </div>
+            <label class="col-md-2 col-form-label text-right">链接提示</label>
+            <div class="form-group col-md-4">
+              <input type="text" class="form-control" [(ngModel)]="ad.txt.picTip"
+                     name="picTip"/>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 图片</label>
+            <div class="form-group col-md-4">
+              <ngx-uploader-bar [previewPic]="preview" isPicture="true" (complete)="adFileChange($event)"></ngx-uploader-bar>
+            </div>
+            <label class="col-md-2 col-form-label text-right">图片尺寸</label>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="form-group col-md-4">
+                  <input type="text" autocomplete="off" class="form-control" [(ngModel)]="ad.txt.picWidth"
+                         name="picWidth" placeholder="宽"/>
+                </div>
+                <div class="margin-top-2p">x</div>
+                <div class="form-group col-md-4">
+                  <input type="text" autocomplete="off" class="form-control" [(ngModel)]="ad.txt.picHeight"
+                         name="picHeight" placeholder="高"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-2 col-form-label text-right">链接目标</label>
+            <div class="form-group col-md-10">
+              <nb-radio-group [(ngModel)]="ad.txt.linkTarget" name="linkTarget">
+                <nb-radio class="float-left" value="_blank">新窗口</nb-radio>
+                <nb-radio class="float-left" value="_self">原窗口</nb-radio>
+              </nb-radio-group>
+            </div>
+          </div>
+        </div>
+
+        <!--文字-->
+        <div *ngSwitchCase="2">
+          <div class="row">
+            <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 文字内容</label>
+            <div class="form-group col-md-4">
+              <input type="text" autocomplete="off" class="form-control" [(ngModel)]="ad.txt.txtContent" name="textTitle"/>
+            </div>
+            <label class="col-md-2 col-form-label text-right">文字链接</label>
+            <div class="form-group col-md-4">
+              <input type="text" autocomplete="off" class="form-control" [(ngModel)]="ad.txt.link" name="link"/>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-2 col-form-label text-right">文字颜色</label>
+            <div class="form-group col-md-4">
+              <input type="text" autocomplete="off" [(colorPicker)]="color" (colorPickerChange)="pickColor(color)" class="form-control" [(ngModel)]="ad.txt.txtColor" name="txtColor"/>
+            </div>
+            <label class="col-md-2 col-form-label text-right">文字大小</label>
+            <div class="form-group col-md-4">
+              <input type="text" autocomplete="off" class="form-control" [(ngModel)]="ad.txt.txtSize" name="txtSize"/>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-md-2 col-form-label text-right">链接目标</label>
+            <div class="form-group col-md-10">
+              <nb-radio-group [(ngModel)]="ad.txt.linkTarget" name="linkTarget">
+                <nb-radio class="float-left" value="_blank">新窗口</nb-radio>
+                <nb-radio class="float-left" value="_self">原窗口</nb-radio>
+              </nb-radio-group>
+            </div>
+          </div>
+        </div>
+
+        <!--代码-->
+        <div *ngSwitchCase="3">
+          <div class="row">
+            <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 代码</label>
+            <div class="form-group col-md-10">
+              <textarea class="form-control" rows="5" [(ngModel)]="ad.txt.codeContent" name="codeContent"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row margin-top-5p">
+        <div class="offset-sm-3">
+          <button class="btn btn-success" (click)="editAd()">确 认</button>
+        </div>
+        <div class="col-sm-2">
+          <a href="#pages/ad/list" class="btn btn-info">
+            <i class="ion-arrow-return-left"></i> 返回列表</a>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>
+

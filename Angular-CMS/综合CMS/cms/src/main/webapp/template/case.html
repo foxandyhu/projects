@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>${site.name}----成功案例</title>
+    <#assign resRoot="${resServer}/style/"/>
+    <#include "/meta.html">
+    <link rel="stylesheet" type="text/css" href="${resRoot}css/font-awesome.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="${resRoot}css/bootstrap.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="${resRoot}css/animate.css" media="screen"/>
+    <link type="text/css" rel="stylesheet" href="${resRoot}css/jquery.mmenu.all.css"/>
+    <link rel="stylesheet" type="text/css" href="${resRoot}css/style.css" media="screen"/>
+</head>
+
+<body>
+    <!-- 头部导航 begin-->
+    <#include "/header.html">
+    <!-- 头部导航 end-->
+
+    <!--正文 start-->
+    <article>
+        <div class="page-container">
+            <div class="container">
+                <div clas="row">
+                    <div class="col-md-12 page-title"><i class="fa fa-cogs"></i>&nbsp;成功案例</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="case-list">
+                            <@articleListDirective pageSize="9" pageNo=RequestParameters['pageNo']???then(RequestParameters['pageNo'],'1') channelId="115">
+                                    <div class="row">
+                                            <#list articles as article>
+                                                <div class="case-item col-lg-4 col-sm-4 col-xs-6">
+                                                    <figure>
+                                                        <a target="_blank" href="/news/id_${article.idStr}.html"  title="${article.articleExt.title}">查看详情</a>
+                                                        <img  alt="长沙网站制作,长沙网站建设" src="${article.articleExt.titlePicUrl}_420_300" title="${article.articleExt.title}"/>
+                                                    </figure>
+                                                    <h5 class="item-title">${article.articleExt.title}</h5>
+                                                </div>
+                                            </#list>
+                                    </div>
+                                    <@pagerMacro pager=pager url=channel.path+"?pageNo=:pageNo"></@pagerMacro>
+                            </@articleListDirective>
+                        </div>
+                    </div>
+                    <aside class="col-md-3">
+                        <#include "/right_contact.html">
+                        <#include "/right_news.html">
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </article>
+    <!--正文 end-->
+
+    <!--底部 start-->
+    <#include "/footer.html">
+    <!--底部 end-->
+
+</body>
+<script type="text/javascript" src="${resRoot}js/jquery.min.js"></script>
+<script type="text/javascript" src="${resRoot}js/bootstrap.js"></script>
+<script type="text/javascript" src="${resRoot}js/jquery.mmenu.all.min.js"></script>
+<script type="text/javascript" src="${resRoot}js/common.js"></script>
+</html>

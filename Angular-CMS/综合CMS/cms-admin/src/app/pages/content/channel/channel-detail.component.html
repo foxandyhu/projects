@@ -1,0 +1,123 @@
+<nb-card style="width:650px;">
+  <nb-card-header>
+    新增栏目
+  </nb-card-header>
+  <nb-card-body>
+    <form id="channelForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">父栏目</label>
+        <div class="form-group col-md-10">
+          <select class="form-control" [(ngModel)]="channel.parentId" name="parentId">
+            <option value="0">根栏目</option>
+            <ng-template #recursiveList let-list let-level="level">
+                  <ng-template ngFor let-item [ngForOf]="list">
+                    <option [value]="item.id">{{'&nbsp;&nbsp;&nbsp;'.repeat(level)}}{{item.name}}</option>
+                    <ng-container *ngIf="item.children?.length>0">
+                      <ng-container
+                        *ngTemplateOutlet="recursiveList; context:{$implicit:item.children,level:level+1}"></ng-container>
+                    </ng-container>
+                  </ng-template>
+            </ng-template>
+            <ng-container *ngTemplateOutlet="recursiveList; context:{$implicit:channels,level:1}"></ng-container>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 名称</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="channel.name"
+                 name="name" maxlength="10"/>
+        </div>
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 别名</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="channel.alias"
+                 name="alias" maxlength="10" nbPopover="推荐使用栏目名字的拼音或英文且唯一" nbPopoverTrigger="hint"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 访问路径</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="channel.path"
+                 name="path" maxlength="200" placeholder="例如:/index.html" nbPopover="推荐使用栏目名字的拼音或英文,只能是一级目录且必须已.html结尾 例如:/index.html" nbPopoverTrigger="hint"/>
+        </div>
+        <label class="col-md-2 col-form-label text-right">打开方式</label>
+        <div class="form-group col-md-4">
+          <select [(ngModel)]="channel.target" name="target" class="form-control">
+            <option value="">打开方式</option>
+            <option *ngFor="let item of opens" [value]="item">{{item}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">是否显示</label>
+        <div class="form-group col-md-4">
+          <nb-checkbox status="success" name="display" [(ngModel)]="channel.display">是</nb-checkbox>
+        </div>
+        <label class="col-md-2 col-form-label text-right">外部连接</label>
+        <div class="form-group col-md-4">
+          <nb-checkbox status="success" name="isOutLink" [(ngModel)]="isOutLink">是</nb-checkbox>
+        </div>
+      </div>
+      <div class="row" *ngIf="isOutLink">
+        <label class="col-md-2 col-form-label text-right">连接地址</label>
+        <div class="form-group col-md-10">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="channel.link"
+                 name="link" maxlength="200"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">PC栏目模版</label>
+        <div class="form-group col-md-4">
+          <select class="form-control" [(ngModel)]="channel.tplPcChannel" name="tplPcChannel">
+            <option value="">选择模版</option>
+            <option *ngFor="let item of pcTemplates" [value]="item">{{item}}</option>
+          </select>
+        </div>
+        <label class="col-md-2 col-form-label text-right">手机栏目模版</label>
+        <div class="form-group col-md-4">
+          <select class="form-control" [(ngModel)]="channel.tplMobileChannel" name="tplMobileChannel">
+            <option value="">选择模版</option>
+            <option *ngFor="let item of mobileTemplates" [value]="item">{{item}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">PC内容模版</label>
+        <div class="form-group col-md-4">
+          <select class="form-control" [(ngModel)]="channel.tplPcContent" name="tplPcContent">
+            <option value="">选择模版</option>
+            <option *ngFor="let item of pcTemplates" [value]="item">{{item}}</option>
+          </select>
+        </div>
+        <label class="col-md-2 col-form-label text-right">手机内容模版</label>
+        <div class="form-group col-md-4">
+          <select class="form-control" [(ngModel)]="channel.tplMobileContent" name="tplMobileContent">
+            <option value="">选择模版</option>
+            <option *ngFor="let item of mobileTemplates" [value]="item">{{item}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">META关键字</label>
+        <div class="form-group col-md-10">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="channel.keywords"
+                 name="keywords" maxlength="200"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">META描述</label>
+        <div class="form-group col-md-10">
+          <textarea class="form-control" [(ngModel)]="channel.summary" name="summary" maxlength="200"></textarea>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="modal-footer">
+      <button type="buttom" class="btn btn-success" (click)="submit()">
+        <i class="ion-checkmark"></i> 确 认
+      </button>&nbsp;&nbsp;&nbsp;
+      <button type="buttom" class="btn btn-default" (click)="cancel()">
+        <i class="ion-checkmark"></i> 取 消
+      </button>
+    </nb-card-footer>
+</nb-card>

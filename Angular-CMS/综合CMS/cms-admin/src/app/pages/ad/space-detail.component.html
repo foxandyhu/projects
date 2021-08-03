@@ -1,0 +1,36 @@
+<nb-card>
+  <nb-card-header>
+    编辑广告位
+  </nb-card-header>
+  <nb-card-body>
+    <form id="adSpaceForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-3 col-form-label text-right">名称</label>
+        <div class="form-group col-md-9">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="adSpace.name"
+                 name="name"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-3 col-form-label text-right">启用</label>
+        <div class="form-group col-md-9">
+          <nb-checkbox status="success" name="enabled" [(ngModel)]="adSpace.enabled">是</nb-checkbox>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-3 col-form-label text-right">描述</label>
+        <div class="form-group col-md-9">
+          <textarea class="form-control" [(ngModel)]="adSpace.remark" name="remark"></textarea>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="modal-footer">
+      <button type="buttom" class="btn btn-success" (click)="submit()">
+        <i class="ion-checkmark"></i> 确 认
+      </button>&nbsp;&nbsp;&nbsp;
+      <button type="buttom" class="btn btn-default" (click)="cancel()">
+        <i class="ion-checkmark"></i> 取 消
+      </button>
+    </nb-card-footer>
+</nb-card>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>长沙网站建设_长沙网站制作_长沙网页设计_长沙网站开发_长沙软件开发 【${site.name}】</title>
+    <#assign resRoot="${resServer}/style/"/>
+    <#include "/meta.html">
+    <link rel="stylesheet" type="text/css" href="${resRoot}css/font-awesome.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="${resRoot}css/bootstrap.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="${resRoot}css/owl.carousel.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="${resRoot}css/animate.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="${resRoot}css/settings.css" media="screen"/>
+    <link type="text/css" rel="stylesheet" href="${resRoot}css/jquery.mmenu.all.css"/>
+    <link rel="stylesheet" type="text/css" href="${resRoot}css/style.css" media="screen"/>
+</head>
+
+
+<body>
+    <!-- 头部导航 begin-->
+    <#include "/header.html">
+    <!-- 头部导航 end-->
+
+    <!--banner begin-->
+    <div class="fullwidthbanner-container">
+        <@adDirective spaceId="7">
+            <#if (ads?? && ads?size>0) >
+                <div class="banner-container">
+                    <ul>
+                            <#list ads as item>
+                                <li data-transition="random" data-slotamount="7" data-masterspeed="500">
+                                    <img src="${item.txt.url}"  alt="长沙网站制作,长沙网站建设" data-bgfit="cover" data-bgposition="center top"
+                                         data-bgrepeat="no-repeat"/>
+                                </li>
+                            </#list>
+                    </ul>
+                    <div class="tp-bannertimer tp-bottom"></div>
+                </div>
+            </#if>
+        </@adDirective>
+    </div>
+    <!--banner end-->
+
+    <!--主营业务 start-->
+    <div class="section-header">
+        <div class="container">
+            <div class="text-box triggerAnimation" data-animate="bounceIn">
+                <@channelDirect channelId="119">
+                    <h1>${channel.keywords}</h1>
+                    <p>${channel.summary}</p>
+                </@channelDirect>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-content">
+        <div class="business-container container">
+            <div class="row">
+                <@articleListDirective pageSize="10" channelId="119">
+                    <#list articles as article>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="item triggerAnimation" data-animate="fadeInUp">
+                                <a class="icon" title="长沙网站建设,长沙网站制作"><i class="${article.attr.icon}"></i></a>
+                                <h2>${article.articleExt.title}</h2>
+                                <p>${article.articleExt.shortTitle}</p>
+                            </div>
+                        </div>
+                    </#list>
+                </@articleListDirective>
+            </div>
+        </div>
+    </div>
+    <!--主营业务 end-->
+
+    <!--成功案例 start-->
+    <div class="section-header">
+        <div class="container">
+            <div class="text-box triggerAnimation" data-animate="bounceIn">
+                <@channelDirect channelId="115">
+                    <h1>${channel.keywords}</h1>
+                    <p>${channel.summary}</p>
+                </@channelDirect>
+            </div>
+        </div>
+    </div>
+    <div class="section-content">
+        <div class="case-container">
+            <div class="container">
+            <div class="owl-carousel">
+                <@articleListDirective pageSize="10" recommend="true" channelId="115">
+                    <#list articles as article>
+                        <div class="item triggerAnimation" data-animate="fadeInUp">
+                            <img  alt="长沙网站制作,长沙网站建设" title="${article.articleExt.title}" src="${article.articleExt.titlePicUrl}_334_238"/>
+                            <div class="model-hover">
+                                <div class="content">
+                                    <h2>
+                                        <a target="_blank" href="/news/id_${article.idStr}.html"  title="${article.articleExt.title}">${article.articleExt.title}</a>
+                                    </h2>
+                                    <a target="_blank" href="/news/id_${article.idStr}.html"  title="${article.articleExt.title}">
+                                        <span>${article.articleExt.shortTitle}</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </#list>
+                </@articleListDirective>
+            </div>
+            </div>
+        </div>
+    </div>
+    <!--成功案例 end-->
+
+    <div class="clear margin-top-100"></div>
+    <div class="sp-bar">10年互联网从业经验 ，专注企业软件定制化开发服务</div>
+    <div class="clear margin-top-100"></div>
+
+    <!--服务流程 start-->
+    <div class="section-header">
+        <div class="container">
+            <div class="text-box triggerAnimation" data-animate="bounceIn">
+                <@channelDirect channelId="121">
+                    <h1>${channel.keywords}</h1>
+                    <p>${channel.summary}</p>
+                </@channelDirect>
+            </div>
+        </div>
+    </div>
+    <div class="section-content">
+        <div class="flow-container">
+            <div class="container">
+                <div class="row">
+                    <@articleListDirective pageSize="6" channelId="121">
+                        <#list articles as article>
+                            <div class="col-md-2 col-sm-6">
+                                <div class="item triggerAnimation" data-animate="fadeInUp">
+                                    <a class="icon" title="长沙网站建设,长沙网站制作"><i class="${article.attr.icon}"></i></a>
+                                    <h2>${article.articleExt.title}</h2>
+                                    <p>${article.articleExt.shortTitle}</p>
+                                </div>
+                            </div>
+                        </#list>
+                    </@articleListDirective>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--服务流程 end-->
+
+    <!--新闻资讯 start-->
+    <div class="section-header">
+        <div class="container">
+            <div class="text-box triggerAnimation" data-animate="bounceIn">
+                <@channelDirect channelId="116">
+                    <h1>${channel.keywords}</h1>
+                    <p>${channel.summary}</p>
+                </@channelDirect>
+            </div>
+        </div>
+    </div>
+    <div class="section-content">
+        <div class="news-container">
+            <div class="container">
+                <div class="owl-carousel">
+                    <@articleListDirective pageSize="10" channelId="116">
+                        <#list articles as article>
+                            <div class="item triggerAnimation" data-animate="fadeInUp">
+                                <a target="_blank" href="/${channel.alias}/id_${article.idStr}.html" ​ title="${article.articleExt.title}">
+                                    <img  alt="长沙网站制作,长沙网站建设" src="${article.articleExt.titlePicUrl}_315_200" title="${article.articleExt.title}"/>
+                                </a>
+                                <h2>
+                                    <a target="_blank" href="/${channel.alias}/id_${article.idStr}.html" ​ title="${article.articleExt.title}">
+                                        ${article.articleExt.title}
+                                    </a>
+                                </h2>
+                                <p>${chartCutMethod(article.articleExt.summary,50)}</p>
+                                <span>
+                                    <i class="fa fa-calendar"></i>
+                                    &nbsp;${article.articleExt.postDate?date}
+                                </span>
+                            </div>
+                        </#list>
+                    </@articleListDirective>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--新闻资讯 end-->
+
+    <!--底部 start-->
+    <#include "/footer.html">
+    <!--底部 end-->
+
+    <!--在线客服 start-->
+    <!--在线客服 end-->
+</body>
+
+<script type="text/javascript" src="${resRoot}js/jquery.min.js"></script>
+<script type="text/javascript" src="${resRoot}js/bootstrap.js"></script>
+<script type="text/javascript" src="${resRoot}js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="${resRoot}js/waypoint.min.js"></script>
+<script type="text/javascript" src="${resRoot}js/jquery.themepunch.tools.min.js"></script>
+<script type="text/javascript" src="${resRoot}js/jquery.themepunch.revolution.min.js"></script>
+<script type="text/javascript" src="${resRoot}js/jquery.mmenu.all.min.js"></script>
+<script type="text/javascript" src="${resRoot}js/index.js"></script>
+<script type="text/javascript" src="${resRoot}js/common.js"></script>
+</html>

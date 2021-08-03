@@ -1,0 +1,105 @@
+<nb-card>
+  <nb-card-header>
+    评论管理
+  </nb-card-header>
+  <nb-list>
+    <nb-list-item>
+      <form class="form-inline">
+        <div class="form-group">
+          <select class="form-control" [(ngModel)]="status" name="status" (change)="search()">
+            <option value="">审核状态</option>
+            <option *ngFor="let item of statuss" [value]="item.id">{{item.name}}</option>
+          </select>&nbsp;&nbsp;
+          <select class="form-control" [(ngModel)]="isRecommend" name="recommend" (change)="search()">
+            <option value="">是否推荐</option>
+            <option value="true">是</option>
+            <option value="false">否</option>
+          </select>&nbsp;&nbsp;&nbsp;&nbsp;
+          <label>文章ID:&nbsp;&nbsp;</label>
+          <input [(ngModel)]="articleId" name="articleId" type="text" class="form-control" placeholder="搜索文章ID" autocomplete="off"/>&nbsp;&nbsp;
+          &nbsp;&nbsp;
+          <button type="button" class="btn btn-success" (click)="search()">
+            查询
+          </button>&nbsp;&nbsp;
+        </div>
+      </form>
+      <div class="margin-top-2p comment-item" *ngFor="let item of pager?.data">
+        <div class="row comment-title">
+          <div class="col-md-6">
+            <label role="checkbox" class="el-checkbox">
+              <nb-checkbox #selectBox status="success" [value]="isSelectAll"
+                           (change)="changeBox(selectBox.value,item.id)"></nb-checkbox>
+            </label>
+            <span>[{{item.typeName}}]</span>&nbsp;
+            <a href="" target="_blank">{{item.title}}</a>
+          </div>
+          <div class="col-md-4">
+            <span>文章ID：{{item.articleId}}</span>&nbsp;&nbsp;
+            <button class="btn btn-outline-primary btn-xs" (click)="viewArticleAll(item.articleId)">查看本文全部评论</button>
+          </div>
+          <div class="col-md-2">审核状态:
+            <span
+              class="{{item.status==0?'text-warning':(item.status==2?'text-success':'text-danger')}}">{{item.statusName}}</span>
+          </div>
+        </div>
+        <div class="row margin-top-5p">
+          <div class="col-md-12">
+            <div>评论内容:&nbsp;<span *ngIf="item.recommend" class="highlight_red">[推荐]</span>&nbsp;{{item.text}}</div>
+            <div class="margin-top-2p" *ngIf="item.show">
+              <nb-card>
+                <nb-card-body>
+                  <textarea [(ngModel)]="item.replyText" name="replyText" placeholder="请输入回复内容" class="form-control border-warning" cols="1"></textarea>
+                </nb-card-body>
+                <nb-card-footer class="text-right">
+                  <button class="btn btn-success btn-xs" (click)="reply(item)">确认</button>&nbsp;&nbsp;
+                  <button class="btn btn-default btn-xs" (click)="hideReply(item)">取消</button>
+                </nb-card-footer>
+              </nb-card>
+            </div>
+          </div>
+        </div>
+        <div class="row comment-op margin-top-5p">
+          <div class="col-md-6">
+            <div class="margin-top-2p">
+              评论者:&nbsp;<span
+              class="margin-right-2p">{{item.memberUserName ? item.memberUserName : item.userName}}</span>
+              评论时间:&nbsp;<span class="margin-right-2p">{{item.postDate}}</span>
+              IP:&nbsp;<span class="margin-right-2p">{{item.ip}} &nbsp;&nbsp;{{item.area}}</span>
+            </div>
+          </div>
+          <div class="col-md-6 text-right">
+            <button class="btn btn-outline-primary btn-xs" (click)="verify(true,item.id)">审核通过</button>&nbsp;
+            <button class="btn btn-outline-primary btn-xs" (click)="verify(false,item.id)">审核不通过</button>&nbsp;
+            <button class="btn btn-outline-primary btn-xs" (click)="showReply(item)">回复</button>&nbsp;
+            <button *ngIf="item.status==2 && !item.recommend" (click)="recommend(item.id,true)" class="btn btn-outline-primary btn-xs">
+              推荐
+            </button>
+            <button *ngIf="item.status==2 && item.recommend" (click)="recommend(item.id,false)" class="btn btn-outline-primary btn-xs">
+              取消推荐
+            </button>&nbsp;
+            <button class="btn btn-outline-primary btn-xs" (click)="del(item.id)">删除</button>
+          </div>
+        </div>
+      </div>
+    </nb-list-item>
+  </nb-list>
+  <nb-card-footer class="text-center">
+    <div class="row">
+      <div class="col-md-5">
+        <nb-checkbox #selectAllBox status="success" [value]="isSelectAll"
+                     (change)="changeAllBox(selectAllBox.value)"></nb-checkbox>
+        <button class="btn btn-outline-primary" [disabled]="!(selectItems.length>0)" (click)="verifyMulti(true)">审核通过
+        </button>&nbsp;&nbsp;
+        <button class="btn btn-outline-primary" [disabled]="!(selectItems.length>0)" (click)="verifyMulti(false)">审核不通过
+        </button>&nbsp;&nbsp;
+        <button class="btn btn-outline-primary" [disabled]="!(selectItems.length>0)" (click)="delMulti()">
+          批量删除
+        </button>
+      </div>
+      <div class="col-md-7">
+        <ngb-pagination ngClass="ng2-smart-pagination" maxSize="10" [collectionSize]="pager?.totalCount"
+                        [pageSize]="pager?.pageSize" (pageChange)="changePager($event)"></ngb-pagination>
+      </div>
+    </div>
+  </nb-card-footer>
+</nb-card>

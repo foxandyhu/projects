@@ -1,0 +1,82 @@
+<nb-card>
+  <nb-card-header>
+    短信发送记录
+  </nb-card-header>
+  <nb-list>
+    <nb-list-item>
+      <form id="searchForm" class="form-inline">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <button class="btn btn-primary btn-icon">
+              <i class="ion-ios-calendar-outline"></i>
+            </button>
+          </div>
+          <input class="form-control" placeholder="选择日期" [nbDatepicker]="rangepicker">
+          <nb-rangepicker #rangepicker (rangeChange)="changeDate($event)" format="YYYY-MM-DD"></nb-rangepicker>
+        </div>&nbsp;
+        <input type="text" autocomplete="off" required="true" class="width-10p form-control" name="phone"
+               [(ngModel)]="phone"
+               placeholder="搜索手机号"/>
+        &nbsp;
+        <input type="text" autocomplete="off" required="true" class="width-10p form-control" name="userName"
+               [(ngModel)]="userName"
+               placeholder="搜索用户名"/>
+        &nbsp;
+        <select class="form-control" [(ngModel)]="providerId" name="providerId" (change)="search()">
+          <option selected value="">服务商</option>
+          <option *ngFor="let p of providers" [value]="p.id">{{p.name}}</option>
+        </select>&nbsp;
+        <select class="form-control" [(ngModel)]="type" name="type" (change)="search()">
+          <option selected value="">所有分类</option>
+          <option *ngFor="let t of types" [value]="t.id">{{t.name}}</option>
+        </select>&nbsp;
+        <select class="form-control" [(ngModel)]="status" name="status" (change)="search()">
+          <option selected value="">所有状态</option>
+          <option *ngFor="let s of statuss" [value]="s.id">{{s.name}}</option>
+        </select>&nbsp;
+        <button class="btn btn-outline-info" (click)="search()">
+          <span class="ion-ios-search"></span> 搜索
+        </button>&nbsp;
+        <button type="reset" class="btn btn-outline-warning" (click)="resetForm()">
+          重置
+        </button>
+      </form>
+      <table class="table table-hover margin-top-2p">
+        <thead>
+        <tr>
+          <th>手机号码</th>
+          <th>服务商</th>
+          <th>用户名</th>
+          <th>业务描述</th>
+          <th>内容</th>
+          <th>发送时间</th>
+          <th>发送状态</th>
+          <td>发送次数</td>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of pager?.data">
+          <td>{{item.phone}}</td>
+          <td>{{item.provider?.name}}</td>
+          <td>{{item.userName}}</td>
+          <td>{{item.typeName}}</td>
+          <td nbPopover="{{item.content}}" nbPopoverTrigger="hint">{{(item.content |slice:0:10)+'...' }}</td>
+          <td>{{item.sendTime}}</td>
+          <td>{{item.statusName}}</td>
+          <td>{{item.count}}</td>
+          <td>
+            <button class="btn btn-warning btn-smaller" (click)="resned(item.id)">
+              <i class="ion-reply-all"></i> 重 发
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </nb-list-item>
+  </nb-list>
+  <nb-card-footer class="text-right">
+    <ngb-pagination ngClass="ng2-smart-pagination" maxSize="10" [collectionSize]="pager?.totalCount"
+                    [pageSize]="pager?.pageSize" (pageChange)="changePager($event)"></ngb-pagination>
+  </nb-card-footer>
+</nb-card>

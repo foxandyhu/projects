@@ -1,0 +1,20 @@
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>时段</th>
+    <th>浏览量(PV)</th>
+    <th>独立访客(UV)</th>
+    <th>IP数</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of data">
+    <td>{{item.time}}</td>
+    <td>{{item.pv}}</td>
+    <td>{{item.uv}}</td>
+    <td>{{item.ip}}</td>
+
+  </tr>
+  </tbody>
+</table>

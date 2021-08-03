@@ -1,0 +1,10 @@
+<section class="right-container">
+    <h3 class="title">热门标签</h3>
+    <div class="tas-right">
+        <@searchWordsDirective pageSize="10" recommend="true">
+            <#list searchWords as word>
+                <a href="#" ​ class="tag-link-5">${word.name}</a>
+            </#list>
+        </@searchWordsDirective>
+    </div>
+</section>

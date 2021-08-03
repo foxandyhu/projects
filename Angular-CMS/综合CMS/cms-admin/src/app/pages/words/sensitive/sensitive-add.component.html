@@ -1,0 +1,31 @@
+<nb-card>
+  <nb-card-header>
+    新增敏感词
+  </nb-card-header>
+  <nb-card-body>
+    <form id="sensitiveForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-3 col-form-label text-right">敏感词</label>
+        <div class="form-group col-md-9">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="sensitive.word"
+                 name="word"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-3 col-form-label text-right">替换词</label>
+        <div class="form-group col-md-9">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="sensitive.replace"
+                 name="replace" placeholder="替换词默认是*"/>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="modal-footer">
+      <button type="buttom" class="btn btn-success" (click)="submit()">
+        <i class="ion-checkmark"></i> 确 认
+      </button>&nbsp;&nbsp;&nbsp;
+      <button type="buttom" class="btn btn-default" (click)="cancel()">
+        <i class="ion-checkmark"></i> 取 消
+      </button>
+    </nb-card-footer>
+</nb-card>

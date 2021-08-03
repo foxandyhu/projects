@@ -1,0 +1,54 @@
+<nb-card style="width:400px">
+  <nb-card-header>请填写菜单信息</nb-card-header>
+  <nb-card-body>
+    <form id="menuForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-3 col-form-label text-right"><i class="font-red">*</i>&nbsp;名称</label>
+        <div class="form-group col-md-9">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="menu.name"
+                 name="name" placeholder="请输入菜单名称"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-3 col-form-label text-right"><i class="font-red">*</i>&nbsp;地址</label>
+        <div class="form-group col-md-9">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="menu.url"
+                 name="url" placeholder="请输入菜单链接地址"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-3 col-form-label text-right"><i class="font-red">*</i>&nbsp;排序</label>
+        <div class="form-group col-md-9">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="menu.seq"
+                 name="seq"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-3 col-form-label text-right"><i class="font-red">*</i>&nbsp;图标</label>
+        <div class="form-group col-md-6">
+          <select [(ngModel)]="menu.icon" name="icon" class="form-control">
+            <option value="">选择图标</option>
+            <option *ngFor="let icon of icons" [value]="icon">{{icon}}</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <h1 style="margin-top: 10px;" class="{{menu.icon}}"></h1>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-3 col-form-label text-right"><i class="font-red">*</i>&nbsp;功能菜单</label>
+        <div class="form-group col-md-9">
+          <nb-checkbox status="success" [(ngModel)]="menu.action" name="action"></nb-checkbox>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="modal-footer">
+    <button type="buttom" class="btn btn-success" (click)="submit()">
+      <i class="ion-checkmark"></i> 确 认
+    </button>&nbsp;&nbsp;&nbsp;
+    <button type="buttom" class="btn btn-default" (click)="cancel()">
+      <i class="ion-checkmark"></i> 取 消
+    </button>
+  </nb-card-footer>
+</nb-card>

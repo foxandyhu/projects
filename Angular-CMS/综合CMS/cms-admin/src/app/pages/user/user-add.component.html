@@ -1,0 +1,62 @@
+<nb-card>
+  <nb-card-header>
+    新增系统管理员
+  </nb-card-header>
+  <nb-card-body>
+    <form id="userForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">用户名</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="user.userName"
+                 name="userName"/>
+        </div>
+        <label class="col-md-2 col-form-label text-right">电子邮箱</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="user.email" name="email"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">密码</label>
+        <div class="form-group col-md-4">
+          <input type="password" autocomplete="off" class="form-control" [(ngModel)]="user.password" name="password"/>
+        </div>
+        <label class="col-md-2 col-form-label text-right">确认密码</label>
+        <div class="form-group col-md-4">
+          <input type="password" autocomplete="off" class="form-control" [(ngModel)]="user.confirmPassword"
+                 name="confirmPassword"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">角色</label>
+        <div class="form-group col-md-10">
+          <nb-checkbox #selectRole *ngFor="let role of roles" status="success"
+                       (change)="changeRole(role.id,selectRole.value)">{{role.name}}</nb-checkbox>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">超级管理员</label>
+        <div class="form-group col-md-10">
+          <nb-checkbox status="success" name="superAdmin" [(ngModel)]="user.superAdmin">是</nb-checkbox>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">头像</label>
+        <div class="col-md-9 vertical-center">
+          <ngx-uploader-bar isPicture="true" (complete)="faceFileChange($event)"
+                          tip="只能上传jpg/png图片，且不超过2M. 建议64 x 64尺寸"></ngx-uploader-bar>
+        </div>
+      </div>
+      <div class="row margin-top-5p">
+        <div class="offset-sm-3">
+          <button type="buttom" class="btn btn-success" (click)="saveUser()">
+            <i class="ion-checkmark"></i> 确 认
+          </button>
+        </div>
+        <div class="col-sm-2">
+          <a href="#/pages/user/list" class="btn btn-info">
+            <i class="ion-arrow-return-left"></i> 返回列表</a>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>

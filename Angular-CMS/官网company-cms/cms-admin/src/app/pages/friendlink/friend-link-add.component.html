@@ -1,0 +1,55 @@
+<nb-card>
+  <nb-card-header>
+    新增友情链接
+  </nb-card-header>
+  <nb-card-body>
+    <form id="friendLinkForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 名称</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" required="true" class="form-control" [(ngModel)]="friendLink.name"
+                 name="name"/>
+        </div>
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 类型</label>
+        <div class="form-group col-md-4">
+          <select class="form-control" [(ngModel)]="friendLink.type.id" name="type">
+            <option value="">所有类型</option>
+            <option *ngFor="let item of types" [value]="item.id">{{item.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 连接地址</label>
+        <div class="form-group col-md-4">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="friendLink.url"
+                 name="url"/>
+        </div>
+        <label class="col-md-2 col-form-label text-right">LOGO</label>
+        <div class="form-group col-md-4">
+          <ngx-uploader-bar isPicture="true" (complete)="logoChange($event)"
+                            tip="只能上传jpg/png图片，且不超过2M. 建议240 x 240尺寸"></ngx-uploader-bar>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">显示</label>
+        <div class="form-group col-md-10">
+          <nb-checkbox status="success" name="enabled" [(ngModel)]="friendLink.enabled">是</nb-checkbox>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right">描述</label>
+        <div class="form-group col-md-10">
+          <textarea class="form-control" [(ngModel)]="friendLink.remark" name="remark"></textarea>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="modal-footer">
+    <button type="buttom" class="btn btn-success" (click)="submit()">
+      <i class="ion-checkmark"></i> 确 认
+    </button>&nbsp;&nbsp;&nbsp;
+    <button type="buttom" class="btn btn-default" (click)="cancel()">
+      <i class="ion-checkmark"></i> 取 消
+    </button>
+  </nb-card-footer>
+</nb-card>

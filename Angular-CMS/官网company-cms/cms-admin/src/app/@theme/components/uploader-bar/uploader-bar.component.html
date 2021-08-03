@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-md-12" *ngIf="!isPicture">
+    <input type="file" [multiple]="multiple" class="hidden" (change)="fileChange($event)"/>
+    <button [disabled]="!isComplete" class="btn btn-success" (click)="fileClick($event)">{{text}}</button>
+  </div>
+  <div class="col-md-12" *ngIf="isPicture">
+    <div class="{{showRemovePreview===true?'img-wrap':''}}">
+      <input type="file" [multiple]="multiple" class="hidden" id="imgFile{{id}}" (change)="fileChange($event)"/>
+      <img src="{{previewPic}}" width="140px" height="140px" (click)="fileClick($event)" nbPopover="{{tip}}" nbPopoverTrigger="hint">
+      <span class="close" *ngIf="showRemovePreview===true" (click)="removePreView()">&times;</span>
+    </div>
+  </div>
+</div>
+<div class="margin-top-1p">
+  <div *ngIf="showBar">
+    {{title}}&nbsp;{{fileName}}
+    <div class="progress">
+      <div id="progress-bar" class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+           [ngStyle]="{width:value+'%'}"></div>
+    </div>
+  </div>
+</div>

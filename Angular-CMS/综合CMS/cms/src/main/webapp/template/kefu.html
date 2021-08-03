@@ -1,0 +1,42 @@
+<div class="kefu-container hidden-xs">
+    <div class="kefu-bar">
+        <a href="#" class="a a-service "><i class="i"></i></a>
+        <a href="javascript:;" class="a a-service-phone "><i class="i"></i></a>
+        <a href="javascript:;" class="a a-qrcode"><i class="i"></i></a>
+        <a href="javascript:;" class="a a-top"><i class="i"></i></a>
+        <div class="d d-service">
+            <i class="arrow"></i>
+            <div class="inner-box">
+                <#list company.qqs as qqMap>
+                    <#list qqMap?keys as key>
+                        <div class="d-service-item clearfix">
+                            <a href="http://wpa.qq.com/msgrd?v=3&uin=${qqMap["${key}"]}&site=qq&menu=yes" class="clearfix">
+                                <span class="circle"><i class="i-qq"></i></span>
+                                <h3>${key}:${qqMap["${key}"]}</h3>
+                            </a>
+                        </div>
+                    </#list>
+                </#list>
+            </div>
+        </div>
+        <div class="d d-service-phone">
+            <i class="arrow"></i>
+            <div class="inner-box">
+                <div class="d-service-item clearfix">
+                    <span class="circle"><i class="i-tel"></i></span>
+                    <div class="text">
+                        <p>服务热线</p>
+                        <p class="red number">${company.phone}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d d-qrcode">
+            <i class="arrow"></i>
+            <div class="inner-box">
+                <div class="qrcode-img"><img src="${company.weiXinUrl}_120_120" alt=""></div>
+                <p>微信服务号</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+<nb-card>
+  <nb-card-header>
+    问卷调查管理
+  </nb-card-header>
+  <nb-list>
+    <nb-list-item>
+      <form class="form-inline">
+        <div class="form-group">
+          <a href="#/pages/vote/add" class="btn btn-success">
+            <span class="ion-plus-round"></span> 新增
+          </a>&nbsp;&nbsp;
+          <select class="form-control" [(ngModel)]="status" name="status" (change)="changeStatus()">
+            <option value="">所有状态</option>
+            <option [value]="item.id" *ngFor="let item of statuss">{{item.name}}</option>
+          </select>&nbsp;&nbsp;&nbsp;&nbsp;
+          <button class="btn btn-outline-primary" [disabled]="!(selectItems.length>0)" (click)="delMulti()">
+            <i class="ion-trash-b"></i> 批量删除
+          </button>
+        </div>
+      </form>
+      <div class="margin-top-2p">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>
+              <nb-checkbox #selectAllBox status="success" [value]="isSelectAll"
+                           (change)="changeAllBox(selectAllBox.value)"></nb-checkbox>
+            </th>
+            <th>标题</th>
+            <th>状态</th>
+            <th>暂停</th>
+            <th>投票量</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of pager?.data">
+            <td>
+              <nb-checkbox #selectBox status="success" [value]="isSelectAll"
+                           (change)="changeBox(selectBox.value,item.id)"></nb-checkbox>
+            </td>
+            <td>{{item.title}}</td>
+            <td>{{item.statusName}}</td>
+            <td>
+              <div *ngIf="item.status==2">
+                <button class="btn btn-{{item.enabled?'success':'danger'}} btn-smaller"
+                        (click)="editEnabled(item.id,!item.enabled)">
+                  <i class="ion-checkmark"></i> {{item.enabled ? "启用" : "禁用"}}
+                </button>
+              </div>
+            </td>
+            <td>{{item.totalCount}}</td>
+            <td>
+              <a href="#/pages/vote/{{item.id}}" class="btn btn-info btn-smaller">
+                <i class="ion-information"></i> 查看
+              </a>&nbsp;&nbsp;
+              <button class="btn btn-danger btn-smaller" (click)="del(item.id)">
+                <i class="ion-trash-a"></i> 删除
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </nb-list-item>
+  </nb-list>
+  <nb-card-footer class="text-right">
+    <ngb-pagination ngClass="ng2-smart-pagination" maxSize="10" [collectionSize]="pager?.totalCount"
+                    [pageSize]="pager?.pageSize" (pageChange)="changePager($event)"></ngb-pagination>
+  </nb-card-footer>
+</nb-card>

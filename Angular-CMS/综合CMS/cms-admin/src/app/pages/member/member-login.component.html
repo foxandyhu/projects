@@ -1,0 +1,55 @@
+<nb-card>
+  <nb-card-body>
+    <form id="loginConfigForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 开启登录</label>
+        <div class="form-group col-md-3">
+          <nb-radio-group [(ngModel)]="loginConfig.openLogin" name="openLogin">
+            <nb-radio class="float-left" [value]="true">是</nb-radio>
+            <nb-radio class="float-left" [value]="false">否</nb-radio>
+          </nb-radio-group>
+        </div>
+      </div>
+      <div class="row vertical-center">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 登录错误次数</label>
+        <div class="form-group col-md-10 vertical-center">
+          <input type="text" autocomplete="off" class="form-control width-10p" [(ngModel)]="loginConfig.loginError" name="loginError"
+          nbPopover="达到错误次数后显示验证码" nbPopoverTrigger="hint"/>
+        </div>
+      </div>
+      <div class="row vertical-center">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 登录错误时间</label>
+        <div class="form-group col-md-10 vertical-center">
+          <input type="text" autocomplete="off" class="form-control width-10p" [(ngModel)]="loginConfig.loginErrorTimeOut" name="loginErrorTimeOut"
+          nbPopover="(分钟)。超过时间重计次数" nbPopoverTrigger="hint"/>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 邮件服务器</label>
+        <div class="form-group col-md-10 vertical-center">
+          <select class="form-control width-15p" [(ngModel)]="loginConfig.emailProvider.id" name="emailId" nbPopover="用于找回密码时发送确认邮件" nbPopoverTrigger="hint">
+            <option value="">选择邮件服务器</option>
+            <option *ngFor="let item of emails" [value]="item.id">{{item.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row vertical-center">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 找回密码标题</label>
+        <div class="form-group col-md-10 vertical-center">
+          <input type="text" autocomplete="off" class="form-control" [(ngModel)]="loginConfig.retrievePwdTitle" name="retrievePwdTitle"/>
+        </div>
+      </div>
+      <div class="row vertical-center">
+        <label class="col-md-2 col-form-label text-right"><i class="font-red">*</i> 找回密码内容</label>
+        <div class="form-group col-md-10">
+          <editor [(ngModel)]="loginConfig.retrievePwdText" name="retrievePwdText"
+            [init]="editParam"></editor>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="text-center">
+      <button class="btn btn-success" (click)="saveLoginConfig()">确 认</button>
+  </nb-card-footer>
+</nb-card>
+

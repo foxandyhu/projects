@@ -1,0 +1,78 @@
+<nb-card>
+  <nb-card-header>
+    问卷调查详情
+  </nb-card-header>
+  <nb-card-body>
+    <form id="voteForm" class="form-horizontal" onSubmit="return false;">
+      <div class="row">
+        <div class="col-md-12 text-center"><h2>{{vote?.title}}</h2></div>
+      </div>
+      <div class="row margin-top-1p">
+        <label class="col-md-2 text-right">描述</label>
+        <div class="col-md-10">{{vote?.remark}}</div>
+      </div>
+      <div class="row margin-top-1p">
+        <label class="col-md-2 text-right"><i class="ion-help-circled help" title="单位：小时。0为禁止重复投票；-1为不限制重复投票。"></i>
+          重复答卷限制</label>
+        <div class="col-md-4">
+          {{vote?.repeatHour}}<br>
+        </div>
+        <label class="col-md-2 text-right">需要登录</label>
+        <div class="col-md-4">
+          {{vote?.needLogin ? "是" : "否"}}
+        </div>
+      </div>
+      <div class="row margin-top-1p">
+        <label class="col-md-2 text-right">开始时间</label>
+        <div class="col-md-4">{{vote?.startTime}}</div>
+        <label class="col-md-2 text-right">结束时间</label>
+        <div class="col-md-4">{{vote?.endTime}}</div>
+      </div>
+      <div class="row margin-top-1p">
+        <label class="col-md-2 text-right">投票数</label>
+        <div class="col-md-10">{{vote?.totalCount}}</div>
+      </div>
+      <div class="row margin-top-1p">
+        <label class="col-md-2 text-right">启用</label>
+        <div class="col-md-4">{{vote?.enabled ? "是" : "否"}}</div>
+        <label class="col-md-2 text-right">状态</label>
+        <div class="col-md-4">{{vote?.statusName}}</div>
+      </div>
+      <div class="margin-top-2p">
+        <nb-accordion>
+          <nb-accordion-item *ngFor="let subTopic of vote?.subtopics">
+            <nb-accordion-item-header>问题 {{subTopic.seq}}. &nbsp;{{subTopic.title}}</nb-accordion-item-header>
+            <nb-accordion-item-body>
+              <div [ngSwitch]="subTopic.type">
+                <div>
+                  <div *ngFor="let item of subTopic.voteItems" class="row margin-top-1p">
+                    <div class="col-md-2 vertical-center">
+                      <div *ngSwitchCase="1">
+                        <nb-radio [disabled]="true"></nb-radio>
+                      </div>
+                      <div *ngSwitchCase="2">
+                        <nb-checkbox status="success" [disabled]="true"></nb-checkbox>
+                      </div>
+                      <img width="60" height="60" *ngIf="item.picture" [src]="item.url"/>
+                    </div>
+                    <div class="col-md-10">
+                      {{item.seq + '. ' + item.title}}
+                      <nb-progress-bar class="margin-top-1p" [value]="item.percent" [status]="status(item.percent)">{{item.voteCount}}</nb-progress-bar>
+                    </div>
+                  </div>
+                </div>
+                <div *ngSwitchCase="3">
+                  <textarea class="form-control" disabled="disabled"></textarea>
+                </div>
+              </div>
+            </nb-accordion-item-body>
+          </nb-accordion-item>
+        </nb-accordion>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="text-center">
+    <a href="#/pages/vote/list" class="btn btn-info">
+      <i class="ion-arrow-return-left"></i> 返回列表</a>
+  </nb-card-footer>
+</nb-card>

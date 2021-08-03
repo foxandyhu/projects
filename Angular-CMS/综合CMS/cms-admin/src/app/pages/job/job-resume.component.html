@@ -1,0 +1,83 @@
+<nb-card>
+  <nb-card-header class="text-center">
+    <b><h2>{{resume?.name}}</h2></b>
+  </nb-card-header>
+  <nb-card-body>
+    <table class="table table-bordered table-striped">
+      <tr>
+        <td>姓名</td>
+        <td>{{resume?.realName}}</td>
+        <td> 性别</td>
+        <td>{{resume?.sex ? "女" : "男"}}</td>
+      </tr>
+      <tr>
+        <td>出生日期</td>
+        <td>{{resume?.birthday}}</td>
+        <td> 来自</td>
+        <td>{{resume?.comeFrom}}</td>
+      </tr>
+      <tr>
+        <td>手机号</td>
+        <td>{{resume?.phone}}</td>
+        <td> 固定电话</td>
+        <td>{{resume?.mobile}}</td>
+      </tr>
+      <tr>
+        <td>学历</td>
+        <td>{{resume?.education}}</td>
+        <td> 专业</td>
+        <td>{{resume?.profession}}</td>
+      </tr>
+      <tr>
+        <td>毕业学校</td>
+        <td>{{resume?.school}}</td>
+        <td> 毕业时间</td>
+        <td>{{resume?.graduation}}</td>
+      </tr>
+      <tr>
+        <td colspan="4"></td>
+      </tr>
+      <tr>
+        <td>期望工作性质</td>
+        <td>{{resume?.expectWorkNature}}</td>
+        <td> 期望工作地点</td>
+        <td>{{resume?.expectWorkPlace}}</td>
+      </tr>
+      <tr>
+        <td>期望职位类型</td>
+        <td>{{resume?.expectCategory}}</td>
+        <td> 期望月薪</td>
+        <td>{{resume?.expectSalary}}</td>
+      </tr>
+      <tr class="tr-line">
+        <td colspan="4">最近一次工作经历</td>
+      </tr>
+      <tr>
+        <td>公司名称</td>
+        <td>{{resume?.expectWorkNature}}</td>
+        <td> 职位名称</td>
+        <td>{{resume?.expectWorkPlace}}</td>
+      </tr>
+      <tr>
+        <td>工作时间</td>
+        <td colspan="3">{{resume?.recentJobStart}} 到 {{resume?.recentJobEnd}}</td>
+      </tr>
+      <tr>
+        <td>工作描述</td>
+        <td colspan="3">
+          <div class="container">{{resume?.remark}}</div>
+        </td>
+      </tr>
+      <tr>
+        <td>自我评价</td>
+        <td colspan="3">
+          <div class="container">{{resume?.selfIntroduction}}</div>
+        </td>
+      </tr>
+    </table>
+  </nb-card-body>
+  <nb-card-footer class="text-center">
+    <a href="#job/list" class="btn btn-info">
+      <i class="ion-arrow-return-left"></i> 返回列表</a>
+  </nb-card-footer>
+</nb-card>

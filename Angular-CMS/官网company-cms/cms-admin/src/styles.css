@@ -1,0 +1,97 @@
+.margin-top-5p {margin-top: 5% !important;}
+.margin-top-2p {margin-top: 2% !important;}
+.margin-top-1p {margin-top: 1% !important;}
+.margin-right-2p {margin-right: 2% !important;}
+.green-low {color: #00f9a6 !important;}
+.width-10p {width: 10% !important;}
+.width-15p {width: 15% !important;}
+.width-50p {width: 50% !important;}
+.vertical-center {display: flex;align-items: center !important;}
+.horizontal-center {display: flex;align-content: center !important;}
+.bg-low-red {background: #ec115024;}
+.font-red{color:#d22017fa;}
+.highlight_red {color:#d65252;}
+.btn-smaller {padding: 0.4rem 0.4rem !important;font-size: 0.75rem !important;line-height: 0 !important;}
+.hidden{display:none !important;}
+.float-left{float: left;}
+.pointer{cursor:pointer;}
+.sort-op{font-size:1.5rem;}
+.help {color: #a4a4c5;cursor: help;}
+
+
+/*翻页条样式*/
+.ng2-smart-pagination {display: inline-flex;font-size: .875em;padding: 0}
+.ng2-smart-pagination .pagination {font-family: Exo;font-size: 1rem;line-height: 1.25;border: 2px solid #7659ff;border-radius: .5rem;padding-left: 0px !important;}
+.ng2-smart-pagination .pagination .page-item {border-right: 1px solid #342e73;}
+.ng2-smart-pagination .pagination .page-item .page-link:hover {background-color: rgba(0, 0, 0, .2);color: #fff;}
+.ng2-smart-pagination .page-item.disabled .page-link {color: #6c757d;pointer-events: none;cursor: auto;background-color: rgb(60, 54, 127);border-color: #dee2e6;}
+.ng2-smart-pagination .pagination li a {background: 0 0;color: #fff;padding: .75rem 1.25rem;border: none;}
+
+
+/*form表单提示样式*/
+.has-error .help-block,
+.has-error .col-form-label,
+.has-error .radio,
+.has-error .checkbox,
+.has-error .radio-inline,
+.has-error .checkbox-inline,
+.has-error.radio label,
+.has-error.checkbox label,
+.has-error.radio-inline label,
+.has-error.checkbox-inline label {color: #a94442;}
+.has-error .form-control {border-color: #dc3545 !important;;-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);}
+.has-error .form-control:focus {border-color: #dc3545 !important;-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;}
+.has-error .input-group-addon {color: #a94442;background-color: #f2dede;border-color: #a94442;}
+.has-error .form-control-feedback {color: #a94442;}
+.has-feedback label ~ .form-control-feedback {top: 25px;}
+.has-feedback label.sr-only ~ .form-control-feedback {top: 0;}
+.help-block {display: block;margin-top: 5px;margin-bottom: 10px;color: #737373;}
+
+@font-face {font-family: 'Glyphicons Halflings';src: url('assets/fonts/glyphicons-halflings-regular.eot');src: url('assets/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('assets/fonts/glyphicons-halflings-regular.woff') format('woff'), url('assets/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('assets/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');}
+.glyphicon {position: relative;top: 1px;display: inline-block;font-family: 'Glyphicons Halflings';font-style: normal;font-weight: normal;line-height: 1;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}
+.glyphicon-ok:before {content: "\e013";color: darkgreen;}
+.glyphicon-remove:before {content: "\e014";}
+.glyphicon-refresh:before {content: "\e031";}
+
+.form-control-feedback {position: absolute;top: 0;right: 0;z-index: 2;display: block;width: 34px;height: 46px;line-height: 46px;text-align: center;pointer-events: none;font-size: 1.2rem !important;}
+.form-horizontal .has-feedback .form-control-feedback {top: 0;right: 15px;}
+
+
+/*zTree样式*/
+.ztree {margin: 0;padding: 5px;color: #ffffff !important;}
+.ztree * {font-size: 16px !important;}
+
+/**********图片上传组件样式*************/
+.img-wrap {
+  position: relative;
+  display: inline-block;
+  border: 1px #e3e9ee solid;
+  font-size: 0;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.img-wrap .close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 100;
+  background-color: #ffffff;
+  padding: 0px 3px 4px 2px !important;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  opacity: 0.2;
+  text-align: center;
+  font-size: 22px;
+  line-height: 20px;
+  width:20px;
+  border-radius: 50%;
+}
+
+.img-wrap:hover .close {
+  opacity: 1;
+  background: red;
+  color: #ffffff;
+  padding: 5px;
+}
