@@ -25,7 +25,7 @@
 		<captcha.version>1.0</captcha.version>
 		<poi.version>3.16</poi.version>
 		<json.version>20180813</json.version>
-		<jsoup.version>1.11.3</jsoup.version>
+		<jsoup.version>1.14.2</jsoup.version>
 		<zxing.version>3.3.3</zxing.version>
 		<alipay.version>3.3.87.ALL</alipay.version>
 		<jdom.version>2.0.2</jdom.version>
