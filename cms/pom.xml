@@ -61,7 +61,7 @@
 	<jta.verson>1.1</jta.verson>
 	<openoffice.version>3.2.1</openoffice.version>
 	<logback.version>1.2.3</logback.version>
-	<spring.version>4.3.16.RELEASE</spring.version>
+	<spring.version>5.3.19</spring.version>
 	<wsdl4j.version>1.5.3</wsdl4j.version>
 	<zxing.version>2.3.0</zxing.version>
 	<bouncycastle.version>1.45</bouncycastle.version>
