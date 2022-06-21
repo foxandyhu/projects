@@ -56,7 +56,7 @@
 	<jmagick.version>6.6.9</jmagick.version>
 	<mailapi.version>1.6.0</mailapi.version>
 	<json.version>20171018</json.version>
-	<mysql.version>5.1.44</mysql.version>
+	<mysql.version>8.0.28</mysql.version>
 	<quartz.version>2.1.7</quartz.version>
 	<jta.verson>1.1</jta.verson>
 	<openoffice.version>3.2.1</openoffice.version>
