@@ -23,7 +23,7 @@
 		<commons-net.version>2.0</commons-net.version>
 		<shiro.version>1.3.0</shiro.version>
 		<captcha.version>1.0</captcha.version>
-		<poi.version>3.16</poi.version>
+		<poi.version>4.1.1</poi.version>
 		<json.version>20180813</json.version>
 		<jsoup.version>1.11.3</jsoup.version>
 		<zxing.version>3.3.3</zxing.version>
