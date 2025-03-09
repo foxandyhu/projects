@@ -21,7 +21,7 @@
 		
 		<commons.version>2.6</commons.version>
 		<commons-net.version>2.0</commons-net.version>
-		<shiro.version>1.3.0</shiro.version>
+		<shiro.version>1.7.1</shiro.version>
 		<captcha.version>1.0</captcha.version>
 		<poi.version>3.16</poi.version>
 		<json.version>20180813</json.version>
